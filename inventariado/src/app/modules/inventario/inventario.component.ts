@@ -13,7 +13,7 @@ export class InventarioComponent implements OnInit {
   inventarios:Array<Inventario> = [];
   numeroInventario: number = 0;
   pagina: number = 0;
-  tamPag: number = 5;
+  tamPag: number = 10;
   cargado = false;
 
   constructor(private readonly inventarioService: InventarioService,
@@ -44,7 +44,7 @@ export class InventarioComponent implements OnInit {
   }
 
   Multiplos4(total: number) {
-    return Array.from({ length: total }, (_, i) => (i + 1) * 4); //para cada posición calcula su múltiplo de 4
+    return Array.from({ length: total }, (_, i) => (i + 1) * 10); 
   }
 
 }
