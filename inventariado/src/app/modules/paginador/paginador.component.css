@@ -1,0 +1,5 @@
+.page-link.selected {
+    background-color: #007bff; /* Color azul, puedes cambiarlo según tu preferencia */
+    color: #fff; /* Color de texto blanco */
+    border-color: #007bff; /* Color del borde */
+}

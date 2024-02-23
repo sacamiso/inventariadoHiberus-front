@@ -1,0 +1,17 @@
+<nav *ngIf="numeroElementos > tamPag" class="p-3">
+    <ul class="pagination justify-content-center">
+        <li *ngIf="pagActual > 0" class="page-item">
+            <a class="page-link" (click)="irAnterior()">Anterior</a>
+            
+        </li>
+        <li *ngFor="let pag of aux; index as i" class="page-item">
+            <a class="page-link" (click)="cambiarPagina(i)" [class.selected]="i === pagActual">{{i+1}}</a>
+            
+        </li>
+        <li *ngIf="pagActual < (numPagTotales-1)" class="page-item">
+            <a class="page-link" (click)="irSiguiente()">Siguiente</a>
+            
+        </li>
+    </ul>
+    <p class="mt-3">Total de elementos: {{numeroElementos}}</p> 
+</nav>

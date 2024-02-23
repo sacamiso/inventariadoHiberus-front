@@ -1,0 +1,43 @@
+<section *ngIf="cargado">
+    <div class="container">
+        <div class="row">
+            <h1 class="col-6 my-4 font-weight-bold">INVENTARIO</h1>
+            
+
+        </div>
+
+        <div class="row">
+            <div class="col col-md-auto">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Número elementos por página</span>
+                    </div>
+                    <select class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+                        [(ngModel)]="tamPag" id="tamPagina">
+                        <option *ngFor="let opcion of Multiplos4(numeroInventario)" [value]="opcion">{{ opcion }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <app-paginador [numeroElementos]="numeroInventario" [tamPag]="tamPag"
+            (pagina)="cargarPagina($event)"></app-paginador>
+
+        <table class="table">
+            <thead>
+                <th scope="col">Oficina</th>
+                <th scope="col">Artículo</th>
+                <th scope="col">Stock</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let inventario of inventarios">
+                    <td>{{ inventario.idOficina }}</td>
+                    <td>{{ inventario.codArticulo }}</td>
+                    <td>{{ inventario.stock }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        
+    </div>
+</section>
