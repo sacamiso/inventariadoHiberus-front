@@ -13,7 +13,7 @@ export class InventarioComponent implements OnInit {
   inventarios:Array<Inventario> = [];
   numeroInventario: number = 0;
   pagina: number = 0;
-  tamPag: number = 10;
+  tamPag: number = 5;
   cargado = false;
 
   constructor(private readonly inventarioService: InventarioService,
@@ -43,8 +43,11 @@ export class InventarioComponent implements OnInit {
     })
   }
 
-  Multiplos4(total: number) {
-    return Array.from({ length: total }, (_, i) => (i + 1) * 10); 
+  Multiplos5(total: number) {
+    return Array.from({ length: total }, (_, i) => (i + 1) * 5); 
   }
 
+  verHistorial() {
+    this.router.navigate(['historial']);
+}
 }

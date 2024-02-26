@@ -14,30 +14,38 @@
                     </div>
                     <select class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
                         [(ngModel)]="tamPag" id="tamPagina">
-                        <option *ngFor="let opcion of Multiplos4(4)" [value]="opcion">{{ opcion }}</option>
+                        <option *ngFor="let opcion of Multiplos5(8)" [value]="opcion">{{ opcion }}</option>
                     </select>
                 </div>
             </div>
         </div>
 
+        <div class="table-responsive">
+            <table class="table table table-bordered table-fixed">
+                <thead>
+                    <th scope="col" class="w-25 text-center">Oficina</th>
+                    <th scope="col" class="w-50 text-center">Artículo</th>
+                    <th scope="col" class="w-25 text-center">Stock</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let inventario of inventarios">
+                        <td>{{ inventario.oficina.localidad }}</td>
+                        <td>{{ inventario.articulo.descripcion }}</td>
+                        <td class="text-center">{{ inventario.stock }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col text-left">
+                <p>Total de elementos: {{ numeroInventario }}</p>
+            </div>
+            <div class="col-md-6 d-flex justify-content-end">
+                <button class="btn btn-primary" style="background-color: #024892e0;" (click)="verHistorial()">Ver Historial</button>
+            </div>
+        </div>
         <app-paginador [numeroElementos]="numeroInventario" [tamPag]="tamPag"
             (pagina)="cargarPagina($event)"></app-paginador>
-
-        <table class="table">
-            <thead>
-                <th scope="col">Oficina</th>
-                <th scope="col">Artículo</th>
-                <th scope="col">Stock</th>
-            </thead>
-            <tbody>
-                <tr *ngFor="let inventario of inventarios">
-                    <td>{{ inventario.idOficina }}</td>
-                    <td>{{ inventario.codArticulo }}</td>
-                    <td>{{ inventario.stock }}</td>
-                </tr>
-            </tbody>
-        </table>
-
         
     </div>
 </section>

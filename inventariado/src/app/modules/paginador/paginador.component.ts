@@ -9,7 +9,7 @@ import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChange
 export class PaginadorComponent implements OnInit, OnChanges {
 
   @Input() numeroElementos: number = 0;
-  @Input() tamPag: number = 10;
+  @Input() tamPag: number = 5;
 
   @Output() pagina = new EventEmitter<number>();
 

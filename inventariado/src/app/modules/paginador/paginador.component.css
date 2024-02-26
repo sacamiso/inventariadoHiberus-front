@@ -1,5 +1,23 @@
-.page-link.selected {
-    background-color: #007bff; /* Color azul, puedes cambiarlo según tu preferencia */
-    color: #fff; /* Color de texto blanco */
-    border-color: #007bff; /* Color del borde */
+.custom-pagination {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.custom-pagination .page-link {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #ced4da;
+}
+
+.custom-pagination .page-link:hover {
+    background-color: #e9ecef;
+    color: #000000;
+    border-color: #b1bbc4;
+}
+
+.custom-pagination .page-item.selected .page-link {
+    background-color: #024892e0;
+    color: #ffffff;
+    border-color: #024892e0;
 }
