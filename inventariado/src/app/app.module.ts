@@ -11,6 +11,9 @@ import { HistorialInventarioComponent } from './modules/historial-inventario/his
 import { PaginadorComponent } from './modules/paginador/paginador.component';
 import { FormsModule } from '@angular/forms';
 import { MenuComponent } from './modules/menu/menu.component';
+import { EntradasComponent } from './modules/entradas/entradas.component';
+import { SalidasComponent } from './modules/salidas/salidas.component';
+import { AvisosComponent } from './modules/avisos/avisos.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,9 @@ import { MenuComponent } from './modules/menu/menu.component';
     HistorialInventarioComponent,
     PaginadorComponent,
     MenuComponent,
+    EntradasComponent,
+    SalidasComponent,
+    AvisosComponent,
   ],
   imports: [
     BrowserModule,

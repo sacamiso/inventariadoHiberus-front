@@ -24,6 +24,9 @@ export class MenuComponent implements OnInit {
       case 3:
         this.seleccionado = 3;
         break;
+      case 4:
+        this.seleccionado = 4;
+        break;
       default:
         this.seleccionado = 0;
         break;

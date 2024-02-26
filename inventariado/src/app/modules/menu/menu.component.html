@@ -5,11 +5,14 @@
                 <a routerLink="" class="nav-link"> Inicio </a>
             </li>
             <li [ngClass]="seleccionado == 2 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(2)">
-                <a routerLink="/productos" class="nav-link"> Entradas </a>
+                <a routerLink="/entradas" class="nav-link"> Entradas </a>
             </li>
             <li [ngClass]="seleccionado == 3 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(3)" >
-                <a routerLink="/usuarios" class="nav-link"> Saldias </a>
-            </li>            
+                <a routerLink="/salidas" class="nav-link"> Saldias </a>
+            </li>    
+            <li [ngClass]="seleccionado == 4 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(4)" >
+                <a routerLink="/avisos" class="nav-link"> Avisos </a>
+            </li>          
         </ul>
     </div>
 </nav>
