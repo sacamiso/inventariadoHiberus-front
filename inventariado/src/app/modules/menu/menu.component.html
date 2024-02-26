@@ -1,0 +1,15 @@
+<nav class="navbar-dark navbar sticky-top navbar-expand-sm"> 
+    <div class="collapse navbar-collapse">
+        <ul class="container navbar-nav">
+            <li [ngClass]="seleccionado == 1 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(1)">
+                <a routerLink="" class="nav-link"> Inicio </a>
+            </li>
+            <li [ngClass]="seleccionado == 2 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(2)">
+                <a routerLink="/productos" class="nav-link"> Entradas </a>
+            </li>
+            <li [ngClass]="seleccionado == 3 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(3)" >
+                <a routerLink="/usuarios" class="nav-link"> Saldias </a>
+            </li>            
+        </ul>
+    </div>
+</nav>

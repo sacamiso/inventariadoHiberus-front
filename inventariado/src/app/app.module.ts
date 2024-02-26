@@ -9,6 +9,7 @@ import { InventarioComponent } from './modules/inventario/inventario.component';
 import { HistorialInventarioComponent } from './modules/historial-inventario/historial-inventario.component';
 import { PaginadorComponent } from './modules/paginador/paginador.component';
 import { FormsModule } from '@angular/forms';
+import { MenuComponent } from './modules/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { FormsModule } from '@angular/forms';
     InventarioComponent,
     HistorialInventarioComponent,
     PaginadorComponent,
+    MenuComponent,
   ],
   imports: [
     BrowserModule,
