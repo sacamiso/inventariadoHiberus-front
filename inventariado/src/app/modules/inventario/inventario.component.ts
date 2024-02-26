@@ -11,7 +11,7 @@ import { InventarioService } from '../../core/services/inventario.service';
 export class InventarioComponent implements OnInit {
 
   inventarios:Array<Inventario> = [];
-  numeroInventario: number = 0;
+  numeroInventarios: number = 0;
   pagina: number = 0;
   tamPag: number = 5;
   cargado = false;
@@ -20,7 +20,7 @@ export class InventarioComponent implements OnInit {
     private readonly router: Router) { }
 
   ngOnInit(): void {
-    this.cargarPagina(1);
+    this.cargarPagina(0);
   }
 
   cargarPagina(pag: number) {
@@ -32,7 +32,7 @@ export class InventarioComponent implements OnInit {
     this.inventarioService.getInventarioInterval(limit, skip).subscribe({
       next: (response) => {
         this.inventarios = response.message;
-        this.numeroInventario = response.numTotal;
+        this.numeroInventarios = response.numTotal;
       },
       error: (error) => {
         console.log(error);
@@ -49,5 +49,5 @@ export class InventarioComponent implements OnInit {
 
   verHistorial() {
     this.router.navigate(['historial']);
-}
+  }
 }

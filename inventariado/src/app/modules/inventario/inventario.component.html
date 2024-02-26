@@ -38,13 +38,13 @@
         </div>
         <div class="row">
             <div class="col text-left">
-                <p>Total de elementos: {{ numeroInventario }}</p>
+                <p>Total de elementos: {{ numeroInventarios }}</p>
             </div>
             <div class="col-md-6 d-flex justify-content-end">
                 <button class="btn btn-primary" style="background-color: #024892e0;" (click)="verHistorial()">Ver Historial</button>
             </div>
         </div>
-        <app-paginador [numeroElementos]="numeroInventario" [tamPag]="tamPag"
+        <app-paginador [numeroElementos]="numeroInventarios" [tamPag]="tamPag"
             (pagina)="cargarPagina($event)"></app-paginador>
         
     </div>

@@ -1,1 +1,51 @@
-<p>historial-inventario works!</p>
+<section *ngIf="cargado">
+    <div class="container">
+        <div class="row">
+            <h1 class="col-6 my-4 font-weight-bold">HISTORIAL</h1>
+        </div>
+
+        <div class="row">
+            <div class="col col-md-auto">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Número elementos por página</span>
+                    </div>
+                    <select class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+                        [(ngModel)]="tamPag" id="tamPagina">
+                        <option *ngFor="let opcion of Multiplos5(8)" [value]="opcion">{{ opcion }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table table-bordered table-fixed">
+                <thead>
+                    <th scope="col" class="w-20 text-center">Fecha</th>
+                    <th scope="col" class="w-20 text-center">Oficina</th>
+                    <th scope="col" class="w-50 text-center">Artículo</th>
+                    <th scope="col" class="w-10 text-center">Stock</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let historial of historiales">
+                        <td class="text-center">{{ historial.fecha }}</td>
+                        <td>{{ historial.oficina.localidad }}</td>
+                        <td>{{ historial.articulo.descripcion }}</td>
+                        <td class="text-center">{{ historial.stock }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col text-left">
+                <p>Total de elementos: {{ numeroHistoriales }}</p>
+            </div>
+            <div class="col-md-6 d-flex justify-content-end">
+                <button class="btn btn-primary" style="background-color: #024892e0;" (click)="goBack()">Volver</button>
+            </div>
+        </div>
+        <app-paginador [numeroElementos]="numeroHistoriales" [tamPag]="tamPag"
+            (pagina)="cargarPagina($event)"></app-paginador>
+        
+    </div>
+</section>
