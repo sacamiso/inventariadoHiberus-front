@@ -29,12 +29,45 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let inventario of inventarios">
-                        <td>{{ inventario.oficina.localidad }}</td>
+                        <td>
+                            <a href="#" class="zoom" data-bs-toggle="modal" [attr.data-bs-target]="'#modalDetalles' + inventario.idOficina">
+                                {{ inventario.oficina.localidad }}
+                            </a>
+                        </td>
                         <td>{{ inventario.articulo.descripcion }}</td>
                         <td class="text-center">{{ inventario.stock }}</td>
+
+                        <div class="container my-4">
+                            <!--detalles de una oficina-->
+                            <!-- Modal -->
+                            <div class="modal fade" [id]="'modalDetalles' + inventario.idOficina" tabindex="-1"
+                                aria-labelledby="modalDetallesLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modalDetallesLabel">Detalles de la oficina de {{ inventario.oficina.localidad }}</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            
+                                            <p class="card-text">Dirección: {{ inventario.oficina.direccion }}</p>
+                                            <p class="card-text">Localidad: {{ inventario.oficina.localidad }}</p>
+                                            <p class="card-text">Provincia: {{ inventario.oficina.provincia }}</p>
+                                            <p class="card-text">País: {{ inventario.oficina.pais }}</p>
+                                            <p class="card-text">Código postal: {{ inventario.oficina.codigoPostal }}</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Hasta aquí detalles de oficina con su modal-->
+                        </div>
+
                     </tr>
                 </tbody>
             </table>
+
         </div>
         <div class="row">
             <div class="col text-left">

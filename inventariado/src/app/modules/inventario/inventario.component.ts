@@ -3,6 +3,7 @@ import { Inventario } from 'src/app/core/model/inventario.model';
 import { Router } from '@angular/router';
 import { InventarioService } from '../../core/services/inventario.service';
 
+
 @Component({
   selector: 'app-inventario',
   templateUrl: './inventario.component.html',
@@ -16,8 +17,10 @@ export class InventarioComponent implements OnInit {
   tamPag: number = 5;
   cargado = false;
 
-  constructor(private readonly inventarioService: InventarioService,
-    private readonly router: Router) { }
+  constructor(
+    private readonly inventarioService: InventarioService,
+    private readonly router: Router
+    ) { }
 
   ngOnInit(): void {
     this.cargarPagina(0);
@@ -50,4 +53,5 @@ export class InventarioComponent implements OnInit {
   verHistorial() {
     this.router.navigate(['historial']);
   }
+
 }

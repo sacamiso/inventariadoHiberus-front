@@ -1,5 +1,5 @@
 .navbar {
-    background-color: #001f3f;
+    background-color: #19255A ;
 }
 
 .nav-item::after {
@@ -7,7 +7,7 @@
     display: block;
     width: 0px;
     height: 2px;
-    background: #73a7df;
+    background: #00CDE2;
     transition: 0.4s
 }
 
@@ -25,7 +25,7 @@
 .navbar-nav .show>.nav-link,
 .navbar-nav .nav-link:focus,
 .navbar-nav .nav-link:hover {
-    color:#73a7df
+    color:#00CDE2
 }
 
 .nav-link {
