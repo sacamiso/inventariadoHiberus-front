@@ -14,6 +14,7 @@ import { MenuComponent } from './modules/menu/menu.component';
 import { EntradasComponent } from './modules/entradas/entradas.component';
 import { SalidasComponent } from './modules/salidas/salidas.component';
 import { AvisosComponent } from './modules/avisos/avisos.component';
+import { DetallePedidoComponent } from './modules/detalle-pedido/detalle-pedido.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { AvisosComponent } from './modules/avisos/avisos.component';
     EntradasComponent,
     SalidasComponent,
     AvisosComponent,
+    DetallePedidoComponent,
   ],
   imports: [
     BrowserModule,

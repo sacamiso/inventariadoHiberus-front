@@ -11,7 +11,7 @@ import { InventarioService } from '../../core/services/inventario.service';
 })
 export class InventarioComponent implements OnInit {
 
-  inventarios:Array<Inventario> = [];
+  inventarios: Array<Inventario> = [];
   numeroInventarios: number = 0;
   pagina: number = 0;
   tamPag: number = 5;
