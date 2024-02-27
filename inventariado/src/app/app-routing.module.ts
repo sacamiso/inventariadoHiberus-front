@@ -5,11 +5,13 @@ import { HistorialInventarioComponent } from 'src/app/modules/historial-inventar
 import { SalidasComponent } from 'src/app/modules/salidas/salidas.component';
 import { EntradasComponent } from 'src/app/modules/entradas/entradas.component';
 import { AvisosComponent } from 'src/app/modules/avisos/avisos.component';
+import { DetallePedidoComponent } from 'src/app/modules/detalle-pedido/detalle-pedido.component';
 
 const routes: Routes = [
   {path: '', component:InventarioComponent},
   {path: 'historial', component:HistorialInventarioComponent},
   {path: 'entradas', component:EntradasComponent},
+  {path: 'entradas/pedido/:id', component:DetallePedidoComponent},
   {path: 'salidas', component:SalidasComponent},
   {path: 'avisos', component:AvisosComponent},
 ];

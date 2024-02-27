@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { PedidoList } from '../model/pedido-list.model';
-
+import { PedidoMsg } from '../model/pedido-msg.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +16,9 @@ export class PedidoService {
 
   getPedidosInterval(limit: number, skip: number): Observable<PedidoList> {
     return this.http.get<PedidoList>(`${this.apiUrl}/pedido/listAllPag?limit=${limit}&skip=${skip}`);
+  }
+
+  getPedidoById(id: number): Observable<PedidoMsg> {
+    return this.http.get<PedidoMsg>(`${this.apiUrl}/pedido/${id}`);
   }
 }

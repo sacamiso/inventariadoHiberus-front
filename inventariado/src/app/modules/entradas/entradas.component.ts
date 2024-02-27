@@ -50,4 +50,7 @@ export class EntradasComponent implements OnInit {
     return Array.from({ length: total }, (_, i) => (i + 1) * 5); 
   }
 
+  detallePedido(id: number){
+    this.router.navigate([`entradas/pedido/${id}`]);
+  }
 }

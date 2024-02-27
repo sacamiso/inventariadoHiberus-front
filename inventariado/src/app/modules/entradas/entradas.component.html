@@ -37,7 +37,7 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let pedido of pedidos">
-                                        <td>Pedido {{pedido.numeroPedido}}</td>
+                                        <td style="cursor: pointer;" (click)="detallePedido(pedido.numeroPedido)">Pedido {{pedido.numeroPedido}}</td>
                                         <td>{{pedido.numeroUnidades}}</td>
                                         <td>{{pedido.costeUnitario}} €</td>
                                         <td>{{pedido.costeTotal}} €</td>

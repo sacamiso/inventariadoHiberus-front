@@ -1,1 +1,111 @@
-<p>detalle-pedido works!</p>
+<section *ngIf="cargado && cargado2 && pedido!=null">
+    <div class="container">
+        <header class="mb-5">
+            <div class="row">
+                <div class="col-sm-6 text-right mt-5">
+                    <h1>Información del pedido</h1>
+                    <p class="mt-4"><strong>Número de pedido:</strong> {{pedido.numeroPedido}}</p>
+                    <p><strong>Fecha pedido: </strong> {{pedido.fechaPedido}}</p>
+                    <p><strong>Fecha recepción: </strong> {{ pedido.fechaRecepcion !== null ? pedido.fechaRecepcion : '-' }}</p>
+                </div>
+            </div>
+        </header>
+
+        <section class="mb-5">
+            <h2>Lineas del pedido</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Número Línea</th>
+                        <th>Unidades</th>
+                        <th>Artículo</th>
+                        <th>Precio unitario</th>
+                        <th>Descuento</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let linea of lineas">
+                        <td>{{linea.numeroLinea}}</td>
+                        <td>{{linea.numeroUnidades}}</td>
+                        <td>{{linea.articulo.descripcion}}</td>
+                        <td>{{linea.articulo.precioUnitario}} €</td>
+                        <td>{{ linea.descuento !== 0 ? linea.descuento + '%' : '-' }}</td>
+                        <td>{{linea.precioLinea}} €</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="mb-5">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h2>Información del proveedor</h2>
+                    <address>
+                        <strong>Dirección:</strong>
+                        <br>{{pedido.proveedor.direccion}}
+                        <br>{{pedido.proveedor.codigoPostal}}, {{pedido.proveedor.localidad}}
+                        
+                        <br><strong>Contacto:</strong>
+                        <br>{{pedido.proveedor.telefono}}
+                        <br>{{pedido.proveedor.email}}
+
+                        <br><strong>Razón social:</strong> {{pedido.proveedor.razonSocial}}
+                        <br><strong>CIF:</strong> {{pedido.proveedor.cif}}
+                    </address>
+
+                    <h2>Detalles</h2>
+                    <address>
+                        <strong>Oficina destino:</strong>
+                        <br>{{pedido.oficina.direccion}}, {{pedido.oficina.codigoPostal}}, {{pedido.oficina.localidad}} {{ pedido.oficina.provincia !== null ? ', ' + pedido.oficina.provincia : '' }}, {{pedido.oficina.pais}}
+                        
+                        <br><strong>Realizado por:</strong>
+                        <br>{{pedido.empleado.nombre}} {{pedido.empleado.apellidos}}
+                        <br><strong>Plazo de entrega:</strong> {{pedido.plazoEntrega}} días
+                        <br><strong>Condición de pago:</strong> {{pedido.condicion.descripcion}}
+                        <br><strong>Medio de pago:</strong> {{pedido.medio.descripcion}}
+                    </address>
+                </div>
+                
+                <div class="col-sm-4 mt-sm-0 mt-4">
+                    <h2>Resumen</h2>
+                    <table class="table table-bordered">
+                        <tfoot>
+                            
+                            <tr>
+                                <th colspan="3">Número total de unidades</th>
+                                <td>{{pedido.numeroUnidades}} uds.</td>
+                            </tr>
+                            <tr>
+                                <th colspan="3">Coste unitario (PMP)</th>
+                                <td>{{pedido.costeUnitario | number:'1.2-2'}} €</td>
+                            </tr>
+                            <tr>
+                                <th colspan="3">Coste total articulos</th>
+                                <td>{{pedido.costeTotal | number:'1.2-2'}} €</td>
+                            </tr>
+                            <tr>
+                                <th colspan="3">Gastos de envío</th>
+                                <td>{{pedido.costesEnvio}} €</td>
+                            </tr>
+
+                            <tr>
+                                <th colspan="3">Total</th>
+                                <td>{{pedido.costesEnvio + pedido.costeTotal | number:'1.2-2'}} €</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                
+            </div>
+        </section>
+
+        <footer>
+            <a href="#" class="btn btn-primary">Imprimir factura</a>
+            <a href="#" class="btn btn-secondary">Gestionar pedido</a>
+        </footer>
+        
+    </div>
+</section>
+
+    
