@@ -1,0 +1,85 @@
+<form [formGroup]="pedidoForm" (ngSubmit)="guardar()">
+    <!-- Apartado de Proveedor -->
+    <fieldset style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+        <legend style="width: auto; border: none; font-size: 20px; font-weight: bold; color: #333;">Proveedor</legend>
+        <div class="form-group">
+            <label for="proveedor">Seleccionar proveedor:</label>
+            <select formControlName="proveedor" id="proveedor" class="form-control">
+                <!-- Opciones del desplegable -->
+            </select>
+        </div>
+    </fieldset>
+
+    <!-- Apartado de Líneas -->
+    <fieldset style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+        <legend style="width: auto; border: none; font-size: 18px; font-weight: bold; color: #333;">Líneas</legend>
+        <div class="row">
+            
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="articulo">Seleccionar artículo:</label>
+                    <select formControlName="articulo" id="articulo" class="form-control">
+                        <!-- Opciones del desplegable -->
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="unidades">Unidades</label>
+                    <input type="number" class="form-control" id="unidades">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="descuento">Descuento (%)</label>
+                    <input type="number" class="form-control" id="descuento">
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- Otros apartados -->
+    <div class="form-group">
+        <label for="realizadoPor">Realizado por</label>
+        <select class="form-control" id="realizadoPor">
+            <option value="">Seleccionar quien ha realizado el pedido</option>
+            <!-- Aquí puedes iterar sobre una lista de empleados o usuarios para generar las opciones -->
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="oficina">Oficina</label>
+        <select class="form-control" id="oficina">
+            <option value="">Seleccionar la oficina</option>
+            <!-- Aquí puedes iterar sobre una lista de oficinas para generar las opciones -->
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="medioPago">Medio de pago</label>
+        <select class="form-control" id="medioPago">
+            <option value="">Seleccionar el medio de pago</option>
+            <!-- Aquí puedes iterar sobre una lista de medios de pago para generar las opciones -->
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="condicion">Condición</label>
+        <select class="form-control" id="condicion">
+            <option value="">Seleccionar la condición</option>
+            <!-- Aquí puedes iterar sobre una lista de condiciones para generar las opciones -->
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="iva">IVA</label>
+        <input type="text" class="form-control" id="iva">
+    </div>
+    <div class="form-group">
+        <label for="plazoEntrega">Plazo de entrega (días)</label>
+        <input type="number" class="form-control" id="plazoEntrega">
+    </div>
+    <div class="form-group">
+        <label for="costesEnvio">Costes de envío</label>
+        <input type="text" class="form-control" id="costesEnvio">
+    </div>
+
+    <!-- Botón de guardar -->
+    <button type="submit" class="btn btn-primary">Guardar</button>
+</form>

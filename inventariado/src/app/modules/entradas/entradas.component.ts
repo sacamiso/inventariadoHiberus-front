@@ -53,4 +53,8 @@ export class EntradasComponent implements OnInit {
   detallePedido(id: number){
     this.router.navigate([`entradas/pedido/${id}`]);
   }
+
+  crearNuevoPedido(){
+    this.router.navigate([`nuevo/pedido`]);
+  }
 }

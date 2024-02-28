@@ -31,10 +31,12 @@ export class DetallePedidoComponent implements OnInit {
     private route: ActivatedRoute,
     private readonly pedidoService: PedidoService,
     private readonly lineaService: LineaService,
-    private location: Location
+    private location: Location,
+    private readonly router: Router
   ) { 
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.alertPlaceholder = document.getElementById('liveAlert');
+
   }
 
   ngOnInit(): void {
@@ -111,6 +113,6 @@ export class DetallePedidoComponent implements OnInit {
   }
 
   goBack() {
-    this.location.back();
+    this.router.navigate([`entradas`]);
   }
 }

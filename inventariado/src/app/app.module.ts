@@ -14,6 +14,9 @@ import { EntradasComponent } from './modules/entradas/entradas.component';
 import { SalidasComponent } from './modules/salidas/salidas.component';
 import { AvisosComponent } from './modules/avisos/avisos.component';
 import { DetallePedidoComponent } from './modules/detalle-pedido/detalle-pedido.component';
+import { NuevoPedidoComponent } from './modules/nuevo-pedido/nuevo-pedido.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,11 +28,13 @@ import { DetallePedidoComponent } from './modules/detalle-pedido/detalle-pedido.
     SalidasComponent,
     AvisosComponent,
     DetallePedidoComponent,
+    NuevoPedidoComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
     FormsModule
   ],
   providers: [],
