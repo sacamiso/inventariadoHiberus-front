@@ -1,14 +1,44 @@
 <section *ngIf="cargado && cargado2 && pedido!=null">
     <div class="container">
         <header class="mb-5">
-            <div class="row">
-                <div class="col-sm-6 text-right mt-5">
-                    <h1>Información del pedido</h1>
+            <div class="d-flex align-items-start justify-content-between">
+                <div>
+                    <h1 class="mb-4 mt-4">Información del pedido</h1>
                     <p class="mt-4"><strong>Número de pedido:</strong> {{pedido.numeroPedido}}</p>
                     <p><strong>Fecha pedido: </strong> {{pedido.fechaPedido}}</p>
                     <p><strong>Fecha recepción: </strong> {{ pedido.fechaRecepcion !== null ? pedido.fechaRecepcion : '-' }}</p>
                 </div>
+                
+                <div class="mt-4">
+                    <button type="button" class="btn btn-primary boton-recibido" data-bs-toggle="modal"
+                    [attr.data-bs-target]="'#modalRecibido' + id" [disabled]="pedido.fechaRecepcion !== null">{{ pedido.fechaRecepcion === null ? 'Marcar como recibido' : 'Recibido' }}</button>
+                    
+                </div>
+                
+                <div class="modal fade" [id]="'modalRecibido' + id" tabindex="-1"
+                            aria-labelledby="modalBorrarLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalBorrarLabel">Recibido</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ¿Está seguro que desea marcarlo como recibido?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                            (click)="marcarRecibido()">Si</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
             </div>
+            <div id="liveAlert"></div>
         </header>
 
         <section class="mb-5">
@@ -95,16 +125,13 @@
                             </tr>
                         </tfoot>
                     </table>
+                    <div class="col-md-6 d-flex mt-4">
+                        <button class="btn btn-primary" style="background-color: #19255A; border-color: #19255A;" (click)="goBack()">Volver</button>
+                    </div>
                 </div>
                 
             </div>
-        </section>
-
-        <footer>
-            <a href="#" class="btn btn-primary">Imprimir factura</a>
-            <a href="#" class="btn btn-secondary">Gestionar pedido</a>
-        </footer>
-        
+        </section>        
     </div>
 </section>
 

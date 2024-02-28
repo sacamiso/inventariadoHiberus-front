@@ -7,6 +7,8 @@ import { Linea } from 'src/app/core/model/Linea.model';
 import { Router } from '@angular/router';
 import { PedidoService } from '../../core/services/pedido.service';
 import { LineaService } from '../../core/services/linea.service';
+import { MesaggeResponse } from 'src/app/core/model/mesagge-response.model';
+
 
 @Component({
   selector: 'app-detalle-pedido',
@@ -22,6 +24,9 @@ export class DetallePedidoComponent implements OnInit {
   cargado2 = false;
   id: number;
 
+  mensaje: MesaggeResponse | undefined;
+  alertPlaceholder: HTMLElement | null;
+
   constructor(
     private route: ActivatedRoute,
     private readonly pedidoService: PedidoService,
@@ -29,6 +34,7 @@ export class DetallePedidoComponent implements OnInit {
     private location: Location
   ) { 
     this.id = Number(this.route.snapshot.paramMap.get('id'));
+    this.alertPlaceholder = document.getElementById('liveAlert');
   }
 
   ngOnInit(): void {
@@ -70,4 +76,41 @@ export class DetallePedidoComponent implements OnInit {
     })
   }
 
+
+  marcarRecibido(){
+    this.pedidoService.marcarRecibido(this.id).subscribe({
+      next: (response) => {
+        this.mensaje = response;
+        if(this.mensaje.success){
+          this.alerta(this.mensaje.message, 'success');
+        }else{
+          this.alerta(this.mensaje.error, 'success');
+        }
+        
+      },
+      error: (error) => {
+        console.log(error);
+        this.alerta("No se ha podido marcar como recibido", 'danger');
+      },
+      complete: () => {
+        this.cargaDatos();
+      }
+    })
+  }
+
+  alerta(message: string, type: string) {
+    this.alertPlaceholder = document.getElementById('liveAlert');
+    if (!this.alertPlaceholder) {
+      return;
+    }
+
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = `<div class="alert alert-${type} alert-dismissible" role="alert"> ${message} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
+
+    this.alertPlaceholder.appendChild(wrapper);
+  }
+
+  goBack() {
+    this.location.back();
+  }
 }

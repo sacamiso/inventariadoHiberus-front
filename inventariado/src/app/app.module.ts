@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { InventarioComponent } from './modules/inventario/inventario.component';
@@ -15,7 +14,6 @@ import { EntradasComponent } from './modules/entradas/entradas.component';
 import { SalidasComponent } from './modules/salidas/salidas.component';
 import { AvisosComponent } from './modules/avisos/avisos.component';
 import { DetallePedidoComponent } from './modules/detalle-pedido/detalle-pedido.component';
-
 @NgModule({
   declarations: [
     AppComponent,
