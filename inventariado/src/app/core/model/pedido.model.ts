@@ -3,6 +3,7 @@ import { Condicion} from 'src/app/core/model/condicion.model';
 import { Empleado} from 'src/app/core/model/empleado.model';
 import { Medio} from 'src/app/core/model/medio.model';
 import { Proveedor} from 'src/app/core/model/proveedor.model';
+import { LineaForm } from './Linea.model';
 
 
 export interface Pedido {
@@ -25,4 +26,16 @@ export interface Pedido {
     oficina:        Oficina;
     condicion:      Condicion;
     medio:          Medio;
+}
+
+export interface PedidoForm {
+    ivaPedido:      number;
+    idEmpleado:     number;
+    plazoEntrega:   number;
+    costesEnvio:    number;
+    idProveedor:    number;
+    idOficina:      number;
+    condicionPago:  string;
+    medioPago:      string;
+    lineas: Array<LineaForm>;
 }

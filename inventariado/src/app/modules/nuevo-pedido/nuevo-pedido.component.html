@@ -1,167 +1,156 @@
 <div *ngIf="cargado" class="container mt-4">
 
-    <form [formGroup]="pedidoForm" (ngSubmit)="guardar()">
-        <div class="card mt-4">
-            <form [formGroup]="pedidoForm" (ngSubmit)="guardar()">
-                <div class="card-body">
-                    <p class="text-danger">* Campos obligatorios</p>
+    <form [formGroup]="pedidoForm">
+        <div class="card-body">
+            <p class="text-danger">* Campos obligatorios</p>
 
-                    <!-- Apartado de Proveedor -->
-                    <div class="row">
-                        <div class="col-md-6">
-                            <fieldset style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;" class="w-100">
-                                <legend
-                                    style="width: auto; border: none; font-size: 20px; font-weight: bold; color: #333;">
-                                    Proveedor</legend>
-                                <div class="form-group">
-                                    <label for="proveedor">Seleccionar proveedor:</label>
-                                    <select formControlName="proveedor" id="proveedor" class="form-control">
-                                        <option [value]="null">Seleccione un proveedor</option>
-                                        <option *ngFor="let prov of listProveedor" [value]="prov.idProveedor">{{ prov.razonSocial }}: {{ prov.direccion }}, {{ prov.localidad }}</option>
-                                    </select>
-                                </div>
-                            </fieldset>
-                        </div>
-                        <div class="col-md-6">
-                            <fieldset style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;" class="w-100">
-                                <legend
-                                    style="width: auto; border: none; font-size: 20px; font-weight: bold; color: #333;">
-                                    Texto Resumen</legend>
-                                <p> Coste total: </p>
-                            </fieldset>
-                        </div>
-                    </div>
-
-                    <!-- Apartado de Líneas -->
-                    <fieldset style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
-                        <legend style="width: auto; border: none; font-size: 18px; font-weight: bold; color: #333;"
-                            class="d-flex align-items-center">
-                            Líneas
-                            <a (click)="agregarLineaForm()" class="text-muted ms-2"> <!-- Agrega un espacio a la izquierda del enlace -->
-                                <i class="fas fa-plus nuevaLinea"></i>
-                            </a>
-                        </legend>
-                        <div *ngFor="let linea of lineas.controls; let i = index">
-                            <hr class="my-4">
-                            <div class="row mb-4 d-flex justify-content-between align-items-center">
-                                <div class="col-md-4 col-lg-2 col-xl-5">
-                                    <div class="form-group d-flex flex-column align-items-center">
-                                        <label for="articulo">Artículo</label>
-                                        <select formControlName="articulo" id="articulo" class="form-control">
-                                            <option [value]="null">Seleccione el articulo</option>
-                                            <option *ngFor="let art of listArticulos" [value]="art.codigoArticulo">{{ art.descripcion }}: {{ art.modelo }}, {{ art.fabricante }}, {{art.precioUnitario}} €/ud</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-
-                                    <button class="btn btn-link px-2 mt-3"
-                                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-
-                                    <div class="form-group d-flex flex-column align-items-center">
-                                        <label for="uds">Unidades</label>
-                                        <input id="uds" min="0" name="quantity" type="number" formControlName="uds"
-                                            class="form-control form-control-sm" />
-                                    </div>
-
-                                    <button class="btn btn-link px-2 mt-3"
-                                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-
-                                </div>
-
-                                <div class="col-md-2 col-lg-2 col-xl-2">
-                                    <div class="form-group d-flex flex-column align-items-center">
-                                        <label for="descuento">Descuento (%)</label>
-                                        <input type="number" class="form-control" id="descuento" min="0" formControlName="descuento">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-1 col-lg-1 col-xl-1 align-items-center">
-                                    <a (click)="eliminarLineaForm(i)" class="text-muted"><i class="fas fa-trash-alt"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-
-
-                    <!-- Otros apartados -->
-                    <div class="row mt-4">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="empleado">Realizado por</label>
-                                <select class="form-control" id="empleado">
-                                    <option [value]="null">Seleccione un empleado</option>
-                                    <option *ngFor="let empl of listEmpleado" [value]="empl.idEmpleado">{{ empl.nombre }} {{ empl.apellidos }}, {{ empl.dni }}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="oficina">Oficina</label>
-                                <select class="form-control" id="oficina">
-                                    <option [value]="null">Seleccione una oficina</option>
-                                    <option *ngFor="let ofi of listOficina" [value]="ofi.idOficina">{{ ofi.direccion }}, {{ ofi.localidad }}{{ ofi.provincia !== null ? ', '+ofi.provincia : '' }}, {{ ofi.pais }}</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="medioPago">Medio de pago</label>
-                                <select class="form-control" id="medioPago">
-                                    <option [value]="null">Seleccione el medio de pago</option>
-                                    <option *ngFor="let medio of listMedioP" [value]="medio.codigoMedio">{{ medio.descripcion }}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="condicion">Condición</label>
-                                <select class="form-control" id="condicion">
-                                    <option [value]="null">Seleccione la condición</option>
-                                    <option *ngFor="let condicion of listCondicionP" [value]="condicion.codigoCondicion">{{ condicion.descripcion }}</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="iva">IVA</label>
-                                <input type="text" class="form-control" id="iva">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="plazoEntrega">Plazo de entrega (días)</label>
-                                <input type="number" class="form-control" id="plazoEntrega">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="costesEnvio">Costes de envío</label>
-                                <input type="text" class="form-control" id="costesEnvio">
-                            </div>
-                        </div>
-                    </div>
-
+            <!-- Apartado de Proveedor -->
+            <fieldset style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;" class="w-100">
+                <legend style="width: auto; border: none; font-size: 20px; font-weight: bold; color: #333;">
+                    Proveedor</legend>
+                <div class="form-group">
+                    <label for="idProveedor">Seleccionar proveedor</label>
+                    <select formControlName="idProveedor" id="idProveedor" class="form-control">
+                        <option [value]="null">Seleccione un proveedor</option>
+                        <option *ngFor="let prov of listProveedor" [value]="prov.idProveedor">
+                            {{ prov.razonSocial }}: {{ prov.direccion }}, {{ prov.localidad }}
+                        </option>
+                    </select>
                 </div>
+            </fieldset>
 
-                <!-- Botón de guardar -->
-                <div class="card-footer">
-                    <button class="btn btn-success" [disabled]="!pedidoForm.valid" type="submit">Guardar</button>
-                    <button type="button" class="btn btn-primary float-end">Volver</button>
+            <!-- Apartado de Líneas -->
+            <fieldset style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+                <legend style="width: auto; border: none; font-size: 18px; font-weight: bold; color: #333;"
+                    class="d-flex align-items-center">
+                    Líneas
+                    <a (click)="agregarLineaForm()" class="text-muted ms-2">
+                        <i class="fas fa-plus nuevaLinea"></i>
+                    </a>
+                </legend>
+                <div *ngFor="let linea of lineas; let i = index">
+                    <hr class="my-4">
+                    <div [formGroup]="linea" class="row mb-4 d-flex justify-content-between align-items-center">
+                        <div class="col-md-4 col-lg-2 col-xl-5">
+                            <div class="form-group d-flex flex-column align-items-center">
+                                <label for="codigoArticulo">Artículo</label>
+                                <select formControlName="codigoArticulo" id="codigoArticulo" class="form-control">
+                                    <option [value]="null">Seleccione el articulo</option>
+                                    <option *ngFor="let art of listArticulos" [value]="art.codigoArticulo">{{
+                                        art.descripcion }}: {{ art.modelo }}, {{ art.fabricante }},
+                                        {{art.precioUnitario}} €/ud</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+
+                            <button class="btn btn-link px-2 mt-3">
+                                <i class="fas fa-minus"></i>
+                            </button>
+
+                            <div class="form-group d-flex flex-column align-items-center">
+                                <label for="numeroUnidades">Unidades</label>
+                                <input id="numeroUnidades" min="0" name="numeroUnidades" type="number"
+                                    formControlName="numeroUnidades" class="form-control form-control-sm" />
+                            </div>
+
+                            <button class="btn btn-link px-2 mt-3">
+                                <i class="fas fa-plus"></i>
+                            </button>
+
+                        </div>
+
+                        <div class="col-md-2 col-lg-2 col-xl-2">
+                            <div class="form-group d-flex flex-column align-items-center">
+                                <label for="descuento">Descuento (%)</label>
+                                <input type="number" class="form-control" id="descuento" min="0"
+                                    formControlName="descuento">
+                            </div>
+                        </div>
+
+                        <div class="col-md-1 col-lg-1 col-xl-1 align-items-center">
+                            <a (click)="eliminarLineaForm(i)" class="text-muted"><i class="fas fa-trash-alt"></i></a>
+                        </div>
+                    </div>
                 </div>
-            </form>
+            </fieldset>
+
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="idEmpleado">Realizado por</label>
+                        <select class="form-control" id="idEmpleado" formControlName="idEmpleado">
+                            <option [value]="null">Seleccione un empleado</option>
+                            <option *ngFor="let empl of listEmpleado" [value]="empl.idEmpleado">{{ empl.nombre
+                                }} {{ empl.apellidos }}, {{ empl.dni }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="idOficina">Oficina</label>
+                        <select class="form-control" id="idOficina" formControlName="idOficina">
+                            <option [value]="null">Seleccione una oficina</option>
+                            <option *ngFor="let ofi of listOficina" [value]="ofi.idOficina">{{ ofi.direccion }},
+                                {{ ofi.localidad }}{{ ofi.provincia !== null ? ', '+ofi.provincia : '' }}, {{
+                                ofi.pais }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="medioPago">Medio de pago</label>
+                        <select class="form-control" id="medioPago" formControlName="medioPago">
+                            <option [value]="null">Seleccione el medio de pago</option>
+                            <option *ngFor="let medio of listMedioP" [value]="medio.codigoMedio">{{
+                                medio.descripcion }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="condicionPago">Condición</label>
+                        <select class="form-control" id="condicionPago" formControlName="condicionPago">
+                            <option [value]="null">Seleccione la condición</option>
+                            <option *ngFor="let condicion of listCondicionP" [value]="condicion.codigoCondicion">{{
+                                condicion.descripcion }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="ivaPedido">IVA</label>
+                        <input type="text" class="form-control" id="ivaPedido" formControlName="ivaPedido">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="plazoEntrega">Plazo de entrega (días)</label>
+                        <input type="number" class="form-control" id="plazoEntrega" formControlName="plazoEntrega">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="costesEnvio">Costes de envío</label>
+                        <input type="text" class="form-control" id="costesEnvio" formControlName="costesEnvio">
+                    </div>
+                </div>
+            </div>
+
         </div>
 
+        
+        <div class="card-footer mt-4">
+            <button type="button" (click)="volver()" class="btn btn-danger">Cancelar</button>
+            <!-- Botón de guardar: esta con el evento click porque no quiero que se envíe cuando haga enter -->
+            <!-- Sino con el submit en la etiqueta del form vale -->
+            <button class="btn btn-success float-end" (click)="guardar()" [disabled]="!pedidoForm.valid">Guardar</button>
+        </div>
     </form>
-
 
 </div>

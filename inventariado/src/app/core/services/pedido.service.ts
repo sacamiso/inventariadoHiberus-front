@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { PedidoList } from '../model/pedido-list.model';
 import { PedidoMsg } from '../model/pedido-msg.model';
 import { MesaggeResponse } from '../model/mesagge-response.model';
+import { PedidoForm } from '../model/pedido.model';
 
 
 @Injectable({
@@ -26,5 +27,9 @@ export class PedidoService {
 
   marcarRecibido(idP: number): Observable<MesaggeResponse> {
     return this.http.put<MesaggeResponse>(`${this.apiUrl}/pedido/recibido?idP=${idP}`, null);
+  }
+
+  guardarPedido(pedido: PedidoForm){
+    return this.http.post<MesaggeResponse>(`${this.apiUrl}/pedido/add`, pedido);
   }
 }

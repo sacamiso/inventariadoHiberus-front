@@ -9,3 +9,10 @@ export interface Linea {
     descuento:      number;
     articulo:       Articulo;
 }
+
+export interface LineaForm {
+    numeroLinea:    number;
+    codigoArticulo: number;
+    numeroUnidades: number;
+    descuento:      number;
+}

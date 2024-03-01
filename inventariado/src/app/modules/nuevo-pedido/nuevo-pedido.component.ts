@@ -12,11 +12,10 @@ import { OficinaService } from '../../core/services/oficina.service';
 import { MedioService } from '../../core/services/medio.service';
 import { CondicionService } from '../../core/services/condicion.service';
 import { EmpleadoService } from '../../core/services/empleado.service';
-import { Linea } from 'src/app/core/model/Linea.model';
+import { LineaForm } from 'src/app/core/model/Linea.model';
 import { firstValueFrom } from 'rxjs';
-import { Pedido} from 'src/app/core/model/pedido.model';
-
-
+import { PedidoForm} from 'src/app/core/model/pedido.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nuevo-pedido',
@@ -27,10 +26,21 @@ export class NuevoPedidoComponent implements OnInit {
 
   pedidoForm: FormGroup;
 
-  //Para almacenar las líneas cuando se le de a guardar
-  listLinea: Array<Linea> = [];
+  lineas: FormGroup[] = [];
+
+  
   //Para almacenar el pedido cuando se le da a guardar
-  pedido: Pedido | undefined;
+  pedido: PedidoForm = {
+    ivaPedido: 0,
+    idEmpleado: 0,
+    plazoEntrega: 0,
+    costesEnvio: 0,
+    idProveedor: 0,
+    idOficina: 0,
+    condicionPago: '',
+    medioPago: '',
+    lineas: []
+  };
 
   listProveedor: Array<Proveedor> = [];
   listArticulos: Array<Articulo> = [];
@@ -42,6 +52,7 @@ export class NuevoPedidoComponent implements OnInit {
   cargado = false;
 
   constructor(
+    private readonly router: Router,
     private formBuilder: FormBuilder,
     private readonly empleadoService: EmpleadoService,
     private readonly condicionService: CondicionService,
@@ -52,15 +63,14 @@ export class NuevoPedidoComponent implements OnInit {
     
   ) { 
     this.pedidoForm = this.formBuilder.group({
-      proveedor: null,
-      empleado: null,
-      oficina: null,
+      idProveedor: null,
+      idEmpleado: null,
+      idOficina: null,
       medioPago: null,
-      condicion: null,
-      iva: null,
+      condicionPago: null,
+      ivaPedido: null,
       plazoEntrega: null,
-      costesEnvio: null,
-      lineas: this.formBuilder.array([]) 
+      costesEnvio: null
     });
     this.agregarLineaForm();
   }
@@ -70,21 +80,17 @@ export class NuevoPedidoComponent implements OnInit {
     this.cargado = true;
   }
 
-  get lineas() {
-    return this.pedidoForm.controls["lineas"] as FormArray;
-  }
-
   agregarLineaForm(){
     const lineasFormArray = this.formBuilder.group({
-      articulo: null,
-      uds: null,
+      codigoArticulo: null,
+      numeroUnidades: null,
       descuento: null,
     });
     this.lineas.push(lineasFormArray);
   }
 
   eliminarLineaForm(index: number){
-    this.lineas.removeAt(index);
+    this.lineas.splice(index,1);
   }
 
   async cargarDatos() {
@@ -96,13 +102,29 @@ export class NuevoPedidoComponent implements OnInit {
     await this.getProveedores();
   }
 
-  
-  
   guardar() {
-    
+
+    if(this.pedidoForm.valid) {
+      console.log("Entra a guardar");
+      this.pedido = this.pedidoForm.getRawValue() as PedidoForm;
+
+      for (let i = 0; i < this.lineas.length; i++) {
+        const linea = this.lineas[i].value;
+        console.log("linea");
+        console.log(linea);
+        
+        this.pedido.lineas.push(linea); 
+      }
+      console.log(this.pedido );
+    } else{
+      console.log("No se pudo guardar");
+    }
+    console.log("Fin guardar");
   }
 
-  
+  volver(){
+    this.router.navigate([`entradas`]);
+  }
 
   async getCondiciones(){
     this.listCondicionP = await firstValueFrom(this.condicionService.getAllCondiciones());
