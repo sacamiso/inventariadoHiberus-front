@@ -70,7 +70,7 @@ export class NuevoPedidoComponent implements OnInit {
       condicionPago: null,
       ivaPedido: null,
       plazoEntrega: null,
-      costesEnvio: null
+      costesEnvio: null,
     });
     this.agregarLineaForm();
   }
@@ -103,23 +103,24 @@ export class NuevoPedidoComponent implements OnInit {
   }
 
   guardar() {
-
-    if(this.pedidoForm.valid) {
-      console.log("Entra a guardar");
-      this.pedido = this.pedidoForm.getRawValue() as PedidoForm;
-
-      for (let i = 0; i < this.lineas.length; i++) {
-        const linea = this.lineas[i].value;
-        console.log("linea");
-        console.log(linea);
-        
-        this.pedido.lineas.push(linea); 
-      }
-      console.log(this.pedido );
-    } else{
+    debugger
+    if (this.pedidoForm.invalid){
       console.log("No se pudo guardar");
+      return;
     }
-    console.log("Fin guardar");
+    console.log("Entra a guardar");
+    this.pedido = this.pedidoForm.getRawValue() as PedidoForm
+    //Es necesario por la función anterior
+    this.pedido.lineas = [];
+    for (let i = 0; i < this.lineas.length; i++) {
+      const linea = this.lineas[i].value;
+      console.log("linea");
+      console.log(linea);
+
+      this.pedido.lineas.push(linea); 
+    }
+    console.log(this.pedido );
+    
   }
 
   volver(){
