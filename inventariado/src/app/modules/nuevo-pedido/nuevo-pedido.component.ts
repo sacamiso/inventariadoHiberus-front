@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Articulo } from 'src/app/core/model/articulo.model';
 import { Medio } from 'src/app/core/model/medio.model';
 import { Condicion } from 'src/app/core/model/condicion.model';
@@ -12,7 +12,9 @@ import { OficinaService } from '../../core/services/oficina.service';
 import { MedioService } from '../../core/services/medio.service';
 import { CondicionService } from '../../core/services/condicion.service';
 import { EmpleadoService } from '../../core/services/empleado.service';
-
+import { Linea } from 'src/app/core/model/Linea.model';
+import { firstValueFrom } from 'rxjs';
+import { Pedido} from 'src/app/core/model/pedido.model';
 
 
 
@@ -25,18 +27,19 @@ export class NuevoPedidoComponent implements OnInit {
 
   pedidoForm: FormGroup;
 
+  //Para almacenar las líneas cuando se le de a guardar
+  listLinea: Array<Linea> = [];
+  //Para almacenar el pedido cuando se le da a guardar
+  pedido: Pedido | undefined;
+
   listProveedor: Array<Proveedor> = [];
-  cargado1 = false;
   listArticulos: Array<Articulo> = [];
-  cargado2 = false;
   listOficina: Array<Oficina> = [];
-  cargado3 = false;
   listEmpleado: Array<Empleado> = [];
-  cargado4 = false;
   listMedioP: Array<Medio> = [];
-  cargado5 = false;
   listCondicionP: Array<Condicion> = [];
-  cargado6 = false;
+ 
+  cargado = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -49,117 +52,80 @@ export class NuevoPedidoComponent implements OnInit {
     
   ) { 
     this.pedidoForm = this.formBuilder.group({
-      title: [null, Validators.required]
+      proveedor: null,
+      empleado: null,
+      oficina: null,
+      medioPago: null,
+      condicion: null,
+      iva: null,
+      plazoEntrega: null,
+      costesEnvio: null,
+      lineas: this.formBuilder.array([]) 
     });
+    this.agregarLineaForm();
   }
 
   ngOnInit(): void {
+    this.cargarDatos();
+    this.cargado = true;
   }
 
-  cargarDatos() {
-    this.getArticulos();
-    this.getCondiciones();
-    this.getMedios();
-    this.getOficinas();
-    this.getEmpleados();
-    this.getProveedores();
+  get lineas() {
+    return this.pedidoForm.controls["lineas"] as FormArray;
   }
 
-  getCondiciones(){
-
-    this.condicionService.getAllCondiciones().subscribe({
-      next: (response) => {
-        this.listCondicionP = response;
-      },
-      error: (error) => {
-        console.log(error);
-      },
-      complete: () => {
-        this.cargado6 = true;
-      }
-    })
-
+  agregarLineaForm(){
+    const lineasFormArray = this.formBuilder.group({
+      articulo: null,
+      uds: null,
+      descuento: null,
+    });
+    this.lineas.push(lineasFormArray);
   }
 
-  getMedios(){
-
-    this.medioService.getAllMedios().subscribe({
-      next: (response) => {
-        this.listMedioP = response;
-      },
-      error: (error) => {
-        console.log(error);
-      },
-      complete: () => {
-        this.cargado5 = true;
-      }
-    })
-
+  eliminarLineaForm(index: number){
+    this.lineas.removeAt(index);
   }
 
-  getEmpleados(){
-
-    this.empleadoService.getAllEmpleados().subscribe({
-      next: (response) => {
-        this.listEmpleado = response;
-      },
-      error: (error) => {
-        console.log(error);
-      },
-      complete: () => {
-        this.cargado4 = true;
-      }
-    })
-
+  async cargarDatos() {
+    await this.getArticulos();
+    await this.getCondiciones();
+    await this.getMedios();
+    await this.getOficinas();
+    await this.getEmpleados();
+    await this.getProveedores();
   }
 
-  getOficinas(){
-
-    this.oficinaService.getAllOficinas().subscribe({
-      next: (response) => {
-        this.listOficina = response;
-      },
-      error: (error) => {
-        console.log(error);
-      },
-      complete: () => {
-        this.cargado3 = true;
-      }
-    })
-
-  }
-  getArticulos(){
-
-    this.articuloService.getAllArticulos().subscribe({
-      next: (response) => {
-        this.listArticulos = response;
-      },
-      error: (error) => {
-        console.log(error);
-      },
-      complete: () => {
-        this.cargado2 = true;
-      }
-    })
-
-  }
-  getProveedores(){
-
-    this.proveedorService.getAllProveedores().subscribe({
-      next: (response) => {
-        this.listProveedor = response;
-      },
-      error: (error) => {
-        console.log(error);
-      },
-      complete: () => {
-        this.cargado1 = true;
-      }
-    })
-
-  }
-
+  
+  
   guardar() {
     
   }
+
+  
+
+  async getCondiciones(){
+    this.listCondicionP = await firstValueFrom(this.condicionService.getAllCondiciones());
+  }
+
+  async getMedios(){
+    this.listMedioP = await firstValueFrom(this.medioService.getAllMedios());
+  }
+
+  async getEmpleados(){
+    this.listEmpleado = await firstValueFrom(this.empleadoService.getAllEmpleados());
+  }
+
+  async getOficinas(){
+    this.listOficina = await firstValueFrom(this.oficinaService.getAllOficinas());
+  }
+  async getArticulos(){
+    this.listArticulos = await firstValueFrom(this.articuloService.getAllArticulos());
+  }
+  async getProveedores(){
+    //En este caso no se puede emplear la estructura habitual de next, error, complete, ya que no podriamos hacer el await
+    //De la siguiente manera soluciono el problema de la sincronía a la hora de cargar los datos en el fomulario
+    this.listProveedor = await firstValueFrom(this.proveedorService.getAllProveedores());
+  }
+
 }
