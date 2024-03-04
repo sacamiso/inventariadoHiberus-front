@@ -21,48 +21,49 @@
         </div>
 
         <div class="table-responsive">
-            <table class="table table table-bordered table-fixed">
-                <thead>
-                    <th scope="col" class="w-25 text-center">Oficina</th>
-                    <th scope="col" class="w-50 text-center">Artículo</th>
-                    <th scope="col" class="w-25 text-center">Stock</th>
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" class="w-25 text-center">Oficina</th>
+                        <th scope="col" class="w-50 text-center">Artículo</th>
+                        <th scope="col" class="w-25 text-center">Stock</th>
+                    </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let inventario of inventarios">
-                        <td>
-                            <a href="#" class="zoom" data-bs-toggle="modal" [attr.data-bs-target]="'#modalDetalles' + inventario.idOficina">
-                                {{ inventario.oficina.localidad }}
-                            </a>
+                        <td style="cursor: pointer;" data-bs-toggle="modal" [attr.data-bs-target]="'#modalDetalles' + inventario.idOficina">
+                            {{ inventario.oficina.localidad }}
+                            
+                                <!--detalles de una oficina-->
+                                <!-- Modal -->
+                                <div class="modal fade" [id]="'modalDetalles' + inventario.idOficina" tabindex="-1"
+                                    aria-labelledby="modalDetallesLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="modalDetallesLabel">Detalles de la oficina de {{ inventario.oficina.localidad }}</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                
+                                                <p class="card-text">Dirección: {{ inventario.oficina.direccion }}</p>
+                                                <p class="card-text">Localidad: {{ inventario.oficina.localidad }}</p>
+                                                <p class="card-text">Provincia: {{ inventario.oficina.provincia }}</p>
+                                                <p class="card-text">País: {{ inventario.oficina.pais }}</p>
+                                                <p class="card-text">Código postal: {{ inventario.oficina.codigoPostal }}</p>
+    
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Hasta aquí detalles de oficina con su modal-->
+                            
                         </td>
                         <td>{{ inventario.articulo.descripcion }}</td>
                         <td class="text-center">{{ inventario.stock }}</td>
 
-                        <div class="container my-4">
-                            <!--detalles de una oficina-->
-                            <!-- Modal -->
-                            <div class="modal fade" [id]="'modalDetalles' + inventario.idOficina" tabindex="-1"
-                                aria-labelledby="modalDetallesLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="modalDetallesLabel">Detalles de la oficina de {{ inventario.oficina.localidad }}</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            
-                                            <p class="card-text">Dirección: {{ inventario.oficina.direccion }}</p>
-                                            <p class="card-text">Localidad: {{ inventario.oficina.localidad }}</p>
-                                            <p class="card-text">Provincia: {{ inventario.oficina.provincia }}</p>
-                                            <p class="card-text">País: {{ inventario.oficina.pais }}</p>
-                                            <p class="card-text">Código postal: {{ inventario.oficina.codigoPostal }}</p>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--Hasta aquí detalles de oficina con su modal-->
-                        </div>
+                        
 
                     </tr>
                 </tbody>
@@ -74,7 +75,7 @@
                 <p>Total de elementos: {{ numeroInventarios }}</p>
             </div>
             <div class="col-md-6 d-flex justify-content-end">
-                <button class="btn btn-primary" style="background-color: #024892e0;" (click)="verHistorial()">Ver Historial</button>
+                <button class="btn btn-primary" style="background-color: #19255A;" (click)="verHistorial()">Ver Historial</button>
             </div>
         </div>
         <app-paginador [numeroElementos]="numeroInventarios" [tamPag]="tamPag"

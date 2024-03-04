@@ -19,12 +19,14 @@
         </div>
 
         <div class="table-responsive">
-            <table class="table table table-bordered table-fixed">
+            <table class="table table-striped table-bordered">
                 <thead>
-                    <th scope="col" class="w-20 text-center">Fecha</th>
-                    <th scope="col" class="w-20 text-center">Oficina</th>
-                    <th scope="col" class="w-50 text-center">Artículo</th>
-                    <th scope="col" class="w-10 text-center">Stock</th>
+                    <tr>
+                        <th scope="col" class="w-20 text-center">Fecha</th>
+                        <th scope="col" class="w-20 text-center">Oficina</th>
+                        <th scope="col" class="w-50 text-center">Artículo</th>
+                        <th scope="col" class="w-10 text-center">Stock</th>
+                    </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let historial of historiales">
@@ -41,7 +43,7 @@
                 <p>Total de elementos: {{ numeroHistoriales }}</p>
             </div>
             <div class="col-md-6 d-flex justify-content-end">
-                <button class="btn btn-primary" style="background-color: #024892e0;" (click)="goBack()">Volver</button>
+                <button class="btn btn-primary" style="background-color: #19255A;" (click)="goBack()">Volver</button>
             </div>
         </div>
         <app-paginador [numeroElementos]="numeroHistoriales" [tamPag]="tamPag"

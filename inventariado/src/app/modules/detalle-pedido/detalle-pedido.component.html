@@ -112,7 +112,7 @@
                             </tr>
                             <tr>
                                 <th colspan="3">Coste total articulos</th>
-                                <td>{{pedido.costeTotal | number:'1.2-2'}} €</td>
+                                <td>{{pedido.costeTotal - pedido.costesEnvio | number:'1.2-2'}} €</td>
                             </tr>
                             <tr>
                                 <th colspan="3">Gastos de envío</th>
@@ -121,7 +121,7 @@
 
                             <tr>
                                 <th colspan="3">Total</th>
-                                <td>{{pedido.costesEnvio + pedido.costeTotal | number:'1.2-2'}} €</td>
+                                <td>{{pedido.costeTotal | number:'1.2-2'}} €</td>
                             </tr>
                         </tfoot>
                     </table>
