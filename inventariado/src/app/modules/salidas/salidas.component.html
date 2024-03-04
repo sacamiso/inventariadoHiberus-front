@@ -1,1 +1,67 @@
-<p>salidas works!</p>
+<section *ngIf="cargado">
+    <div class="container">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center mt-5">
+                    <h1 class="display-4">SALIDAS</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-md-auto">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Número elementos por página</span>
+                    </div>
+                    <select class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+                        [(ngModel)]="tamPag" id="tamPagina">
+                        <option *ngFor="let opcion of Multiplos5(8)" [value]="opcion">{{ opcion }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <section class="mt-5">
+                <div class="row">
+                    <div class="col-md-10 offset-md-1">
+                        <h2>Información de las salidas</h2>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Número de Salida</th>
+                                        <th scope="col">Unidades Totales</th>
+                                        <th scope="col">Coste Unitario</th>
+                                        <th scope="col">Coste Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let salida of salidas">
+                                        <td style="cursor: pointer;" (click)="detalleSalida(salida.idSalida)">Salida {{salida.idSalida}}</td>
+                                        <td>{{salida.numUnidades}}</td>
+                                        <td>{{salida.costeUnitario}} €</td>
+                                        <td>{{salida.costeTotal.toFixed(2)}} €</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <p>Total de salidas: {{ numeroSalidas }}</p>
+                </div>
+            </div>
+            <app-paginador [numeroElementos]="numeroSalidas" [tamPag]="tamPag"
+            (pagina)="cargarPagina($event)"></app-paginador>
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <button class="btn btn-primary mt-3 boton" (click)="crearNuevaSalida()">Nueva Salida</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
