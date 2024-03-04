@@ -51,6 +51,13 @@
         </div>
         <div class="container">
             <div class="row">
+                <div class="col text-center">
+                    <p>Total de pedidos: {{ numeroPedidos }}</p>
+                </div>
+            </div>
+            <app-paginador [numeroElementos]="numeroPedidos" [tamPag]="tamPag"
+            (pagina)="cargarPagina($event)"></app-paginador>
+            <div class="row">
                 <div class="col-md-10 offset-md-1">
                     <button class="btn btn-primary mt-3 boton" (click)="crearNuevoPedido()">Nuevo Pedido</button>
                 </div>

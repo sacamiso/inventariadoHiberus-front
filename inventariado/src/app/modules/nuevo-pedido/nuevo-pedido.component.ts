@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Articulo } from 'src/app/core/model/articulo.model';
 import { Medio } from 'src/app/core/model/medio.model';
+import { MesaggeResponse } from 'src/app/core/model/mesagge-response.model';
 import { Condicion } from 'src/app/core/model/condicion.model';
 import { Oficina } from 'src/app/core/model/oficina.model';
 import { Empleado } from 'src/app/core/model/empleado.model';
@@ -16,6 +17,7 @@ import { LineaForm } from 'src/app/core/model/Linea.model';
 import { firstValueFrom } from 'rxjs';
 import { PedidoForm} from 'src/app/core/model/pedido.model';
 import { Router } from '@angular/router';
+import { PedidoService } from '../../core/services/pedido.service';
 
 @Component({
   selector: 'app-nuevo-pedido',
@@ -28,6 +30,8 @@ export class NuevoPedidoComponent implements OnInit {
 
   lineas: FormGroup[] = [];
 
+  msg: MesaggeResponse | undefined;
+  alertPlaceholder: HTMLElement | null;
   
   //Para almacenar el pedido cuando se le da a guardar
   pedido: PedidoForm = {
@@ -60,19 +64,20 @@ export class NuevoPedidoComponent implements OnInit {
     private readonly oficinaService: OficinaService,
     private readonly articuloService: ArticuloService,
     private readonly proveedorService: ProveedorService,
-    
+    private readonly pedidoService: PedidoService,
   ) { 
     this.pedidoForm = this.formBuilder.group({
-      idProveedor: null,
-      idEmpleado: null,
-      idOficina: null,
-      medioPago: null,
-      condicionPago: null,
-      ivaPedido: null,
-      plazoEntrega: null,
-      costesEnvio: null,
+      idProveedor: [null, Validators.required],
+      idEmpleado: [null, Validators.required],
+      idOficina: [null, Validators.required],
+      medioPago: [null, Validators.required],
+      condicionPago: [null, Validators.required],
+      ivaPedido: [null, [Validators.required, Validators.min(0)]],
+      plazoEntrega: [null, [Validators.required, Validators.pattern('^(-?\\d+)$'), Validators.min(1)]],
+      costesEnvio: [null, [Validators.required, Validators.min(0)]],
     });
     this.agregarLineaForm();
+    this.alertPlaceholder = document.getElementById('liveAlert');
   }
 
   ngOnInit(): void {
@@ -82,11 +87,21 @@ export class NuevoPedidoComponent implements OnInit {
 
   agregarLineaForm(){
     const lineasFormArray = this.formBuilder.group({
-      codigoArticulo: null,
-      numeroUnidades: null,
-      descuento: null,
+      codigoArticulo: [null, Validators.required],
+      numeroUnidades: [1, [Validators.required, Validators.pattern('^(-?\\d+)$'), Validators.min(1)]],
+      descuento: [0, [Validators.required, Validators.min(0)]],
     });
     this.lineas.push(lineasFormArray);
+  }
+
+  verificarValidezLineas() {
+    let valido = true;
+    this.lineas.forEach(linea => {
+      if (!linea.valid) {
+        valido = false;
+      }
+    });
+    return valido;
   }
 
   eliminarLineaForm(index: number){
@@ -103,24 +118,62 @@ export class NuevoPedidoComponent implements OnInit {
   }
 
   guardar() {
-    debugger
-    if (this.pedidoForm.invalid){
-      console.log("No se pudo guardar");
+    
+    if (this.pedidoForm.invalid || !this.verificarValidezLineas()){
+      this.alerta('El formulario no es válido', 'danger');
       return;
     }
-    console.log("Entra a guardar");
+
     this.pedido = this.pedidoForm.getRawValue() as PedidoForm
-    //Es necesario por la función anterior
+
+    //Es necesario por la función anterior, ya que los campos que no están iniciados se ponen a null automáticos
     this.pedido.lineas = [];
+    let lineaAux: LineaForm;
     for (let i = 0; i < this.lineas.length; i++) {
       const linea = this.lineas[i].value;
-      console.log("linea");
-      console.log(linea);
 
-      this.pedido.lineas.push(linea); 
+      lineaAux = {
+        numeroLinea: i+1,
+        codigoArticulo: linea.codigoArticulo,
+        numeroUnidades: linea.numeroUnidades,
+        descuento: linea.descuento
+      }
+
+      this.pedido.lineas.push(lineaAux); 
     }
-    console.log(this.pedido );
     
+    this.guardarFormulario();
+  }
+
+  guardarFormulario(){
+    this.pedidoService.guardarPedido(this.pedido).subscribe({
+      next: (response) => {
+        this.msg = response;
+        if(this.msg.success){
+          this.alerta(this.msg.message, 'success');
+          this.pedidoForm.reset();
+          this.lineas = [];
+          this.agregarLineaForm();
+        }else{
+          this.alerta(this.msg.error, 'danger');
+        }
+      },
+      error: (error) => {
+        this.alerta('El pedido no se ha podido guardar', 'danger');
+      }
+    })
+  }
+
+  alerta(message: string, type: string) {
+    this.alertPlaceholder = document.getElementById('liveAlert');
+    if (!this.alertPlaceholder) {
+      return;
+    }
+
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = `<div class="alert alert-${type} alert-dismissible" role="alert"> ${message} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
+
+    this.alertPlaceholder.appendChild(wrapper);
   }
 
   volver(){
