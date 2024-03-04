@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Articulo } from 'src/app/core/model/articulo.model';
 import { Medio } from 'src/app/core/model/medio.model';
 import { MesaggeResponse } from 'src/app/core/model/mesagge-response.model';
@@ -159,7 +159,7 @@ export class NuevoPedidoComponent implements OnInit {
         }
       },
       error: (error) => {
-        this.alerta('El pedido no se ha podido guardar', 'danger');
+        this.alerta(error, 'danger');
       }
     })
   }

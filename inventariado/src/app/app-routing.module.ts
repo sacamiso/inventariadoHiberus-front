@@ -7,6 +7,7 @@ import { EntradasComponent } from 'src/app/modules/entradas/entradas.component';
 import { AvisosComponent } from 'src/app/modules/avisos/avisos.component';
 import { DetallePedidoComponent } from 'src/app/modules/detalle-pedido/detalle-pedido.component';
 import { NuevoPedidoComponent } from 'src/app/modules/nuevo-pedido/nuevo-pedido.component';
+import { NuevaSalidaComponent } from 'src/app/modules/nueva-salida/nueva-salida.component';
 
 const routes: Routes = [
   {path: '', component:InventarioComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'entradas', component:EntradasComponent},
   {path: 'entradas/pedido/:id', component:DetallePedidoComponent},
   {path: 'salidas', component:SalidasComponent},
+  {path: 'salidas/nueva', component:NuevaSalidaComponent},
   {path: 'avisos', component:AvisosComponent},
   {path: 'nuevo/pedido', component:NuevoPedidoComponent},
 ];

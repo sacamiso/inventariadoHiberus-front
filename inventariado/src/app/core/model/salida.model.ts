@@ -12,3 +12,12 @@ export interface Salida {
     oficina:       Oficina;
     articulo:      Articulo;
 }
+
+export interface SalidaForm {
+    numUnidades:   number;
+    costeTotal:    number;
+    costeUnitario: number;
+    fechaSalida:   Date;
+    idOficina:     number;
+    codArticulo:   number;
+}
