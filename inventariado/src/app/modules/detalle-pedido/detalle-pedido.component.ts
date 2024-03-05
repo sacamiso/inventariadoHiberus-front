@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
-import { firstValueFrom } from 'rxjs';
 import { Pedido } from 'src/app/core/model/pedido.model';
 import { Linea } from 'src/app/core/model/Linea.model';
 import { Router } from '@angular/router';
@@ -19,7 +17,6 @@ export class DetallePedidoComponent implements OnInit {
 
   pedido: Pedido | undefined;
   lineas: Array<Linea> = [];
-  existe = false;
   cargado = false;
   cargado2 = false;
   id: number;
@@ -31,12 +28,10 @@ export class DetallePedidoComponent implements OnInit {
     private route: ActivatedRoute,
     private readonly pedidoService: PedidoService,
     private readonly lineaService: LineaService,
-    private location: Location,
     private readonly router: Router
   ) { 
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.alertPlaceholder = document.getElementById('liveAlert');
-
   }
 
   ngOnInit(): void {

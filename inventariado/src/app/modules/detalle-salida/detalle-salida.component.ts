@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Salida } from 'src/app/core/model/salida.model';
+import { Router } from '@angular/router';
+import { SalidaService } from '../../core/services/salida.service';
+
 
 @Component({
   selector: 'app-detalle-salida',
@@ -7,9 +12,42 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetalleSalidaComponent implements OnInit {
 
-  constructor() { }
+  salida: Salida | undefined;
+  cargado = false;
+  id: number;
+
+  constructor(
+    private route: ActivatedRoute,
+    private readonly salidaService: SalidaService,
+    private readonly router: Router,
+  ) {
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
+  }
 
   ngOnInit(): void {
+    this.cargaDatos();
+  }
+
+  cargaDatos() {
+    this.getSalida();
+  }
+
+  getSalida() {
+    this.salidaService.getSalidaById(this.id).subscribe({
+      next: (response) => {
+        this.salida = response.message;
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {
+        this.cargado = true;
+      }
+    })
+  }
+
+  goBack() {
+    this.router.navigate([`salidas`]);
   }
 
 }

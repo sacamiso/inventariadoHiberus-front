@@ -39,7 +39,7 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let salida of salidas">
-                                        <td style="cursor: pointer;" (click)="detalleSalida(salida.idSalida)">Salida {{salida.idSalida}}</td>
+                                        <td class="underline-link" (click)="detalleSalida(salida.idSalida)">Salida {{salida.idSalida}}</td>
                                         <td>{{salida.articulo.descripcion}}</td>
                                         <td>{{salida.numUnidades}}</td>
                                         <td>{{salida.costeUnitario}} €</td>

@@ -1,1 +1,66 @@
-<p>detalle-salida works!</p>
+<section *ngIf="cargado && salida!=null">
+    <div class="container">
+        <header class="mb-2">
+            <div class="d-flex align-items-start justify-content-between">
+                <div>
+                    <h1 class="mb-4 mt-4">Información de la salida</h1>
+                    <p class="mt-4"><strong>Número de salida:</strong> {{salida.idSalida}}</p>
+                    <p><strong>Fecha de salida: </strong> {{salida.fechaSalida}}</p>
+                </div>
+            </div>
+        </header>
+
+        <section>
+            <div class="row">
+                <div class="col-sm-8">
+                    <h2>Información del artículo</h2>
+                    <div>
+                        <strong>Articulo: {{salida.codArticulo}}</strong>
+                        <br>{{salida.articulo.descripcion}}
+                        <br>{{salida.articulo.fabricante}}, {{salida.articulo.modelo}}
+                        <br><strong>Referencia:</strong> {{salida.articulo.referencia}}
+
+                        <br><strong>Categoría: </strong>
+                        {{salida.articulo.codCategoria}}
+                        <br><strong>Subcategoría: </strong>
+                        {{salida.articulo.codSubcategoria}}
+
+                        <br><strong>Precio unitario: </strong>
+                        {{salida.articulo.precioUnitario}} €
+                        <br><strong>IVA: </strong>
+                        {{salida.articulo.iva}} %
+                    </div>
+                    <h2 class="mt-4">Detalles</h2>
+                    <div>
+                        <strong>Oficina de salida:</strong>
+                        <br>{{salida.oficina.direccion}}, {{salida.oficina.codigoPostal}}, {{salida.oficina.localidad}} {{ salida.oficina.provincia !== null ? ', ' + salida.oficina.provincia : '' }}, {{salida.oficina.pais}}
+                    </div>
+                </div>
+
+                <div class="col-sm-4 mt-sm-0 mt-4">
+                    <h2>Resumen</h2>
+                    <table class="table table-bordered">
+                        <tfoot>
+                            <tr>
+                                <th colspan="3">Número total de unidades</th>
+                                <td>{{salida.numUnidades}} uds.</td>
+                            </tr>
+                            <tr>
+                                <th colspan="3">Coste unitario (PMP)</th>
+                                <td>{{salida.costeUnitario | number:'1.2-2'}} €</td>
+                            </tr>
+                            <tr>
+                                <th colspan="3">Coste total</th>
+                                <td>{{salida.costeTotal | number:'1.2-2'}} €</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <div class="col-md-6 d-flex mt-4">
+                        <button class="btn btn-primary" style="background-color: #19255A; border-color: #19255A;" (click)="goBack()">Ir a Salidas</button>
+                    </div>
+                </div>
+                
+            </div>
+        </section>        
+    </div>
+</section>
