@@ -16,4 +16,9 @@ export class InventarioService {
   getInventarioInterval(limit: number, skip: number): Observable<InventarioList> {
     return this.http.get<InventarioList>(`${this.apiUrl}/inventario/listAllPag?limit=${limit}&skip=${skip}`);
   }
+
+  getInventarioByOficina(idOficina: number): Observable<InventarioList> {
+    return this.http.get<InventarioList>(`${this.apiUrl}/inventario/listOf/${idOficina}`);
+  }
+
 }

@@ -1,1 +1,82 @@
-<p>nueva-salida works!</p>
+<div *ngIf="cargado1" class="container mt-4">
+    <div class="mt-4" id="liveAlert"></div>
+    <h1>Oficina</h1>
+    <select class="form-control" [(ngModel)]="idOficinaSeleccionada" (ngModelChange)="changeOfi()">
+        <option *ngFor="let oficina of listOficina" [value]="oficina.idOficina">{{oficina.direccion}}, {{oficina.localidad}}</option>
+    </select>
+
+    <div *ngIf="cargado2" class="container mt-4">
+        <form [formGroup]="salidaForm">
+            <div class="card-body">
+                <p class="text-danger">* Campos obligatorios</p>
+
+                <div class="row mt-4">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="codArticulo">Artículo <span class="text-danger">*</span></label>
+                            <select class="form-control" id="codArticulo" formControlName="codArticulo" [(ngModel)]="selectedItemId" (ngModelChange)="resetNumUnidades()">
+                                
+                                <option *ngFor="let listI of listInventario?.message" [ngValue]="listI.codArticulo">
+                                    {{ listI.articulo.descripcion }}, {{ listI.articulo.modelo }}
+                                </option>
+                            </select>
+                            <div *ngIf="selectedItemId !== null" class="mt-2">Stock actual: {{ getSelectedStock() }}</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="costeTotal">Coste Total (€)<span class="text-danger">* </span>
+                                <span class="text-danger" *ngIf="this.salidaForm.get('costeTotal')?.errors?.['min']">
+                                    (No puede ser negativo)
+                                </span>
+                            </label>
+                            <input type="number" class="form-control" id="costeTotal" formControlName="costeTotal" step="0.01" min="0" [attr.disabled]="!selectedItemId ? true : null" (ngModelChange)="actualizarCostoUnitario()"/>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label for="numUnidades">Uds <span class="text-danger">*</span>
+                                <span class="text-danger" *ngIf="this.salidaForm.get('numUnidades')?.errors?.['min']">
+                                    (Como mínimo debe ser 1)
+                                </span>
+                                <span class="text-danger" *ngIf="this.salidaForm.get('numUnidades')?.errors?.['pattern']">
+                                    (Debe ser entero)
+                                </span>
+                            </label>
+                            <input type="number" class="form-control" id="numUnidades" formControlName="numUnidades" min="1" [max]="getSelectedStock()" [attr.disabled]="!selectedItemId ? true : null" (ngModelChange)="actualizarCostoUnitario()"/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="fechaSalida">Fecha de salida<span class="text-danger">*</span></label>
+                            <br>
+                            <span class="text-danger" *ngIf="salidaForm.get('fechaSalida')?.errors?.['fechaInvalida']">
+                                (La fecha no puede ser posterior a la actual)
+                            </span>
+                            <input type="date" class="form-control" id="fechaSalida" formControlName="fechaSalida" appFechaValida>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="costeUnitario">Coste unitario (€)</label>
+                        <input id="costeUnitario" class="form-control readonly-input" type="text" [value]="costeUnitario !==0 ? costeUnitario.toFixed(2)  : ''" readonly>
+                    </div>
+                </div>
+                
+                
+            </div>
+
+            <div class="card-footer mt-4">
+                
+                <!-- Botón de guardar: esta con el evento click porque no quiero que se envíe cuando haga enter -->
+                <!-- Sino con el submit en la etiqueta del form vale -->
+                <button class="btn btn-success float-end" (click)="guardar()" [disabled]="!salidaForm.valid">Guardar</button>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer mt-4">
+        <button type="button" (click)="volver()" class="btn btn-danger">Cancelar</button>
+    </div>
+    
+</div>

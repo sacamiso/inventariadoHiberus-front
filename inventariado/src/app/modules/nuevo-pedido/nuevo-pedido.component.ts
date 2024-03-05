@@ -82,7 +82,7 @@ export class NuevoPedidoComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarDatos();
-    this.cargado = true;
+    
   }
 
   agregarLineaForm(){
@@ -115,6 +115,7 @@ export class NuevoPedidoComponent implements OnInit {
     await this.getOficinas();
     await this.getEmpleados();
     await this.getProveedores();
+    this.cargado = true;
   }
 
   guardar() {

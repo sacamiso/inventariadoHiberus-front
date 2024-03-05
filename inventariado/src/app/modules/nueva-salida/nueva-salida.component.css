@@ -1,0 +1,6 @@
+.readonly-input {
+    background-color: #f0f0f0; /* Cambia el color de fondo */
+    border: 1px solid #ddd; /* Añade un borde */
+    padding: 5px; /* Añade un espacio interno */
+    cursor: not-allowed; /* Cambia el cursor al puntero de "no permitido" */
+}
