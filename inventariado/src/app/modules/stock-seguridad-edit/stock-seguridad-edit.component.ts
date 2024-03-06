@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Oficina } from 'src/app/core/model/oficina.model';
 import { OficinaService } from '../../core/services/oficina.service';
 import { StockSeguridadList } from 'src/app/core/model/stock-seguridad-list.model';
-import { StockSeguridad } from 'src/app/core/model/stock-seguridad.model';
+import { StockSeguridad, StockSeguridadForm } from 'src/app/core/model/stock-seguridad.model';
 import { StockSeguridadService } from '../../core/services/stock-seguridad.service';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
@@ -20,7 +20,7 @@ export class StockSeguridadEditComponent implements OnInit {
   cargado2 = false;
 
   stockSeguridadResponse: StockSeguridadList | undefined;
-  stockSeguridad: Array<StockSeguridad> = [];
+  stockSeguridad: Array<StockSeguridadForm> = [];
 
   constructor(
     private readonly router: Router,
@@ -57,5 +57,21 @@ export class StockSeguridadEditComponent implements OnInit {
   async getStockSeguridadByOficina(idOf: number){
     this.stockSeguridadResponse = await firstValueFrom(this.stockSeguridadService.getStockSeguridadByOficina(idOf));
     this.stockSeguridad = this.stockSeguridadResponse.message;
+  }
+  eliminarLineaSS(ss: any) {
+    const index = this.stockSeguridad.indexOf(ss);
+    if (index !== -1) {
+        this.stockSeguridad.splice(index, 1);
+    }
+}
+
+  agregarFila() {
+    this.stockSeguridad.push({
+      codSubcategoria: "",
+      codCategoria:"",
+      idOficina: this.idOficinaSeleccionada,
+      cantidad: 0,
+      plazoEntregaMedio: 0
+    });
   }
 }

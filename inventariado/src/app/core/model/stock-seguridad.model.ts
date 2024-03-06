@@ -8,3 +8,11 @@ export interface StockSeguridad {
     plazoEntregaMedio: number;
     oficina:           Oficina;
 }
+
+export interface StockSeguridadForm {
+    codSubcategoria:   string;
+    codCategoria:      string;
+    idOficina:         number;
+    cantidad:          number;
+    plazoEntregaMedio: number;
+}
