@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MesaggeResponse } from 'src/app/core/model/mesagge-response.model';
 import { SalidaForm } from 'src/app/core/model/salida.model';
-import { Articulo } from 'src/app/core/model/articulo.model';
 import { Oficina } from 'src/app/core/model/oficina.model';
 import { InventarioService } from '../../core/services/inventario.service';
 import { OficinaService } from '../../core/services/oficina.service';

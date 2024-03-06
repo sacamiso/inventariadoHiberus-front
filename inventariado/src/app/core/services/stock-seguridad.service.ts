@@ -16,4 +16,8 @@ export class StockSeguridadService {
   getStockSeguridadInterval(limit: number, skip: number): Observable<StockSeguridadList> {
     return this.http.get<StockSeguridadList>(`${this.apiUrl}/stockSeguridad/listAllPag?limit=${limit}&skip=${skip}`);
   }
+
+  getStockSeguridadByOficina(idOficina: number): Observable<StockSeguridadList> {
+    return this.http.get<StockSeguridadList>(`${this.apiUrl}/stockSeguridad/listOf/${idOficina}`);
+  }
 }

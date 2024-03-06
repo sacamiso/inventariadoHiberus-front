@@ -1,1 +1,53 @@
-<p>stock-seguridad-edit works!</p>
+<div *ngIf="cargado1" class="container mt-4">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center mt-5">
+                <h1 class="display-4">EDITAR STOCK DE SEGURIDAD</h1>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container mt-4">
+        <section class="mt-5">
+            <div class="row mb-5">
+                <div class="col-md-10 offset-md-1">
+                    <h2>Oficina</h2>
+                    <label for="oficina" class="mb-3">Seleccione la oficina de la que desea editar el stock de seguridad:</label>
+                    <select id="oficina" class="form-control" [(ngModel)]="idOficinaSeleccionada" (ngModelChange)="changeOfi()">
+                        <option *ngFor="let oficina of listOficina" [value]="oficina.idOficina">{{oficina.direccion}}, {{oficina.localidad}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <h2>Información del Stock de Seguridad</h2>
+                    <div *ngIf="cargado2" class="table-responsive">
+                        <table class="table table-striped table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Oficina</th>
+                                    <th scope="col">Categoría</th>
+                                    <th scope="col">Subcategoría</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Plazo de entrega medio</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let ss of stockSeguridad">
+                                    <td>{{ss.oficina.direccion}}, {{ss.oficina.localidad}}</td>
+                                    <td>{{ss.codCategoria}}</td>
+                                    <td>{{ss.codSubcategoria}}</td>
+                                    <td>{{ss.cantidad}} uds</td>
+                                    <td>{{ss.plazoEntregaMedio}} días</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+</div>
