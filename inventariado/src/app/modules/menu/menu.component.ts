@@ -27,10 +27,19 @@ export class MenuComponent implements OnInit {
       case 4:
         this.seleccionado = 4;
         break;
+      case 5:
+          this.seleccionado = 5;
+          break;
       default:
         this.seleccionado = 0;
         break;
     }
+  }
+
+  dropdownOpen = false;
+
+  toggleDropdown(open: boolean) {
+      this.dropdownOpen = open;
   }
 
 }

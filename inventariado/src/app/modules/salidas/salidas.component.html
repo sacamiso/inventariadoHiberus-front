@@ -42,7 +42,7 @@
                                         <td class="underline-link" (click)="detalleSalida(salida.idSalida)">Salida {{salida.idSalida}}</td>
                                         <td>{{salida.articulo.descripcion}}</td>
                                         <td>{{salida.numUnidades}}</td>
-                                        <td>{{salida.costeUnitario}} €</td>
+                                        <td>{{salida.costeUnitario.toFixed(2)}} €</td>
                                         <td>{{salida.costeTotal.toFixed(2)}} €</td>
                                         <td>{{salida.fechaSalida}}</td>
                                     </tr>

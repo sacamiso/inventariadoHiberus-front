@@ -1,18 +1,39 @@
-<nav class="navbar-dark navbar sticky-top navbar-expand-sm"> 
-    <div class="collapse navbar-collapse">
-        <ul class="container navbar-nav">
-            <li [ngClass]="seleccionado == 1 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(1)">
-                <a routerLink="" class="nav-link"> Inicio </a>
-            </li>
-            <li [ngClass]="seleccionado == 2 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(2)">
-                <a routerLink="/entradas" class="nav-link"> Entradas </a>
-            </li>
-            <li [ngClass]="seleccionado == 3 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(3)" >
-                <a routerLink="/salidas" class="nav-link"> Saldias </a>
-            </li>    
-            <li [ngClass]="seleccionado == 4 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(4)" >
-                <a routerLink="/avisos" class="nav-link"> Avisos </a>
-            </li>          
-        </ul>
-    </div>
+<nav class="navbar-dark navbar sticky-top navbar-expand-sm">
+    <div class="container-fluid">
+        <!--Botón para menú hamburguesa para pantallas pequeñas-->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li [ngClass]="seleccionado == 1 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(1)">
+                    <a routerLink="" class="nav-link"> Inicio </a>
+                </li>
+                <li [ngClass]="seleccionado == 2 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(2)">
+                    <a routerLink="/entradas" class="nav-link"> Entradas </a>
+                </li>
+                <li [ngClass]="seleccionado == 3 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(3)" >
+                    <a routerLink="/salidas" class="nav-link"> Saldias </a>
+                </li>    
+                <li [ngClass]="seleccionado == 4 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(4)" >
+                    <a routerLink="/avisos" class="nav-link"> Avisos </a>
+                </li>
+                <li [ngClass]="seleccionado == 5 ? 'nav-item dropdown active' : 'nav-item dropdown'" 
+                (mouseenter)="toggleDropdown(true)" (mouseleave)="toggleDropdown(false)" (click)="cambiaSeleccionado(5)">
+                    <a class="nav-link dropdown-toggle" routerLink="/gestion" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Gestión
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" [ngClass]="dropdownOpen ? 'show' : ''">
+                        <li><a class="dropdown-item" routerLink="/gestion">Stock de seguridad</a></li>
+                        <li><a class="dropdown-item" routerLink="/gestion">Proveedores</a></li>
+                        <li><a class="dropdown-item" routerLink="/gestion">Artículos</a></li>
+                        <li><a class="dropdown-item" routerLink="/gestion">Unidades</a></li>
+                        <li><a class="dropdown-item" routerLink="/gestion">Empleados</a></li>
+                        <li><a class="dropdown-item" routerLink="/gestion">Oficinas</a></li>
+                      </ul>
+                </li>        
+            </ul>
+        </div>
+    </div>    
 </nav>

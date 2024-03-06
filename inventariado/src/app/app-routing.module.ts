@@ -9,17 +9,20 @@ import { DetallePedidoComponent } from 'src/app/modules/detalle-pedido/detalle-p
 import { NuevoPedidoComponent } from 'src/app/modules/nuevo-pedido/nuevo-pedido.component';
 import { NuevaSalidaComponent } from 'src/app/modules/nueva-salida/nueva-salida.component';
 import { DetalleSalidaComponent } from './modules/detalle-salida/detalle-salida.component';
+import { GestionComponent } from './modules/gestion/gestion.component';
 
 const routes: Routes = [
   {path: '', component:InventarioComponent},
-  {path: 'historial', component:HistorialInventarioComponent},
+  {path: 'avisos', component:AvisosComponent},
   {path: 'entradas', component:EntradasComponent},
   {path: 'entradas/pedido/:id', component:DetallePedidoComponent},
+  {path: 'gestion', component:GestionComponent},
+  {path: 'historial', component:HistorialInventarioComponent},
+  {path: 'nuevo/pedido', component:NuevoPedidoComponent},
   {path: 'salidas', component:SalidasComponent},
   {path: 'salidas/nueva', component:NuevaSalidaComponent},
   {path: 'salidas/salida/:id', component:DetalleSalidaComponent},
-  {path: 'avisos', component:AvisosComponent},
-  {path: 'nuevo/pedido', component:NuevoPedidoComponent},
+  
 ];
 
 @NgModule({

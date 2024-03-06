@@ -19,6 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NuevaSalidaComponent } from './modules/nueva-salida/nueva-salida.component';
 import { FechaValidaDirective } from './core/directives/fecha-valida.directive';
 import { DetalleSalidaComponent } from './modules/detalle-salida/detalle-salida.component';
+import { GestionComponent } from './modules/gestion/gestion.component';
+
 
 @NgModule({
   declarations: [
@@ -35,6 +37,7 @@ import { DetalleSalidaComponent } from './modules/detalle-salida/detalle-salida.
     NuevaSalidaComponent,
     FechaValidaDirective,
     DetalleSalidaComponent,
+    GestionComponent,
   ],
   imports: [
     BrowserModule,
