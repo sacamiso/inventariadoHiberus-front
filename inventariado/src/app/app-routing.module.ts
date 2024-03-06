@@ -10,6 +10,8 @@ import { NuevoPedidoComponent } from 'src/app/modules/nuevo-pedido/nuevo-pedido.
 import { NuevaSalidaComponent } from 'src/app/modules/nueva-salida/nueva-salida.component';
 import { DetalleSalidaComponent } from './modules/detalle-salida/detalle-salida.component';
 import { GestionComponent } from './modules/gestion/gestion.component';
+import { StockSeguridadComponent } from './modules/stock-seguridad/stock-seguridad.component';
+import { StockSeguridadEditComponent } from './modules/stock-seguridad-edit/stock-seguridad-edit.component';
 
 const routes: Routes = [
   {path: '', component:InventarioComponent},
@@ -17,6 +19,8 @@ const routes: Routes = [
   {path: 'entradas', component:EntradasComponent},
   {path: 'entradas/pedido/:id', component:DetallePedidoComponent},
   {path: 'gestion', component:GestionComponent},
+  {path: 'gestion/stockSeguridad', component:StockSeguridadComponent},
+  {path: 'gestion/stockSeguridad/edit', component:StockSeguridadEditComponent},
   {path: 'historial', component:HistorialInventarioComponent},
   {path: 'nuevo/pedido', component:NuevoPedidoComponent},
   {path: 'salidas', component:SalidasComponent},

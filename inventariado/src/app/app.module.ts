@@ -20,6 +20,8 @@ import { NuevaSalidaComponent } from './modules/nueva-salida/nueva-salida.compon
 import { FechaValidaDirective } from './core/directives/fecha-valida.directive';
 import { DetalleSalidaComponent } from './modules/detalle-salida/detalle-salida.component';
 import { GestionComponent } from './modules/gestion/gestion.component';
+import { StockSeguridadComponent } from './modules/stock-seguridad/stock-seguridad.component';
+import { StockSeguridadEditComponent } from './modules/stock-seguridad-edit/stock-seguridad-edit.component';
 
 
 @NgModule({
@@ -38,6 +40,8 @@ import { GestionComponent } from './modules/gestion/gestion.component';
     FechaValidaDirective,
     DetalleSalidaComponent,
     GestionComponent,
+    StockSeguridadComponent,
+    StockSeguridadEditComponent,
   ],
   imports: [
     BrowserModule,
