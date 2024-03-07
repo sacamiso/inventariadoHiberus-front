@@ -32,3 +32,11 @@
     padding: 10px 25px;
     transition: 0.2s
 }
+
+.dropdown-menu{
+    background-color: #ececec;
+}
+.desp:hover {
+    color: white;
+    background-color: #19255A; /* Cambia este color al azul oscuro que desees */
+}

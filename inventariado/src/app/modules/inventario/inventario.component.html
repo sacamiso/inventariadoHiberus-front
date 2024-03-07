@@ -31,8 +31,8 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let inventario of inventarios">
-                        <td style="cursor: pointer;" data-bs-toggle="modal" [attr.data-bs-target]="'#modalDetalles' + inventario.idOficina">
-                            {{ inventario.oficina.localidad }}
+                        <td data-bs-toggle="modal" [attr.data-bs-target]="'#modalDetalles' + inventario.idOficina">
+                            <span class="underline-link">{{ inventario.oficina.localidad }}</span>
                             
                                 <!--detalles de una oficina-->
                                 <!-- Modal -->

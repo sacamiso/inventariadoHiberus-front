@@ -1,7 +1,7 @@
 <div *ngIf="cargado1" class="container mt-4">
     <div class="mt-4" id="liveAlert"></div>
     <h1>Oficina</h1>
-    <select class="form-control" [(ngModel)]="idOficinaSeleccionada" (ngModelChange)="changeOfi()">
+    <select class="form-control form-select" [(ngModel)]="idOficinaSeleccionada" (ngModelChange)="changeOfi()">
         <option *ngFor="let oficina of listOficina" [value]="oficina.idOficina">{{oficina.direccion}}, {{oficina.localidad}}</option>
     </select>
 
@@ -14,7 +14,7 @@
                     <div class="col-md-5">
                         <div class="form-group">
                             <label for="codArticulo">Artículo <span class="text-danger">*</span></label>
-                            <select class="form-control" id="codArticulo" formControlName="codArticulo" [(ngModel)]="selectedItemId" (ngModelChange)="resetNumUnidades()">
+                            <select class="form-control form-select" id="codArticulo" formControlName="codArticulo" [(ngModel)]="selectedItemId" (ngModelChange)="resetNumUnidades()">
                                 
                                 <option *ngFor="let listI of listInventario?.message" [ngValue]="listI.codArticulo">
                                     {{ listI.articulo.descripcion }}, {{ listI.articulo.modelo }}
