@@ -6,6 +6,11 @@ import { StockSeguridad, StockSeguridadForm } from 'src/app/core/model/stock-seg
 import { StockSeguridadService } from '../../core/services/stock-seguridad.service';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
+import { Categoria } from 'src/app/core/model/categoria.model';
+import { CategoriaService } from '../../core/services/categoria.service';
+import { Subcategoria } from 'src/app/core/model/subcategoria.model';
+import { SubcategoriaService } from '../../core/services/subcategoria.service';
+import { MesaggeResponse } from 'src/app/core/model/mesagge-response.model';
 
 @Component({
   selector: 'app-stock-seguridad-edit',
@@ -16,19 +21,32 @@ export class StockSeguridadEditComponent implements OnInit {
 
   listOficina: Array<Oficina> = [];
   idOficinaSeleccionada : number = 0;
+  listCategorias: Array<Categoria> = [];
+  listSubcategorias: Array<Subcategoria> = [];
+
   cargado1 = false;
   cargado2 = false;
 
   stockSeguridadResponse: StockSeguridadList | undefined;
   stockSeguridad: Array<StockSeguridadForm> = [];
+  mensajeRepetido: string = '';
+  repetido = false;
+
+  msg: MesaggeResponse | undefined;
+  alertPlaceholder: HTMLElement | null;
 
   constructor(
     private readonly router: Router,
     private readonly oficinaService: OficinaService,
     private readonly stockSeguridadService: StockSeguridadService,
-  ) { }
+    private readonly categoriaService: CategoriaService,
+    private readonly subcategoriaService: SubcategoriaService,
+  ) {
+    this.alertPlaceholder = document.getElementById('liveAlert');
+  }
 
   ngOnInit(): void {
+    
     this.cargarDatos1();
   }
 
@@ -44,7 +62,7 @@ export class StockSeguridadEditComponent implements OnInit {
   async changeOfi(): Promise<void> {
     if(this.idOficinaSeleccionada !== 0 && this.idOficinaSeleccionada!== null && this.idOficinaSeleccionada!== undefined) {
       await this.cargarDatos2();
-      this.cargado2 = true;
+      
     }else{
       this.cargado2 = false;
     }
@@ -52,6 +70,17 @@ export class StockSeguridadEditComponent implements OnInit {
 
   async cargarDatos2() {
     await this.getStockSeguridadByOficina(this.idOficinaSeleccionada);
+    await this.getCategorias();
+    await this.getSubcategorias();
+    this.cargado2 = true;
+  }
+
+  async getCategorias(){
+    this.listCategorias = await firstValueFrom(this.categoriaService.getAllCategorias());
+  }
+
+  async getSubcategorias(){
+    this.listSubcategorias = await firstValueFrom(this.subcategoriaService.getAllSubcategorias());
   }
 
   async getStockSeguridadByOficina(idOf: number){
@@ -74,4 +103,77 @@ export class StockSeguridadEditComponent implements OnInit {
       plazoEntregaMedio: 0
     });
   }
+
+  isNumeroEnteroValido(n: any): boolean {
+    return /^[0-9]*$/.test(n);
+  }
+
+  limpiarSeleccionSubcategoria(ss: any) {
+    ss.codSubcategoria = "";
+  }
+  guardar(){
+    this.stockSeguridadService.guardarStockSeguridad(this.stockSeguridad).subscribe({
+      next: (response) => {
+        this.msg = response;
+        if(this.msg.success){
+          this.alerta(this.msg.message, 'success');
+        }else{
+          this.alerta(this.msg.error, 'danger');
+        }
+      },
+      error: (error) => {
+        this.alerta(error, 'danger');
+      }
+    })
+  }
+
+  alerta(message: string, type: string) {
+    this.alertPlaceholder = document.getElementById('liveAlert');
+    if (!this.alertPlaceholder) {
+      return;
+    }
+
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = `<div class="alert alert-${type} alert-dismissible" role="alert"> ${message} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
+
+    this.alertPlaceholder.appendChild(wrapper);
+  }
+
+  validaCampos(){
+    let correcto = true;
+    this.repetido = false;
+    const parejasUnicas = new Set<string>();
+
+    this.stockSeguridad.forEach(elemento => {
+      const pareja = elemento.codCategoria + '-' + elemento.codSubcategoria;
+
+      if (parejasUnicas.has(pareja)) {
+        correcto = false;
+        this.repetido = true;
+        this.mensajeRepetido = 'No se puede repetir la pareja Categoria y Subcategoria';
+        return;
+      }
+
+      parejasUnicas.add(pareja);
+
+      if(elemento.codCategoria === ""){
+        correcto = false;
+        return;
+      }
+      if(elemento.codSubcategoria === ""){
+        correcto = false;
+        return;
+      }
+      if(elemento.cantidad < 1 ||  !Number.isInteger(elemento.cantidad)){
+        correcto = false;
+        return;
+      }
+      if(elemento.plazoEntregaMedio < 1 ||  !Number.isInteger(elemento.plazoEntregaMedio)){
+        correcto = false;
+        return;
+      }
+    });
+    return correcto;
+  }
+
 }
