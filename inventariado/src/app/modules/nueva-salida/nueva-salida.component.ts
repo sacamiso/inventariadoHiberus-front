@@ -149,7 +149,7 @@ export class NuevaSalidaComponent implements OnInit {
         }
       },
       error: (error) => {
-        this.alerta(error, 'danger');
+        this.alerta(error.error.error, 'danger');
       }
     })
   }

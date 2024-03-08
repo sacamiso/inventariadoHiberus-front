@@ -22,6 +22,7 @@ import { DetalleSalidaComponent } from './modules/detalle-salida/detalle-salida.
 import { GestionComponent } from './modules/gestion/gestion.component';
 import { StockSeguridadComponent } from './modules/stock-seguridad/stock-seguridad.component';
 import { StockSeguridadEditComponent } from './modules/stock-seguridad-edit/stock-seguridad-edit.component';
+import { UnidadesComponent } from './modules/unidades/unidades.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { StockSeguridadEditComponent } from './modules/stock-seguridad-edit/stoc
     GestionComponent,
     StockSeguridadComponent,
     StockSeguridadEditComponent,
+    UnidadesComponent,
   ],
   imports: [
     BrowserModule,

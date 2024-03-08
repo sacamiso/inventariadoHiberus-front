@@ -1,0 +1,59 @@
+<section *ngIf="cargado">
+    <div class="container">
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center mt-5">
+                    <h1 class="display-4">UNIDADES</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col col-md-auto">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Número elementos por página</span>
+                    </div>
+                    <select class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+                        [(ngModel)]="tamPag" id="tamPagina">
+                        <option *ngFor="let opcion of Multiplos5(8)" [value]="opcion">{{ opcion }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center">Código interno</th>
+                        <th scope="col" class="text-center">Oficina</th>
+                        <th scope="col" class="text-center">Artículo</th>
+                        <th scope="col" class="text-center">Estado</th>
+                        <th scope="col" class="text-center">Pedido</th>
+                        <th scope="col" class="text-center">Salida</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let unidad of unidades">
+                        <td class="text-center">{{ unidad.codigoInterno }}</td>
+                        <td>{{ unidad.oficina.localidad }}</td>
+                        <td>{{ unidad.articulo.descripcion }}</td>
+                        <td>{{ unidad.codEstado }}</td>
+                        <td>{{ unidad.numeroPedido}}</td>
+                        <td>{{ unidad.idSalida }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col text-left">
+                <p>Total de elementos: {{ numeroUnidades }}</p>
+            </div>
+        </div>
+        <app-paginador [numeroElementos]="numeroUnidades" [tamPag]="tamPag"
+            (pagina)="cargarPagina($event)"></app-paginador>
+        
+    </div>
+</section>

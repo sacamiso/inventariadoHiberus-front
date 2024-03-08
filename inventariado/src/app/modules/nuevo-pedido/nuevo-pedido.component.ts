@@ -160,7 +160,7 @@ export class NuevoPedidoComponent implements OnInit {
         }
       },
       error: (error) => {
-        this.alerta(error, 'danger');
+        this.alerta(error.error.error, 'danger');
       }
     })
   }
