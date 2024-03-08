@@ -1,11 +1,19 @@
-<div *ngIf="cargado1" class="container mt-4">
+<div *ngIf="cargado1" class="container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center mt-5">
+                <h1 class="display-4">NUEVA SALIDA</h1>
+            </div>
+        </div>
+    </div>
     <div class="mt-4" id="liveAlert"></div>
-    <h1>Oficina</h1>
-    <select class="form-control form-select" [(ngModel)]="idOficinaSeleccionada" (ngModelChange)="changeOfi()">
+    <h3>Oficina</h3>
+    <label for="ofi"  class="mb-3">Seleccione la oficina para la que se desea registar la salida:</label>
+    <select id="ofi" class="form-control form-select" [(ngModel)]="idOficinaSeleccionada" (ngModelChange)="changeOfi()" required>
         <option *ngFor="let oficina of listOficina" [value]="oficina.idOficina">{{oficina.direccion}}, {{oficina.localidad}}</option>
     </select>
 
-    <div *ngIf="cargado2" class="container mt-4">
+    <div *ngIf="cargado2" class="mt-4">
         <form [formGroup]="salidaForm">
             <div class="card-body">
                 <p class="text-danger">* Campos obligatorios</p>
@@ -14,8 +22,8 @@
                     <div class="col-md-5">
                         <div class="form-group">
                             <label for="codArticulo">Artículo <span class="text-danger">*</span></label>
-                            <select class="form-control form-select" id="codArticulo" formControlName="codArticulo" [(ngModel)]="selectedItemId" (ngModelChange)="resetNumUnidades()">
-                                
+                            <select class="form-control form-select" id="codArticulo" formControlName="codArticulo" [(ngModel)]="selectedItemId" (ngModelChange)="resetNumUnidades()" required>
+                                <option [value]="null" disabled [selected]="selectedItemId===null">Seleccione el articulo</option>
                                 <option *ngFor="let listI of listInventario?.message" [ngValue]="listI.codArticulo">
                                     {{ listI.articulo.descripcion }}, {{ listI.articulo.modelo }}
                                 </option>
@@ -31,7 +39,7 @@
                                     (No puede ser negativo)
                                 </span>
                             </label>
-                            <input type="number" class="form-control" id="costeTotal" formControlName="costeTotal" step="0.01" min="0" [attr.disabled]="!selectedItemId ? true : null" (ngModelChange)="actualizarCostoUnitario()"/>
+                            <input type="number" class="form-control" id="costeTotal" formControlName="costeTotal" step="0.01" min="0" [attr.disabled]="!selectedItemId ? true : null" (ngModelChange)="actualizarCostoUnitario()" required/>
                         </div>
                     </div>
                     <div class="col-md-1">
@@ -44,7 +52,7 @@
                                     (Debe ser entero)
                                 </span>
                             </label>
-                            <input type="number" class="form-control" id="numUnidades" formControlName="numUnidades" min="1" [max]="getSelectedStock()" [attr.disabled]="!selectedItemId ? true : null" (ngModelChange)="actualizarCostoUnitario()"/>
+                            <input type="number" class="form-control" id="numUnidades" formControlName="numUnidades" required min="1" [max]="getSelectedStock()" [attr.disabled]="!selectedItemId ? true : null" (ngModelChange)="actualizarCostoUnitario()"/>
                         </div>
                     </div>
 
@@ -55,7 +63,7 @@
                             <span class="text-danger" *ngIf="salidaForm.get('fechaSalida')?.errors?.['fechaInvalida']">
                                 (La fecha no puede ser posterior a la actual)
                             </span>
-                            <input type="date" class="form-control" id="fechaSalida" formControlName="fechaSalida" appFechaValida>
+                            <input type="date" class="form-control" id="fechaSalida" formControlName="fechaSalida" appFechaValida required>
                         </div>
                     </div>
                     <div class="col-md-2">

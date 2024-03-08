@@ -20,50 +20,43 @@
                 </div>
             </div>
         </div>
-        <div class="container">
-            <section class="mt-5">
-                <div class="row">
-                    <div class="col-md-10 offset-md-1">
-                        <h2>Información Seguridad</h2>
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th scope="col">Oficina</th>
-                                        <th scope="col">Categoría</th>
-                                        <th scope="col">Subcategoría</th>
-                                        <th scope="col">Cantidad</th>
-                                        <th scope="col">Plazo de entrega medio</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let ss of stockSeguridad">
-                                        <td>{{ss.oficina.direccion}}, {{ss.oficina.localidad}}</td>
-                                        <td>{{ss.codCategoria}}</td>
-                                        <td>{{ss.codSubcategoria}}</td>
-                                        <td>{{ss.cantidad}} uds</td>
-                                        <td>{{ss.plazoEntregaMedio}} días</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+        
+        <section class="mt-2">
+            <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Oficina</th>
+                                    <th scope="col">Categoría</th>
+                                    <th scope="col">Subcategoría</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Plazo de entrega medio</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let ss of stockSeguridad">
+                                    <td>{{ss.oficina.direccion}}, {{ss.oficina.localidad}}</td>
+                                    <td>{{ss.codCategoria}}</td>
+                                    <td>{{ss.codSubcategoria}}</td>
+                                    <td>{{ss.cantidad}} uds</td>
+                                    <td>{{ss.plazoEntregaMedio}} días</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                </div>
-            </section>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col text-center">
-                    <p>Total de salidas: {{ numeroSS }}</p>
-                </div>
             </div>
-            <app-paginador [numeroElementos]="numeroSS" [tamPag]="tamPag"
-            (pagina)="cargarPagina($event)"></app-paginador>
-            <div class="row">
-                <div class="col-md-10 offset-md-1">
-                    <button class="btn btn-primary mt-3 boton" (click)="editarStockSeguridad()">Editar Stock de Seguridad</button>
-                </div>
+        </section>
+        <div class="row">
+            <div class="col text-left">
+                <p>Total de salidas: {{ numeroSS }}</p>
+            </div>
+            <div class="col-md-6 d-flex justify-content-end">
+                <button class="btn btn-primary boton" (click)="editarStockSeguridad()">Editar Stock de Seguridad</button>
             </div>
         </div>
+        <app-paginador [numeroElementos]="numeroSS" [tamPag]="tamPag"
+        (pagina)="cargarPagina($event)"></app-paginador>
+        
     </div>
 </section>

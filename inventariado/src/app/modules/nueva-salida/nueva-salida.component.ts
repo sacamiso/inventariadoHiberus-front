@@ -87,7 +87,7 @@ export class NuevaSalidaComponent implements OnInit {
     this.listInventario = await firstValueFrom(this.inventarioService.getInventarioByOficina(idOf));
   }
 
-  selectedItemId: any;
+  selectedItemId: any = null;
 
   getSelectedStock(): number {
       const selectedItem = this.listInventario?.message.find(item => item.codArticulo === this.selectedItemId);

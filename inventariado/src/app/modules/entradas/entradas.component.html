@@ -20,49 +20,44 @@
                 </div>
             </div>
         </div>
-        <div class="container">
-            <section class="mt-5">
-                <div class="row">
-                    <div class="col-md-10 offset-md-1">
-                        <h2>Información de Pedidos</h2>
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th scope="col">Número de Pedido</th>
-                                        <th scope="col">Unidades Totales</th>
-                                        <th scope="col">Coste Unitario</th>
-                                        <th scope="col">Coste Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let pedido of pedidos">
-                                        <td class="underline-link" (click)="detallePedido(pedido.numeroPedido)">Pedido {{pedido.numeroPedido}}</td>
-                                        <td>{{pedido.numeroUnidades}}</td>
-                                        <td>{{pedido.costeUnitario.toFixed(2)}} €</td>
-                                        <td>{{pedido.costeTotal.toFixed(2)}} €</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-        <div class="container">
+        <section class="mt-2">
             <div class="row">
-                <div class="col text-center">
-                    <p>Total de pedidos: {{ numeroPedidos }}</p>
+                
+                <h2>Información de Pedidos</h2>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Número de Pedido</th>
+                                <th scope="col">Unidades Totales</th>
+                                <th scope="col">Coste Unitario</th>
+                                <th scope="col">Coste Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let pedido of pedidos">
+                                <td class="underline-link" (click)="detallePedido(pedido.numeroPedido)">Pedido {{pedido.numeroPedido}}</td>
+                                <td>{{pedido.numeroUnidades}}</td>
+                                <td>{{pedido.costeUnitario.toFixed(2)}} €</td>
+                                <td>{{pedido.costeTotal.toFixed(2)}} €</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
+            
             </div>
-            <app-paginador [numeroElementos]="numeroPedidos" [tamPag]="tamPag"
-            (pagina)="cargarPagina($event)"></app-paginador>
-            <div class="row">
-                <div class="col-md-10 offset-md-1">
-                    <button class="btn btn-primary mt-3 boton" (click)="crearNuevoPedido()">Nuevo Pedido</button>
-                </div>
+        </section>
+        <div class="row">
+            <div class="col text-left">
+                <p>Total de pedidos: {{ numeroPedidos }}</p>
+            </div>
+            <div class="col-md-6 d-flex justify-content-end">
+                <button class="btn btn-primary boton" (click)="crearNuevoPedido()">Nuevo Pedido</button>
             </div>
         </div>
+        <app-paginador [numeroElementos]="numeroPedidos" [tamPag]="tamPag"
+        (pagina)="cargarPagina($event)"></app-paginador>
+            
     </div>
 </section>
 
