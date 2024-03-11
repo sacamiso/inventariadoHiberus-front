@@ -1,4 +1,4 @@
-<section *ngIf="cargado">
+<section *ngIf="cargado && filtrosCargados">
     <div class="container">
         
         <div class="container">
@@ -9,9 +9,65 @@
             </div>
         </div>
 
-        <div class="row">
+         <!-- Botón para mostrar/ocultar filtros -->
+         <div class="row mb-3">
+            <div class="col-md-12 text-right">
+                <button class="btn btn-primary boton" (click)="toggleFiltros()">
+                    {{ mostrarFiltros ? 'Ocultar Filtros' : 'Mostrar Filtros' }}
+                </button>
+            </div>
+        </div>
+
+        <!-- Filtros -->
+        <div *ngIf="mostrarFiltros " class="container mb-3">
+            <hr>
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <label for="filtroEstado">Estado:</label>
+                    <select class="form-control form-select" id="filtroEstado" [(ngModel)]="filtros.codEstado">
+                        <option [value]=""></option>
+                        <option *ngFor="let estado of listEstados" [value]="estado.codigoEstado">{{estado.codigoEstado}}: {{estado.nombre}}</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="filtroOficina">Oficina:</label>
+                    <select class="form-control form-select" id="filtroOficina" [(ngModel)]="filtros.idOficina">
+                        <option [value]=0></option>
+                        <option *ngFor="let oficina of listOficinas" [value]="oficina.idOficina">{{oficina.localidad}}</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="filtroArticulo">Artículo:</label>
+                    <select class="form-control form-select" id="filtroArticulo" [(ngModel)]="filtros.codArticulo">
+                        <option [value]=0></option>
+                        <option *ngFor="let art of listArticulos" [value]="art.codigoArticulo">{{art.descripcion}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-3 form-group">
+                    <label for="filtroSalida">Fecha Salida:</label>
+                    <input type="date" class="form-control" id="filtroSalida" [(ngModel)]="filtros.fechaSalida">
+                </div>
+                <div class="col-md-3">
+                    <label for="filtroPedido">Fecha Pedido:</label>
+                    <input type="date" class="form-control" id="filtroPedido"  [(ngModel)]="filtros.fechaPedido" >
+                </div>
+                <div class="col-md-3 text-center ">
+                    <button class="btn btn-danger mt-3" (click)="limpiarFiltros()">Limpiar filtros</button>
+                </div>
+    
+                <div class="col-md-3 text-end ">
+                    <button class="btn btn-success mt-3" (click)="aplicarFiltros()">Aplicar filtros</button>
+                </div>
+            </div>
+            <hr>
+
+        </div>
+
+        <div class="row mt-4">
             <div class="col col-md-auto">
-                <div class="input-group mb-3">
+                <div class="input-group mb-4">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-default">Número elementos por página</span>
                     </div>
@@ -22,6 +78,8 @@
                 </div>
             </div>
         </div>
+
+        <div id="liveAlert"></div>
 
         <div class="table-responsive">
             <table class="table table-striped table-bordered">
@@ -40,11 +98,67 @@
                         <td class="text-center">{{ unidad.codigoInterno }}</td>
                         <td>{{ unidad.oficina.localidad }}</td>
                         <td>{{ unidad.articulo.descripcion }}</td>
-                        <td>{{ unidad.codEstado }}</td>
-                        <td>{{ unidad.numeroPedido}}</td>
-                        <td>{{ unidad.idSalida }}</td>
+                        <td class="d-flex justify-content-between align-items-center">
+                            <div class="text-center flex-grow-1">
+                                {{ unidad.codEstado }}
+                            </div>
+                            <button type="button" class="btn btn-link" data-bs-toggle="modal" [attr.data-bs-target]="'#modalDetalles' + unidad.codigoInterno">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <!-- Modal -->
+                            <div class="modal fade" [id]="'modalDetalles' + unidad.codigoInterno" tabindex="-1"
+                            aria-labelledby="modalDetallesLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Editar Estado</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label for="estadoAct">Estado actual:</label>
+                                                <span id="estadoAct" class="form-control">{{ unidad.codEstado }}: {{unidad.estado.nombre}}</span>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <i class="fa-solid fa-arrow-right mt-4"></i>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="cambioEstado">Nuevo estado:</label>
+                                                <select id="cambioEstado" class="form-select" [(ngModel)]="selectedEstado">
+                                                    <option *ngFor="let estado of listEstados" [value]="estado.codigoEstado">{{estado.codigoEstado}}: {{estado.nombre}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="selectedEstado==='S'" class="row mt-4">
+                                            
+                                            <div class="col-md-12">
+                                                <label for="salida">Si desa incluir la unidad en una salida seleccione en cual:</label>
+                                                <select id="salida" class="form-select" [(ngModel)]="selectedSalida">
+                                                    <ng-container *ngFor="let salida of listSalidas">
+                                                        <ng-container *ngIf="salida.idOficina === unidad.idOficina && salida.codArticulo === unidad.codArticulo">
+                                                            <option [ngValue]="salida.idSalida">{{ salida.idSalida }}: {{ salida.fechaSalida }}</option>
+                                                        </ng-container>
+                                                    </ng-container>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="saveEstado(unidad.codigoInterno , selectedEstado)">Guardar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Hasta aquí detalles de oficina con su modal-->
+                        </td>
+                        <td class="text-center">{{ unidad.pedido !== null ? unidad.pedido.fechaPedido : '-' }}</td>
+                        <td class="text-center">{{  unidad.salida  !== null ?  unidad.salida.fechaSalida  : '-' }}</td>
                     </tr>
                 </tbody>
+                
             </table>
         </div>
         <div class="row">

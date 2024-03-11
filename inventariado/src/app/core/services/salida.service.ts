@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { SalidaList } from '../model/salida-list.model';
-import { SalidaForm } from '../model/salida.model';
+import { Salida, SalidaForm } from '../model/salida.model';
 import { MesaggeResponse } from '../model/mesagge-response.model';
 import { SalidaMsg } from '../model/salida-msg.model';
 
@@ -26,5 +26,9 @@ export class SalidaService {
 
   getSalidaById(id: number): Observable<SalidaMsg> {
     return this.http.get<SalidaMsg>(`${this.apiUrl}/salida/${id}`);
+  }
+
+  getAllSalidas(): Observable<Array<Salida>> {
+    return this.http.get<Array<Salida>>(`${this.apiUrl}/salida/listAll`);
   }
 }

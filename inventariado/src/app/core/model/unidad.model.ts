@@ -27,11 +27,16 @@ export interface Unidad {
     articulo:      Articulo;
 }
 
+export interface UnidadEstado {
+    codEstado:     string;
+    idSalida:      number;
+}
+
 export interface UnidadFiltros {
     
     codEstado:     string;
-    numeroPedido:  number;
-    idSalida:      number;
+    fechaPedido:   Date | null;
+    fechaSalida:   Date | null;
     idOficina:     number;
     codArticulo:   number;
     
