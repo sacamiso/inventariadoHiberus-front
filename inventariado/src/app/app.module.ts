@@ -23,6 +23,7 @@ import { GestionComponent } from './modules/gestion/gestion.component';
 import { StockSeguridadComponent } from './modules/stock-seguridad/stock-seguridad.component';
 import { StockSeguridadEditComponent } from './modules/stock-seguridad-edit/stock-seguridad-edit.component';
 import { UnidadesComponent } from './modules/unidades/unidades.component';
+import { NuevaUnidadComponent } from './modules/nueva-unidad/nueva-unidad.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { UnidadesComponent } from './modules/unidades/unidades.component';
     StockSeguridadComponent,
     StockSeguridadEditComponent,
     UnidadesComponent,
+    NuevaUnidadComponent,
   ],
   imports: [
     BrowserModule,

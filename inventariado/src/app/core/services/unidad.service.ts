@@ -4,6 +4,9 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { UnidadList, UnidadFiltros, UnidadEstado } from '../model/unidad.model';
 import { MesaggeResponse } from '../model/mesagge-response.model';
+import { PedidoList } from 'src/app/core/model/pedido-list.model';
+import { Articulo } from 'src/app/core/model/articulo.model';
+
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +23,13 @@ export class UnidadService {
 
   editEstadoUnidad(unidad: UnidadEstado, id: number): Observable<MesaggeResponse> {
     return this.http.put<MesaggeResponse>(`${this.apiUrl}/unidad/editar/${id}`, unidad);
+  }
+
+  getPedidosDisponible(idOficina: number, codArticulo: number): Observable<PedidoList> {
+    return this.http.get<PedidoList>(`${this.apiUrl}/unidad/listPedidosDispParaUdsByOficinaAndArt?idOficina=${idOficina}&codArticulo=${codArticulo }`);
+  }
+
+  getArticulosDisponiblesByOficina(idOficina: number): Observable<Array<Articulo>> {
+    return this.http.get<Array<Articulo>>(`${this.apiUrl}/unidad/listArtDiponiblesByOficina?idOficina=${idOficina}`);
   }
 }

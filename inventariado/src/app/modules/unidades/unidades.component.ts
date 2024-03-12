@@ -169,12 +169,12 @@ export class UnidadesComponent implements OnInit {
       },
       error: (error) => {
         this.alerta(error.error.error , 'danger');
+        this.selectedEstado = '';
+        this.selectedSalida = 0;
       },
       complete: () => {
-        //no entra aqui en caso de que sea error y debería
-        debugger
+        //no entra aqui en caso de que sea error y debería por eso he repetido el código en error
         this.listaUnidadesMostrar(this.tamPag, this.pagina);
-        
         this.selectedEstado = '';
         this.selectedSalida = 0;
       }

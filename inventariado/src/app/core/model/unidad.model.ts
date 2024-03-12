@@ -41,3 +41,11 @@ export interface UnidadFiltros {
     codArticulo:   number;
     
 }
+
+export interface UnidadForm {
+    codigoInterno: number;
+    codEstado:     string;
+    numeroPedido:  number | null;
+    idOficina:     number;
+    codArticulo:   number;
+}

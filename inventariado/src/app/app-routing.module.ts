@@ -13,6 +13,7 @@ import { GestionComponent } from './modules/gestion/gestion.component';
 import { StockSeguridadComponent } from './modules/stock-seguridad/stock-seguridad.component';
 import { StockSeguridadEditComponent } from './modules/stock-seguridad-edit/stock-seguridad-edit.component';
 import { UnidadesComponent } from './modules/unidades/unidades.component';
+import { NuevaUnidadComponent } from './modules/nueva-unidad/nueva-unidad.component';
 
 const routes: Routes = [
   {path: '', component:InventarioComponent},
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path: 'gestion/stockSeguridad', component:StockSeguridadComponent},
   {path: 'gestion/stockSeguridad/edit', component:StockSeguridadEditComponent},
   {path: 'gestion/unidades', component:UnidadesComponent},
+  {path: 'gestion/unidades/nueva', component:NuevaUnidadComponent},
   {path: 'historial', component:HistorialInventarioComponent},
   {path: 'nuevo/pedido', component:NuevoPedidoComponent},
   {path: 'salidas', component:SalidasComponent},

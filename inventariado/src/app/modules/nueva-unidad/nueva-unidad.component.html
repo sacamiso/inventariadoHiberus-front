@@ -1,0 +1,62 @@
+<div *ngIf="cargado" class="container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center mt-5">
+                <h1 class="display-4">REGISTRAR UNIDAD</h1>
+            </div>
+        </div>
+    </div>
+    <div class="mt-4" id="liveAlert"></div>
+    <p class="text-danger">* Campos obligatorios</p>
+    <div class="row mt-4">
+        <div class="col-md-5">
+            <label for="ofi"  class="mb-3">Seleccione la oficina <span class="text-danger">*</span></label>
+            <select id="ofi" class="form-control form-select" [(ngModel)]="idOficinaSeleccionada" (ngModelChange)="changeOfi()" required>
+                <option *ngFor="let oficina of listOficina" [value]="oficina.idOficina">{{oficina.direccion}}, {{oficina.localidad}}</option>
+            </select>
+        </div>
+        <div class="col-md-5">
+            <label for="estado"  class="mb-3">Seleccione el estado <span class="text-danger">*</span></label>
+            <select id="estado" class="form-control form-select" [(ngModel)]="estadoSeleccionado" required>
+                <ng-container *ngFor="let estado of listEstados">
+                    <ng-container *ngIf="estado.codigoEstado !== 'S'">
+                        <option [ngValue]="estado.codigoEstado">{{ estado.codigoEstado }}: {{ estado.nombre }}</option>
+                    </ng-container>
+                </ng-container>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="codInterno" class="mb-3">Código interno <span class="text-danger">*</span></label>
+                <input type="number" class="form-control" id="codInterno" min="0" formControlName="codInterno" required [(ngModel)]="unidad.codigoInterno"/>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-5">
+            <label for="art"  class="mb-3">Seleccione el artículo <span class="text-danger">*</span></label>
+            <select id="art" class="form-control form-select" [(ngModel)]="codArticuloSeleccionado" (ngModelChange)="changeArticulo()" required [disabled]="!cargado2">
+                <ng-container *ngIf="listArticulo && listArticulo.length > 0; else noArticulos">
+                    <option *ngFor="let articulo of listArticulo" [value]="articulo.codigoArticulo">{{articulo.descripcion}}</option>
+                </ng-container>
+                <ng-template #noArticulos>
+                    <option disabled>No se ha encontrado ningún artículo disponible en el inventario sin unidad</option>
+                </ng-template>
+            
+            </select>
+        </div>
+        
+        <div class="col-md-6">
+            <label for="pedido"  class="mb-3">Seleccione el pedido</label>
+            <select id="pedido" class="form-control form-select" [(ngModel)]="unidad.numeroPedido" required [disabled]="!cargado3">
+                <ng-container *ngIf="listPedido && listPedido.length > 0; else noPedidos">
+                    <option *ngFor="let pedido of listPedido" [value]="pedido.numeroPedido">Pedido {{pedido.numeroPedido}}: {{pedido.fechaPedido}}, recibido el {{pedido.fechaRecepcion}}</option>
+                </ng-container>
+                <ng-template #noPedidos>
+                    <option disabled>No se ha encontrado ningún pedido compatible</option>
+                </ng-template>
+            
+            </select>
+        </div>
+    </div>
+</div>
