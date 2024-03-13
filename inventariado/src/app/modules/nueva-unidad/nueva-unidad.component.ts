@@ -3,7 +3,6 @@ import { Oficina } from 'src/app/core/model/oficina.model';
 import { Articulo } from 'src/app/core/model/articulo.model';
 import { Pedido } from 'src/app/core/model/pedido.model';
 import { Estado } from 'src/app/core/model/estado.model';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MesaggeResponse } from 'src/app/core/model/mesagge-response.model';
 import { UnidadForm } from 'src/app/core/model/unidad.model';
 import { OficinaService } from '../../core/services/oficina.service';
@@ -43,9 +42,13 @@ export class NuevaUnidadComponent implements OnInit {
   codArticuloSeleccionado : number = 0;
   estadoSeleccionado : string = "";
 
+  oficinaInvalida = false;
+  articuloInvalido = false;
+  estadoInvalido = false;
+  codigoInvalido = false;
+
   constructor(
     private readonly router: Router,
-    private formBuilder: FormBuilder,
     private readonly oficinaService: OficinaService,
     private readonly unidadService: UnidadService,
     private readonly estadoService: EstadoService,
@@ -68,6 +71,7 @@ export class NuevaUnidadComponent implements OnInit {
     this.codArticuloSeleccionado = 0;
     this.unidad.numeroPedido = null;
     if(this.idOficinaSeleccionada !== 0 && this.idOficinaSeleccionada!== null && this.idOficinaSeleccionada!== undefined) {
+      this.oficinaInvalida = false;
       await this.cargarDatos2();
       this.cargado2 = true;
       
@@ -79,11 +83,27 @@ export class NuevaUnidadComponent implements OnInit {
   async changeArticulo(): Promise<void> {
     this.unidad.numeroPedido = null;
     if(this.codArticuloSeleccionado !== 0 && this.codArticuloSeleccionado!== null && this.codArticuloSeleccionado!== undefined) {
+      this.articuloInvalido = false;
       await this.cargarDatos3();
       this.cargado3 = true;
     }else{
       this.cargado3 = false;
     }
+  }
+
+  changeEstado(){
+    if(this.estadoSeleccionado !== "") {
+      this.estadoInvalido = false;
+    }
+  }
+
+  changeCodigo(){
+    if(this.unidad.codigoInterno > 0) {
+      this.codigoInvalido = false;
+    }else{
+      this.codigoInvalido = true;
+    }
+    
   }
 
   async cargarDatos3() {
@@ -121,5 +141,64 @@ export class NuevaUnidadComponent implements OnInit {
     wrapper.innerHTML = `<div class="alert alert-${type} alert-dismissible" role="alert"> ${message} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
 
     this.alertPlaceholder.appendChild(wrapper);
+  }
+
+  guardarUnidad(){
+    
+    let pasavalidacion = true;
+    if(this.idOficinaSeleccionada === 0){
+      this.oficinaInvalida = true;
+      pasavalidacion = false;
+    }
+    if(this.codArticuloSeleccionado === 0){
+      this.articuloInvalido = true;
+      pasavalidacion = false;
+    }
+    if(this.estadoSeleccionado === ""){
+      this.estadoInvalido = true;
+      pasavalidacion = false;
+    }
+    if(this.unidad.codigoInterno < 1){
+      this.codigoInvalido = true;
+      pasavalidacion = false;
+    }
+
+    if(pasavalidacion){
+      this.unidad.idOficina = this.idOficinaSeleccionada;
+      this.unidad.codArticulo = this.codArticuloSeleccionado;
+      this.unidad.codEstado = this.estadoSeleccionado;
+      
+      this.guardarFormulario();
+    }
+  }
+
+  guardarFormulario(){
+    this.unidadService.guardarUnidad(this.unidad).subscribe({
+      next: (response) => {
+        this.msg = response;
+        if(this.msg.success){
+          this.alerta(this.msg.message, 'success');
+          this.unidad = {
+            codigoInterno: 0,
+            codEstado: "",
+            numeroPedido:null,
+            idOficina:0,
+            codArticulo:0,
+          }
+          this.idOficinaSeleccionada = 0;
+          this.codArticuloSeleccionado = 0;
+          this.estadoSeleccionado = "";
+        }else{
+          this.alerta(this.msg.error, 'danger');
+        }
+      },
+      error: (error) => {
+        this.alerta(error.error.error, 'danger');
+      }
+    })
+  }
+
+  goBack() {
+    this.router.navigate([`gestion/unidades`]);
   }
 }

@@ -7,17 +7,17 @@
         </div>
     </div>
     <div class="mt-4" id="liveAlert"></div>
-    <p class="text-danger">* Campos obligatorios</p>
+    <p class="text-danger mt-4">* Campos obligatorios</p>
     <div class="row mt-4">
         <div class="col-md-5">
             <label for="ofi"  class="mb-3">Seleccione la oficina <span class="text-danger">*</span></label>
-            <select id="ofi" class="form-control form-select" [(ngModel)]="idOficinaSeleccionada" (ngModelChange)="changeOfi()" required>
+            <select id="ofi" class="form-control form-select" [(ngModel)]="idOficinaSeleccionada" (ngModelChange)="changeOfi()" required [ngClass]="{'is-invalid': oficinaInvalida}">
                 <option *ngFor="let oficina of listOficina" [value]="oficina.idOficina">{{oficina.direccion}}, {{oficina.localidad}}</option>
             </select>
         </div>
         <div class="col-md-5">
             <label for="estado"  class="mb-3">Seleccione el estado <span class="text-danger">*</span></label>
-            <select id="estado" class="form-control form-select" [(ngModel)]="estadoSeleccionado" required>
+            <select id="estado" class="form-control form-select" [(ngModel)]="estadoSeleccionado" required [ngClass]="{'is-invalid': estadoInvalido}" (ngModelChange)="changeEstado()">
                 <ng-container *ngFor="let estado of listEstados">
                     <ng-container *ngIf="estado.codigoEstado !== 'S'">
                         <option [ngValue]="estado.codigoEstado">{{ estado.codigoEstado }}: {{ estado.nombre }}</option>
@@ -28,14 +28,15 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label for="codInterno" class="mb-3">Código interno <span class="text-danger">*</span></label>
-                <input type="number" class="form-control" id="codInterno" min="0" formControlName="codInterno" required [(ngModel)]="unidad.codigoInterno"/>
+                <input type="number" class="form-control" id="codInterno" min="0" (change)="changeCodigo()" required [(ngModel)]="unidad.codigoInterno" [ngClass]="{'is-invalid': codigoInvalido}"/>
+                <div *ngIf="codigoInvalido" class="invalid-feedback">Debe ser mayor que 1</div>
             </div>
         </div>
     </div>
     <div class="row mt-4">
-        <div class="col-md-5">
+        <div class="col-md-6">
             <label for="art"  class="mb-3">Seleccione el artículo <span class="text-danger">*</span></label>
-            <select id="art" class="form-control form-select" [(ngModel)]="codArticuloSeleccionado" (ngModelChange)="changeArticulo()" required [disabled]="!cargado2">
+            <select id="art" class="form-control form-select" [(ngModel)]="codArticuloSeleccionado" (ngModelChange)="changeArticulo()" required [disabled]="!cargado2" [ngClass]="{'is-invalid': articuloInvalido}">
                 <ng-container *ngIf="listArticulo && listArticulo.length > 0; else noArticulos">
                     <option *ngFor="let articulo of listArticulo" [value]="articulo.codigoArticulo">{{articulo.descripcion}}</option>
                 </ng-container>
@@ -57,6 +58,16 @@
                 </ng-template>
             
             </select>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-6 text-start">
+            <button class="btn boton" (click)="goBack()">Volver</button>
+        </div>
+        <div class="col-md-6 text-end">
+            <button class="btn btn-success" (click)="guardarUnidad()">
+                Guardar
+            </button>
         </div>
     </div>
 </div>

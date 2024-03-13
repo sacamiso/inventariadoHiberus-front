@@ -181,5 +181,8 @@ export class UnidadesComponent implements OnInit {
     })
   }
   
+  registrarUnidad(){
+    this.router.navigate([`gestion/unidades/nueva`]);
+  }
 
 }
