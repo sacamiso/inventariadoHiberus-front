@@ -1,6 +1,6 @@
 <section *ngIf="cargado && cargado2 && pedido!=null">
     <div class="container">
-        <header class="mb-5">
+        <header class="mb-3">
             <div class="d-flex align-items-start justify-content-between">
                 <div>
                     <h1 class="mb-4 mt-4">Información del pedido</h1>
@@ -42,6 +42,10 @@
         </header>
 
         <section class="mb-5">
+            <div class="mb-3">
+                <button class="btn boton-recibido text-end" (click)="volver()">Volver</button>
+            </div>
+
             <h2>Lineas del pedido</h2>
             <table class="table table-bordered">
                 <thead>
@@ -125,8 +129,11 @@
                             </tr>
                         </tfoot>
                     </table>
-                    <div class="col-md-6 d-flex mt-4">
-                        <button class="btn btn-primary" style="background-color: #19255A; border-color: #19255A;" (click)="goBack()">Ir a Entradas</button>
+                    <div class="row mt-4">
+                        <div class="col-6">
+                            <button class="btn boton-recibido text-start" (click)="goBack()">Ir a Entradas</button>
+                        </div>
+                        
                     </div>
                 </div>
                 

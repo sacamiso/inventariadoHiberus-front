@@ -4,6 +4,11 @@ import { Pedido} from 'src/app/core/model/pedido.model';
 import { Salida} from 'src/app/core/model/salida.model';
 import { Estado} from 'src/app/core/model/estado.model';
 
+export interface UnidadMsg {
+    success: boolean;
+    error:   string;
+    message: Unidad;
+}
 
 export interface UnidadList {
     success:  boolean;

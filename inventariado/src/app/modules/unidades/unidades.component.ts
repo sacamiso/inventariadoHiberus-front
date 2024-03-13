@@ -185,4 +185,7 @@ export class UnidadesComponent implements OnInit {
     this.router.navigate([`gestion/unidades/nueva`]);
   }
 
+  detalleUnidad(id: number){
+    this.router.navigate([`gestion/unidades/unidad/${id}`]);
+  }
 }

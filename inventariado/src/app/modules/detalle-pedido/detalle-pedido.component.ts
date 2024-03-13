@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { PedidoService } from '../../core/services/pedido.service';
 import { LineaService } from '../../core/services/linea.service';
 import { MesaggeResponse } from 'src/app/core/model/mesagge-response.model';
-
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-detalle-pedido',
@@ -28,7 +28,8 @@ export class DetallePedidoComponent implements OnInit {
     private route: ActivatedRoute,
     private readonly pedidoService: PedidoService,
     private readonly lineaService: LineaService,
-    private readonly router: Router
+    private readonly router: Router,
+    private location: Location
   ) { 
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.alertPlaceholder = document.getElementById('liveAlert');
@@ -109,5 +110,9 @@ export class DetallePedidoComponent implements OnInit {
 
   goBack() {
     this.router.navigate([`entradas`]);
+  }
+
+  volver() {
+    this.location.back();
   }
 }

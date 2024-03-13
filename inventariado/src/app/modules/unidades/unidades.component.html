@@ -34,14 +34,14 @@
                         <option *ngFor="let estado of listEstados" [value]="estado.codigoEstado">{{estado.codigoEstado}}: {{estado.nombre}}</option>
                     </select>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <label for="filtroOficina">Oficina:</label>
                     <select class="form-control form-select" id="filtroOficina" [(ngModel)]="filtros.idOficina">
                         <option [value]=0></option>
-                        <option *ngFor="let oficina of listOficinas" [value]="oficina.idOficina">{{oficina.localidad}}</option>
+                        <option *ngFor="let oficina of listOficinas" [value]="oficina.idOficina">{{oficina.direccion}}, {{oficina.localidad}}</option>
                     </select>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <label for="filtroArticulo">Artículo:</label>
                     <select class="form-control form-select" id="filtroArticulo" [(ngModel)]="filtros.codArticulo">
                         <option [value]=0></option>
@@ -100,7 +100,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let unidad of unidades">
-                        <td class="text-center">{{ unidad.codigoInterno }}</td>
+                        <td class="text-center underline-link" (click)="detalleUnidad(unidad.codigoInterno)">{{ unidad.codigoInterno }}</td>
                         <td>{{ unidad.oficina.localidad }}</td>
                         <td>{{ unidad.articulo.descripcion }}</td>
                         <td class="d-flex justify-content-between align-items-center">

@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Salida } from 'src/app/core/model/salida.model';
 import { Router } from '@angular/router';
 import { SalidaService } from '../../core/services/salida.service';
-
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-detalle-salida',
@@ -20,6 +20,7 @@ export class DetalleSalidaComponent implements OnInit {
     private route: ActivatedRoute,
     private readonly salidaService: SalidaService,
     private readonly router: Router,
+    private location: Location
   ) {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
   }
@@ -50,4 +51,7 @@ export class DetalleSalidaComponent implements OnInit {
     this.router.navigate([`salidas`]);
   }
 
+  volver() {
+    this.location.back();
+  }
 }
