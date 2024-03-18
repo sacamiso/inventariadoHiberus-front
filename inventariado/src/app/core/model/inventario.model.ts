@@ -7,3 +7,10 @@ export interface Inventario {
     articulo:    Articulo;
     oficina:     Oficina;
 }
+
+export interface InventarioFiltros {
+    idOficina:     number;
+    codArticulo:   number;
+    stockMin: number | null;
+    stockMax: number | null;
+}

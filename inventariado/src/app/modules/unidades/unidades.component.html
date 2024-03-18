@@ -136,10 +136,16 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div *ngIf="selectedEstado==='S'" class="row mt-4">
-                                            
-                                            <div class="col-md-12">
-                                                <label for="salida">Si desa incluir la unidad en una salida seleccione en cual:</label>
+                                        <div class="row mt-4">
+                                            <div *ngIf="unidad.salida  !== null" class="col-md-5">
+                                                <label for="salida">Salida seleccionada:</label>
+                                                <span id="estadoAct" class="form-control">{{ unidad.salida.idSalida }}: {{ unidad.salida.fechaSalida }}</span>
+                                            </div>
+                                            <div *ngIf="unidad.salida  !== null && selectedEstado==='S'" class="col-md-1">
+                                                <i class="fa-solid fa-arrow-right mt-4"></i>
+                                            </div>
+                                            <div *ngIf="selectedEstado==='S'" class="col-md-6">
+                                                <label for="salida">Nueva salida:</label>
                                                 <select id="salida" class="form-select" [(ngModel)]="selectedSalida">
                                                     <ng-container *ngFor="let salida of listSalidas">
                                                         <ng-container *ngIf="salida.idOficina === unidad.idOficina && salida.codArticulo === unidad.codArticulo">
@@ -149,6 +155,8 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        
+                                        
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>

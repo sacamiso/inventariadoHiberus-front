@@ -1,4 +1,4 @@
-<section *ngIf="cargado">
+<section *ngIf="cargado && filtrosCargados">
     <div class="container">
         <div class="container">
             <div class="row">
@@ -7,7 +7,54 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row mb-3">
+            <div class="col-md-6 text-start">
+                <button class="btn btn-primary boton" (click)="toggleFiltros()">
+                    {{ mostrarFiltros ? 'Ocultar Filtros' : 'Mostrar Filtros' }}
+                </button>
+            </div>
+        </div>
+        <!-- Filtros -->
+        <div *ngIf="mostrarFiltros " class="container mb-3">
+            <hr>
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label for="filtroOficina">Oficina:</label>
+                    <select class="form-control form-select" id="filtroOficina" [(ngModel)]="filtros.idOficina">
+                        <option [value]=0></option>
+                        <option *ngFor="let oficina of listOficinas" [value]="oficina.idOficina">{{oficina.direccion}}, {{oficina.localidad}}</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="filtroArticulo">Artículo:</label>
+                    <select class="form-control form-select" id="filtroArticulo" [(ngModel)]="filtros.codArticulo">
+                        <option [value]=0></option>
+                        <option *ngFor="let art of listArticulos" [value]="art.codigoArticulo">{{art.descripcion}}</option>
+                    </select>
+                </div>
+                <div class="col-md-2 form-group">
+                    <label for="filtroMin">Stock mínimo:</label>
+                    <input type="number" class="form-control" id="filtroMin" [(ngModel)]="filtros.stockMin">
+                </div>
+                <div class="col-md-2">
+                    <label for="filtroMax">Stock máximo:</label>
+                    <input type="number" class="form-control" id="filtroMax"  [(ngModel)]="filtros.stockMax" >
+                </div>
+            </div>
+            <div class="row mb-3">
+                
+                <div class="col-md-6 text-start ">
+                    <button class="btn btn-danger mt-3" (click)="limpiarFiltros()">Limpiar filtros</button>
+                </div>
+    
+                <div class="col-md-6 text-end ">
+                    <button class="btn btn-success mt-3" (click)="aplicarFiltros()">Aplicar filtros</button>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <!--Fin filtros-->
+        <div class="row mt-4">
             <div class="col col-md-auto">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">

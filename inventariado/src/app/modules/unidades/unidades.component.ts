@@ -12,7 +12,6 @@ import { EstadoService } from '../../core/services/estado.service';
 import { ArticuloService } from '../../core/services/articulo.service';
 import { SalidaService } from '../../core/services/salida.service';
 import { firstValueFrom } from 'rxjs';
-import { debug } from 'console';
 
 
 
