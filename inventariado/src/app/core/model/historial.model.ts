@@ -9,3 +9,11 @@ export interface Historial {
     articulo:    Articulo;
     oficina:     Oficina;
 }
+
+export interface HistorialInventarioFiltros {
+    idOficina:     number;
+    codArticulo:   number;
+    stockMin: number | null;
+    stockMax: number | null;
+    fecha:   Date | null;
+}

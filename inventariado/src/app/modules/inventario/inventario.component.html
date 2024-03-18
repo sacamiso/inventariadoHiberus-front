@@ -34,11 +34,11 @@
                 </div>
                 <div class="col-md-2 form-group">
                     <label for="filtroMin">Stock mínimo:</label>
-                    <input type="number" class="form-control" id="filtroMin" [(ngModel)]="filtros.stockMin">
+                    <input type="number" class="form-control" id="filtroMin" min="0" [(ngModel)]="filtros.stockMin">
                 </div>
                 <div class="col-md-2">
                     <label for="filtroMax">Stock máximo:</label>
-                    <input type="number" class="form-control" id="filtroMax"  [(ngModel)]="filtros.stockMax" >
+                    <input type="number" class="form-control" id="filtroMax" min="0" [(ngModel)]="filtros.stockMax" >
                 </div>
             </div>
             <div class="row mb-3">
