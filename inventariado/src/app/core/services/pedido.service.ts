@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import { PedidoList } from '../model/pedido-list.model';
 import { PedidoMsg } from '../model/pedido-msg.model';
 import { MesaggeResponse } from '../model/mesagge-response.model';
-import { Pedido, PedidoForm } from '../model/pedido.model';
+import { Pedido, PedidoFiltros, PedidoForm } from '../model/pedido.model';
 
 
 @Injectable({
@@ -17,8 +17,8 @@ export class PedidoService {
 
   constructor(private readonly http: HttpClient) { }
 
-  getPedidosInterval(limit: number, skip: number): Observable<PedidoList> {
-    return this.http.get<PedidoList>(`${this.apiUrl}/pedido/listAllPag?limit=${limit}&skip=${skip}`);
+  getPedidosInterval(limit: number, skip: number, filtros: PedidoFiltros): Observable<PedidoList> {
+    return this.http.post<PedidoList>(`${this.apiUrl}/pedido/listAllPag?limit=${limit}&skip=${skip}`, filtros);
   }
 
   getPedidoById(id: number): Observable<PedidoMsg> {

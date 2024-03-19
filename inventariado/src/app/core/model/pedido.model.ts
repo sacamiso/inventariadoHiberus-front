@@ -39,3 +39,24 @@ export interface PedidoForm {
     medioPago:      string;
     lineas: Array<LineaForm>;
 }
+
+export interface PedidoFiltros {
+    fechaPedido:    Date | null;
+    ivaPedidoMin:      number | null;
+    ivaPedidoMax:      number | null;
+    costeTotalMin:     number | null;
+    costeTotalMax:     number | null;
+    idEmpleado:     number | null;
+    plazoEntregaMin:   number | null;
+    plazoEntregaMax:   number | null;
+    costesEnvioMin:    number | null;
+    costesEnvioMax:    number | null;
+    idProveedor:    number | null;
+    idOficina:      number | null;
+    fechaRecepcion: Date | null;
+    codigoCondicionPago:  string | null;
+    codigoMedioPago:      string | null;
+    recibido: boolean | null;
+    costeUnitarioMin:  number | null;
+    costeUnitarioMax: number | null;
+}
