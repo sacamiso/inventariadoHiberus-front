@@ -1,4 +1,4 @@
-<div *ngIf="cargado1" class="container mt-4">
+<div *ngIf="cargado1" class="container">
 
     <div class="container">
         <div class="row">
@@ -9,14 +9,26 @@
     </div>
     <section class="mt-5">
         <div class="row mb-5">
-            <h2>Oficina</h2>
-            <label for="oficina" class="mb-3">Seleccione la oficina de la que desea editar el stock de seguridad:</label>
-            <select id="oficina" class="form-control form-select" [(ngModel)]="idOficinaSeleccionada" (ngModelChange)="changeOfi()">
-                <option *ngFor="let oficina of listOficina" [value]="oficina.idOficina">{{oficina.direccion}}, {{oficina.localidad}}</option>
-            </select>
+            <div class="row justify-content-center">
+                <div class="col-6">
+                    <h2 class="text-center">Oficina</h2>
+                    <select id="ofi" class="form-control form-select" [(ngModel)]="idOficinaSeleccionada" (ngModelChange)="changeOfi()" required>
+                        <option [value]=0 disabled>Seleccione la oficina de la que desea editar el stock de seguridad:</option>
+                        <option *ngFor="let oficina of listOficina" [value]="oficina.idOficina">{{oficina.direccion}}, {{oficina.localidad}}</option>
+                    </select>
+                </div>
+            </div>
+            
         </div>
         <div class="row">
-            <h2 class="mb-3">Información del Stock de Seguridad</h2>
+            <div class="col-md-6 text-start">
+                <h2 class="mb-3">Información del Stock de Seguridad</h2>
+            </div>
+            <div class="col-md-6 text-end">
+                <button class="btn boton" (click)="goBack()">Volver Stock</button>
+            </div>
+            
+            
             <div *ngIf="cargado2" class="table-responsive">
                 <div class="mt-2" id="liveAlert"></div>
                 <div *ngIf="repetido" class="text-danger mt-2">
@@ -25,11 +37,11 @@
                 <table class="table table-striped table-bordered">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col" class="col-2">Categoría</th>
-                            <th scope="col" class="col-2">Subcategoría</th>
-                            <th scope="col" class="col-2">Cantidad</th>
-                            <th scope="col" class="col-3">Plazo de entrega medio</th>
-                            <th scope="col" class="col-1"></th>
+                            <th class="text-center" scope="col" class="col-2">Categoría</th>
+                            <th class="text-center" scope="col" class="col-2">Subcategoría</th>
+                            <th class="text-center" scope="col" class="col-2">Cantidad</th>
+                            <th class="text-center" scope="col" class="col-3">Plazo de entrega medio</th>
+                            <th class="text-center" scope="col" class="col-1"></th>
                         </tr>
                     </thead>
                     <tbody>

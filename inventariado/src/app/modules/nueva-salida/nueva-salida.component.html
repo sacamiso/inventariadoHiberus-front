@@ -7,13 +7,19 @@
         </div>
     </div>
     <div class="mt-4" id="liveAlert"></div>
-    <h3>Oficina</h3>
-    <label for="ofi"  class="mb-3">Seleccione la oficina para la que se desea registar la salida:</label>
-    <select id="ofi" class="form-control form-select" [(ngModel)]="idOficinaSeleccionada" (ngModelChange)="changeOfi()" required>
-        <option *ngFor="let oficina of listOficina" [value]="oficina.idOficina">{{oficina.direccion}}, {{oficina.localidad}}</option>
-    </select>
+    
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <h2 class="text-center">Oficina</h2>
+            <select id="ofi" class="form-control form-select" [(ngModel)]="idOficinaSeleccionada" (ngModelChange)="changeOfi()" required>
+                <option [value]=0 disabled>Seleccione la oficina para la que se desea registar la salida:</option>
+                <option *ngFor="let oficina of listOficina" [value]="oficina.idOficina">{{oficina.direccion}}, {{oficina.localidad}}</option>
+            </select>
+        </div>
+    </div>
+    
 
-    <div *ngIf="cargado2" class="mt-4">
+    <div *ngIf="cargado2 && idOficinaSeleccionada!==0" class="mt-4">
         <form [formGroup]="salidaForm">
             <div class="card-body">
                 <p class="text-danger">* Campos obligatorios</p>

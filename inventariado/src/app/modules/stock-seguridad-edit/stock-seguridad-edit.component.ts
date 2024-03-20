@@ -60,7 +60,7 @@ export class StockSeguridadEditComponent implements OnInit {
   }
 
   async changeOfi(): Promise<void> {
-    if(this.idOficinaSeleccionada !== 0 && this.idOficinaSeleccionada!== null && this.idOficinaSeleccionada!== undefined) {
+    if(this.idOficinaSeleccionada != 0 && this.idOficinaSeleccionada!= null && this.idOficinaSeleccionada!= undefined) {
       await this.cargarDatos2();
       
     }else{
@@ -176,6 +176,10 @@ export class StockSeguridadEditComponent implements OnInit {
       }
     });
     return correcto;
+  }
+
+  goBack() {
+    this.router.navigate([`gestion/stockSeguridad`]);
   }
 
 }

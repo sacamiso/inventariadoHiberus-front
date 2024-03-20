@@ -26,22 +26,24 @@
                         <table class="table table-striped table-bordered">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th scope="col">Nº Salida</th>
-                                    <th scope="col">Artículo</th>
-                                    <th scope="col">Nº Unidades</th>
-                                    <th scope="col">Coste Unitario</th>
-                                    <th scope="col">Coste Total</th>
-                                    <th scope="col">Fecha Salida</th>
+                                    <th class="text-center" scope="col">Nº Salida</th>
+                                    <th class="text-center" scope="col">Fecha Salida</th>
+                                    <th class="text-center" scope="col">Artículo</th>
+                                    <th class="text-center" scope="col">Nº Unidades</th>
+                                    <th class="text-center" scope="col">Coste Unitario</th>
+                                    <th class="text-center" scope="col">Coste Total</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let salida of salidas">
                                     <td class="underline-link" (click)="detalleSalida(salida.idSalida)">Salida {{salida.idSalida}}</td>
+                                    <td>{{salida.fechaSalida | date: 'dd/MM/yyyy'  }}</td>
                                     <td>{{salida.articulo.descripcion}}</td>
                                     <td>{{salida.numUnidades}}</td>
                                     <td>{{salida.costeUnitario.toFixed(2)}} €</td>
                                     <td>{{salida.costeTotal.toFixed(2)}} €</td>
-                                    <td>{{salida.fechaSalida | date: 'dd/MM/yyyy'  }}</td>
+                                    
                                 </tr>
                             </tbody>
                         </table>

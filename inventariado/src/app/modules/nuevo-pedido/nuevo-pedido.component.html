@@ -14,7 +14,7 @@
 
             <!-- Apartado de Proveedor -->
             <fieldset style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;" class="w-100">
-                <legend style="width: auto; border: none; font-size: 20px; font-weight: bold; color: #333;">
+                <legend style="width: auto; border: none; font-size: 24px; font-weight: bold; color: #333;">
                     Proveedor <span class="text-danger">*</span></legend>
                 <div class="form-group">
                     <select formControlName="idProveedor" id="idProveedor" class="form-control form-select">
@@ -28,10 +28,10 @@
 
             <!-- Apartado de Líneas -->
             <fieldset style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
-                <legend style="width: auto; border: none; font-size: 18px; font-weight: bold; color: #333;"
+                <legend style="width: auto; border: none; font-size: 24px; font-weight: bold; color: #333;"
                     class="d-flex align-items-center">
                     Líneas
-                    <a (click)="agregarLineaForm()" class="text-muted ms-2">
+                    <a (click)="agregarLineaForm()" class="text-muted ms-4 interactive-link">
                         <i class="fas fa-plus nuevaLinea"></i>
                     </a>
                 </legend>
@@ -84,8 +84,8 @@
                             </div>
                         </div>
 
-                        <div class="col-md-1 col-lg-1 col-xl-1 align-items-center">
-                            <a (click)="eliminarLineaForm(i)" class="text-muted"><i class="fas fa-trash-alt"></i></a>
+                        <div class="col-md-1 col-lg-1 col-xl-1 align-items-center d-flex">
+                            <a (click)="eliminarLineaForm(i)" class="text-muted interactive-link"><i class="fas fa-trash-alt"></i></a>
                         </div>
                     </div>
                 </div>
@@ -129,7 +129,7 @@
                     <div class="form-group">
                         <label for="condicionPago">Condición <span class="text-danger">*</span></label>
                         <select class="form-control form-select" id="condicionPago" formControlName="condicionPago">
-                            <option [value]="null" disabled>Seleccione la condición</option>
+                            <option [value]="null" disabled>Seleccione la condición de pago</option>
                             <option *ngFor="let condicion of listCondicionP" [value]="condicion.codigoCondicion">{{
                                 condicion.descripcion }}</option>
                         </select>

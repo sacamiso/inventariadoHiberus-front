@@ -68,7 +68,7 @@ export class NuevaSalidaComponent implements OnInit {
 
   async changeOfi(): Promise<void> {
     this.salidaForm.reset();
-    if(this.idOficinaSeleccionada !== 0 && this.idOficinaSeleccionada!== null && this.idOficinaSeleccionada!== undefined) {
+    if(this.idOficinaSeleccionada != 0 && this.idOficinaSeleccionada!= null && this.idOficinaSeleccionada!= undefined) {
       await this.cargarDatos2();
       this.cargado2 = true;
     }else{
