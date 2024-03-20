@@ -5,7 +5,7 @@
                 <div>
                     <h1 class="mb-4 mt-4">Información de la salida</h1>
                     <p class="mt-4"><strong>Número de salida:</strong> {{salida.idSalida}}</p>
-                    <p><strong>Fecha de salida: </strong> {{salida.fechaSalida}}</p>
+                    <p><strong>Fecha de salida: </strong> {{salida.fechaSalida | date: 'dd/MM/yyyy'  }}</p>
                 </div>
                 <div class="mt-4">
                     <button class="btn boton text-end" (click)="volver()">Volver</button>

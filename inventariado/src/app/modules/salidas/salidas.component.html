@@ -41,7 +41,7 @@
                                     <td>{{salida.numUnidades}}</td>
                                     <td>{{salida.costeUnitario.toFixed(2)}} €</td>
                                     <td>{{salida.costeTotal.toFixed(2)}} €</td>
-                                    <td>{{salida.fechaSalida}}</td>
+                                    <td>{{salida.fechaSalida | date: 'dd/MM/yyyy'  }}</td>
                                 </tr>
                             </tbody>
                         </table>

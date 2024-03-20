@@ -5,8 +5,8 @@
                 <div>
                     <h1 class="mb-4 mt-4">Información del pedido</h1>
                     <p class="mt-4"><strong>Número de pedido:</strong> {{pedido.numeroPedido}}</p>
-                    <p><strong>Fecha pedido: </strong> {{pedido.fechaPedido}}</p>
-                    <p><strong>Fecha recepción: </strong> {{ pedido.fechaRecepcion !== null ? pedido.fechaRecepcion : '-' }}</p>
+                    <p><strong>Fecha pedido: </strong> {{pedido.fechaPedido | date: 'dd/MM/yyyy'  }}</p>
+                    <p><strong>Fecha recepción: </strong> {{ pedido.fechaRecepcion !== null ? (pedido.fechaRecepcion | date: 'dd/MM/yyyy')   : '-' }}</p>
                 </div>
                 
                 <div class="mt-4">

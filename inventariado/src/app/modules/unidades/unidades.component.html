@@ -139,7 +139,7 @@
                                         <div class="row mt-4">
                                             <div *ngIf="unidad.salida  !== null" class="col-md-5">
                                                 <label for="salida">Salida seleccionada:</label>
-                                                <span id="estadoAct" class="form-control">{{ unidad.salida.idSalida }}: {{ unidad.salida.fechaSalida }}</span>
+                                                <span id="estadoAct" class="form-control">{{ unidad.salida.idSalida }}: {{ unidad.salida.fechaSalida | date: 'dd/MM/yyyy' }}</span>
                                             </div>
                                             <div *ngIf="unidad.salida  !== null && selectedEstado==='S'" class="col-md-1">
                                                 <i class="fa-solid fa-arrow-right mt-4"></i>
@@ -149,7 +149,7 @@
                                                 <select id="salida" class="form-select" [(ngModel)]="selectedSalida">
                                                     <ng-container *ngFor="let salida of listSalidas">
                                                         <ng-container *ngIf="salida.idOficina === unidad.idOficina && salida.codArticulo === unidad.codArticulo">
-                                                            <option [ngValue]="salida.idSalida">{{ salida.idSalida }}: {{ salida.fechaSalida }}</option>
+                                                            <option [ngValue]="salida.idSalida">{{ salida.idSalida }}: {{ salida.fechaSalida | date: 'dd/MM/yyyy' }}</option>
                                                         </ng-container>
                                                     </ng-container>
                                                 </select>
@@ -167,8 +167,8 @@
                         </div>
                         <!--Hasta aquí detalles de oficina con su modal-->
                         </td>
-                        <td class="text-center">{{ unidad.pedido !== null ? unidad.pedido.fechaPedido : '-' }}</td>
-                        <td class="text-center">{{  unidad.salida  !== null ?  unidad.salida.fechaSalida  : '-' }}</td>
+                        <td class="text-center">{{ unidad.pedido !== null ? (unidad.pedido.fechaPedido | date: 'dd/MM/yyyy' )  : '-' }}</td>
+                        <td class="text-center">{{  unidad.salida  !== null ?  (unidad.salida.fechaSalida | date: 'dd/MM/yyyy'  )  : '-' }}</td>
                     </tr>
                 </tbody>
                 
