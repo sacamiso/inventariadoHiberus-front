@@ -1,4 +1,4 @@
-<section *ngIf="cargado">
+<section *ngIf="cargado && filtrosCargados">
     <div class="container">
         <div class="container">
             <div class="row">
@@ -7,6 +7,67 @@
                 </div>
             </div>
         </div>
+
+        <!-- Botón para mostrar/ocultar filtros -->
+        <div class="row mb-3">
+            <div class="col-md-6 text-start">
+                <button class="btn boton" (click)="toggleFiltros()">
+                    {{ mostrarFiltros ? 'Ocultar Filtros' : 'Mostrar Filtros' }}
+                </button>
+            </div>
+            <div class="col-md-6 text-end">
+                <button class="btn btn-success" (click)="editarStockSeguridad()">Editar Stock de Seguridad</button>
+            </div>
+        </div>
+
+        <!-- Filtros -->
+        <div *ngIf="mostrarFiltros " class="container mb-3">
+            <hr>
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label for="filtroOficina">Oficina:</label>
+                    <select class="form-control form-select" id="filtroOficina" [(ngModel)]="filtros.idOficina">
+                        <option *ngFor="let oficina of listOficinas" [value]="oficina.idOficina">{{oficina.direccion}}, {{oficina.localidad}}</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="filtroCat">Categoría:</label>
+                    <select class="form-control form-select" id="filtroCat" [(ngModel)]="filtros.codCategoria">
+                        <option *ngFor="let cat of listCategorias" [value]="cat.codigoCategoria">{{cat.codigoCategoria}}: {{cat.nombre}}</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="filtroScat">Subcategoría:</label>
+                    <select class="form-control form-select" id="filtroScat" [(ngModel)]="filtros.codSubcategoria">
+                        <option *ngFor="let scat of listsubcategorias" [value]="scat.codigoSubcategoria">{{scat.codigoSubcategoria}}: {{scat.nombre}}</option>
+                    </select>
+                </div>
+                <div class="col-md-2 form-group">
+                    <label for="filtrocantidad">Cantidad:</label>
+                    <input type="number" class="form-control" id="filtrocantidad" min="0" [(ngModel)]="filtros.cantidad">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-2 form-group">
+                    <label for="filtroPMin">Plazo de entrega min:</label>
+                    <input type="number" class="form-control" id="filtroPMin" min="0" [(ngModel)]="filtros.plazoMin">
+                </div>
+                <div class="col-md-2">
+                    <label for="filtroPMax">Plazo de entrega max:</label>
+                    <input type="number" class="form-control" id="filtroPMax" min="0" [(ngModel)]="filtros.plazoMax" >
+                </div>
+                <div class="col-md-4 text-end ">
+                    <button class="btn btn-danger mt-3" (click)="limpiarFiltros()">Limpiar filtros</button>
+                </div>
+    
+                <div class="col-md-4 text-end ">
+                    <button class="btn btn-success mt-3" (click)="aplicarFiltros()">Aplicar filtros</button>
+                </div>
+            </div>
+            
+            <hr>
+        </div>
+
         <div class="row">
             <div class="col col-md-auto">
                 <div class="input-group mb-3">
@@ -49,10 +110,7 @@
         </section>
         <div class="row">
             <div class="col text-left">
-                <p>Total de salidas: {{ numeroSS }}</p>
-            </div>
-            <div class="col-md-6 d-flex justify-content-end">
-                <button class="btn btn-primary boton" (click)="editarStockSeguridad()">Editar Stock de Seguridad</button>
+                <p>Total de elementos: {{ numeroSS }}</p>
             </div>
         </div>
         <app-paginador [numeroElementos]="numeroSS" [tamPag]="tamPag"

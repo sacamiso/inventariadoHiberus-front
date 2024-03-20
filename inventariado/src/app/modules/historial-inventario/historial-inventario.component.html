@@ -22,14 +22,14 @@
                 <div class="col-md-4">
                     <label for="filtroOficina">Oficina:</label>
                     <select class="form-control form-select" id="filtroOficina" [(ngModel)]="filtros.idOficina">
-                        <option [value]=0></option>
+                        
                         <option *ngFor="let oficina of listOficinas" [value]="oficina.idOficina">{{oficina.direccion}}, {{oficina.localidad}}</option>
                     </select>
                 </div>
                 <div class="col-md-4">
                     <label for="filtroArticulo">Artículo:</label>
                     <select class="form-control form-select" id="filtroArticulo" [(ngModel)]="filtros.codArticulo">
-                        <option [value]=0></option>
+                        
                         <option *ngFor="let art of listArticulos" [value]="art.codigoArticulo">{{art.descripcion}}</option>
                     </select>
                 </div>

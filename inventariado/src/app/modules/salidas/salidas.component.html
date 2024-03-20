@@ -1,4 +1,4 @@
-<section *ngIf="cargado">
+<section *ngIf="cargado && filtrosCargados">
     <div class="container">
         <div class="container">
             <div class="row">
@@ -26,14 +26,14 @@
                 <div class="col-md-4">
                     <label for="filtroOficina">Oficina:</label>
                     <select class="form-control form-select" id="filtroOficina" [(ngModel)]="filtros.idOficina">
-                        <option [value]=null></option>
+                        
                         <option *ngFor="let oficina of listOficinas" [value]="oficina.idOficina">{{oficina.direccion}}, {{oficina.localidad}}</option>
                     </select>
                 </div>
                 <div class="col-md-5">
                     <label for="filtroArticulos">Artículo:</label>
                     <select class="form-control form-select" id="filtroArticulos" [(ngModel)]="filtros.codArticulo">
-                        <option [value]=null></option>
+                        
                         <option *ngFor="let art of listArticulos" [value]="art.codigoArticulo">{{art.descripcion}}, {{art.modelo}}, {{art.fabricante}}</option>
                     </select>
                 </div>

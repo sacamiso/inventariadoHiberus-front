@@ -16,3 +16,12 @@ export interface StockSeguridadForm {
     cantidad:          number;
     plazoEntregaMedio: number;
 }
+
+export interface StockSeguridadFiltros {
+    codCategoria: string | null;
+    codSubcategoria: string | null;
+    idOficina: number | null;
+    cantidad: number | null;
+    plazoMin: number | null;
+    plazoMax: number | null;
+}

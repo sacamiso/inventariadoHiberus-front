@@ -26,21 +26,21 @@
                 <div class="col-md-4">
                     <label for="filtroMedio">Medio de pago:</label>
                     <select class="form-control form-select" id="filtroMedio" [(ngModel)]="filtros.codigoMedioPago">
-                        <option [value]=null></option>
+                        
                         <option *ngFor="let medio of listMedios" [value]="medio.codigoMedio">{{medio.codigoMedio}}: {{medio.descripcion}}</option>
                     </select>
                 </div>
                 <div class="col-md-4">
                     <label for="filtroCondicion">Condición de pago:</label>
                     <select class="form-control form-select" id="filtroCondicion" [(ngModel)]="filtros.codigoCondicionPago">
-                        <option [value]=null></option>
+                        
                         <option *ngFor="let con of listCondiciones" [value]="con.codigoCondicion">{{con.codigoCondicion}}: {{con.descripcion}}</option>
                     </select>
                 </div>
                 <div class="col-md-4">
                     <label for="filtroOficina">Oficina:</label>
                     <select class="form-control form-select" id="filtroOficina" [(ngModel)]="filtros.idOficina">
-                        <option [value]=null></option>
+                        
                         <option *ngFor="let oficina of listOficinas" [value]="oficina.idOficina">{{oficina.direccion}}, {{oficina.localidad}}</option>
                     </select>
                 </div>
@@ -50,14 +50,14 @@
                 <div class="col-md-4 form-group">
                     <label for="filtroProveedor">Proveedor:</label>
                     <select class="form-control form-select" id="filtroProveedor" [(ngModel)]="filtros.idProveedor">
-                        <option [value]=null></option>
+                        
                         <option *ngFor="let prove of listProveedores" [value]="prove.idProveedor">{{prove.razonSocial}}</option>
                     </select>
                 </div>
                 <div class="col-md-4">
                     <label for="filtroEmpleado">Realizado por:</label>
                     <select class="form-control form-select" id="filtroEmpleado" [(ngModel)]="filtros.idEmpleado">
-                        <option [value]=null></option>
+                        
                         <option *ngFor="let empl of listEmpleados" [value]="empl.idEmpleado">{{empl.nombre}} {{empl.apellidos}}, {{empl.dni}}</option>
                     </select>
                 </div>

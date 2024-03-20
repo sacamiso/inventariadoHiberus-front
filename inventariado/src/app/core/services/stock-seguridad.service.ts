@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { StockSeguridadList} from '../model/stock-seguridad-list.model';
-import { StockSeguridadForm} from '../model/stock-seguridad.model';
+import { StockSeguridadFiltros, StockSeguridadForm} from '../model/stock-seguridad.model';
 import { MesaggeResponse } from '../model/mesagge-response.model';
 
 @Injectable({
@@ -15,8 +15,8 @@ export class StockSeguridadService {
 
   constructor(private readonly http: HttpClient) { }
 
-  getStockSeguridadInterval(limit: number, skip: number): Observable<StockSeguridadList> {
-    return this.http.get<StockSeguridadList>(`${this.apiUrl}/stockSeguridad/listAllPag?limit=${limit}&skip=${skip}`);
+  getStockSeguridadInterval(limit: number, skip: number, filtros: StockSeguridadFiltros): Observable<StockSeguridadList> {
+    return this.http.post<StockSeguridadList>(`${this.apiUrl}/stockSeguridad/listAllPag?limit=${limit}&skip=${skip}`, filtros);
   }
 
   getStockSeguridadByOficina(idOficina: number): Observable<StockSeguridadList> {
