@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { SalidaList } from '../model/salida-list.model';
-import { Salida, SalidaForm } from '../model/salida.model';
+import { Salida, SalidaFiltros, SalidaForm } from '../model/salida.model';
 import { MesaggeResponse } from '../model/mesagge-response.model';
 import { SalidaMsg } from '../model/salida-msg.model';
 
@@ -16,8 +16,8 @@ export class SalidaService {
 
   constructor(private readonly http: HttpClient) { }
 
-  getSalidasInterval(limit: number, skip: number): Observable<SalidaList> {
-    return this.http.get<SalidaList>(`${this.apiUrl}/salida/listAllPag?limit=${limit}&skip=${skip}`);
+  getSalidasInterval(limit: number, skip: number, filtros: SalidaFiltros): Observable<SalidaList> {
+    return this.http.post<SalidaList>(`${this.apiUrl}/salida/listAllPag?limit=${limit}&skip=${skip}`, filtros);
   }
 
   guardarSalida(salida: SalidaForm){

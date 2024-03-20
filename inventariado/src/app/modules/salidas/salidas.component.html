@@ -7,6 +7,77 @@
                 </div>
             </div>
         </div>
+        <!-- Botón para mostrar/ocultar filtros -->
+        <div class="row mb-3">
+            <div class="col-md-6 text-start">
+                <button class="btn boton" (click)="toggleFiltros()">
+                    {{ mostrarFiltros ? 'Ocultar Filtros' : 'Mostrar Filtros' }}
+                </button>
+            </div>
+            <div class="col-md-6 text-end">
+                <button class="btn btn-success" (click)="crearNuevaSalida()">Nueva Salida</button>
+            </div>
+        </div>
+
+        <!-- Filtros -->
+        <div *ngIf="mostrarFiltros " class="container mb-3">
+            <hr>
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label for="filtroOficina">Oficina:</label>
+                    <select class="form-control form-select" id="filtroOficina" [(ngModel)]="filtros.idOficina">
+                        <option [value]=null></option>
+                        <option *ngFor="let oficina of listOficinas" [value]="oficina.idOficina">{{oficina.direccion}}, {{oficina.localidad}}</option>
+                    </select>
+                </div>
+                <div class="col-md-5">
+                    <label for="filtroArticulos">Artículo:</label>
+                    <select class="form-control form-select" id="filtroArticulos" [(ngModel)]="filtros.codArticulo">
+                        <option [value]=null></option>
+                        <option *ngFor="let art of listArticulos" [value]="art.codigoArticulo">{{art.descripcion}}, {{art.modelo}}, {{art.fabricante}}</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="filtroFecha">Fecha:</label>
+                    <input type="date" class="form-control" id="filtroFecha"  [(ngModel)]="filtros.fechaSalida" >
+                </div>
+                
+            </div>
+            <div class="row mb-3">
+                <div class="col form-group">
+                    <label for="filtroCosteTotMin">Coste total min:</label>
+                    <input type="number" class="form-control" id="filtroCosteTotMin" min="0" [(ngModel)]="filtros.costeTotalMin">
+                </div>
+                <div class="col">
+                    <label for="filtroCosteTotMax">Coste total max:</label>
+                    <input type="number" class="form-control" id="filtroCosteTotMax" min="0" [(ngModel)]="filtros.costeTotalMax" >
+                </div>
+                <div class="col form-group">
+                    <label for="filtroUnitarioMin">Coste unitario min:</label>
+                    <input type="number" class="form-control" id="filtroUnitarioMin" min="0" [(ngModel)]="filtros.costeUnitarioMin">
+                </div>
+                <div class="col">
+                    <label for="filtroUnitarioMax">Coste unitario max:</label>
+                    <input type="number" class="form-control" id="filtroUnitarioMax" min="0" [(ngModel)]="filtros.costeUnitarioMax" >
+                </div>
+                <div class="col form-group">
+                    <label for="filtroNumUds">Número de unidades:</label>
+                    <input type="number" class="form-control" id="filtroNumUds" min="0" [(ngModel)]="filtros.numeroUnidades">
+                </div>
+            </div>
+            
+            <div class="row mb-3">
+                <div class="col-md-6 text-start ">
+                    <button class="btn btn-danger mt-3" (click)="limpiarFiltros()">Limpiar filtros</button>
+                </div>
+    
+                <div class="col-md-6 text-end ">
+                    <button class="btn btn-success mt-3" (click)="aplicarFiltros()">Aplicar filtros</button>
+                </div>
+            </div>
+            <hr>
+        </div>
+
         <div class="row">
             <div class="col col-md-auto">
                 <div class="input-group mb-3">
@@ -53,9 +124,6 @@
         <div class="row">
             <div class="col text-left">
                 <p>Total de salidas: {{ numeroSalidas }}</p>
-            </div>
-            <div class="col-md-6 d-flex justify-content-end">
-                <button class="btn btn-primary boton" (click)="crearNuevaSalida()">Nueva Salida</button>
             </div>
         </div>
         <app-paginador [numeroElementos]="numeroSalidas" [tamPag]="tamPag"
