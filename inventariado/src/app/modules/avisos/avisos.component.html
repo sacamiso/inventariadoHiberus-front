@@ -1,1 +1,51 @@
-<p>avisos works!</p>
+<section *ngIf="cargado && avisos.length > 0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center mt-5">
+                <h1 class="display-4">Avisos</h1>
+            </div>
+        </div>
+        <div class="notificaciones ">
+            <div class="notificacion mt-3" *ngFor="let aviso of avisos">
+                
+                <div class="row align-items-center">
+                    <div class="col-md-1 text-center">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="row">
+                            <div class="col">
+                                No se cumple el <strong>stock de seguridad</strong> en la oficina de {{ aviso.oficina.localidad }} con dirección: {{ aviso.oficina.direccion }}, {{ aviso.oficina.codigoPostal }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div *ngIf="aviso.cantidadInventario > 0" class="col">
+                                Se debería disponer de <strong>{{ aviso.cantidadStockSeguridad }} </strong>unidades de {{ aviso.subcategoria.nombre }} y únicamente se tienen <strong> {{ aviso.cantidadInventario }} </strong>unidades. Por lo tanto, se precisa <strong>adquirir {{ aviso.cantidadNecesaria }} </strong>unidades de artículos con la categoria <strong>{{ aviso.subcategoria.codigoCategoria }}, {{ aviso.subcategoria.codigoSubcategoria }}</strong>
+                            </div>
+                            <div *ngIf="aviso.cantidadInventario <= 0" class="col">
+                                Se debería disponer de <strong>{{ aviso.cantidadStockSeguridad }} </strong>unidades de {{ aviso.subcategoria.nombre }} y no se dispone de ninguna unidad con esas características. Por lo tanto, se precisa <strong>adquirir {{ aviso.cantidadNecesaria }} </strong>unidades de artículos con la categoria <strong>{{ aviso.subcategoria.codigoCategoria }}, {{ aviso.subcategoria.codigoSubcategoria }}</strong>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+<section *ngIf="cargado && avisos.length <= 0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center mt-5">
+                <h1 class="display-4">Avisos</h1>
+            </div>
+        </div>
+        <div class="notificaciones">
+            Actualmento no hay ningún aviso disponible
+        </div>
+    </div>
+</section>

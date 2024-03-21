@@ -17,7 +17,12 @@
                     <a routerLink="/salidas" class="nav-link"> Salidas </a>
                 </li>    
                 <li [ngClass]="seleccionado == 4 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(4)" >
-                    <a routerLink="/avisos" class="nav-link"> Avisos </a>
+                    <a routerLink="/avisos" class="nav-link"> 
+                        <span>Avisos</span>
+                        <span *ngIf="hayAvisos" class="badge">
+                            <i class="fas fa-exclamation-circle icono-notificacion"></i>
+                        </span>    
+                    </a>
                 </li>
                 <li [ngClass]="seleccionado == 5 ? 'nav-item dropdown active' : 'nav-item dropdown'" 
                 (mouseenter)="toggleDropdown(true)" (mouseleave)="toggleDropdown(false)" (click)="cambiaSeleccionado(5)">

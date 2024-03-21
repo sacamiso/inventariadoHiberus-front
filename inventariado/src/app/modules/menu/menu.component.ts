@@ -1,16 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { EventoAvisoService } from '../../core/services/evento-aviso.service';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit, OnDestroy  {
+
+  hayAvisos = false;
+  private hayAvisosSubscription: Subscription = new Subscription();
 
   seleccionado: number = 1;
-  constructor() { }
+  constructor(
+    private eventoAvisoService: EventoAvisoService
+  ) { }
 
   ngOnInit(): void {
+    this.hayAvisosSubscription = this.eventoAvisoService.hayAvisos$.subscribe(hayAvisos => {
+      this.hayAvisos = hayAvisos;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.hayAvisosSubscription.unsubscribe();
   }
 
   cambiaSeleccionado(activo: number) {

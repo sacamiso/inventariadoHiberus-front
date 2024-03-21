@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { StockSeguridadList} from '../model/stock-seguridad-list.model';
 import { StockSeguridadFiltros, StockSeguridadForm} from '../model/stock-seguridad.model';
 import { MesaggeResponse } from '../model/mesagge-response.model';
+import { AvisoResponse } from '../model/aviso.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,9 @@ export class StockSeguridadService {
 
   guardarStockSeguridad(ss: Array<StockSeguridadForm>){
     return this.http.post<MesaggeResponse>(`${this.apiUrl}/stockSeguridad/save`, ss);
+  }
+
+  getAvisos(): Observable<AvisoResponse> {
+    return this.http.get<AvisoResponse>(`${this.apiUrl}/stockSeguridad/getAvisos`);
   }
 }

@@ -40,3 +40,10 @@
     color: white;
     background-color: #19255A; /* Cambia este color al azul oscuro que desees */
 }
+
+.icono-notificacion {
+    font-size: smaller; /* Ajusta el tamaño del icono */
+    color: #ff0404;
+    position: relative; /* Establece la posición relativa */
+    top: -10px;
+}
