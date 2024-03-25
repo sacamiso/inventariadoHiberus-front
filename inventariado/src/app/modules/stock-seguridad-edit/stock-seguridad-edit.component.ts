@@ -114,7 +114,6 @@ export class StockSeguridadEditComponent implements OnInit {
   guardar(){
     this.stockSeguridadService.guardarStockSeguridad(this.stockSeguridad).subscribe({
       next: (response) => {
-        console.log(response);
         this.msg = response;
         if(this.msg.success){
           this.alerta(this.msg.message, 'success');

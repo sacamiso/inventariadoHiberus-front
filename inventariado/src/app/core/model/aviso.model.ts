@@ -14,3 +14,10 @@ export interface Aviso {
     cantidadInventario:     number;
     cantidadNecesaria:      number;
 }
+
+
+export interface HayAvisoResponse {
+    success: boolean;
+    error:   string;
+    message: boolean;
+}

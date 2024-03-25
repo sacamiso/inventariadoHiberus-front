@@ -23,6 +23,9 @@ export class AvisosComponent implements OnInit {
 
   ngOnInit(): void {
     this.listaAvisos();
+    this.eventoAvisoService.hayAvisos$.subscribe(hayAvisos => {
+      this.listaAvisos();
+    });
   }
 
   listaAvisos() {
