@@ -10,6 +10,8 @@ import { EventoAvisoService } from '../../core/services/evento-aviso.service';
 export class MenuComponent implements OnInit, OnDestroy  {
 
   hayAvisos = false;
+
+
   private hayAvisosSubscription: Subscription = new Subscription();
 
   seleccionado: number = 1;
