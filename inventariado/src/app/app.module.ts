@@ -26,6 +26,7 @@ import { UnidadesComponent } from './modules/unidades/unidades.component';
 import { NuevaUnidadComponent } from './modules/nueva-unidad/nueva-unidad.component';
 import { DetalleUnidadComponent } from './modules/detalle-unidad/detalle-unidad.component';
 import { InicioComponent } from './modules/inicio/inicio.component';
+import { ArticulosComponent } from './modules/articulos/articulos.component';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { InicioComponent } from './modules/inicio/inicio.component';
     NuevaUnidadComponent,
     DetalleUnidadComponent,
     InicioComponent,
+    ArticulosComponent,
   ],
   imports: [
     BrowserModule,

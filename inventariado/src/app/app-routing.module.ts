@@ -16,6 +16,7 @@ import { UnidadesComponent } from './modules/unidades/unidades.component';
 import { NuevaUnidadComponent } from './modules/nueva-unidad/nueva-unidad.component';
 import { DetalleUnidadComponent } from './modules/detalle-unidad/detalle-unidad.component';
 import { InicioComponent } from './modules/inicio/inicio.component';
+import { ArticulosComponent } from './modules/articulos/articulos.component';
 
 const routes: Routes = [
   {path: '', component:InicioComponent},
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path: 'entradas', component:EntradasComponent},
   {path: 'entradas/pedido/:id', component:DetallePedidoComponent},
   {path: 'gestion', component:GestionComponent},
+  {path: 'gestion/articulos', component:ArticulosComponent},
   {path: 'gestion/stockSeguridad', component:StockSeguridadComponent},
   {path: 'gestion/stockSeguridad/edit', component:StockSeguridadEditComponent},
   {path: 'gestion/unidades', component:UnidadesComponent},
