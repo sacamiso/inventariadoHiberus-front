@@ -15,9 +15,10 @@ import { StockSeguridadEditComponent } from './modules/stock-seguridad-edit/stoc
 import { UnidadesComponent } from './modules/unidades/unidades.component';
 import { NuevaUnidadComponent } from './modules/nueva-unidad/nueva-unidad.component';
 import { DetalleUnidadComponent } from './modules/detalle-unidad/detalle-unidad.component';
+import { InicioComponent } from './modules/inicio/inicio.component';
 
 const routes: Routes = [
-  {path: '', component:InventarioComponent},
+  {path: '', component:InicioComponent},
   {path: 'avisos', component:AvisosComponent},
   {path: 'entradas', component:EntradasComponent},
   {path: 'entradas/pedido/:id', component:DetallePedidoComponent},
@@ -28,6 +29,7 @@ const routes: Routes = [
   {path: 'gestion/unidades/nueva', component:NuevaUnidadComponent},
   {path: 'gestion/unidades/unidad/:id', component:DetalleUnidadComponent},
   {path: 'historial', component:HistorialInventarioComponent},
+  {path: 'inventario', component:InventarioComponent},
   {path: 'nuevo/pedido', component:NuevoPedidoComponent},
   {path: 'salidas', component:SalidasComponent},
   {path: 'salidas/nueva', component:NuevaSalidaComponent},

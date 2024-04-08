@@ -7,8 +7,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li [ngClass]="seleccionado == 0 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(0)">
+                    <a routerLink="" class="nav-link"> 
+                        <img src="assets/images/Hiberus_Blanco.png" alt="Inicio" class="menu-imagen-hiberus"/>    
+                    </a>
+                </li>
                 <li [ngClass]="seleccionado == 1 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(1)">
-                    <a routerLink="" class="nav-link"> Inicio </a>
+                    <a routerLink="/inventario" class="nav-link"> Inventario </a>
                 </li>
                 <li [ngClass]="seleccionado == 2 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(2)">
                     <a routerLink="/entradas" class="nav-link"> Entradas </a>

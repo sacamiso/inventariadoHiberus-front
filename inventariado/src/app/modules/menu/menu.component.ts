@@ -14,7 +14,7 @@ export class MenuComponent implements OnInit, OnDestroy  {
 
   private hayAvisosSubscription: Subscription = new Subscription();
 
-  seleccionado: number = 1;
+  seleccionado: number = 0;
   constructor(
     private eventoAvisoService: EventoAvisoService
   ) { }
@@ -31,6 +31,9 @@ export class MenuComponent implements OnInit, OnDestroy  {
 
   cambiaSeleccionado(activo: number) {
     switch (activo) {
+      case 0:
+        this.seleccionado = 0;
+        break;
       case 1:
         this.seleccionado = 1;
         break;

@@ -7,7 +7,6 @@ import { NG_VALIDATORS, Validator, AbstractControl, ValidationErrors } from '@an
 })
 
 export class FechaValidaDirective implements Validator{
-
   validate(control: AbstractControl): ValidationErrors | null {
     const fechaSeleccionada = new Date(control.value);
     const fechaActual = new Date();
@@ -15,8 +14,6 @@ export class FechaValidaDirective implements Validator{
     if (fechaSeleccionada > fechaActual) {
       return { 'fechaInvalida': true };
     }
-
     return null;
   }
-
 }
