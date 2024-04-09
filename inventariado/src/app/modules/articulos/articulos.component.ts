@@ -94,7 +94,7 @@ export class ArticulosComponent implements OnInit {
 
 
   crearNuevoArticulo(){
-    this.router.navigate([`nuevo/articulo`]);
+    this.router.navigate([`gestion/articulos/nuevo`]);
   }
 
   goBack() {

@@ -27,6 +27,7 @@ import { NuevaUnidadComponent } from './modules/nueva-unidad/nueva-unidad.compon
 import { DetalleUnidadComponent } from './modules/detalle-unidad/detalle-unidad.component';
 import { InicioComponent } from './modules/inicio/inicio.component';
 import { ArticulosComponent } from './modules/articulos/articulos.component';
+import { NuevoArticuloComponent } from './modules/nuevo-articulo/nuevo-articulo.component';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { ArticulosComponent } from './modules/articulos/articulos.component';
     DetalleUnidadComponent,
     InicioComponent,
     ArticulosComponent,
+    NuevoArticuloComponent,
   ],
   imports: [
     BrowserModule,

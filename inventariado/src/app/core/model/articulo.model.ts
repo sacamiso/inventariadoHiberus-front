@@ -31,3 +31,14 @@ export interface ArticuloList {
     skip:     number;
     numTotal: number;
 }
+
+export interface ArticuloForm {
+    descripcion: string;
+    precioUnitario: number | null;
+    referencia: string;
+    codCategoria: string;
+    codSubcategoria: string;
+    iva: number | null;
+    fabricante: string;
+    modelo: string;
+}
