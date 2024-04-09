@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center mt-5">
-                    <h1 class="display-4">ENTRADAS</h1>
+                    <h1 class="display-4">ARTÍCULOS</h1>
                 </div>
             </div>
         </div>
@@ -15,7 +15,7 @@
                 </button>
             </div>
             <div class="col-md-6 text-end">
-                <button class="btn btn-success" (click)="crearNuevoPedido()">Nuevo Pedido</button>
+                <button class="btn btn-success" (click)="crearNuevoArticulo()">Nuevo Artícuo</button>
             </div>
         </div>
 
@@ -23,139 +23,63 @@
         <div *ngIf="mostrarFiltros " class="container mb-3">
             <hr>
             <div class="row mb-3">
-                <div class="col-md-4">
-                    <label for="filtroMedio">Medio de pago:</label>
-                    <select class="form-control form-select" id="filtroMedio" [(ngModel)]="filtros.codigoMedioPago">
-                        
-                        <option *ngFor="let medio of listMedios" [value]="medio.codigoMedio">{{medio.codigoMedio}}: {{medio.descripcion}}</option>
-                    </select>
+                <div class="col-md-5">
+                    <label for="filtroDescripcion">Descripción:</label>
+                    <input type="text" class="form-control" id="filtroDescripcion" [(ngModel)]="filtros.descripcion">
                 </div>
-                <div class="col-md-4">
-                    <label for="filtroCondicion">Condición de pago:</label>
-                    <select class="form-control form-select" id="filtroCondicion" [(ngModel)]="filtros.codigoCondicionPago">
-                        
-                        <option *ngFor="let con of listCondiciones" [value]="con.codigoCondicion">{{con.codigoCondicion}}: {{con.descripcion}}</option>
-                    </select>
-                </div>
-                <div class="col-md-4">
-                    <label for="filtroOficina">Oficina:</label>
-                    <select class="form-control form-select" id="filtroOficina" [(ngModel)]="filtros.idOficina">
-                        
-                        <option *ngFor="let oficina of listOficinas" [value]="oficina.idOficina">{{oficina.direccion}}, {{oficina.localidad}}</option>
-                    </select>
-                </div>
-                
-            </div>
-            <div class="row mb-3">
-                <div class="col-md-4 form-group">
-                    <label for="filtroProveedor">Proveedor:</label>
-                    <select class="form-control form-select" id="filtroProveedor" [(ngModel)]="filtros.idProveedor">
-                        
-                        <option *ngFor="let prove of listProveedores" [value]="prove.idProveedor">{{prove.razonSocial}}</option>
-                    </select>
-                </div>
-                <div class="col-md-4">
-                    <label for="filtroEmpleado">Realizado por:</label>
-                    <select class="form-control form-select" id="filtroEmpleado" [(ngModel)]="filtros.idEmpleado">
-                        
-                        <option *ngFor="let empl of listEmpleados" [value]="empl.idEmpleado">{{empl.nombre}} {{empl.apellidos}}, {{empl.dni}}</option>
-                    </select>
-                </div>
-                
-                <div class="col-md-2 form-group">
-                    <label for="filtroIvaMin">IVA min:</label>
-                    <input type="number" class="form-control" id="filtroIvaMin" min="0" [(ngModel)]="filtros.ivaPedidoMin">
+                <div class="col-md-3 form-group">
+                    <label for="filtroReferencia">Referencia</label>
+                    <input type="text" class="form-control" id="filtroReferencia" [(ngModel)]="filtros.referencia">
                 </div>
                 <div class="col-md-2">
-                    <label for="filtroIVAMax">IVA max:</label>
-                    <input type="number" class="form-control" id="filtroIVAMax" min="0" [(ngModel)]="filtros.ivaPedidoMax" >
+                    <label for="filtroCategoria">Categoria:</label>
+                    <select class="form-control form-select" id="filtroCategoria" [(ngModel)]="filtros.codigoCategoria">
+                        <option *ngFor="let cat of listCategorias" [value]="cat.codigoCategoria">{{cat.codigoCategoria}}</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label for="filtroSubcategoria">Subcategoría:</label>
+                    <select class="form-control form-select" id="filtroSubcategoria" [(ngModel)]="filtros.codigoSubcatogria">
+                        <option *ngFor="let sub of listSubcategorias" [value]="sub.codigoSubcategoria">{{sub.codigoSubcategoria}}</option>
+                    </select>
                 </div>
             </div>
             <div class="row mb-3">
-                
-                <div class="col-md-2 form-group">
-                    <label for="filtroCosteTotMin">Coste total min:</label>
-                    <input type="number" class="form-control" id="filtroCosteTotMin" min="0" [(ngModel)]="filtros.costeTotalMin">
-                </div>
-                <div class="col-md-2">
-                    <label for="filtroCosteTotMax">Coste total max:</label>
-                    <input type="number" class="form-control" id="filtroCosteTotMax" min="0" [(ngModel)]="filtros.costeTotalMax" >
-                </div>
-                <div class="col-md-2 form-group">
-                    <label for="filtroPlazoMin">Plazo entrega min:</label>
-                    <input type="number" class="form-control" id="filtroPlazoMin" min="0" [(ngModel)]="filtros.plazoEntregaMin">
-                </div>
-                <div class="col-md-2">
-                    <label for="filtroPlazoMax">Plazo entrega max:</label>
-                    <input type="number" class="form-control" id="filtroPlazoMax" min="0" [(ngModel)]="filtros.plazoEntregaMax" >
-                </div>
-                <div class="col-md-2 form-group">
-                    <label for="filtroEnvioMin">Costes envío min:</label>
-                    <input type="number" class="form-control" id="filtroEnvioMin" min="0" [(ngModel)]="filtros.costesEnvioMin">
-                </div>
-                <div class="col-md-2">
-                    <label for="filtroEnvioMax">Costes envío max:</label>
-                    <input type="number" class="form-control" id="filtroEnvioMax" min="0" [(ngModel)]="filtros.costesEnvioMax" >
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-md-2 form-group">
-                    <label for="filtroUnitarioMin">Coste unitario min:</label>
-                    <input type="number" class="form-control" id="filtroUnitarioMin" min="0" [(ngModel)]="filtros.costeUnitarioMin">
-                </div>
-                <div class="col-md-2">
-                    <label for="filtroUnitarioMax">Coste unitario max:</label>
-                    <input type="number" class="form-control" id="filtroUnitarioMax" min="0" [(ngModel)]="filtros.costeUnitarioMax" >
+                <div class="col-md-3 form-group">
+                    <label for="filtroprecioUnitarioMin">Precio unirtario min (€):</label>
+                    <input type="number" class="form-control" id="filtroprecioUnitarioMin" min="0" [(ngModel)]="filtros.precioUnitarioMin">
                 </div>
                 <div class="col-md-3">
-                    <label for="filtroRecepcion">Fecha de recepción:</label>
-                    <input type="date" class="form-control" id="filtroRecepcion"  [(ngModel)]="filtros.fechaRecepcion" >
+                    <label for="filtroprecioUnitarioMax">Precio unitario max (€):</label>
+                    <input type="number" class="form-control" id="filtroprecioUnitarioMax" min="0" [(ngModel)]="filtros.precioUnitarioMax" >
                 </div>
-
+                <div class="col-md-3 form-group">
+                    <label for="filtroIvaMin">IVA min (%):</label>
+                    <input type="number" class="form-control" id="filtroIvaMin" min="0" [(ngModel)]="filtros.ivaMin">
+                </div>
                 <div class="col-md-3">
-                    <label for="filtroPedido">Fecha de pedido:</label>
-                    <input type="date" class="form-control" id="filtroPedido"  [(ngModel)]="filtros.fechaPedido" >
-                </div>
-
-                <div class="col-md-2">
-                    <label>Recibido:</label>
-                    <div class="row">
-                        <div class="col">
-                            <div>
-                                <label>
-                                    <input type="radio" name="recibido" [(ngModel)]="filtros.recibido" [value]="true"> Sí
-                                </label>
-                            </div>
-                            
-                            <div>
-                                <label>
-                                    <input type="radio" name="recibido" [(ngModel)]="filtros.recibido" [value]="false"> No
-                                </label>
-                            </div>
-                            
-                        </div>
-                        <div class="col">
-                            <label>
-                                <input type="radio" name="recibido" [(ngModel)]="filtros.recibido" [value]="null"> Ambos
-                            </label>
-                        </div>
-                    </div>
-                    
-                    
+                    <label for="filtroIvaMax">IVA max (%):</label>
+                    <input type="number" class="form-control" id="filtroIvaMax" min="0" [(ngModel)]="filtros.ivaMax" >
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col-md-6 text-start ">
+                <div class="col-md-3">
+                    <label for="filtroFabricante">Fabricante:</label>
+                    <input type="text" class="form-control" id="filtroFabricante" [(ngModel)]="filtros.fabricante">
+                </div>
+                <div class="col-md-3">
+                    <label for="filtroModelo">Modelo:</label>
+                    <input type="text" class="form-control" id="filtroModelo" [(ngModel)]="filtros.modelo">
+                </div>
+                <div class="col-md-3  text-center">
                     <button class="btn btn-danger mt-3" (click)="limpiarFiltros()">Limpiar filtros</button>
                 </div>
-    
-                <div class="col-md-6 text-end ">
+                <div class="col-md-3 text-end ">
                     <button class="btn btn-success mt-3" (click)="aplicarFiltros()">Aplicar filtros</button>
                 </div>
             </div>
             <hr>
         </div>
-
 
         <div class="row">
             <div class="col col-md-auto">
@@ -176,11 +100,10 @@
                     <table class="table table-striped table-bordered">
                         <thead class="thead-dark">
                             <tr>
-                                <th class="text-center" scope="col">Código</th>
-                                <th class="text-center" scope="col">Descripción</th>
-                                <th class="text-center" scope="col">Precio unitario</th>
                                 <th class="text-center" scope="col">Referencia</th>
-                                <th class="text-center" scope="col">Catgoría</th>
+                                <th class="text-center" scope="col">Descripción</th>
+                                <th class="text-center" scope="col">Precio</th>
+                                <th class="text-center" scope="col">Categoría</th>
                                 <th class="text-center" scope="col">Subcategoría</th>
                                 <th class="text-center" scope="col">IVA</th>
                                 <th class="text-center" scope="col">Fabricante</th>
@@ -189,15 +112,14 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let articulo of articulos">
-                                <td>Pedido {{articulo.codigoArticulo}}</td>
+                                <td class="text-center">{{articulo.referencia}}</td>
                                 <td>{{articulo.descripcion}}</td>
-                                <td>{{articulo.precioUnitario.toFixed(2)}} €</td>
-                                <td>{{articulo.referencia}}</td>
-                                <td>{{articulo.codCategoria}}</td>
-                                <td>{{articulo.codSubcategoria}}</td>
-                                <td>{{articulo.iva.toFixed(2)}} %</td>
-                                <td>{{articulo.fabricante}}</td>
-                                <td>{{articulo.modelo}}</td>
+                                <td class="text-center">{{articulo.precioUnitario.toFixed(2)}} €</td>
+                                <td class="text-center">{{articulo.codCategoria}}</td>
+                                <td class="text-center">{{articulo.codSubcategoria}}</td>
+                                <td class="text-center">{{articulo.iva.toFixed(2)}} %</td>
+                                <td class="text-center">{{articulo.fabricante}}</td>
+                                <td class="text-center">{{articulo.modelo}}</td>
                             </tr>
                         </tbody>
                     </table>

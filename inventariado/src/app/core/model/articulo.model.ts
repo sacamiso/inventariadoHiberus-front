@@ -14,7 +14,7 @@ export interface ArticuloFiltros {
     descripcion: string | null;
     precioUnitarioMin: number | null;
     precioUnitarioMax: number | null;
-    referencia: number | null;
+    referencia: string | null;
     codigoCategoria: string | null;
     codigoSubcatogria: string | null;
     ivaMin: number | null;
