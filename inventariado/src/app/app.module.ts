@@ -28,6 +28,7 @@ import { DetalleUnidadComponent } from './modules/detalle-unidad/detalle-unidad.
 import { InicioComponent } from './modules/inicio/inicio.component';
 import { ArticulosComponent } from './modules/articulos/articulos.component';
 import { NuevoArticuloComponent } from './modules/nuevo-articulo/nuevo-articulo.component';
+import { ProveedoresComponent } from './modules/proveedores/proveedores.component';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { NuevoArticuloComponent } from './modules/nuevo-articulo/nuevo-articulo.
     InicioComponent,
     ArticulosComponent,
     NuevoArticuloComponent,
+    ProveedoresComponent,
   ],
   imports: [
     BrowserModule,
