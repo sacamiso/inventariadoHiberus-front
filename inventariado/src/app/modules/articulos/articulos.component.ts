@@ -120,20 +120,20 @@ export class ArticulosComponent implements OnInit {
             }
         }
     }
-}
+  }
 
   limpiarFiltros(){
     this.filtros = {
       descripcion: null,
-    precioUnitarioMin: null,
-    precioUnitarioMax:null,
-    referencia:null,
-    codigoCategoria:null,
-    codigoSubcatogria: null,
-    ivaMin: null,
-    ivaMax:null,
-    fabricante: null,
-    modelo:null
+      precioUnitarioMin: null,
+      precioUnitarioMax:null,
+      referencia:null,
+      codigoCategoria:null,
+      codigoSubcatogria: null,
+      ivaMin: null,
+      ivaMax:null,
+      fabricante: null,
+      modelo:null
     }
     this.listaElementosMostrar(this.tamPag, this.pagina);
   }

@@ -1,0 +1,122 @@
+<section *ngIf="cargado && filtrosCargados">
+    <div class="container">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center mt-5">
+                    <h1 class="display-4">EMPLEADOS</h1>
+                </div>
+            </div>
+        </div>
+        <!-- Botón para mostrar/ocultar filtros -->
+        <div class="row mb-3">
+            <div class="col-md-6 text-start">
+                <button class="btn btn-primary boton" (click)="toggleFiltros()">
+                    {{ mostrarFiltros ? 'Ocultar Filtros' : 'Mostrar Filtros' }}
+                </button>
+            </div>
+            <div class="col-md-6 text-end">
+                <button class="btn btn-success" (click)="crearNuevoEmpleado()">Nuevo Empleado</button>
+            </div>
+        </div>
+
+        <!-- Filtros -->
+        <div *ngIf="mostrarFiltros " class="container mb-3">
+            <hr>
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label for="filtroDni">DNI:</label>
+                    <input type="text" class="form-control" id="filtroDni" [(ngModel)]="filtros.dni">
+                </div>
+                <div class="col-md-4">
+                    <label for="filtroNombre">Nombre:</label>
+                    <input type="text" class="form-control" id="filtroNombre" [(ngModel)]="filtros.nombre">
+                </div>
+                <div class="col-md-4">
+                    <label for="filtroApellidos">Apellidos:</label>
+                    <input type="text" class="form-control" id="filtroApellidos" [(ngModel)]="filtros.apellidos">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label for="filtroUsuario">Usuario:</label>
+                    <input type="text" class="form-control" id="filtroUsuario" [(ngModel)]="filtros.usuario">
+                </div>
+                <div class="col-md-4">
+                    <label for="filtroRol">Rol:</label>
+                    <select class="form-control form-select" id="filtroRol" [(ngModel)]="filtros.codRol">
+                        <option *ngFor="let rol of listRoles" [value]="rol.codigoRol">{{rol.codigoRol}}: {{rol.nombre}}</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="filtroOficina">Oficina:</label>
+                    <select class="form-control form-select" id="filtroOficina" [(ngModel)]="filtros.idOficina">
+                        <option *ngFor="let oficina of listOficinas" [value]="oficina.idOficina">{{oficina.direccion}}, {{oficina.localidad}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                
+                <div class="col-md-6 text-start ">
+                    <button class="btn btn-danger mt-3" (click)="limpiarFiltros()">Limpiar filtros</button>
+                </div>
+    
+                <div class="col-md-6 text-end ">
+                    <button class="btn btn-success mt-3" (click)="aplicarFiltros()">Aplicar filtros</button>
+                </div>
+            </div>
+            <hr>
+        </div>
+
+        <div class="row">
+            <div class="col col-md-auto">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Número elementos por página</span>
+                    </div>
+                    <select class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+                        [(ngModel)]="tamPag" id="tamPagina">
+                        <option *ngFor="let opcion of Multiplos5(8)" [value]="opcion">{{ opcion }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <section class="mt-2">
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th class="text-center" scope="col">DNI</th>
+                                <th class="text-center" scope="col">Nombre</th>
+                                <th class="text-center" scope="col">Apellidos</th>
+                                <th class="text-center" scope="col">Usuario</th>
+                                <th class="text-center" scope="col">Rol</th>
+                                <th class="text-center" scope="col">Oficina</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let empl of empleados">
+                                <td>{{empl.dni}}</td>
+                                <td>{{empl.nombre}}</td>
+                                <td>{{empl.apellidos}}</td>
+                                <td>{{empl.usuario}}</td>
+                                <td>{{empl.codRol}}: {{empl.rol.nombre}}</td>
+                                <td>{{empl.oficina.localidad}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            
+            </div>
+        </section>
+        <div class="row">
+            <div class="col text-left">
+                <p>Total de empelados: {{ numeroEmpleados }}</p>
+            </div>
+        </div>
+        <app-paginador [numeroElementos]="numeroEmpleados" [tamPag]="tamPag"
+        (pagina)="cargarPagina($event)"></app-paginador>
+        
+        <br>
+    </div>
+</section>

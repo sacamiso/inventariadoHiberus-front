@@ -30,6 +30,7 @@ import { ArticulosComponent } from './modules/articulos/articulos.component';
 import { NuevoArticuloComponent } from './modules/nuevo-articulo/nuevo-articulo.component';
 import { ProveedoresComponent } from './modules/proveedores/proveedores.component';
 import { NuevoProveedorComponent } from './modules/nuevo-proveedor/nuevo-proveedor.component';
+import { EmpleadosComponent } from './modules/empleados/empleados.component';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import { NuevoProveedorComponent } from './modules/nuevo-proveedor/nuevo-proveed
     NuevoArticuloComponent,
     ProveedoresComponent,
     NuevoProveedorComponent,
+    EmpleadosComponent,
   ],
   imports: [
     BrowserModule,

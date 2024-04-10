@@ -13,3 +13,21 @@ export interface Empleado {
     rol:        Rol;
     oficina:    Oficina;
 }
+
+export interface EmpleadoFiltros {
+    dni:        string | null;
+    nombre:     string | null;
+    apellidos:  string | null;
+    usuario:    string | null;
+    codRol:     string | null;
+    idOficina:  number | null;
+}
+
+export interface EmpleadoList {
+    success:  boolean;
+    error:    string;
+    message:  Empleado[];
+    limit:    number;
+    skip:     number;
+    numTotal: number;
+}

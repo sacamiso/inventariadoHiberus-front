@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Empleado } from '../model/empleado.model';
+import { Empleado, EmpleadoFiltros, EmpleadoList } from '../model/empleado.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,4 +18,7 @@ export class EmpleadoService {
     return this.http.get<Array<Empleado>>(`${this.apiUrl}/empleado/listAll`);
   }
 
+  getEmpleadosInterval(limit: number, skip: number, filtros: EmpleadoFiltros): Observable<EmpleadoList> {
+    return this.http.post<EmpleadoList>(`${this.apiUrl}/empleado/listAllPag?limit=${limit}&skip=${skip}`, filtros);
+  }
 }
