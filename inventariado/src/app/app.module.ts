@@ -29,6 +29,7 @@ import { InicioComponent } from './modules/inicio/inicio.component';
 import { ArticulosComponent } from './modules/articulos/articulos.component';
 import { NuevoArticuloComponent } from './modules/nuevo-articulo/nuevo-articulo.component';
 import { ProveedoresComponent } from './modules/proveedores/proveedores.component';
+import { NuevoProveedorComponent } from './modules/nuevo-proveedor/nuevo-proveedor.component';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { ProveedoresComponent } from './modules/proveedores/proveedores.componen
     ArticulosComponent,
     NuevoArticuloComponent,
     ProveedoresComponent,
+    NuevoProveedorComponent,
   ],
   imports: [
     BrowserModule,

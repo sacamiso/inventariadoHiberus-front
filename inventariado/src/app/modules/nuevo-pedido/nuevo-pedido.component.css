@@ -52,7 +52,7 @@
     }
 
     .interactive-link {
-        transition: transform 0.3s; /* Agrega una transición para suavizar el efecto */
+        transition: transform 0.3s; /* Agrega una transición para suavizar el efecto de ampliar */
     }
 
     .interactive-link:hover {

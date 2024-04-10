@@ -27,3 +27,13 @@ export interface ProveedorFiltros {
     telefono:     string | null;
     email:        string | null;
 }
+
+export interface ProveedorForm {
+    cif:          string;
+    razonSocial:  string;
+    direccion:    string;
+    codigoPostal: number | null;
+    localidad:    string;
+    telefono:     string;
+    email:        string;
+}

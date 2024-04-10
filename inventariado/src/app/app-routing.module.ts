@@ -19,6 +19,7 @@ import { InicioComponent } from './modules/inicio/inicio.component';
 import { ArticulosComponent } from './modules/articulos/articulos.component';
 import { NuevoArticuloComponent } from './modules/nuevo-articulo/nuevo-articulo.component';
 import { ProveedoresComponent } from './modules/proveedores/proveedores.component';
+import { NuevoProveedorComponent } from './modules/nuevo-proveedor/nuevo-proveedor.component';
 
 const routes: Routes = [
   {path: '', component:InicioComponent},
@@ -29,6 +30,7 @@ const routes: Routes = [
   {path: 'gestion/articulos', component:ArticulosComponent},
   {path: 'gestion/articulos/nuevo', component:NuevoArticuloComponent},
   {path: 'gestion/proveedores', component:ProveedoresComponent},
+  {path: 'gestion/proveedores/nuevo', component:NuevoProveedorComponent},
   {path: 'gestion/stockSeguridad', component:StockSeguridadComponent},
   {path: 'gestion/stockSeguridad/edit', component:StockSeguridadEditComponent},
   {path: 'gestion/unidades', component:UnidadesComponent},
@@ -40,7 +42,6 @@ const routes: Routes = [
   {path: 'salidas', component:SalidasComponent},
   {path: 'salidas/nueva', component:NuevaSalidaComponent},
   {path: 'salidas/salida/:id', component:DetalleSalidaComponent},
-  
 ];
 
 @NgModule({
