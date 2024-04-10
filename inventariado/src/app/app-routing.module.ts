@@ -21,6 +21,7 @@ import { NuevoArticuloComponent } from './modules/nuevo-articulo/nuevo-articulo.
 import { ProveedoresComponent } from './modules/proveedores/proveedores.component';
 import { NuevoProveedorComponent } from './modules/nuevo-proveedor/nuevo-proveedor.component';
 import { EmpleadosComponent } from './modules/empleados/empleados.component';
+import { NuevoEmpleadoComponent } from './modules/nuevo-empleado/nuevo-empleado.component';
 
 const routes: Routes = [
   {path: '', component:InicioComponent},
@@ -31,6 +32,7 @@ const routes: Routes = [
   {path: 'gestion/articulos', component:ArticulosComponent},
   {path: 'gestion/articulos/nuevo', component:NuevoArticuloComponent},
   {path: 'gestion/empleados', component:EmpleadosComponent},
+  {path: 'gestion/empleados/nuevo', component:NuevoEmpleadoComponent},
   {path: 'gestion/proveedores', component:ProveedoresComponent},
   {path: 'gestion/proveedores/nuevo', component:NuevoProveedorComponent},
   {path: 'gestion/stockSeguridad', component:StockSeguridadComponent},
