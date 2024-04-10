@@ -3,7 +3,7 @@ export interface Proveedor {
     cif:          string;
     razonSocial:  string;
     direccion:    string;
-    codigoPostal: number;
+    codigoPostal: number | null;
     localidad:    string;
     telefono:     string;
     email:        string;

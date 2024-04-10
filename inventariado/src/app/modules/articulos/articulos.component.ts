@@ -106,8 +106,21 @@ export class ArticulosComponent implements OnInit {
   }
 
   aplicarFiltros(){
+    this.trimStringProperties(this.filtros);
     this.listaElementosMostrar(this.tamPag, this.pagina);
   }
+
+  trimStringProperties(obj: any) {
+    for (const prop in obj) {
+        if (typeof obj[prop] === 'string') {
+            if (obj[prop].trim() === '') {
+                obj[prop] = null;
+            } else {
+                obj[prop] = obj[prop].trim();
+            }
+        }
+    }
+}
 
   limpiarFiltros(){
     this.filtros = {
