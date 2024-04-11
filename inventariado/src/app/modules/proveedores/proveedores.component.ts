@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
 import { Proveedor, ProveedorFiltros } from 'src/app/core/model/proveedor.model';
 import { ProveedorService } from 'src/app/core/services/proveedor.service';
 
@@ -85,7 +84,7 @@ export class ProveedoresComponent implements OnInit {
             }
         }
     }
-}
+  }
 
   limpiarFiltros(){
     this.filtros = {

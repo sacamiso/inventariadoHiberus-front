@@ -1,0 +1,59 @@
+<div *ngIf="cargado" class="container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center mt-5">
+                <h1 class="display-4">NUEVA OFICINA</h1>
+            </div>
+        </div>
+    </div>
+    <div class="mt-4" id="liveAlert"></div>
+       
+    <form [formGroup]="oficinaForm" (ngSubmit)="guardar()">
+        <p class="text-danger">* Campos obligatorios</p>
+        <section class="rounded" style="border: 1px solid #aaaaaa;">
+            <div class="form-group m-2">
+                <br>
+                <div class="row mb-4">
+                    <div class="form-item col-md-7">
+                        <label for="direccion">Dirección<span class="text-danger">*</span></label>
+                        <input required id="direccion" class="form-control" type="text" formControlName="direccion"
+                            placeholder="Dirección" [ngClass]="{'is-invalid': oficinaForm.get('direccion')?.invalid && formularioEnviado}"/>
+                    </div>
+                    <div class="form-item col-md-5">
+                        <label for="localidad">Localidad<span class="text-danger">*</span></label>
+                        <input required id="localidad" class="form-control" type="text" formControlName="localidad"
+                            placeholder="Localidad" [ngClass]="{'is-invalid': oficinaForm.get('localidad')?.invalid && formularioEnviado}"/>
+                    </div>                     
+                </div>
+                <div class="row mb-4">
+                    <div class="form-item col-md-4">
+                        <label for="codigoPostal">Código postal</label>
+                        <input id="codigoPostal" class="form-control" type="number" min="0" formControlName="codigoPostal"
+                            placeholder="Código Postal" [ngClass]="{'is-invalid': oficinaForm.get('codigoPostal')?.invalid && formularioEnviado}"/>
+                        <div *ngIf="formularioEnviado && oficinaForm.get('codigoPostal')?.invalid" class="text-danger">
+                            <div *ngIf="oficinaForm.get('codigoPostal')?.errors?.['min'] || oficinaForm.get('codigoPostal')?.errors?.['pattern']">
+                                Codigo postal inválido.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-item col-md-4">
+                        <label for="provincia">Provincia<span class="text-danger">*</span></label>
+                        <input required id="provincia" class="form-control" type="text" formControlName="provincia"
+                            placeholder="Provincia" [ngClass]="{'is-invalid': oficinaForm.get('provincia')?.invalid && formularioEnviado}"/>
+                    </div>
+                    <div class="form-item col-md-4">
+                        <label for="pais">País<span class="text-danger">*</span></label>
+                        <input required id="pais" class="form-control" type="text" formControlName="pais"
+                            placeholder="País" [ngClass]="{'is-invalid': oficinaForm.get('pais')?.invalid && formularioEnviado}"/>
+                    </div>                       
+                </div>
+            </div>
+        </section>
+        <div class="mt-4 mb-5">
+            <button type="button" (click)="volver()" class="btn btn-danger">Cancelar</button>
+            <button type="submit" class="btn btn-success float-end">Guardar</button>
+        </div>
+        
+    </form>
+
+</div>
