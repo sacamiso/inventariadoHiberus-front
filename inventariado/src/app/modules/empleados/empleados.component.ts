@@ -128,4 +128,8 @@ export class EmpleadosComponent implements OnInit {
     }
     this.listaElementosMostrar(this.tamPag, this.pagina);
   }
+
+  detalleEmpleado(id: number){
+    this.router.navigate([`gestion/empleados/empleado/${id}`]);
+  }
 }

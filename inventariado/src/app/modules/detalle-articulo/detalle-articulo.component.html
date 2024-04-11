@@ -1,0 +1,35 @@
+<section *ngIf="cargado && articulo!=null">
+    <div class="container">
+        <header class="mb-4">
+            <div class="d-flex align-items-start justify-content-between">
+                <div>
+                    <h1 class="mt-4">Información del artículo: {{articulo.codigoArticulo}}</h1>
+                    
+                </div>
+            </div>
+        </header>
+
+        <section class="mb-5">
+            <div class="row">
+                <div class="col-11">
+                    <br>
+                    <h4><strong>Referencia:</strong> {{articulo.referencia}}</h4>
+                    <br>
+                    <br>
+                    <h4><strong>Descripción:</strong> {{articulo.descripcion}}</h4>
+                    <h4><strong>Fabricante:</strong> {{articulo.fabricante}}</h4>
+                    <h4><strong>Modelo:</strong> {{articulo.modelo}}</h4>
+                    <br>
+                    <h5><strong>Categoría: </strong> {{articulo.codCategoria}}</h5>
+                    <h5><strong>Subcategoría: </strong> {{articulo.codSubcategoria}}</h5>
+                    <h5><strong>Precio unitario: </strong>{{articulo.precioUnitario}} €</h5>
+                    <h5><strong>IVA: </strong>{{articulo.iva}} %</h5>
+                </div>
+                <div class="col-1">
+                    <button class="btn boton text-start" (click)="volver()">Volver</button>
+                </div>   
+            </div>
+        </section>   
+          
+    </div>
+</section>

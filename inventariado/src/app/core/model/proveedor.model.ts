@@ -28,6 +28,12 @@ export interface ProveedorFiltros {
     email:        string | null;
 }
 
+export interface ProveedorMsg {
+    success: boolean;
+    error:   string;
+    message: Proveedor;
+}
+
 export interface ProveedorForm {
     cif:          string;
     razonSocial:  string;

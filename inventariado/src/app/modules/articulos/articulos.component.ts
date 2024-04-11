@@ -138,5 +138,7 @@ export class ArticulosComponent implements OnInit {
     this.listaElementosMostrar(this.tamPag, this.pagina);
   }
 
-
+  detalleArticulo(id: number){
+    this.router.navigate([`gestion/articulos/articulo/${id}`]);
+  }
 }

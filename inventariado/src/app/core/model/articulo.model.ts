@@ -32,6 +32,12 @@ export interface ArticuloList {
     numTotal: number;
 }
 
+export interface ArticuloMsg {
+    success: boolean;
+    error:   string;
+    message: Articulo;
+}
+
 export interface ArticuloForm {
     descripcion: string;
     precioUnitario: number | null;

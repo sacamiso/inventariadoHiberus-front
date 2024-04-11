@@ -34,6 +34,10 @@ import { EmpleadosComponent } from './modules/empleados/empleados.component';
 import { NuevoEmpleadoComponent } from './modules/nuevo-empleado/nuevo-empleado.component';
 import { OficinasComponent } from './modules/oficinas/oficinas.component';
 import { NuevaOficinaComponent } from './modules/nueva-oficina/nueva-oficina.component';
+import { DetalleProveedorComponent } from './modules/detalle-proveedor/detalle-proveedor.component';
+import { DetalleArticuloComponent } from './modules/detalle-articulo/detalle-articulo.component';
+import { DetalleOficinaComponent } from './modules/detalle-oficina/detalle-oficina.component';
+import { DetalleEmpleadoComponent } from './modules/detalle-empleado/detalle-empleado.component';
 
 
 @NgModule({
@@ -66,6 +70,10 @@ import { NuevaOficinaComponent } from './modules/nueva-oficina/nueva-oficina.com
     NuevoEmpleadoComponent,
     OficinasComponent,
     NuevaOficinaComponent,
+    DetalleProveedorComponent,
+    DetalleArticuloComponent,
+    DetalleOficinaComponent,
+    DetalleEmpleadoComponent,
   ],
   imports: [
     BrowserModule,

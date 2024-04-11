@@ -98,4 +98,8 @@ export class ProveedoresComponent implements OnInit {
     }
     this.listaElementosMostrar(this.tamPag, this.pagina);
   }
+
+  detalleProveedor(id: number){
+    this.router.navigate([`gestion/proveedores/proveedor/${id}`]);
+  }
 }

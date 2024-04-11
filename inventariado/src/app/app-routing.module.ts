@@ -24,6 +24,10 @@ import { EmpleadosComponent } from './modules/empleados/empleados.component';
 import { NuevoEmpleadoComponent } from './modules/nuevo-empleado/nuevo-empleado.component';
 import { OficinasComponent } from './modules/oficinas/oficinas.component';
 import { NuevaOficinaComponent } from './modules/nueva-oficina/nueva-oficina.component';
+import { DetalleProveedorComponent } from './modules/detalle-proveedor/detalle-proveedor.component';
+import { DetalleArticuloComponent } from './modules/detalle-articulo/detalle-articulo.component';
+import { DetalleOficinaComponent } from './modules/detalle-oficina/detalle-oficina.component';
+import { DetalleEmpleadoComponent } from './modules/detalle-empleado/detalle-empleado.component';
 
 const routes: Routes = [
   {path: '', component:InicioComponent},
@@ -32,12 +36,16 @@ const routes: Routes = [
   {path: 'entradas/pedido/:id', component:DetallePedidoComponent},
   {path: 'gestion', component:GestionComponent},
   {path: 'gestion/articulos', component:ArticulosComponent},
+  {path: 'gestion/articulos/articulo/:id', component:DetalleArticuloComponent},
   {path: 'gestion/articulos/nuevo', component:NuevoArticuloComponent},
   {path: 'gestion/empleados', component:EmpleadosComponent},
+  {path: 'gestion/empleados/empleado/:id', component:DetalleEmpleadoComponent},
   {path: 'gestion/empleados/nuevo', component:NuevoEmpleadoComponent},
   {path: 'gestion/oficinas', component:OficinasComponent},
+  {path: 'gestion/oficinas/oficina/:id', component:DetalleOficinaComponent},
   {path: 'gestion/oficinas/nueva', component:NuevaOficinaComponent},
   {path: 'gestion/proveedores', component:ProveedoresComponent},
+  {path: 'gestion/proveedores/proveedor/:id', component:DetalleProveedorComponent},
   {path: 'gestion/proveedores/nuevo', component:NuevoProveedorComponent},
   {path: 'gestion/stockSeguridad', component:StockSeguridadComponent},
   {path: 'gestion/stockSeguridad/edit', component:StockSeguridadEditComponent},

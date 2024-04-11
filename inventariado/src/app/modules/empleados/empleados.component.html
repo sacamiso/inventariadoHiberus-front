@@ -96,7 +96,7 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let empl of empleados">
-                                <td>{{empl.dni}}</td>
+                                <td class="underline-link" (click)="detalleEmpleado(empl.idEmpleado)">{{empl.dni}}</td>
                                 <td>{{empl.nombre}}</td>
                                 <td>{{empl.apellidos}}</td>
                                 <td>{{empl.usuario}}</td>

@@ -7,6 +7,12 @@ export interface Oficina {
     pais:         string;
 }
 
+export interface OficinaMsg {
+    success: boolean;
+    error:   string;
+    message: Oficina;
+}
+
 export interface OficinaList {
     success:  boolean;
     error:    string;

@@ -106,4 +106,7 @@ export class InventarioComponent implements OnInit {
     this.listaElementosMostrar(this.tamPag, this.pagina);
   }
 
+  detalleOficina(id: number){
+    this.router.navigate([`gestion/oficinas/oficina/${id}`]);
+  }
 }

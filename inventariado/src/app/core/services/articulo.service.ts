@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Articulo, ArticuloFiltros, ArticuloForm, ArticuloList } from '../model/articulo.model';
+import { Articulo, ArticuloFiltros, ArticuloForm, ArticuloList, ArticuloMsg } from '../model/articulo.model';
 import { MesaggeResponse } from '../model/mesagge-response.model';
 
 @Injectable({
@@ -26,5 +26,9 @@ export class ArticuloService {
 
   guardarArticulo(articulo: ArticuloForm){
     return this.http.post<MesaggeResponse>(`${this.apiUrl}/articulo/add`, articulo);
+  }
+
+  getArticuloById(id: number): Observable<ArticuloMsg> {
+    return this.http.get<ArticuloMsg>(`${this.apiUrl}/articulo/${id}`);
   }
 }

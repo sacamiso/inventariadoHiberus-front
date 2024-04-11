@@ -97,7 +97,7 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let prove of proveedores">
-                                    <td>{{prove.cif}}</td>
+                                    <td class="underline-link" (click)="detalleProveedor(prove.idProveedor)">{{prove.cif}}</td>
                                     <td>{{prove.razonSocial}}</td>
                                     <td>{{prove.direccion}}</td>
                                     <td *ngIf="prove.codigoPostal!==null">{{prove.codigoPostal}}</td>

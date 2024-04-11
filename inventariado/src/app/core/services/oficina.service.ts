@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Oficina, OficinaFiltros, OficinaForm, OficinaList } from '../model/oficina.model';
+import { Oficina, OficinaFiltros, OficinaForm, OficinaList, OficinaMsg } from '../model/oficina.model';
 import { MesaggeResponse } from '../model/mesagge-response.model';
 
 @Injectable({
@@ -22,6 +22,10 @@ export class OficinaService {
 
   getOficinasInterval(limit: number, skip: number, filtros: OficinaFiltros): Observable<OficinaList> {
     return this.http.post<OficinaList>(`${this.apiUrl}/oficina/listAllPag?limit=${limit}&skip=${skip}`, filtros);
+  }
+
+  getOficinaById(id: number): Observable<OficinaMsg> {
+    return this.http.get<OficinaMsg>(`${this.apiUrl}/oficina/${id}`);
   }
 
   guardarOficina(oficina: OficinaForm){
