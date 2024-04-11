@@ -31,3 +31,13 @@ export interface EmpleadoList {
     skip:     number;
     numTotal: number;
 }
+
+export interface EmpleadoForm {
+    dni:        string;
+    nombre:     string;
+    apellidos:  string;
+    usuario:    string;
+    contraseña: string;
+    codRol:     string;
+    idOficina:  number;
+}

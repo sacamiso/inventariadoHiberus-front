@@ -1,1 +1,79 @@
-<p>nuevo-empleado works!</p>
+<div *ngIf="cargado" class="container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center mt-5">
+                <h1 class="display-4">NUEVO EMPLEADO</h1>
+            </div>
+        </div>
+    </div>
+    <div class="mt-4" id="liveAlert"></div>
+       
+    <form [formGroup]="empleadoForm" (ngSubmit)="guardar()">
+        <p class="text-danger">* Campos obligatorios</p>
+        <section class="rounded" style="border: 1px solid #aaaaaa;">
+            <div class="form-group m-2">
+                <br>
+                <div class="row mb-4">
+                    <div class="form-item col-md-2">
+                        <label for="dni">DNI<span class="text-danger">*</span></label>
+                        <input required id="dni" class="form-control" type="text" formControlName="dni"
+                            placeholder="DNI" [ngClass]="{'is-invalid': empleadoForm.get('dni')?.invalid && formularioEnviado}"/>
+                        <div *ngIf="formularioEnviado && empleadoForm.get('dni')?.invalid" class="text-danger">
+                            <div *ngIf="empleadoForm.get('dni')?.errors?.['dniInvalido']">
+                                El DNI no es válido.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-item col-md-3">
+                        <label for="nombre">Nombre<span class="text-danger">*</span></label>
+                        <input required id="nombre" class="form-control" type="text" formControlName="nombre"
+                            placeholder="Nombre" [ngClass]="{'is-invalid': empleadoForm.get('nombre')?.invalid && formularioEnviado}"/>
+                    </div>
+                    <div class="form-item col-md-4">
+                        <label for="apellidos">Apellidos<span class="text-danger">*</span></label>
+                        <input required id="apellidos" class="form-control" type="text" formControlName="apellidos"
+                            placeholder="Apellidos" [ngClass]="{'is-invalid': empleadoForm.get('apellidos')?.invalid && formularioEnviado}"/>
+                    </div>
+                    <div class="form-item col-md-3">
+                        <label for="usuario">Usuario<span class="text-danger">*</span></label>
+                        <input required id="usuario" class="form-control" type="text" formControlName="usuario"
+                            placeholder="Usuario" [ngClass]="{'is-invalid': empleadoForm.get('usuario')?.invalid && formularioEnviado}"/>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="form-item col-md-4">
+                        <label for="contraseña">Contraseña provisional<span class="text-danger">*</span></label>
+                        <input required id="contraseña" class="form-control" type="text" formControlName="contraseña"
+                            placeholder="Contraseña" [ngClass]="{'is-invalid': empleadoForm.get('contraseña')?.invalid && formularioEnviado}"/>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="codRol">Rol<span class="text-danger">*</span></label>
+                            <select class="form-control form-select" id="codRol" formControlName="codRol"  [ngClass]="{'is-invalid': empleadoForm.get('codRol')?.invalid && formularioEnviado}">
+                                <option [value]="0" disabled>Seleccione el rol</option>
+                                <option *ngFor="let rol of listRoles" [value]="rol.codigoRol">{{
+                                    rol.codigoRol }}: {{ rol.nombre }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="idOficina">Oficina<span class="text-danger">*</span></label>
+                            <select class="form-control form-select" id="idOficina" formControlName="idOficina"  [ngClass]="{'is-invalid': empleadoForm.get('idOficina')?.invalid && formularioEnviado}">
+                                <option [value]="" disabled>Seleccione la oficina</option>
+                                <option *ngFor="let oficina of listOficinas" [value]="oficina.idOficina">
+                                {{ oficina.direccion }}, {{ oficina.localidad }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="mt-4 mb-5">
+            <button type="button" (click)="volver()" class="btn btn-danger">Cancelar</button>
+            <button type="submit" class="btn btn-success float-end">Guardar</button>
+        </div>
+        
+    </form>
+
+</div>
