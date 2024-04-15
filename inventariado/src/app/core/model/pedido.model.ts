@@ -19,6 +19,7 @@ export interface Pedido {
     fechaRecepcion: Date;
     condicionPago:  string;
     medioPago:      string;
+    devuelto:       boolean;
     costeUnitario:  number;
     numeroUnidades: number;
     empleado:       Empleado;
@@ -59,4 +60,5 @@ export interface PedidoFiltros {
     recibido: boolean | null;
     costeUnitarioMin:  number | null;
     costeUnitarioMax: number | null;
+    devuelto:       boolean | null;
 }

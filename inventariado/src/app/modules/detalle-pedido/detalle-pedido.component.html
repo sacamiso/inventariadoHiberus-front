@@ -5,38 +5,69 @@
                 <div>
                     <h1 class="mb-4 mt-4">Información del pedido</h1>
                     <p class="mt-4"><strong>Número de pedido:</strong> {{pedido.numeroPedido}}</p>
-                    <p><strong>Fecha pedido: </strong> {{pedido.fechaPedido | date: 'dd/MM/yyyy'  }}</p>
-                    <p><strong>Fecha recepción: </strong> {{ pedido.fechaRecepcion !== null ? (pedido.fechaRecepcion | date: 'dd/MM/yyyy')   : '-' }}</p>
+                    <p><strong>Fecha pedido: </strong> {{pedido.fechaPedido | date: 'dd/MM/yyyy' }}</p>
+                    <p><strong>Fecha recepción: </strong> {{ pedido.fechaRecepcion !== null ? (pedido.fechaRecepcion |
+                        date: 'dd/MM/yyyy') : '-' }}</p>
+                    <p class="devuelto" *ngIf="pedido.devuelto===true">Pedido devuelto</p>
                 </div>
-                
+
                 <div class="mt-4">
                     <button type="button" class="btn btn-primary boton-recibido" data-bs-toggle="modal"
-                    [attr.data-bs-target]="'#modalRecibido' + id" [disabled]="pedido.fechaRecepcion !== null">{{ pedido.fechaRecepcion === null ? 'Marcar como recibido' : 'Recibido' }}</button>
-                    
+                        [attr.data-bs-target]="'#modalRecibido' + id" [disabled]="pedido.fechaRecepcion !== null">{{
+                        pedido.fechaRecepcion === null ? 'Marcar como recibido' : 'Recibido' }}</button>
+
                 </div>
-                
-                <div class="modal fade" [id]="'modalRecibido' + id" tabindex="-1"
-                            aria-labelledby="modalBorrarLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="modalBorrarLabel">Recibido</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        ¿Está seguro que desea marcarlo como recibido?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                                            (click)="marcarRecibido()">Si</button>
-                                    </div>
-                                </div>
+
+                <div class="modal fade" [id]="'modalRecibido' + id" tabindex="-1" aria-labelledby="modalBorrarLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalBorrarLabel">Recibido</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                ¿Está seguro que desea marcarlo como recibido?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                    (click)="marcarRecibido()">Si</button>
                             </div>
                         </div>
+                    </div>
+                </div>
 
+                <div class="mt-4">
+                    <button type="button" class="btn btn-primary boton-recibido" data-bs-toggle="modal"
+                        [attr.data-bs-target]="'#modalDevolver' + id" [disabled]="pedido.fechaRecepcion === null || pedido.devuelto === true">{{
+                        pedido.devuelto === false ? 'Devolver pedido' : 'Pedido devuelto' }}</button>
+
+                </div>
+
+                <div class="modal fade" [id]="'modalDevolver' + id" tabindex="-1" aria-labelledby="modalDevolverLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalDevolverLabel">Devolver pedido</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                ¿Está seguro que desea devolver el pedido?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                    (click)="devolverPedido()">Si</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div id="liveAlert"></div>
         </header>
@@ -79,7 +110,7 @@
                         <strong>Dirección:</strong>
                         <br>{{pedido.proveedor.direccion}}
                         <br>{{pedido.proveedor.codigoPostal}}, {{pedido.proveedor.localidad}}
-                        
+
                         <br><strong>Contacto:</strong>
                         <br>{{pedido.proveedor.telefono}}
                         <br>{{pedido.proveedor.email}}
@@ -91,8 +122,10 @@
                     <h2>Detalles</h2>
                     <address>
                         <strong>Oficina destino:</strong>
-                        <br>{{pedido.oficina.direccion}}, {{pedido.oficina.codigoPostal}}, {{pedido.oficina.localidad}} {{ pedido.oficina.provincia !== null ? ', ' + pedido.oficina.provincia : '' }}, {{pedido.oficina.pais}}
-                        
+                        <br>{{pedido.oficina.direccion}}, {{pedido.oficina.codigoPostal}}, {{pedido.oficina.localidad}}
+                        {{ pedido.oficina.provincia !== null ? ', ' + pedido.oficina.provincia : '' }},
+                        {{pedido.oficina.pais}}
+
                         <br><strong>Realizado por:</strong>
                         <br>{{pedido.empleado.nombre}} {{pedido.empleado.apellidos}}
                         <br><strong>Plazo de entrega:</strong> {{pedido.plazoEntrega}} días
@@ -100,12 +133,12 @@
                         <br><strong>Medio de pago:</strong> {{pedido.medio.descripcion}}
                     </address>
                 </div>
-                
+
                 <div class="col-sm-4 mt-sm-0 mt-4">
                     <h2>Resumen</h2>
                     <table class="table table-bordered">
                         <tfoot>
-                            
+
                             <tr>
                                 <th colspan="3">Número total de unidades</th>
                                 <td>{{pedido.numeroUnidades}} uds.</td>
@@ -133,13 +166,11 @@
                         <div class="col-6">
                             <button class="btn boton-recibido text-start" (click)="goBack()">Ir a Entradas</button>
                         </div>
-                        
+
                     </div>
                 </div>
-                
+
             </div>
-        </section>        
+        </section>
     </div>
 </section>
-
-    

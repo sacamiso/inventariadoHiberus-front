@@ -96,6 +96,27 @@ export class DetallePedidoComponent implements OnInit {
     })
   }
 
+  devolverPedido(){
+    this.pedidoService.devolverPedido(this.id).subscribe({
+      next: (response) => {
+        this.mensaje = response;
+        if(this.mensaje.success){
+          this.alerta(this.mensaje.message, 'success');
+        }else{
+          this.alerta(this.mensaje.error, 'success');
+        }
+        
+      },
+      error: (error) => {
+        console.log(error);
+        this.alerta(error.error.error, 'danger');
+      },
+      complete: () => {
+        this.cargaDatos();
+      }
+    })
+  }
+
   alerta(message: string, type: string) {
     this.alertPlaceholder = document.getElementById('liveAlert');
     if (!this.alertPlaceholder) {

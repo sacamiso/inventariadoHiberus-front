@@ -26,6 +26,7 @@ export interface Message {
     fechaRecepcion: Date;
     condicionPago:  string;
     medioPago:      string;
+    devuelto:       boolean;
     costeUnitario:  number;
     numeroUnidades: number;
     empleado:       Empleado;

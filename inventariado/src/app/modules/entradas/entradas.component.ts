@@ -55,6 +55,7 @@ export class EntradasComponent implements OnInit {
     codigoCondicionPago: null,
     codigoMedioPago:null,
     recibido:null,
+    devuelto:null,
     costeUnitarioMin:null,
     costeUnitarioMax:null
   }
@@ -165,6 +166,7 @@ export class EntradasComponent implements OnInit {
       codigoCondicionPago: null,
       codigoMedioPago:null,
       recibido:null,
+      devuelto:null,
       costeUnitarioMin:null,
       costeUnitarioMax:null
     }

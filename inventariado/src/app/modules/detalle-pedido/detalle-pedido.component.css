@@ -3,3 +3,8 @@
     border-color: #19255A;
     color: white;
 }
+
+.devuelto {
+    color: red; 
+    font-weight: bold; 
+}

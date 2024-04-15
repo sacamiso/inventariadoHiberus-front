@@ -36,4 +36,8 @@ export class PedidoService {
   getAllPedidos(): Observable<Array<Pedido>> {
     return this.http.get<Array<Pedido>>(`${this.apiUrl}/pedido/listAll`);
   }
+
+  devolverPedido(idP: number): Observable<MesaggeResponse> {
+    return this.http.put<MesaggeResponse>(`${this.apiUrl}/pedido/devolver?idP=${idP}`, null);
+  }
 }
