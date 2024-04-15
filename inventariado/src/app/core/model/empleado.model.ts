@@ -41,3 +41,9 @@ export interface EmpleadoForm {
     codRol:     string;
     idOficina:  number;
 }
+
+export interface EmpleadoMsg {
+    success: boolean;
+    error:   string;
+    message: Empleado;
+}

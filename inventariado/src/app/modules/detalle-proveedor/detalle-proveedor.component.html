@@ -13,16 +13,14 @@
             <div class="row">
                 <div class="col-11">
                     <br>
-                    <h4><strong>Razón social:</strong> {{proveedor.razonSocial}}</h4>
-                    <h4><strong>CIF:</strong> {{proveedor.cif}}</h4>
+                    <h5><strong>Razón social:</strong> {{proveedor.razonSocial}}</h5>
+                    <h5><strong>CIF:</strong> {{proveedor.cif}}</h5>
                     <br>
-                    <h4><strong>Dirección</strong></h4>
-                    <h5>{{proveedor.direccion}}</h5>
+                    <h5><strong>Dirección:</strong> {{proveedor.direccion}}</h5>
                     <h5 *ngIf="proveedor.codigoPostal !== null"><strong>Código postal: </strong>{{proveedor.codigoPostal}}</h5>
                     <h5><strong>Localidad: </strong> {{proveedor.localidad}}</h5>
-                    
+                    <br>
                     <h4><strong>Contacto</strong></h4>
-                    <h5>{{proveedor.direccion}}</h5>
                     <h5><strong>Teléfono: </strong>{{proveedor.telefono}}</h5>
                     <h5><strong>Correo electrónico: </strong> <a href="mailto:{{proveedor.email}}">{{proveedor.email}}</a></h5>
                 </div>
