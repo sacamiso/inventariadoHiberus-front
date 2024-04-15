@@ -1,0 +1,43 @@
+<section *ngIf="cargado && asignacion!=null">
+    <div class="container">
+        <header class="mb-2">
+            <div class="d-flex align-items-start justify-content-between">
+                <div>
+                    <h1 class="mb-4 mt-4">Información de la asignación</h1>
+                    <p class="mt-4"><strong>Número de asignación:</strong> {{asignacion.idAsignacion}}</p>
+                    <p><strong>Fecha de inicio: </strong> {{asignacion.fechaInicio| date: 'dd/MM/yyyy'  }}</p>
+                    <p *ngIf="asignacion.fechaFin!==null"><strong>Fecha de fin: </strong> {{asignacion.fechaFin| date: 'dd/MM/yyyy'  }}</p>
+                </div>
+                <div class="mt-4">
+                    <button class="btn boton text-end" (click)="volver()">Volver</button>
+                </div>
+            </div>
+        </header>
+
+        <section>
+            <div class="row mb-4">
+                <div class="col-sm-12">
+                    <h2 class="underline-link" (click)="detalleEmpleado(asignacion.empleado.idEmpleado)">Información del empleado</h2>
+                    <div>
+                        <p><strong>DNI: </strong>{{asignacion.empleado.dni}}</p>
+                        <p><strong>Nombre: </strong>{{asignacion.empleado.nombre}}</p>
+                        <p><strong>Apellidos: </strong>{{asignacion.empleado.apellidos}}</p>
+                        <p><strong>Usuario: </strong>{{asignacion.empleado.usuario}}</p>
+                    </div>
+                    <h2 class="underline-link" (click)="detalleUnidad(asignacion.codUnidad)">Información de la unidad</h2>
+                    <div>
+                        <p><strong>Código interno: </strong>{{asignacion.unidad.codigoInterno}}</p>
+                        <p><strong>Descripción: </strong>{{asignacion.unidad.articulo.descripcion}}</p>
+                    </div>
+                    <h2 class="mt-4">Detalles</h2>
+                    <div>
+                        <strong>Oficina:</strong>
+                        <br>{{asignacion.empleado.oficina.direccion}}, {{asignacion.empleado.oficina.codigoPostal}}, {{asignacion.empleado.oficina.localidad}} {{ asignacion.empleado.oficina.provincia !== null ? ', ' + asignacion.empleado.oficina.provincia : '' }}, {{asignacion.empleado.oficina.pais}}
+                    </div>
+                </div>
+                
+            </div>
+        </section>        
+    </div>
+</section>
+

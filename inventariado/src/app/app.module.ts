@@ -38,6 +38,8 @@ import { DetalleProveedorComponent } from './modules/detalle-proveedor/detalle-p
 import { DetalleArticuloComponent } from './modules/detalle-articulo/detalle-articulo.component';
 import { DetalleOficinaComponent } from './modules/detalle-oficina/detalle-oficina.component';
 import { DetalleEmpleadoComponent } from './modules/detalle-empleado/detalle-empleado.component';
+import { AsignacionesComponent } from './modules/asignaciones/asignaciones.component';
+import { DetalleAsignacionComponent } from './modules/detalle-asignacion/detalle-asignacion.component';
 
 
 @NgModule({
@@ -74,6 +76,8 @@ import { DetalleEmpleadoComponent } from './modules/detalle-empleado/detalle-emp
     DetalleArticuloComponent,
     DetalleOficinaComponent,
     DetalleEmpleadoComponent,
+    AsignacionesComponent,
+    DetalleAsignacionComponent,
   ],
   imports: [
     BrowserModule,

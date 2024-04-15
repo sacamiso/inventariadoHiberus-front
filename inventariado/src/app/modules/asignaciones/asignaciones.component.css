@@ -1,0 +1,14 @@
+.boton {
+    background-color: #19255A;
+    border-color: #19255A;
+    color: white;
+}
+
+.underline-link {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.underline-link:hover {
+    color: #00CDE2;
+}

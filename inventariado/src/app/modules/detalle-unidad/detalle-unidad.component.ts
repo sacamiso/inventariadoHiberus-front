@@ -4,6 +4,7 @@ import { Unidad } from 'src/app/core/model/unidad.model';
 import { Router } from '@angular/router';
 import { UnidadService } from '../../core/services/unidad.service';
 import { firstValueFrom } from 'rxjs';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-detalle-unidad',
@@ -22,6 +23,7 @@ export class DetalleUnidadComponent implements OnInit {
     private route: ActivatedRoute,
     private readonly unidadService: UnidadService,
     private readonly router: Router,
+    private location: Location
   ) { 
     this.id = Number(this.route.snapshot.paramMap.get('id'));
   }
@@ -73,4 +75,7 @@ export class DetalleUnidadComponent implements OnInit {
     this.router.navigate([`salidas/salida/${id}`]);
   }
 
+  volver() {
+    this.location.back();
+  }
 }

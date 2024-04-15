@@ -1,0 +1,147 @@
+<section *ngIf="cargado && filtrosCargados">
+    <div class="container">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center mt-5">
+                    <h1 class="display-4">ASIGNACIONES</h1>
+                </div>
+            </div>
+        </div>
+        <!-- Botón para mostrar/ocultar filtros -->
+        <div class="row mb-3">
+            <div class="col-md-6 text-start">
+                <button class="btn btn-primary boton" (click)="toggleFiltros()">
+                    {{ mostrarFiltros ? 'Ocultar Filtros' : 'Mostrar Filtros' }}
+                </button>
+            </div>
+            <div class="col-md-6 text-end">
+                <button class="btn btn-success" (click)="crearNuevaAsignacion()">Nueva Asignación</button>
+            </div>
+        </div>
+
+        <!-- Filtros -->
+        <div *ngIf="mostrarFiltros " class="container mb-3">
+            <hr>
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <label for="filtroDni">DNI del empleado:</label>
+                    <input type="text" class="form-control" id="filtroDni" [(ngModel)]="filtros.dniEmpleado">
+                </div>
+                <div class="col-md-3">
+                    <label for="filtroNombre">Nombre del empleado:</label>
+                    <input type="text" class="form-control" id="filtroNombre" [(ngModel)]="filtros.nombreEmpleado">
+                </div>
+                <div class="col-md-3">
+                    <label for="filtroApellidos">Apellidos del empleado:</label>
+                    <input type="text" class="form-control" id="filtroApellidos" [(ngModel)]="filtros.apellidosEmpleado">
+                </div>
+                <div class="col-md-3">
+                    <label for="filtroUnidad">Código de unidad:</label>
+                    <input type="number" class="form-control" id="filtroUnidad"  [(ngModel)]="filtros.codUnidad" >
+                </div>
+                
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <label for="filtroInicio">Fecha de inicio:</label>
+                    <input type="date" class="form-control" id="filtroInicio"  [(ngModel)]="filtros.fechaInicio" >
+                </div>
+                <div class="col-md-3">
+                    <label for="filtroFin">Fecha de fín:</label>
+                    <input type="date" class="form-control" id="filtroFin"  [(ngModel)]="filtros.fechaFin" >
+                </div>
+                <div class="col-md-4">
+                    <label for="filtroOficina">Oficina:</label>
+                    <select class="form-control form-select" id="filtroOficina" [(ngModel)]="filtros.codOficinaEmpleado">
+                        <option *ngFor="let oficina of listOficinas" [value]="oficina.idOficina">{{oficina.direccion}}, {{oficina.localidad}}</option>
+                    </select>
+                </div>
+                
+                <div class="col-md-2">
+                    <label>Finalizada:</label>
+                    <div class="row">
+                        <div class="col">
+                            <div>
+                                <label>
+                                    <input type="radio" name="finalizada" [(ngModel)]="filtros.finalizadas" [value]="true"> Sí
+                                </label>
+                            </div>
+                            
+                            <div>
+                                <label>
+                                    <input type="radio" name="finalizada" [(ngModel)]="filtros.finalizadas" [value]="false"> No
+                                </label>
+                            </div>
+                            
+                        </div>
+                        <div class="col">
+                            <label>
+                                <input type="radio" name="finalizada" [(ngModel)]="filtros.finalizadas" [value]="null"> Ambos
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                
+                <div class="col-md-6 text-start ">
+                    <button class="btn btn-danger mt-3" (click)="limpiarFiltros()">Limpiar filtros</button>
+                </div>
+    
+                <div class="col-md-6 text-end ">
+                    <button class="btn btn-success mt-3" (click)="aplicarFiltros()">Aplicar filtros</button>
+                </div>
+            </div>
+            <hr>
+        </div>
+
+        <div class="row">
+            <div class="col col-md-auto">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Número elementos por página</span>
+                    </div>
+                    <select class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+                        [(ngModel)]="tamPag" id="tamPagina">
+                        <option *ngFor="let opcion of Multiplos5(8)" [value]="opcion">{{ opcion }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <section class="mt-2">
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th class="text-center" scope="col">Inicio</th>
+                                <th class="text-center" scope="col">Fin</th>
+                                <th class="text-center" scope="col">Empleado</th>
+                                <th class="text-center" scope="col">Unidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let asigancion of asignaciones">
+                                <td class="underline-link" (click)="detalleAsignacion(asigancion.idAsignacion)">{{asigancion.fechaInicio  | date: 'dd/MM/yyyy' }}</td>
+                                <td *ngIf="asigancion.fechaFin!==null">{{asigancion.fechaFin  | date: 'dd/MM/yyyy' }}</td>
+                                <td *ngIf="asigancion.fechaFin===null">-</td>
+                                <td>{{asigancion.empleado.nombre}} {{asigancion.empleado.apellidos}}</td>
+                                <td>{{asigancion.codUnidad}}: {{asigancion.unidad.articulo.descripcion}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            
+            </div>
+        </section>
+        <div class="row">
+            <div class="col text-left">
+                <p>Total de asignaciones {{ numeroAsignaciones }}</p>
+            </div>
+        </div>
+        <app-paginador [numeroElementos]="numeroAsignaciones" [tamPag]="tamPag"
+        (pagina)="cargarPagina($event)"></app-paginador>
+        
+        <br>
+    </div>
+</section>

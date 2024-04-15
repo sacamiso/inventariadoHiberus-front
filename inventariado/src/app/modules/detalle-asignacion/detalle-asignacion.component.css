@@ -3,13 +3,11 @@
     border-color: #19255A;
     color: white;
 }
-
 .underline-link {
-    text-decoration: underline;
     cursor: pointer; /* Cambia el cursor al pasar el ratón */
-}
-
-    /* Estilos para cambiar el color al pasar el ratón */
-.underline-link:hover {
+  }
+  
+  /* Estilos para cambiar el color al pasar el ratón */
+  .underline-link:hover {
     color: #00CDE2; /* Cambia el color del texto al pasar el ratón */
-}
+  }
