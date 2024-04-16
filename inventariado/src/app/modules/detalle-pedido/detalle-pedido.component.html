@@ -43,7 +43,7 @@
                 <div class="mt-4">
                     <button type="button" class="btn btn-primary boton-recibido" data-bs-toggle="modal"
                         [attr.data-bs-target]="'#modalDevolver' + id" [disabled]="pedido.fechaRecepcion === null || pedido.devuelto === true">{{
-                        pedido.devuelto === false ? 'Devolver pedido' : 'Pedido devuelto' }}</button>
+                        pedido.devuelto !== true ? 'Devolver pedido' : 'Pedido devuelto' }}</button>
 
                 </div>
 
