@@ -40,6 +40,7 @@ import { DetalleOficinaComponent } from './modules/detalle-oficina/detalle-ofici
 import { DetalleEmpleadoComponent } from './modules/detalle-empleado/detalle-empleado.component';
 import { AsignacionesComponent } from './modules/asignaciones/asignaciones.component';
 import { DetalleAsignacionComponent } from './modules/detalle-asignacion/detalle-asignacion.component';
+import { NuevaAsignacionComponent } from './modules/nueva-asignacion/nueva-asignacion.component';
 
 
 @NgModule({
@@ -78,6 +79,7 @@ import { DetalleAsignacionComponent } from './modules/detalle-asignacion/detalle
     DetalleEmpleadoComponent,
     AsignacionesComponent,
     DetalleAsignacionComponent,
+    NuevaAsignacionComponent,
   ],
   imports: [
     BrowserModule,

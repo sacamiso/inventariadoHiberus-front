@@ -1,0 +1,84 @@
+<div *ngIf="cargado1" class="container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center mt-5">
+                <h1 class="display-4">NUEVA ASIGNACIÓN</h1>
+            </div>
+        </div>
+    </div>
+    <div class="mt-4" id="liveAlert"></div>
+    
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <h2 class="text-center">Oficina</h2>
+            <select id="ofi" class="form-control form-select" [(ngModel)]="idOficinaSeleccionada" (ngModelChange)="changeOfi()" required>
+                <option [value]=0 disabled>Seleccione la oficina del empleado:</option>
+                <option *ngFor="let oficina of listOficinas" [value]="oficina.idOficina">{{oficina.direccion}}, {{oficina.localidad}}</option>
+            </select>
+        </div>
+    </div>
+    
+
+    <div *ngIf="cargado2 && idOficinaSeleccionada!==0" class="mt-4">
+        <form [formGroup]="asignacionForm" (ngSubmit)="guardar()">
+            <div class="card-body">
+                <p class="text-danger">* Campos obligatorios</p>
+
+                <div class="row mt-4">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="idEmpleado">Seleccione el empleado <span class="text-danger">*</span></label>
+                            <select class="form-control form-select" id="idEmpleado" formControlName="idEmpleado" required
+                            [ngClass]="{'is-invalid': asignacionForm.get('idEmpleado')?.invalid && formularioEnviado}">
+                                <option *ngFor="let listE of listEmpleados?.message" [ngValue]="listE.idEmpleado">
+                                    {{ listE.dni }}: {{ listE.nombre }} {{ listE.apellidos }}
+                                </option>
+                                <option *ngIf=" listEmpleados?.message?.length === 0" [ngValue]="0" disabled>
+                                    No se encuentran empleados en esa oficina
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="codUnidad">Seleccione la unidad <span class="text-danger">*</span></label>
+                            <select class="form-control form-select" id="codUnidad" formControlName="codUnidad" required
+                            [ngClass]="{'is-invalid': asignacionForm.get('codUnidad')?.invalid && formularioEnviado}">
+                                <option *ngFor="let listU of listUnidades?.message" [ngValue]="listU.codigoInterno">
+                                    {{ listU.codigoInterno }}: {{ listU.articulo.descripcion }}
+                                </option>
+                                <option *ngIf=" listUnidades?.message?.length === 0" [ngValue]="0" disabled>
+                                    No se encuentran unidades disponibles en esa oficina
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="fechaInicio">Fecha de inicio <span class="text-danger">*</span></label>
+                            <input type="date" class="form-control" id="fechaInicio" formControlName="fechaInicio" 
+                            [ngClass]="{'is-invalid': asignacionForm.get('fechaInicio')?.invalid && formularioEnviado}" appFechaValida required>
+                            <br>
+                            <span class="text-danger" *ngIf="asignacionForm.get('fechaInicio')?.errors?.['fechaInvalida']">
+                                (La fecha no puede ser posterior a la actual)
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+
+            <div class="card-footer mt-4">
+                
+                <button type="submit" class="btn btn-success float-end">Guardar</button>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer mt-4">
+        <button type="button" (click)="volver()" class="btn btn-danger">Cancelar</button>
+    </div>
+    
+</div>

@@ -36,3 +36,9 @@ export interface AsignacionMsg {
     error:   string;
     message: Asignacion;
 }
+
+export interface AsignacionForm {
+    fechaInicio:  Date;
+    idEmpleado:   number;
+    codUnidad:    number;
+}

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { UnidadList, UnidadFiltros, UnidadEstado, UnidadForm, UnidadMsg } from '../model/unidad.model';
+import { UnidadList, UnidadFiltros, UnidadEstado, UnidadForm, UnidadMsg, Unidad } from '../model/unidad.model';
 import { MesaggeResponse } from '../model/mesagge-response.model';
 import { PedidoList } from 'src/app/core/model/pedido-list.model';
 import { Articulo } from 'src/app/core/model/articulo.model';
@@ -43,6 +43,10 @@ export class UnidadService {
 
   getUnidadesDisponibles(idOficina: number): Observable<UnidadList> {
     return this.http.get<UnidadList>(`${this.apiUrl}/unidad/listDisponibles/${idOficina}`);
+  }
+
+  getUnidadesSinAsignarDisponiblesByOficina(id: number): Observable<UnidadList> {
+    return this.http.get<UnidadList>(`${this.apiUrl}/unidad/listDisponiblesSinAsignar/${id}`);
   }
   
 }

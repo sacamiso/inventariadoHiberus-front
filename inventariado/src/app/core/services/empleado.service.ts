@@ -30,4 +30,8 @@ export class EmpleadoService {
   getEmpleadoById(id: number): Observable<EmpleadoMsg> {
     return this.http.get<EmpleadoMsg>(`${this.apiUrl}/empleado/${id}`);
   }
+
+  getEmpleadosByOficina(id: number): Observable<EmpleadoList> {
+    return this.http.get<EmpleadoList>(`${this.apiUrl}/empleado/listAll/oficina/${id}`);
+  }
 }
