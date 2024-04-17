@@ -118,6 +118,7 @@
                                 <th class="text-center" scope="col">Fin</th>
                                 <th class="text-center" scope="col">Empleado</th>
                                 <th class="text-center" scope="col">Unidad</th>
+                                <th class="text-center" scope="col">Oficina</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -127,6 +128,7 @@
                                 <td *ngIf="asigancion.fechaFin===null">-</td>
                                 <td>{{asigancion.empleado.nombre}} {{asigancion.empleado.apellidos}}</td>
                                 <td>{{asigancion.codUnidad}}: {{asigancion.unidad.articulo.descripcion}}</td>
+                                <td>{{asigancion.empleado.oficina.direccion}}, {{asigancion.empleado.oficina.localidad}}</td>
                             </tr>
                         </tbody>
                     </table>

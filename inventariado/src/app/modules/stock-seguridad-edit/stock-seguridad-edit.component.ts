@@ -112,20 +112,37 @@ export class StockSeguridadEditComponent implements OnInit {
     ss.codSubcategoria = "";
   }
   guardar(){
-    this.stockSeguridadService.guardarStockSeguridad(this.stockSeguridad).subscribe({
-      next: (response) => {
-        this.msg = response;
-        if(this.msg.success){
-          this.alerta(this.msg.message, 'success');
-        }else{
-          this.alerta(this.msg.error, 'danger');
+    if(this.stockSeguridad.length < 1){
+      this.stockSeguridadService.vaciarStockSeguridad(this.idOficinaSeleccionada).subscribe({
+        next: (response) => {
+          this.msg = response;
+          if(this.msg.success){
+            this.alerta(this.msg.message, 'success');
+          }else{
+            this.alerta(this.msg.error, 'danger');
+          }
+        },
+        error: (error) => {
+          console.log(error);
+          this.alerta(error.error.error, 'danger');
         }
-      },
-      error: (error) => {
-        console.log(error);
-        this.alerta(error.error.error, 'danger');
-      }
-    })
+      })
+    }else{
+      this.stockSeguridadService.guardarStockSeguridad(this.stockSeguridad).subscribe({
+        next: (response) => {
+          this.msg = response;
+          if(this.msg.success){
+            this.alerta(this.msg.message, 'success');
+          }else{
+            this.alerta(this.msg.error, 'danger');
+          }
+        },
+        error: (error) => {
+          console.log(error);
+          this.alerta(error.error.error, 'danger');
+        }
+      })
+    }
   }
 
   alerta(message: string, type: string) {

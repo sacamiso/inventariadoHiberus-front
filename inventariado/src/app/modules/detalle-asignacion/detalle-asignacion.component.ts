@@ -58,4 +58,8 @@ export class DetalleAsignacionComponent implements OnInit {
   detalleUnidad(id: number){
     this.router.navigate([`gestion/unidades/unidad/${id}`]);
   }
+
+  finalizarAsig(){
+    
+  }
 }

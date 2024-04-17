@@ -4,9 +4,7 @@
             <div class="d-flex align-items-start justify-content-between">
                 <div>
                     <h1 class="mb-4 mt-4">Información de la asignación</h1>
-                    <p class="mt-4"><strong>Número de asignación:</strong> {{asignacion.idAsignacion}}</p>
-                    <p><strong>Fecha de inicio: </strong> {{asignacion.fechaInicio| date: 'dd/MM/yyyy'  }}</p>
-                    <p *ngIf="asignacion.fechaFin!==null"><strong>Fecha de fin: </strong> {{asignacion.fechaFin| date: 'dd/MM/yyyy'  }}</p>
+                    
                 </div>
                 <div class="mt-4">
                     <button class="btn boton text-end" (click)="volver()">Volver</button>
@@ -15,6 +13,17 @@
         </header>
 
         <section>
+            <div class="row">
+                <div class="col-5">
+                    <p><strong>Número de asignación:</strong> {{asignacion.idAsignacion}}</p>
+                    <p><strong>Fecha de inicio: </strong> {{asignacion.fechaInicio| date: 'dd/MM/yyyy'  }}</p>
+                    <p *ngIf="asignacion.fechaFin!==null"><strong>Fecha de fin: </strong> {{asignacion.fechaFin| date: 'dd/MM/yyyy'  }}</p>
+                </div>
+                <div class="col-5">
+                    <button class="btn btn-danger" (click)="finalizarAsig()" [disabled]="asignacion.fechaFin !== null">{{
+                        asignacion.fechaFin === null ? 'Finalizar asignacion' : 'Asignación finalizada' }}</button>
+                </div>
+            </div>
             <div class="row mb-4">
                 <div class="col-sm-12">
                     <h2 class="underline-link" (click)="detalleEmpleado(asignacion.empleado.idEmpleado)">Información del empleado</h2>

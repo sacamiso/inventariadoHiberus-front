@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -26,6 +26,14 @@ export class StockSeguridadService {
 
   guardarStockSeguridad(ss: Array<StockSeguridadForm>){
     return this.http.post<MesaggeResponse>(`${this.apiUrl}/stockSeguridad/save`, ss);
+  }
+
+  vaciarStockSeguridad(idOf: number){
+    return this.http.post<MesaggeResponse>(`${this.apiUrl}/stockSeguridad/vaciar`, { idOficina: idOf }, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
   }
 
   getAvisos(): Observable<AvisoResponse> {
