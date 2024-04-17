@@ -41,6 +41,8 @@ import { DetalleEmpleadoComponent } from './modules/detalle-empleado/detalle-emp
 import { AsignacionesComponent } from './modules/asignaciones/asignaciones.component';
 import { DetalleAsignacionComponent } from './modules/detalle-asignacion/detalle-asignacion.component';
 import { NuevaAsignacionComponent } from './modules/nueva-asignacion/nueva-asignacion.component';
+import { AsignacionEditComponent } from './modules/asignacion-edit/asignacion-edit.component';
+import { FechaFinAsignacionDirective } from './core/directives/fecha-fin-asignacion.directive';
 
 
 @NgModule({
@@ -80,6 +82,8 @@ import { NuevaAsignacionComponent } from './modules/nueva-asignacion/nueva-asign
     AsignacionesComponent,
     DetalleAsignacionComponent,
     NuevaAsignacionComponent,
+    AsignacionEditComponent,
+    FechaFinAsignacionDirective,
   ],
   imports: [
     BrowserModule,

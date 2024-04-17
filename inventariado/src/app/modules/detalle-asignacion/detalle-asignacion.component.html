@@ -11,28 +11,24 @@
                 </div>
             </div>
         </header>
-
+        <div id="liveAlert"></div>
         <section>
             <div class="row">
-                <div class="col-5">
+                <div class="col-6">
                     <p><strong>Número de asignación:</strong> {{asignacion.idAsignacion}}</p>
                     <p><strong>Fecha de inicio: </strong> {{asignacion.fechaInicio| date: 'dd/MM/yyyy'  }}</p>
                     <p *ngIf="asignacion.fechaFin!==null"><strong>Fecha de fin: </strong> {{asignacion.fechaFin| date: 'dd/MM/yyyy'  }}</p>
                 </div>
-                <div class="col-5">
+                <div class="col-3">
                     <button class="btn btn-danger" (click)="finalizarAsig()" [disabled]="asignacion.fechaFin !== null">{{
-                        asignacion.fechaFin === null ? 'Finalizar asignacion' : 'Asignación finalizada' }}</button>
+                        asignacion.fechaFin === null ? 'Finalizar asignación' : 'Asignación finalizada' }}</button>
+                </div>
+                <div class="col-3">
+                    <button class="btn boton-editar" (click)="editarAsig()" >Editar asignación</button>
                 </div>
             </div>
             <div class="row mb-4">
-                <div class="col-sm-12">
-                    <h2 class="underline-link" (click)="detalleEmpleado(asignacion.empleado.idEmpleado)">Información del empleado</h2>
-                    <div>
-                        <p><strong>DNI: </strong>{{asignacion.empleado.dni}}</p>
-                        <p><strong>Nombre: </strong>{{asignacion.empleado.nombre}}</p>
-                        <p><strong>Apellidos: </strong>{{asignacion.empleado.apellidos}}</p>
-                        <p><strong>Usuario: </strong>{{asignacion.empleado.usuario}}</p>
-                    </div>
+                <div class="col-sm-6">
                     <h2 class="underline-link" (click)="detalleUnidad(asignacion.codUnidad)">Información de la unidad</h2>
                     <div>
                         <p><strong>Código interno: </strong>{{asignacion.unidad.codigoInterno}}</p>
@@ -42,6 +38,15 @@
                     <div>
                         <strong>Oficina:</strong>
                         <br>{{asignacion.empleado.oficina.direccion}}, {{asignacion.empleado.oficina.codigoPostal}}, {{asignacion.empleado.oficina.localidad}} {{ asignacion.empleado.oficina.provincia !== null ? ', ' + asignacion.empleado.oficina.provincia : '' }}, {{asignacion.empleado.oficina.pais}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <h2 class="underline-link" (click)="detalleEmpleado(asignacion.empleado.idEmpleado)">Información del empleado</h2>
+                    <div>
+                        <p><strong>DNI: </strong>{{asignacion.empleado.dni}}</p>
+                        <p><strong>Nombre: </strong>{{asignacion.empleado.nombre}}</p>
+                        <p><strong>Apellidos: </strong>{{asignacion.empleado.apellidos}}</p>
+                        <p><strong>Usuario: </strong>{{asignacion.empleado.usuario}}</p>
                     </div>
                 </div>
                 

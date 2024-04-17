@@ -42,3 +42,8 @@ export interface AsignacionForm {
     idEmpleado:   number;
     codUnidad:    number;
 }
+
+export interface AsignacionEdit {
+    fechaInicio:  Date;
+    fechaFin:  Date | null;
+}

@@ -11,9 +11,3 @@
   .underline-link:hover {
     color: #00CDE2; /* Cambia el color del texto al pasar el ratón */
   }
-
-  .boton-editar {
-    background-color: #76aa3b;
-    border-color: #76aa3b;
-    color: white;
-}

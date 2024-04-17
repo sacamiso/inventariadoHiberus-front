@@ -31,6 +31,7 @@ import { DetalleEmpleadoComponent } from './modules/detalle-empleado/detalle-emp
 import { AsignacionesComponent } from './modules/asignaciones/asignaciones.component';
 import { DetalleAsignacionComponent } from './modules/detalle-asignacion/detalle-asignacion.component';
 import { NuevaAsignacionComponent } from './modules/nueva-asignacion/nueva-asignacion.component';
+import { AsignacionEditComponent } from './modules/asignacion-edit/asignacion-edit.component';
 
 const routes: Routes = [
   {path: '', component:InicioComponent},
@@ -43,6 +44,7 @@ const routes: Routes = [
   {path: 'gestion/articulos/nuevo', component:NuevoArticuloComponent},
   {path: 'gestion/asignaciones', component:AsignacionesComponent},
   {path: 'gestion/asignaciones/asignacion/:id', component:DetalleAsignacionComponent},
+  {path: 'gestion/asignaciones/asignacion/edit/:id', component:AsignacionEditComponent},
   {path: 'gestion/asignaciones/nueva', component:NuevaAsignacionComponent},
   {path: 'gestion/empleados', component:EmpleadosComponent},
   {path: 'gestion/empleados/empleado/:id', component:DetalleEmpleadoComponent},

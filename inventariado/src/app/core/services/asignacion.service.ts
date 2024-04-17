@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { MesaggeResponse } from '../model/mesagge-response.model';
-import { AsignacionFiltros, AsignacionForm, AsignacionList, AsignacionMsg } from '../model/asignacion.model';
+import { AsignacionEdit, AsignacionFiltros, AsignacionForm, AsignacionList, AsignacionMsg } from '../model/asignacion.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +26,13 @@ export class AsignacionService {
 
   guardarAsignacion(asignacion: AsignacionForm){
     return this.http.post<MesaggeResponse>(`${this.apiUrl}/asignacion/add`, asignacion);
+  }
+
+  editarAsignacion(asignacion: AsignacionEdit, idAsignacion: number ){
+    return this.http.put<MesaggeResponse>(`${this.apiUrl}/asignacion/editar/${idAsignacion}`, asignacion);
+  }
+
+  finalizarAsignacion(idAsignacion: number): Observable<MesaggeResponse> {
+    return this.http.put<MesaggeResponse>(`${this.apiUrl}/asignacion/finalizar/${idAsignacion}`, null);
   }
 }
