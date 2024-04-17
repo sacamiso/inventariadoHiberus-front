@@ -35,6 +35,7 @@ export class UnidadesComponent implements OnInit {
     fechaSalida: null,
     idOficina: 0,
     codArticulo: 0,
+    disponible: null
   }
   numeroUnidades: number = 0;
   pagina: number = 0;
@@ -119,6 +120,7 @@ export class UnidadesComponent implements OnInit {
       fechaSalida: null,
       idOficina: 0,
       codArticulo: 0,
+      disponible: null
     }
     this.listaUnidadesMostrar(this.tamPag, this.pagina);
   }

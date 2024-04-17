@@ -58,11 +58,35 @@
                     <label for="filtroPedido">Fecha Pedido:</label>
                     <input type="date" class="form-control" id="filtroPedido"  [(ngModel)]="filtros.fechaPedido" >
                 </div>
-                <div class="col-md-3 text-center ">
+                <div class="col-md-2">
+                    <label>Disponible:</label>
+                    <div class="row">
+                        <div class="col">
+                            <div>
+                                <label>
+                                    <input type="radio" name="disponible" [(ngModel)]="filtros.disponible" [value]="true"> Sí
+                                </label>
+                            </div>
+                            
+                            <div>
+                                <label>
+                                    <input type="radio" name="disponible" [(ngModel)]="filtros.disponible" [value]="false"> No
+                                </label>
+                            </div>
+                            
+                        </div>
+                        <div class="col">
+                            <label>
+                                <input type="radio" name="disponible" [(ngModel)]="filtros.disponible" [value]="null"> Ambos
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 text-center ">
                     <button class="btn btn-danger mt-3" (click)="limpiarFiltros()">Limpiar filtros</button>
                 </div>
     
-                <div class="col-md-3 text-end ">
+                <div class="col-md-2 text-end ">
                     <button class="btn btn-success mt-3" (click)="aplicarFiltros()">Aplicar filtros</button>
                 </div>
             </div>

@@ -44,7 +44,7 @@ export interface UnidadFiltros {
     fechaSalida:   Date | null;
     idOficina:     number;
     codArticulo:   number;
-    
+    disponible:       boolean | null;
 }
 
 export interface UnidadForm {

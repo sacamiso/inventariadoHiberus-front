@@ -18,6 +18,7 @@ export class DetalleUnidadComponent implements OnInit {
   id: number;
 
   disponible: boolean | undefined;
+  asignada: boolean | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -56,13 +57,19 @@ export class DetalleUnidadComponent implements OnInit {
         this.disponible = true;
       }
     }
-
+    this.asignada = (await this.estaAsignada(this.id)).message;
+    
     this.cargado = true;
   }
 
   async getDisponibles(idOficina: number){
     return await firstValueFrom(this.unidadService.getUnidadesDisponibles(idOficina));
   }
+
+  async estaAsignada(codInterno: number){
+    return await firstValueFrom(this.unidadService.estaAsignada(codInterno));
+  }
+
   goBack() {
     this.router.navigate([`gestion/unidades`]);
   }

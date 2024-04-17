@@ -17,10 +17,16 @@
                     <h2>Estado</h2>
                     <div>
                         {{unidad.estado.codigoEstado}}: {{unidad.estado.nombre}}
-                        <div class="text-success" *ngIf="unidad.estado.codigoEstado === 'OP' && disponible">
+                        <div class="text-success" *ngIf="unidad.estado.codigoEstado === 'OP' && disponible && !asignada">
                             Disponible
                         </div>
-                        <div class="text-danger" *ngIf="unidad.estado.codigoEstado !== 'OP' ||  !disponible">
+                        <div class="text-danger" *ngIf="unidad.estado.codigoEstado === 'OP' && disponible && asignada">
+                            Asignada
+                        </div>
+                        <div class="text-danger" *ngIf="(unidad.estado.codigoEstado !== 'OP' ||  !disponible) && asignada ">
+                            Asignada
+                        </div>
+                        <div class="text-danger" *ngIf="(unidad.estado.codigoEstado !== 'OP' ||  !disponible) && !asignada ">
                             No Disponible
                         </div>
                     </div>
