@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MesaggeResponse } from 'src/app/core/model/mesagge-response.model';
+import { MesaggeResponse, MesaggeResponseNumber } from 'src/app/core/model/mesagge-response.model';
 import { SalidaForm } from 'src/app/core/model/salida.model';
 import { Oficina } from 'src/app/core/model/oficina.model';
 import { InventarioService } from '../../core/services/inventario.service';
@@ -19,7 +19,7 @@ export class NuevaSalidaComponent implements OnInit {
 
   salidaForm: FormGroup;
 
-  msg: MesaggeResponse | undefined;
+  msg: MesaggeResponseNumber | undefined;
   alertPlaceholder: HTMLElement | null;
 
   saldia: SalidaForm = {
@@ -85,6 +85,7 @@ export class NuevaSalidaComponent implements OnInit {
   }
   async getAInventarioByOf(idOf: number){
     this.listInventario = await firstValueFrom(this.inventarioService.getInventarioByOficina(idOf));
+    debugger
   }
 
   selectedItemId: any = null;
@@ -95,7 +96,7 @@ export class NuevaSalidaComponent implements OnInit {
   }
 
   resetNumUnidades(): void {
-    this.salidaForm.get('numUnidades')?.setValue(1);
+    this.salidaForm.get('numUnidades')?.setValue(null);
   }
 
   volver(){
@@ -141,9 +142,10 @@ export class NuevaSalidaComponent implements OnInit {
       next: (response) => {
         this.msg = response;
         if(this.msg.success){
-          this.alerta(this.msg.message, 'success');
+          this.alerta('Salida añadida con éxito', 'success');
           this.salidaForm.reset();
           this.idOficinaSeleccionada = 0;
+          this.router.navigate([`salidas/salida/${this.msg.message}`]);
         }else{
           this.alerta(this.msg.error, 'danger');
         }

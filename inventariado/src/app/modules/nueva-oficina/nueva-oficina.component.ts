@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MesaggeResponse } from 'src/app/core/model/mesagge-response.model';
+import { MesaggeResponse, MesaggeResponseNumber } from 'src/app/core/model/mesagge-response.model';
 import { Router } from '@angular/router';import { OficinaForm } from 'src/app/core/model/oficina.model';
 import { OficinaService } from 'src/app/core/services/oficina.service';
 
@@ -14,7 +14,7 @@ export class NuevaOficinaComponent implements OnInit {
 
   oficinaForm: FormGroup;
 
-  msg: MesaggeResponse | undefined;
+  msg: MesaggeResponseNumber | undefined;
   alertPlaceholder: HTMLElement | null;
 
   cargado = false;
@@ -71,9 +71,9 @@ export class NuevaOficinaComponent implements OnInit {
       next: (response) => {
         this.msg = response;
         if(this.msg.success){
-          this.alerta(this.msg.message, 'success');
+          this.alerta('Oficina añadida con éxito', 'success');
           this.formularioEnviado=false;
-          this.oficinaForm.reset();
+          this.router.navigate([`gestion/oficinas/oficina/${this.msg.message}`]);
         }else{
           this.alerta(this.msg.error, 'danger');
         }

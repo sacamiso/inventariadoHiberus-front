@@ -3,7 +3,7 @@ import { Oficina } from 'src/app/core/model/oficina.model';
 import { Articulo } from 'src/app/core/model/articulo.model';
 import { Pedido } from 'src/app/core/model/pedido.model';
 import { Estado } from 'src/app/core/model/estado.model';
-import { MesaggeResponse } from 'src/app/core/model/mesagge-response.model';
+import { MesaggeResponse, MesaggeResponseNumber } from 'src/app/core/model/mesagge-response.model';
 import { UnidadForm } from 'src/app/core/model/unidad.model';
 import { OficinaService } from '../../core/services/oficina.service';
 import { EstadoService } from '../../core/services/estado.service';
@@ -18,7 +18,7 @@ import { firstValueFrom } from 'rxjs';
 })
 export class NuevaUnidadComponent implements OnInit {
 
-  msg: MesaggeResponse | undefined;
+  msg: MesaggeResponseNumber | undefined;
   alertPlaceholder: HTMLElement | null;
 
   unidad: UnidadForm = {
@@ -177,7 +177,8 @@ export class NuevaUnidadComponent implements OnInit {
       next: (response) => {
         this.msg = response;
         if(this.msg.success){
-          this.alerta(this.msg.message, 'success');
+          this.alerta('Unidad registrada con éxito', 'success');
+          this.router.navigate([`gestion/unidades/unidad/${this.msg.message}`]);
           this.unidad = {
             codigoInterno: 0,
             codEstado: "",

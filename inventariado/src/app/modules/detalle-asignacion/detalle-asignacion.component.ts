@@ -101,4 +101,8 @@ export class DetalleAsignacionComponent implements OnInit {
 
     this.alertPlaceholder.appendChild(wrapper);
   }
+
+  irAsignaciones(){
+    this.router.navigate([`gestion/asignaciones`]);
+  }
 }

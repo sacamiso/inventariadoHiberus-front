@@ -49,4 +49,8 @@ export class DetalleArticuloComponent implements OnInit {
   volver() {
     this.location.back();
   }
+
+  irArticulos(){
+    this.router.navigate([`gestion/articulos`]);
+  }
 }

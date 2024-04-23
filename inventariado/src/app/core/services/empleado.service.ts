@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Empleado, EmpleadoFiltros, EmpleadoForm, EmpleadoList, EmpleadoMsg } from '../model/empleado.model';
-import { MesaggeResponse } from '../model/mesagge-response.model';
+import { MesaggeResponse, MesaggeResponseNumber } from '../model/mesagge-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,7 @@ export class EmpleadoService {
   }
 
   guardarEmpleado(empleado: EmpleadoForm){
-    return this.http.post<MesaggeResponse>(`${this.apiUrl}/empleado/add`, empleado);
+    return this.http.post<MesaggeResponseNumber>(`${this.apiUrl}/empleado/add`, empleado);
   }
 
   getEmpleadoById(id: number): Observable<EmpleadoMsg> {

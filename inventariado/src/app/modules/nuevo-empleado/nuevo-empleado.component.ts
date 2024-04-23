@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MesaggeResponse } from 'src/app/core/model/mesagge-response.model';
+import { MesaggeResponse, MesaggeResponseNumber } from 'src/app/core/model/mesagge-response.model';
 import { Router } from '@angular/router';
 import { Rol } from 'src/app/core/model/rol.model';
 import { Oficina } from 'src/app/core/model/oficina.model';
@@ -19,7 +19,7 @@ export class NuevoEmpleadoComponent implements OnInit {
 
   empleadoForm: FormGroup;
 
-  msg: MesaggeResponse | undefined;
+  msg: MesaggeResponseNumber | undefined;
   alertPlaceholder: HTMLElement | null;
 
   cargado = false;
@@ -131,9 +131,10 @@ export class NuevoEmpleadoComponent implements OnInit {
       next: (response) => {
         this.msg = response;
         if(this.msg.success){
-          this.alerta(this.msg.message, 'success');
+          this.alerta('Empleado añadido con éxito', 'success');
           this.formularioEnviado=false;
-          this.empleadoForm.reset();
+          this.router.navigate([`gestion/empleados/empleado/${this.msg.message}`]);
+          
         }else{
           this.alerta(this.msg.error, 'danger');
         }

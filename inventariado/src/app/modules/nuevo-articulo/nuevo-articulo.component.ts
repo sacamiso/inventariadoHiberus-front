@@ -1,13 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Oficina } from 'src/app/core/model/oficina.model';
 import { Articulo, ArticuloForm } from 'src/app/core/model/articulo.model';
-import { Pedido } from 'src/app/core/model/pedido.model';
-import { Estado } from 'src/app/core/model/estado.model';
-import { MesaggeResponse } from 'src/app/core/model/mesagge-response.model';
-import { UnidadForm } from 'src/app/core/model/unidad.model';
-import { OficinaService } from '../../core/services/oficina.service';
-import { EstadoService } from '../../core/services/estado.service';
-import { UnidadService } from '../../core/services/unidad.service';
+import { MesaggeResponse, MesaggeResponseNumber } from 'src/app/core/model/mesagge-response.model';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { Categoria } from 'src/app/core/model/categoria.model';
@@ -23,7 +16,7 @@ import { ArticuloService } from 'src/app/core/services/articulo.service';
 })
 export class NuevoArticuloComponent implements OnInit {
 
-  msg: MesaggeResponse | undefined;
+  msg: MesaggeResponseNumber | undefined;
   alertPlaceholder: HTMLElement | null;
 
   articulo: ArticuloForm = {
@@ -195,7 +188,7 @@ export class NuevoArticuloComponent implements OnInit {
       next: (response) => {
         this.msg = response;
         if(this.msg.success){
-          this.alerta(this.msg.message, 'success');
+          this.alerta('Artículo añadido con éxito', 'success');
           this.articulo = {
             descripcion: "",
             precioUnitario: null,
@@ -206,6 +199,7 @@ export class NuevoArticuloComponent implements OnInit {
             fabricante: "",
             modelo: "",
           }
+          this.router.navigate([`gestion/articulos/articulo/${this.msg.message}`]);
         }else{
           this.alerta(this.msg.error, 'danger');
         }

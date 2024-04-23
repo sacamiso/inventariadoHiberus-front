@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Oficina, OficinaFiltros, OficinaForm, OficinaList, OficinaMsg } from '../model/oficina.model';
-import { MesaggeResponse } from '../model/mesagge-response.model';
+import { MesaggeResponse, MesaggeResponseNumber } from '../model/mesagge-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +29,6 @@ export class OficinaService {
   }
 
   guardarOficina(oficina: OficinaForm){
-    return this.http.post<MesaggeResponse>(`${this.apiUrl}/oficina/add`, oficina);
+    return this.http.post<MesaggeResponseNumber>(`${this.apiUrl}/oficina/add`, oficina);
   }
 }

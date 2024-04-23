@@ -23,13 +23,15 @@
         <form [formGroup]="salidaForm">
             <div class="card-body">
                 <p class="text-danger">* Campos obligatorios</p>
+                <p *ngIf="listInventario?.message?.length !== undefined && listInventario?.message?.length === 0" class="text-danger"> <i class="fas fa-exclamation-circle"></i> No se dispone de artículos a los que dar salida en esta oficina</p>
 
                 <div class="row mt-4">
                     <div class="col-md-5">
                         <div class="form-group">
                             <label for="codArticulo">Artículo <span class="text-danger">*</span></label>
                             <select class="form-control form-select" id="codArticulo" formControlName="codArticulo" [(ngModel)]="selectedItemId" (ngModelChange)="resetNumUnidades()" required>
-                                <option [value]="null" disabled [selected]="selectedItemId===null">Seleccione el articulo</option>
+                                <option *ngIf="listInventario?.message?.length !== undefined && listInventario?.message?.length !== 0"[value]="null" disabled [selected]="selectedItemId===null">Seleccione el articulo</option>
+                                <option *ngIf="listInventario?.message?.length !== undefined && listInventario?.message?.length === 0" [value]="null" disabled [selected]="selectedItemId===null">No se dispone de artículos</option>
                                 <option *ngFor="let listI of listInventario?.message" [ngValue]="listI.codArticulo">
                                     {{ listI.articulo.descripcion }}, {{ listI.articulo.modelo }}
                                 </option>
@@ -51,10 +53,13 @@
                     <div class="col-md-1">
                         <div class="form-group">
                             <label for="numUnidades">Uds <span class="text-danger">*</span>
+                                <span class="text-danger" *ngIf="this.salidaForm.get('numUnidades')?.errors?.['max']">
+                                    (Stock insuficiente)
+                                </span>
                                 <span class="text-danger" *ngIf="this.salidaForm.get('numUnidades')?.errors?.['min']">
                                     (Como mínimo debe ser 1)
                                 </span>
-                                <span class="text-danger" *ngIf="this.salidaForm.get('numUnidades')?.errors?.['pattern']">
+                                <span class="text-danger" *ngIf="this.salidaForm.get('numUnidades')?.errors?.['pattern'] && this.salidaForm.get('numUnidades')?.value !== null">
                                     (Debe ser entero)
                                 </span>
                             </label>

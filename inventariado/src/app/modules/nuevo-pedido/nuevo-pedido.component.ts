@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Articulo } from 'src/app/core/model/articulo.model';
 import { Medio } from 'src/app/core/model/medio.model';
-import { MesaggeResponse } from 'src/app/core/model/mesagge-response.model';
+import { MesaggeResponse, MesaggeResponseNumber } from 'src/app/core/model/mesagge-response.model';
 import { Condicion } from 'src/app/core/model/condicion.model';
 import { Oficina } from 'src/app/core/model/oficina.model';
 import { Empleado } from 'src/app/core/model/empleado.model';
@@ -30,7 +30,7 @@ export class NuevoPedidoComponent implements OnInit {
 
   lineas: FormGroup[] = [];
 
-  msg: MesaggeResponse | undefined;
+  msg: MesaggeResponseNumber | undefined;
   alertPlaceholder: HTMLElement | null;
   
   //Para almacenar el pedido cuando se le da a guardar
@@ -151,10 +151,11 @@ export class NuevoPedidoComponent implements OnInit {
       next: (response) => {
         this.msg = response;
         if(this.msg.success){
-          this.alerta(this.msg.message, 'success');
+          this.alerta('Pedido añadido con éxito', 'success');
           this.pedidoForm.reset();
           this.lineas = [];
           this.agregarLineaForm();
+          this.router.navigate([`entradas/pedido/${this.msg.message}`]);
         }else{
           this.alerta(this.msg.error, 'danger');
         }

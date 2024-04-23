@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Proveedor, ProveedorFiltros, ProveedorForm, ProveedorList, ProveedorMsg } from '../model/proveedor.model';
-import { MesaggeResponse } from '../model/mesagge-response.model';
+import { MesaggeResponse, MesaggeResponseNumber } from '../model/mesagge-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +29,6 @@ export class ProveedorService {
   }
 
   guardarProveedor(proveedor: ProveedorForm){
-    return this.http.post<MesaggeResponse>(`${this.apiUrl}/proveedor/add`, proveedor);
+    return this.http.post<MesaggeResponseNumber>(`${this.apiUrl}/proveedor/add`, proveedor);
   }
 }

@@ -17,3 +17,21 @@
     border-color: #76aa3b;
     color: white;
 }
+
+.centrar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.derecha{
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.izquierda{
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}

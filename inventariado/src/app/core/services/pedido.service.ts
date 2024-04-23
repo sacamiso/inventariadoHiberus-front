@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { PedidoList } from '../model/pedido-list.model';
 import { PedidoMsg } from '../model/pedido-msg.model';
-import { MesaggeResponse } from '../model/mesagge-response.model';
+import { MesaggeResponse, MesaggeResponseNumber } from '../model/mesagge-response.model';
 import { Pedido, PedidoFiltros, PedidoForm } from '../model/pedido.model';
 
 
@@ -30,7 +30,7 @@ export class PedidoService {
   }
 
   guardarPedido(pedido: PedidoForm){
-    return this.http.post<MesaggeResponse>(`${this.apiUrl}/pedido/add`, pedido);
+    return this.http.post<MesaggeResponseNumber>(`${this.apiUrl}/pedido/add`, pedido);
   }
 
   getAllPedidos(): Observable<Array<Pedido>> {

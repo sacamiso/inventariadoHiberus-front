@@ -9,3 +9,9 @@ export interface MesaggeResponseBoolean {
     error:   string;
     message: boolean;
 }
+
+export interface MesaggeResponseNumber {
+    success: boolean;
+    error:   string;
+    message: number;
+}

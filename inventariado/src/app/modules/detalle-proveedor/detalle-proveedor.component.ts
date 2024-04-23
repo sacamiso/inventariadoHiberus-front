@@ -49,4 +49,8 @@ export class DetalleProveedorComponent implements OnInit {
   volver() {
     this.location.back();
   }
+
+  irProveedores(){
+    this.router.navigate([`gestion/proveedores`]);
+  }
 }

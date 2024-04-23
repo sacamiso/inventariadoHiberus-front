@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { SalidaList } from '../model/salida-list.model';
 import { Salida, SalidaFiltros, SalidaForm } from '../model/salida.model';
-import { MesaggeResponse } from '../model/mesagge-response.model';
+import { MesaggeResponse, MesaggeResponseNumber } from '../model/mesagge-response.model';
 import { SalidaMsg } from '../model/salida-msg.model';
 
 @Injectable({
@@ -21,7 +21,7 @@ export class SalidaService {
   }
 
   guardarSalida(salida: SalidaForm){
-    return this.http.post<MesaggeResponse>(`${this.apiUrl}/salida/add`, salida);
+    return this.http.post<MesaggeResponseNumber>(`${this.apiUrl}/salida/add`, salida);
   }
 
   getSalidaById(id: number): Observable<SalidaMsg> {

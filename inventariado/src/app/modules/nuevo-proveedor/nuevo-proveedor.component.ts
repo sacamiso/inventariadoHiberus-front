@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MesaggeResponse } from 'src/app/core/model/mesagge-response.model';
+import { MesaggeResponse, MesaggeResponseNumber } from 'src/app/core/model/mesagge-response.model';
 import { ProveedorService } from '../../core/services/proveedor.service';
 import { Router } from '@angular/router';
 import { ProveedorForm } from 'src/app/core/model/proveedor.model';
@@ -14,7 +14,7 @@ export class NuevoProveedorComponent implements OnInit {
 
   proveedorForm: FormGroup;
 
-  msg: MesaggeResponse | undefined;
+  msg: MesaggeResponseNumber | undefined;
   alertPlaceholder: HTMLElement | null;
 
   cargado = false;
@@ -67,9 +67,9 @@ export class NuevoProveedorComponent implements OnInit {
       next: (response) => {
         this.msg = response;
         if(this.msg.success){
-          this.alerta(this.msg.message, 'success');
+          this.alerta('Proveedor añadido con éxito', 'success');
           this.formularioEnviado=false;
-          this.proveedorForm.reset();
+          this.router.navigate([`gestion/proveedores/proveedor/${this.msg.message}`]);
         }else{
           this.alerta(this.msg.error, 'danger');
         }

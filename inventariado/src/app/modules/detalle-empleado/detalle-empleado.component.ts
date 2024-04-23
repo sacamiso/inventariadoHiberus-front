@@ -50,4 +50,7 @@ export class DetalleEmpleadoComponent implements OnInit {
     this.location.back();
   }
   
+  irEmpleados(){
+    this.router.navigate([`gestion/empleados`]);
+  }
 }

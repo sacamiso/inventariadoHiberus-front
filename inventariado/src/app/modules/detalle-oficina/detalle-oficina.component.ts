@@ -49,4 +49,8 @@ export class DetalleOficinaComponent implements OnInit {
   volver() {
     this.location.back();
   }
+
+  irOficinas(){
+    this.router.navigate([`gestion/oficinas`]);
+  }
 }

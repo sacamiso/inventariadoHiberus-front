@@ -201,6 +201,8 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th class="text-center" scope="col">Número de Pedido</th>
+                                <th class="text-center" scope="col">Fecha de pedido</th>
+                                <th class="text-center" scope="col">Fecha de recepción</th>
                                 <th class="text-center" scope="col">Unidades Totales</th>
                                 <th class="text-center" scope="col">Coste Unitario</th>
                                 <th class="text-center" scope="col">Coste Total</th>
@@ -209,6 +211,9 @@
                         <tbody>
                             <tr *ngFor="let pedido of pedidos">
                                 <td class="underline-link" (click)="detallePedido(pedido.numeroPedido)">Pedido {{pedido.numeroPedido}}</td>
+                                <td>{{pedido.fechaPedido  | date: 'dd/MM/yyyy' }}</td>
+                                <td *ngIf="pedido.fechaRecepcion===null">-</td>
+                                <td *ngIf="pedido.fechaRecepcion!==null">{{pedido.fechaRecepcion  | date: 'dd/MM/yyyy' }}</td>
                                 <td *ngIf="pedido.numeroUnidades===null">0</td>
                                 <td *ngIf="pedido.numeroUnidades!==null">{{pedido.numeroUnidades}}</td>
                                 <td *ngIf="pedido.costeUnitario!==null">{{pedido.costeUnitario.toFixed(2)}} €</td>

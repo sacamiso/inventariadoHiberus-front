@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Articulo, ArticuloFiltros, ArticuloForm, ArticuloList, ArticuloMsg } from '../model/articulo.model';
-import { MesaggeResponse } from '../model/mesagge-response.model';
+import { MesaggeResponse, MesaggeResponseNumber } from '../model/mesagge-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,7 @@ export class ArticuloService {
   }
 
   guardarArticulo(articulo: ArticuloForm){
-    return this.http.post<MesaggeResponse>(`${this.apiUrl}/articulo/add`, articulo);
+    return this.http.post<MesaggeResponseNumber>(`${this.apiUrl}/articulo/add`, articulo);
   }
 
   getArticuloById(id: number): Observable<ArticuloMsg> {

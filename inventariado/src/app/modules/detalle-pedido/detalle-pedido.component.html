@@ -155,7 +155,10 @@
                                 <th colspan="3">Gastos de envío</th>
                                 <td>{{pedido.costesEnvio}} €</td>
                             </tr>
-
+                            <tr>
+                                <th colspan="3">IVA</th>
+                                <td>{{pedido.ivaPedido}} %</td>
+                            </tr>
                             <tr>
                                 <th colspan="3">Total</th>
                                 <td>{{pedido.costeTotal | number:'1.2-2'}} €</td>

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { AsignacionForm } from 'src/app/core/model/asignacion.model';
 import { Empleado, EmpleadoList } from 'src/app/core/model/empleado.model';
-import { MesaggeResponse } from 'src/app/core/model/mesagge-response.model';
+import { MesaggeResponse, MesaggeResponseNumber } from 'src/app/core/model/mesagge-response.model';
 import { Oficina } from 'src/app/core/model/oficina.model';
 import { Unidad, UnidadList } from 'src/app/core/model/unidad.model';
 import { AsignacionService } from 'src/app/core/services/asignacion.service';
@@ -21,7 +21,7 @@ export class NuevaAsignacionComponent implements OnInit {
 
   asignacionForm: FormGroup;
 
-  msg: MesaggeResponse | undefined;
+  msg: MesaggeResponseNumber | undefined;
   alertPlaceholder: HTMLElement | null;
 
   asignacion: AsignacionForm = {
@@ -125,10 +125,11 @@ export class NuevaAsignacionComponent implements OnInit {
       next: (response) => {
         this.msg = response;
         if(this.msg.success){
-          this.alerta(this.msg.message, 'success');
+          this.alerta('Asignación añadida con éxito', 'success');
           this.formularioEnviado=false;
           this.asignacionForm.reset();
           this.idOficinaSeleccionada = 0;
+          this.router.navigate([`gestion/asignaciones/asignacion/${this.msg.message}`]);
         }else{
           this.alerta(this.msg.error, 'danger');
         }

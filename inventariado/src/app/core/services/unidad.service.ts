@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { UnidadList, UnidadFiltros, UnidadEstado, UnidadForm, UnidadMsg, Unidad } from '../model/unidad.model';
-import { MesaggeResponse, MesaggeResponseBoolean } from '../model/mesagge-response.model';
+import { MesaggeResponse, MesaggeResponseBoolean, MesaggeResponseNumber } from '../model/mesagge-response.model';
 import { PedidoList } from 'src/app/core/model/pedido-list.model';
 import { Articulo } from 'src/app/core/model/articulo.model';
 
@@ -34,7 +34,7 @@ export class UnidadService {
   }
 
   guardarUnidad(unidad: UnidadForm){
-    return this.http.post<MesaggeResponse>(`${this.apiUrl}/unidad/add`, unidad);
+    return this.http.post<MesaggeResponseNumber>(`${this.apiUrl}/unidad/add`, unidad);
   }
 
   getUnidadById(id: number): Observable<UnidadMsg> {
