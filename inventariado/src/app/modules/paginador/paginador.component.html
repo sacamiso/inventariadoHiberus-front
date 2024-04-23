@@ -1,4 +1,6 @@
-<nav *ngIf="numeroElementos > tamPag" class="p-3">
+<!-- Guardo el paginador antiguo por si el nuevo da problemas -->
+
+<!-- <nav *ngIf="numeroElementos > tamPag" class="p-3">
     <ul class="pagination justify-content-center custom-pagination">
         <li *ngIf="pagActual > 0" class="page-item">
             <a class="page-link" (click)="irAnterior()">&lt;</a>
@@ -13,4 +15,26 @@
             
         </li>
     </ul>
-</nav>
+</nav> -->
+<nav *ngIf="numPagTotales > 1" class="p-3">
+    <ul class="pagination justify-content-center custom-pagination">
+      <li *ngIf="pagActual > 0" class="page-item" [ngClass]="{'disabled': pagActual === 0}">
+        <a class="page-link" (click)="irAnterior()">&lt;</a>
+      </li>
+      <ng-container *ngFor="let pag of aux">
+        <ng-container *ngIf="pag === -1">
+          <li class="page-item disabled">
+            <a class="page-link">...</a>
+          </li>
+        </ng-container>
+        <ng-container *ngIf="pag !== -1">
+          <li class="page-item" [ngClass]="{'selected': pag === pagActual}">
+            <a class="page-link" (click)="cambiarPagina(pag)">{{ pag + 1 }}</a>
+          </li>
+        </ng-container>
+      </ng-container>
+      <li *ngIf="pagActual < (numPagTotales-1)" class="page-item" [ngClass]="{'disabled': pagActual === numPagTotales - 1}">
+        <a class="page-link" (click)="irSiguiente()">&gt;</a>
+      </li>
+    </ul>
+  </nav>

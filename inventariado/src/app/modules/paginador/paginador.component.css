@@ -1,5 +1,5 @@
 .custom-pagination {
-    background-color: #f8f9fa;
+    background-color: #ffffff;
     border-radius: 5px;
     padding: 10px;
 }
@@ -20,4 +20,8 @@
     background-color: #19255A;
     color: #ffffff;
     border-color: #19255A;
+}
+
+.custom-pagination .page-item:hover {
+    cursor: pointer;
 }
