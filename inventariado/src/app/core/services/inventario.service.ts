@@ -22,4 +22,7 @@ export class InventarioService {
     return this.http.get<InventarioList>(`${this.apiUrl}/inventario/listOf/${idOficina}`);
   }
 
+  descargarExcel(filtros: InventarioFiltros): Observable<ArrayBuffer> {
+    return this.http.post(`${this.apiUrl}/inventario/descargarExcel`, filtros, { responseType: 'arraybuffer' });
+  }
 }

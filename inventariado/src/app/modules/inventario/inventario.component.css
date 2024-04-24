@@ -12,3 +12,18 @@
   border-color: #19255A;
   color: white;
 }
+
+.boton-descarga {
+  background-color: #19255A;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.boton-descarga:hover {
+  background-color: #00CDE2;
+}

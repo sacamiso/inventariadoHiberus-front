@@ -109,4 +109,23 @@ export class InventarioComponent implements OnInit {
   detalleOficina(id: number){
     this.router.navigate([`gestion/oficinas/oficina/${id}`]);
   }
+
+  descargarExcel() {
+    this.inventarioService.descargarExcel( this.filtros).subscribe({
+      next: (data: ArrayBuffer) => {
+        const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'InformeInventarioAtual.xlsx';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error: (error: any) => {
+        console.error('Error al descargar el archivo Excel:', error);
+      }
+    });
+  }
+
 }
