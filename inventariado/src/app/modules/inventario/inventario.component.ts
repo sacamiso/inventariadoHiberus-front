@@ -117,7 +117,7 @@ export class InventarioComponent implements OnInit {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'InformeInventarioAtual.xlsx';
+        a.download = 'InformeInventarioAtcual.xlsx';
         document.body.appendChild(a);
         a.click();
         window.URL.revokeObjectURL(url);

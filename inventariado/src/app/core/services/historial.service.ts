@@ -17,4 +17,8 @@ export class HistorialService {
   getHistorialInterval(limit: number, skip: number, filtros: HistorialInventarioFiltros): Observable<HistorialList> {
     return this.http.post<HistorialList>(`${this.apiUrl}/historialInventario/listAllPag?limit=${limit}&skip=${skip}`, filtros);
   }
+
+  descargarExcel(filtros: HistorialInventarioFiltros): Observable<ArrayBuffer> {
+    return this.http.post(`${this.apiUrl}/historialInventario/descargarExcel`, filtros, { responseType: 'arraybuffer' });
+  }
 }

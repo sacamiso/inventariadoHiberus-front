@@ -33,7 +33,9 @@ export class HistorialInventarioComponent implements OnInit {
     codArticulo: 0,
     stockMin: null,
     stockMax: null,
-    fecha: null
+    fecha: null,
+    fechaInicioIntervalo: null,
+    fechaFinIntervalo: null
   }
 
   constructor(
@@ -105,9 +107,29 @@ export class HistorialInventarioComponent implements OnInit {
       codArticulo: 0,
       stockMin: null,
       stockMax: null,
-      fecha: null
+      fecha: null,
+      fechaInicioIntervalo: null,
+      fechaFinIntervalo: null
     }
     this.listaElementosMostrar(this.tamPag, this.pagina);
+  }
+
+  descargarExcel() {
+    this.historialService.descargarExcel( this.filtros).subscribe({
+      next: (data: ArrayBuffer) => {
+        const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'InformeHistorialInventario.xlsx';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error: (error: any) => {
+        console.error('Error al descargar el archivo Excel:', error);
+      }
+    });
   }
 
 }

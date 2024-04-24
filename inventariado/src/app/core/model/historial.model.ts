@@ -16,4 +16,6 @@ export interface HistorialInventarioFiltros {
     stockMin: number | null;
     stockMax: number | null;
     fecha:   Date | null;
+    fechaInicioIntervalo:   Date | null;
+    fechaFinIntervalo:   Date | null;
 }

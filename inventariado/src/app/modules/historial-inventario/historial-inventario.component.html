@@ -47,11 +47,23 @@
                     <label for="filtroFecha">Fecha Salida:</label>
                     <input type="date" class="form-control" id="filtroFecha" [(ngModel)]="filtros.fecha">
                 </div>
-                <div class="col-md-4 text-end ">
+                
+                <div class="col-md-4 form-group">
+                    <label for="filtrofechaInicioIntervalo">Fecha inicio intervalo:</label>
+                    <input type="date" class="form-control" id="filtrofechaInicioIntervalo" [(ngModel)]="filtros.fechaInicioIntervalo">
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="filtrofechaFinIntervalo">Fecha fin intervalo:</label>
+                    <input type="date" class="form-control" id="filtrofechaFinIntervalo" [(ngModel)]="filtros.fechaFinIntervalo">
+                </div>
+                
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6 text-start ">
                     <button class="btn btn-danger mt-3" (click)="limpiarFiltros()">Limpiar filtros</button>
                 </div>
     
-                <div class="col-md-4 text-end ">
+                <div class="col-md-6 text-end ">
                     <button class="btn btn-success mt-3" (click)="aplicarFiltros()">Aplicar filtros</button>
                 </div>
             </div>
@@ -59,7 +71,7 @@
         </div>
         <!--Fin filtros-->
         <div class="row">
-            <div class="col col-md-auto">
+            <div class="col col-auto">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-default">Número elementos por página</span>
@@ -69,6 +81,9 @@
                         <option *ngFor="let opcion of Multiplos5(8)" [value]="opcion">{{ opcion }}</option>
                     </select>
                 </div>
+            </div>
+            <div class="col col-6">
+                <button class="btn boton-descarga" (click)="descargarExcel()">Descargar en Excel</button>
             </div>
         </div>
 
