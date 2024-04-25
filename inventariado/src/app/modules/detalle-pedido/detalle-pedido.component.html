@@ -73,8 +73,16 @@
         </header>
 
         <section class="mb-5">
-            <div class="mb-3">
-                <button class="btn boton-recibido text-end" (click)="volver()">Volver</button>
+            <div class="row mb-3">
+                <div class="col col-2">
+                    <button class="btn boton-recibido" (click)="volver()">Volver</button>
+                </div>
+                <div class="col col-2">
+                    <button class="btn boton-descarga" (click)="descargarExcel()">Descargar en Excel</button>
+                </div>
+                <div *ngIf="descargando" class="overlay">
+                    <div class="spinner"></div>
+                </div>
             </div>
 
             <h2>Lineas del pedido</h2>

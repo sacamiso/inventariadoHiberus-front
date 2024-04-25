@@ -24,6 +24,7 @@ export class DetallePedidoComponent implements OnInit {
   mensaje: MesaggeResponse | undefined;
   alertPlaceholder: HTMLElement | null;
 
+  descargando: boolean = false;
   constructor(
     private route: ActivatedRoute,
     private readonly pedidoService: PedidoService,
@@ -135,5 +136,28 @@ export class DetallePedidoComponent implements OnInit {
 
   volver() {
     this.location.back();
+  }
+
+  descargarExcel() {
+    this.descargando = true;
+    this.pedidoService.descargarExcelByPedido(this.id).subscribe({
+      next: (data: ArrayBuffer) => {
+        const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        const nombre = 'InformePedido'+this.id+'.xlsx';
+        a.download = nombre;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        this.descargando = false;
+      },
+      error: (error: any) => {
+        this.alerta("Error al descargar el archivo Excel", 'danger');
+        console.error('Error al descargar el archivo Excel:', error);
+        this.descargando = false;
+      }
+    });
   }
 }

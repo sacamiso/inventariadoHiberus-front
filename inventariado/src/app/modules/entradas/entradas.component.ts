@@ -57,8 +57,13 @@ export class EntradasComponent implements OnInit {
     recibido:null,
     devuelto:null,
     costeUnitarioMin:null,
-    costeUnitarioMax:null
+    costeUnitarioMax:null,
+    fechaInicioIntervalo: null,
+    fechaFinIntervalo: null
   }
+
+  alertPlaceholder: HTMLElement | null;
+  descargando: boolean = false;
 
   constructor(
     private location: Location,
@@ -69,7 +74,9 @@ export class EntradasComponent implements OnInit {
     private readonly condicionService: CondicionService,
     private readonly medioService: MedioService,
     private readonly proveedorService: ProveedorService
-  ) { }
+  ) { 
+    this.alertPlaceholder = document.getElementById('liveAlert');
+  }
 
   ngOnInit(): void {
     this.cargarPagina(0);
@@ -168,9 +175,45 @@ export class EntradasComponent implements OnInit {
       recibido:null,
       devuelto:null,
       costeUnitarioMin:null,
-      costeUnitarioMax:null
+      costeUnitarioMax:null,
+      fechaInicioIntervalo: null,
+      fechaFinIntervalo: null
     }
     this.listaElementosMostrar(this.tamPag, this.pagina);
+  }
+
+  descargarExcel() {
+    this.descargando = true;
+    this.pedidoService.descargarExcel( this.filtros).subscribe({
+      next: (data: ArrayBuffer) => {
+        const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'InformeEntradas.xlsx';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        this.descargando = false;
+      },
+      error: (error: any) => {
+        this.alerta("Error al descargar el archivo Excel", 'danger');
+        console.error('Error al descargar el archivo Excel:', error);
+        this.descargando = false;
+      }
+    });
+  }
+
+  alerta(message: string, type: string) {
+    this.alertPlaceholder = document.getElementById('liveAlert');
+    if (!this.alertPlaceholder) {
+      return;
+    }
+
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = `<div class="alert alert-${type} alert-dismissible" role="alert"> ${message} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
+
+    this.alertPlaceholder.appendChild(wrapper);
   }
 
 }

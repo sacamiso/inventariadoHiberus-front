@@ -40,4 +40,12 @@ export class PedidoService {
   devolverPedido(idP: number): Observable<MesaggeResponse> {
     return this.http.put<MesaggeResponse>(`${this.apiUrl}/pedido/devolver?idP=${idP}`, null);
   }
+
+  descargarExcel(filtros: PedidoFiltros): Observable<ArrayBuffer> {
+    return this.http.post(`${this.apiUrl}/pedido/descargarExcel`, filtros, { responseType: 'arraybuffer' });
+  }
+
+  descargarExcelByPedido(id: number): Observable<ArrayBuffer> {
+    return this.http.post(`${this.apiUrl}/pedido/descargarExcelById?id=${id}`, null, { responseType: 'arraybuffer' });
+  }
 }

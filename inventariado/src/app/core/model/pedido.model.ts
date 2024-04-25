@@ -61,4 +61,6 @@ export interface PedidoFiltros {
     costeUnitarioMin:  number | null;
     costeUnitarioMax: number | null;
     devuelto:       boolean | null;
+    fechaInicioIntervalo:   Date | null;
+    fechaFinIntervalo:   Date | null;
 }
