@@ -31,4 +31,8 @@ export class SalidaService {
   getAllSalidas(): Observable<Array<Salida>> {
     return this.http.get<Array<Salida>>(`${this.apiUrl}/salida/listAll`);
   }
+
+  descargarExcel(filtros: SalidaFiltros): Observable<ArrayBuffer> {
+    return this.http.post(`${this.apiUrl}/salida/descargarExcel`, filtros, { responseType: 'arraybuffer' });
+  }
 }

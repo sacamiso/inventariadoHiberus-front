@@ -31,4 +31,6 @@ export interface SalidaFiltros {
     fechaSalida: Date | null;
     idOficina: number | null;
     codArticulo: number | null;
+    fechaInicioIntervalo:   Date | null;
+    fechaFinIntervalo:   Date | null;
 }

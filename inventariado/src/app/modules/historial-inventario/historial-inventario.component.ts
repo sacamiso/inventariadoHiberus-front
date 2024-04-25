@@ -28,6 +28,9 @@ export class HistorialInventarioComponent implements OnInit {
   filtrosCargados = false;
   mostrarFiltros = false;
 
+  descargando: boolean = false;
+  alertPlaceholder: HTMLElement | null;
+
   filtros: HistorialInventarioFiltros = {
     idOficina: 0,
     codArticulo: 0,
@@ -44,7 +47,9 @@ export class HistorialInventarioComponent implements OnInit {
     private location: Location,
     private readonly oficinaService: OficinaService,
     private readonly articuloService: ArticuloService
-    ) { }
+    ) { 
+      this.alertPlaceholder = document.getElementById('liveAlert');
+    }
 
   ngOnInit(): void {
     this.cargarPagina(0);
@@ -115,6 +120,7 @@ export class HistorialInventarioComponent implements OnInit {
   }
 
   descargarExcel() {
+    this.descargando = true;
     this.historialService.descargarExcel( this.filtros).subscribe({
       next: (data: ArrayBuffer) => {
         const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
@@ -125,11 +131,26 @@ export class HistorialInventarioComponent implements OnInit {
         document.body.appendChild(a);
         a.click();
         window.URL.revokeObjectURL(url);
+        this.descargando = false;
       },
       error: (error: any) => {
+        this.alerta("Error al descargar el archivo Excel", 'danger');
         console.error('Error al descargar el archivo Excel:', error);
+        this.descargando = false;
       }
     });
+  }
+
+  alerta(message: string, type: string) {
+    this.alertPlaceholder = document.getElementById('liveAlert');
+    if (!this.alertPlaceholder) {
+      return;
+    }
+
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = `<div class="alert alert-${type} alert-dismissible" role="alert"> ${message} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
+
+    this.alertPlaceholder.appendChild(wrapper);
   }
 
 }

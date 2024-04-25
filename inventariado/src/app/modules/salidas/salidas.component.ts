@@ -15,6 +15,8 @@ import { firstValueFrom } from 'rxjs';
 })
 export class SalidasComponent implements OnInit {
 
+  alertPlaceholder: HTMLElement | null;
+
   salidas: Array<Salida> = [];
   numeroSalidas: number = 0;
   pagina: number = 0;
@@ -27,6 +29,8 @@ export class SalidasComponent implements OnInit {
   filtrosCargados = false;
   mostrarFiltros = false;
 
+  descargando: boolean = false;
+
   filtros: SalidaFiltros = {
     numeroUnidades: null,
     costeTotalMin: null,
@@ -35,14 +39,18 @@ export class SalidasComponent implements OnInit {
     costeUnitarioMax: null,
     fechaSalida:null,
     idOficina: null,
-    codArticulo: null
+    codArticulo: null,
+    fechaInicioIntervalo: null,
+    fechaFinIntervalo: null
   };
   constructor(
     private readonly salidaService: SalidaService,
     private readonly router: Router,
     private readonly oficinaService: OficinaService,
     private readonly articuloService: ArticuloService,
-  ) { }
+  ) { 
+    this.alertPlaceholder = document.getElementById('liveAlert');
+  }
 
   ngOnInit(): void {
     this.cargarPagina(0);
@@ -111,8 +119,44 @@ export class SalidasComponent implements OnInit {
       costeUnitarioMax: null,
       fechaSalida:null,
       idOficina: null,
-      codArticulo: null
+      codArticulo: null,
+      fechaInicioIntervalo: null,
+      fechaFinIntervalo: null
     }
     this.listaElementosMostrar(this.tamPag, this.pagina);
+  }
+
+  descargarExcel() {
+    this.descargando = true;
+    this.salidaService.descargarExcel( this.filtros).subscribe({
+      next: (data: ArrayBuffer) => {
+        const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'InformeSalidas.xlsx';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        this.descargando = false;
+      },
+      error: (error: any) => {
+        this.alerta("Error al descargar el archivo Excel", 'danger');
+        console.error('Error al descargar el archivo Excel:', error);
+        this.descargando = false;
+      }
+    });
+  }
+
+  alerta(message: string, type: string) {
+    this.alertPlaceholder = document.getElementById('liveAlert');
+    if (!this.alertPlaceholder) {
+      return;
+    }
+
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = `<div class="alert alert-${type} alert-dismissible" role="alert"> ${message} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
+
+    this.alertPlaceholder.appendChild(wrapper);
   }
 }

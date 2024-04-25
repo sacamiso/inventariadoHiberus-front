@@ -67,11 +67,19 @@
             </div>
             
             <div class="row mb-3">
-                <div class="col-md-6 text-start ">
+                <div class="col-md-3 form-group">
+                    <label for="filtrofechaInicioIntervalo">Fecha inicio intervalo:</label>
+                    <input type="date" class="form-control" id="filtrofechaInicioIntervalo" [(ngModel)]="filtros.fechaInicioIntervalo">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="filtrofechaFinIntervalo">Fecha fin intervalo:</label>
+                    <input type="date" class="form-control" id="filtrofechaFinIntervalo" [(ngModel)]="filtros.fechaFinIntervalo">
+                </div>
+                <div class="col-md-3 text-end ">
                     <button class="btn btn-danger mt-3" (click)="limpiarFiltros()">Limpiar filtros</button>
                 </div>
     
-                <div class="col-md-6 text-end ">
+                <div class="col-md-3 text-end ">
                     <button class="btn btn-success mt-3" (click)="aplicarFiltros()">Aplicar filtros</button>
                 </div>
             </div>
@@ -90,6 +98,18 @@
                     </select>
                 </div>
             </div>
+            <div class="col col-3">
+                <button class="btn boton-descarga" (click)="descargarExcel()">Descargar en Excel</button>
+            </div>
+
+            <div class="col col-5">
+                <div id="liveAlert"></div>
+            </div>
+
+            <div *ngIf="descargando" class="overlay">
+                <div class="spinner"></div>
+            </div>
+
         </div>
         <section class="mt-2">
             <div class="row">
