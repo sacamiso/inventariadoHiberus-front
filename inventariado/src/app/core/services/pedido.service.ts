@@ -48,4 +48,8 @@ export class PedidoService {
   descargarExcelByPedido(id: number): Observable<ArrayBuffer> {
     return this.http.post(`${this.apiUrl}/pedido/descargarExcelById?id=${id}`, null, { responseType: 'arraybuffer' });
   }
+
+  reporteJasperById(id: number): Observable<ArrayBuffer> {
+    return this.http.post(`${this.apiUrl}/pedido/reporteJasperById?id=${id}`, null, { responseType: 'arraybuffer' });
+  }
 }

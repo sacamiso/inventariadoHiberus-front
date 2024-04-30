@@ -160,4 +160,34 @@ export class DetallePedidoComponent implements OnInit {
       }
     });
   }
+
+
+  descargarPdf() {
+    this.descargando = true;
+    this.pedidoService.reporteJasperById(this.id).subscribe({
+      next: (data: ArrayBuffer) => {
+        if(data===null){
+          this.alerta("Error al descargar el archivo PDF", 'danger');
+          this.descargando = false;
+          return;
+        }else{
+          const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          const nombre = 'ReportePedido'+this.id+'.pdf';
+          a.download = nombre;
+          document.body.appendChild(a);
+          a.click();
+          window.URL.revokeObjectURL(url);
+          this.descargando = false;
+        }
+      },
+      error: (error: any) => {
+        this.alerta("Error al descargar el archivo PDF", 'danger');
+        console.error('Error al descargar el archivo PDF:', error);
+        this.descargando = false;
+      }
+    });
+  }
 }
