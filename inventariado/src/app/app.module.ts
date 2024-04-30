@@ -43,6 +43,9 @@ import { DetalleAsignacionComponent } from './modules/detalle-asignacion/detalle
 import { NuevaAsignacionComponent } from './modules/nueva-asignacion/nueva-asignacion.component';
 import { AsignacionEditComponent } from './modules/asignacion-edit/asignacion-edit.component';
 import { FechaFinAsignacionDirective } from './core/directives/fecha-fin-asignacion.directive';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+
 
 
 @NgModule({
@@ -87,10 +90,12 @@ import { FechaFinAsignacionDirective } from './core/directives/fecha-fin-asignac
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AutoCompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]

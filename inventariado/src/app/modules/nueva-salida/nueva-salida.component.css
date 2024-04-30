@@ -4,3 +4,11 @@
     padding: 5px; /* Añade un espacio interno */
     cursor: not-allowed; /* Cambia el cursor al puntero de "no permitido" */
 }
+
+:host ::ng-deep .myAutoComplete{ 
+    width: 100%;
+}
+
+:host ::ng-deep .myAutoComplete .selected-office{ 
+    font-weight: bold;
+}

@@ -9,6 +9,9 @@ import { SalidaService } from '../../core/services/salida.service';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { InventarioList } from 'src/app/core/model/inventario-list.model';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+
+
 
 @Component({
   selector: 'app-nueva-salida',
@@ -33,6 +36,8 @@ export class NuevaSalidaComponent implements OnInit {
 
   listInventario: InventarioList | undefined;
   listOficina: Array<Oficina> = [];
+  filteredOficinas: Array<Oficina> = [];
+  selectedOficina: Oficina | undefined;
 
   cargado1 = false;
   idOficinaSeleccionada : number = 0;
@@ -154,5 +159,24 @@ export class NuevaSalidaComponent implements OnInit {
         this.alerta(error.error.error, 'danger');
       }
     })
+  }
+
+  filterOficina(event: any) {
+    let query = event.query;
+    this.filteredOficinas = this.listOficina.filter(oficina => {
+        const fullDescription = `${oficina.direccion}, ${oficina.localidad}`;
+        return fullDescription.toLowerCase().includes(query.toLowerCase());
+    });
+  }
+
+  onSelectOficina(event: any) {
+    // Cuando seleccionas una oficina del dropdown, actualiza el objeto seleccionado
+    this.selectedOficina = event;
+    this.idOficinaSeleccionada = event.idOficina;
+    this.changeOfi();
+  }
+
+  getFullDescription(oficina: Oficina): string {
+    return `${oficina.direccion}, ${oficina.localidad}`;
   }
 }

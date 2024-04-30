@@ -7,36 +7,61 @@
         </div>
     </div>
     <div class="mt-4" id="liveAlert"></div>
-    
+
     <div class="row justify-content-center">
         <div class="col-6">
             <h2 class="text-center">Oficina</h2>
-            <select id="ofi" class="form-control form-select" [(ngModel)]="idOficinaSeleccionada" (ngModelChange)="changeOfi()" required>
-                <option [value]=0 disabled>Seleccione la oficina para la que se desea registar la salida:</option>
-                <option *ngFor="let oficina of listOficina" [value]="oficina.idOficina">{{oficina.direccion}}, {{oficina.localidad}}</option>
-            </select>
+            <p-autoComplete styleClass="myAutoComplete"
+                            [(ngModel)]="selectedOficina" 
+                            (onSelect)="onSelectOficina($event)" 
+                            (onChange)="changeOfi()"
+                            (onBlur)="changeOfi()"
+                            [suggestions]="filteredOficinas" 
+                            (completeMethod)="filterOficina($event)" 
+                            field="fullDescription"
+                            [dropdown]="true" 
+                            inputStyleClass="selected-office"
+                            class="selected-office full-width"
+                            placeholder="{{ selectedOficina ? getFullDescription(selectedOficina) : 'Seleccione la oficina...' }}">
+                <ng-template let-oficina pTemplate="item">
+                    {{oficina.direccion}}, {{oficina.localidad}}
+                </ng-template>
+            </p-autoComplete>
         </div>
     </div>
-    
+
+
+
+
 
     <div *ngIf="cargado2 && idOficinaSeleccionada!==0" class="mt-4">
         <form [formGroup]="salidaForm">
             <div class="card-body">
                 <p class="text-danger">* Campos obligatorios</p>
-                <p *ngIf="listInventario?.message?.length !== undefined && listInventario?.message?.length === 0" class="text-danger"> <i class="fas fa-exclamation-circle"></i> No se dispone de artículos a los que dar salida en esta oficina</p>
+                <p *ngIf="listInventario?.message?.length !== undefined && listInventario?.message?.length === 0"
+                    class="text-danger"> <i class="fas fa-exclamation-circle"></i> No se dispone de artículos a los que
+                    dar salida en esta oficina</p>
 
                 <div class="row mt-4">
                     <div class="col-md-5">
                         <div class="form-group">
                             <label for="codArticulo">Artículo <span class="text-danger">*</span></label>
-                            <select class="form-control form-select" id="codArticulo" formControlName="codArticulo" [(ngModel)]="selectedItemId" (ngModelChange)="resetNumUnidades()" required>
-                                <option *ngIf="listInventario?.message?.length !== undefined && listInventario?.message?.length !== 0"[value]="null" disabled [selected]="selectedItemId===null">Seleccione el articulo</option>
-                                <option *ngIf="listInventario?.message?.length !== undefined && listInventario?.message?.length === 0" [value]="null" disabled [selected]="selectedItemId===null">No se dispone de artículos</option>
+                            <select class="form-control form-select" id="codArticulo" formControlName="codArticulo"
+                                [(ngModel)]="selectedItemId" (ngModelChange)="resetNumUnidades()" required>
+                                <option
+                                    *ngIf="listInventario?.message?.length !== undefined && listInventario?.message?.length !== 0"
+                                    [value]="null" disabled [selected]="selectedItemId===null">Seleccione el articulo
+                                </option>
+                                <option
+                                    *ngIf="listInventario?.message?.length !== undefined && listInventario?.message?.length === 0"
+                                    [value]="null" disabled [selected]="selectedItemId===null">No se dispone de
+                                    artículos</option>
                                 <option *ngFor="let listI of listInventario?.message" [ngValue]="listI.codArticulo">
                                     {{ listI.articulo.descripcion }}, {{ listI.articulo.modelo }}
                                 </option>
                             </select>
-                            <div *ngIf="selectedItemId !== null" class="mt-2">Stock actual: {{ getSelectedStock() }}</div>
+                            <div *ngIf="selectedItemId !== null" class="mt-2">Stock actual: {{ getSelectedStock() }}
+                            </div>
                         </div>
                     </div>
 
@@ -47,7 +72,9 @@
                                     (No puede ser negativo)
                                 </span>
                             </label>
-                            <input type="number" class="form-control" id="costeTotal" formControlName="costeTotal" step="0.01" min="0" [attr.disabled]="!selectedItemId ? true : null" (ngModelChange)="actualizarCostoUnitario()" required/>
+                            <input type="number" class="form-control" id="costeTotal" formControlName="costeTotal"
+                                step="0.01" min="0" [attr.disabled]="!selectedItemId ? true : null"
+                                (ngModelChange)="actualizarCostoUnitario()" required />
                         </div>
                     </div>
                     <div class="col-md-1">
@@ -59,11 +86,15 @@
                                 <span class="text-danger" *ngIf="this.salidaForm.get('numUnidades')?.errors?.['min']">
                                     (Como mínimo debe ser 1)
                                 </span>
-                                <span class="text-danger" *ngIf="this.salidaForm.get('numUnidades')?.errors?.['pattern'] && this.salidaForm.get('numUnidades')?.value !== null">
+                                <span class="text-danger"
+                                    *ngIf="this.salidaForm.get('numUnidades')?.errors?.['pattern'] && this.salidaForm.get('numUnidades')?.value !== null">
                                     (Debe ser entero)
                                 </span>
                             </label>
-                            <input type="number" class="form-control" id="numUnidades" formControlName="numUnidades" required min="1" [max]="getSelectedStock()" [attr.disabled]="!selectedItemId ? true : null" (ngModelChange)="actualizarCostoUnitario()"/>
+                            <input type="number" class="form-control" id="numUnidades" formControlName="numUnidades"
+                                required min="1" [max]="getSelectedStock()"
+                                [attr.disabled]="!selectedItemId ? true : null"
+                                (ngModelChange)="actualizarCostoUnitario()" />
                         </div>
                     </div>
 
@@ -74,28 +105,31 @@
                             <span class="text-danger" *ngIf="salidaForm.get('fechaSalida')?.errors?.['fechaInvalida']">
                                 (La fecha no puede ser posterior a la actual)
                             </span>
-                            <input type="date" class="form-control" id="fechaSalida" formControlName="fechaSalida" appFechaValida required>
+                            <input type="date" class="form-control" id="fechaSalida" formControlName="fechaSalida"
+                                appFechaValida required>
                         </div>
                     </div>
                     <div class="col-md-2">
                         <label for="costeUnitario">Coste unitario (€)</label>
-                        <input id="costeUnitario" class="form-control readonly-input" type="text" [value]="costeUnitario !==0 ? costeUnitario.toFixed(2)  : ''" readonly>
+                        <input id="costeUnitario" class="form-control readonly-input" type="text"
+                            [value]="costeUnitario !==0 ? costeUnitario.toFixed(2)  : ''" readonly>
                     </div>
                 </div>
-                
-                
+
+
             </div>
 
             <div class="card-footer mt-4">
-                
+
                 <!-- Botón de guardar: esta con el evento click porque no quiero que se envíe cuando haga enter -->
                 <!-- Sino con el submit en la etiqueta del form vale -->
-                <button class="btn btn-success float-end" (click)="guardar()" [disabled]="!salidaForm.valid">Guardar</button>
+                <button class="btn btn-success float-end" (click)="guardar()"
+                    [disabled]="!salidaForm.valid">Guardar</button>
             </div>
         </form>
     </div>
     <div class="card-footer mt-4">
         <button type="button" (click)="volver()" class="btn btn-danger">Cancelar</button>
     </div>
-    
+
 </div>
