@@ -7,8 +7,22 @@
 
 :host ::ng-deep .myAutoComplete{ 
     width: 100%;
+    height: 35%;
 }
 
 :host ::ng-deep .myAutoComplete .selected-office{ 
     font-weight: bold;
+}
+
+:host ::ng-deep .myAutoComplete .p-autocomplete-dropdown {
+    background-color: #e0e0e0; /* Color de fondo del botón */
+    border: 1px solid #e0e0e0; /* Borde del botón */
+    border-radius: 4px; /* Radio de borde del botón */
+    padding: 5px; /* Relleno del botón */
+    color: #333333; /* Color del texto del botón */
+}
+
+:host ::ng-deep .myAutoComplete .p-autocomplete-dropdown-icon {
+    font-size: 16px; /* Tamaño del ícono del botón */
+    color: #666666; /* Color del ícono del botón */
 }

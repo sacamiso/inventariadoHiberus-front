@@ -93,6 +93,7 @@ export class NuevaSalidaComponent implements OnInit {
 
   resetNumUnidades(): void {
     this.salidaForm.get('numUnidades')?.setValue(null);
+    this.actualizarCostoUnitario();
   }
 
   volver(){
