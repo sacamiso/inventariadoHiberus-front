@@ -11,7 +11,7 @@
     <div class="row justify-content-center">
         <div class="col-6">
             <h2 class="text-center mb-4">Oficina</h2>
-            <p-autoComplete styleClass="myAutoComplete"
+            <p-autoComplete styleClass="myAutoComplete w-100"
                             (onSelect)="onSelectOficina($event)" 
                             (onClear)="onClear()"
                             (onBlur)="checkIfValidInput($event)"
@@ -20,7 +20,7 @@
                             field="fullDescription"
                             [dropdown]="true" 
                             inputStyleClass="selected-office"
-                            class="selected-office full-width"
+                            class="selected-office"
                             placeholder="{{ selectedOficina ? getFullDescription(selectedOficina) : 'Seleccione la oficina...' }}">
                 <ng-template let-oficina pTemplate="item">
                     {{oficina.direccion}}, {{oficina.localidad}}
