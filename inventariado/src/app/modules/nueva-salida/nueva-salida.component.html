@@ -12,10 +12,9 @@
         <div class="col-6">
             <h2 class="text-center">Oficina</h2>
             <p-autoComplete styleClass="myAutoComplete"
-                            [(ngModel)]="selectedOficina" 
                             (onSelect)="onSelectOficina($event)" 
-                            (onChange)="changeOfi()"
-                            (onBlur)="changeOfi()"
+                            (onClear)="onClear()"
+                            (onBlur)="checkIfValidInput($event)"
                             [suggestions]="filteredOficinas" 
                             (completeMethod)="filterOficina($event)" 
                             field="fullDescription"
@@ -31,8 +30,8 @@
     </div>
 
 
-
-
+    <!-- <div>{{idOficinaSeleccionada}}</div>
+    <div>{{selectedOficina?.direccion}}, {{selectedOficina?.localidad}}</div> -->
 
     <div *ngIf="cargado2 && idOficinaSeleccionada!==0" class="mt-4">
         <form [formGroup]="salidaForm">
