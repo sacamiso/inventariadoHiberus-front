@@ -21,17 +21,41 @@
             <div class="row mb-3">
                 <div class="col-md-4">
                     <label for="filtroOficina">Oficina:</label>
-                    <select class="form-control form-select" id="filtroOficina" [(ngModel)]="filtros.idOficina">
-                        
-                        <option *ngFor="let oficina of listOficinas" [value]="oficina.idOficina">{{oficina.direccion}}, {{oficina.localidad}}</option>
-                    </select>
+                    <p-autoComplete styleClass="myAutoComplete w-100"
+                            (onSelect)="onSelectOficina($event)" 
+                            (onClear)="onClearOficina()"
+                            (onBlur)="checkIfValidInputOficina($event)"
+                            [suggestions]="filteredOficina" 
+                            (completeMethod)="filterOficina($event)" 
+                            field="fullDescriptionOficina"
+                            [dropdown]="true" 
+                            inputStyleClass="selected-office"
+                            class="selected-office"
+                            id="filtroOficina"
+                            placeholder="{{ selectedOficina ? getFullDescriptionOficina(selectedOficina): '' }}">
+                        <ng-template let-oficina pTemplate="item">
+                            {{oficina.direccion}}, {{oficina.localidad}}
+                        </ng-template>
+                    </p-autoComplete>
                 </div>
                 <div class="col-md-4">
                     <label for="filtroArticulo">Artículo:</label>
-                    <select class="form-control form-select" id="filtroArticulo" [(ngModel)]="filtros.codArticulo">
-                        
-                        <option *ngFor="let art of listArticulos" [value]="art.codigoArticulo">{{art.descripcion}}</option>
-                    </select>
+                    <p-autoComplete styleClass="myAutoComplete w-100"
+                            (onSelect)="onSelectArticulo($event)" 
+                            (onClear)="onClearArticulo()"
+                            (onBlur)="checkIfValidInputArticulo($event)"
+                            [suggestions]="filteredArticulo" 
+                            (completeMethod)="filterArticulo($event)" 
+                            field="fullDescriptionArticulo"
+                            [dropdown]="true" 
+                            inputStyleClass="selected-office"
+                            class="selected-office"
+                            id="filtroArticulo"
+                            placeholder="{{ selectedArticulo ? getFullDescriptionArticulo(selectedArticulo): '' }}">
+                        <ng-template let-articulo pTemplate="item">
+                            {{articulo.referencia}}: {{articulo.descripcion}}, {{articulo.precioUnitario}}€
+                        </ng-template>
+                    </p-autoComplete>
                 </div>
                 <div class="col-md-2 form-group">
                     <label for="filtroMin">Stock mínimo:</label>

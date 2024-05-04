@@ -16,7 +16,7 @@
         </li>
     </ul>
 </nav> -->
-<nav *ngIf="numPagTotales > 1" class="p-3">
+<nav *ngIf="numeroElementos > tamPag" class="p-3">
     <ul class="pagination justify-content-center custom-pagination">
       <li *ngIf="pagActual > 0" class="page-item" [ngClass]="{'disabled': pagActual === 0}">
         <a class="page-link" (click)="irAnterior()">&lt;</a>
