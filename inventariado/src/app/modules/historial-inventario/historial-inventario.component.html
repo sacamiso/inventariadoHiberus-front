@@ -133,7 +133,7 @@
                     <tr *ngFor="let historial of historiales">
                         <td class="text-center">{{ historial.fecha | date: 'dd/MM/yyyy HH:mm:ss'  }}</td>
                         <td>{{ historial.oficina.localidad }}</td>
-                        <td>{{ historial.articulo.descripcion }}</td>
+                        <td>{{ historial.articulo.referencia }}: {{ historial.articulo.descripcion }}, {{ historial.articulo.precioUnitario }} €</td>
                         <td class="text-center">{{ historial.stock }}</td>
                     </tr>
                 </tbody>
