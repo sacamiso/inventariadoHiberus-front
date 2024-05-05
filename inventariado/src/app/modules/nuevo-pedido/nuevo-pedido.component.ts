@@ -206,4 +206,58 @@ export class NuevoPedidoComponent implements OnInit {
     this.listProveedor = await firstValueFrom(this.proveedorService.getAllProveedores());
   }
 
+  //cambios para el select autocompletable de proveedor
+
+  filteredProveedor: Array<Proveedor> = [];
+  selectedProveedor: Proveedor | undefined;
+  lastSelectedProveedor: Proveedor | undefined;
+
+  onSelectProveedor(event: any) {
+    this.selectedProveedor = event;
+    this.lastSelectedProveedor = event;
+    this.pedidoForm.get('idProveedor')?.setValue(event.idProveedor);
+  }
+
+  onClearProveedor() {
+    if (this.lastSelectedProveedor){
+      this.selectedProveedor = this.lastSelectedProveedor;
+      this.pedidoForm.get('idProveedor')?.setValue(this.lastSelectedProveedor.idProveedor);
+    }  else {
+      this.selectedProveedor = undefined; 
+      this.pedidoForm.get('idProveedor')?.setValue(null);
+    }
+  }
+
+  checkIfValidInputProveedor(event: KeyboardEvent) {
+    const inputValue = (event.target as HTMLInputElement).value.toLowerCase();
+    const match = this.listProveedor.some(proveedor => 
+        this.getFullDescriptionProveedor(proveedor).toLowerCase()===inputValue,
+    );
+    if (!match) {
+      this.onClearProveedor();
+    }else{
+      this.listProveedor.forEach(proveedor => {
+        if(this.getFullDescriptionProveedor(proveedor).toLowerCase()===inputValue){
+          this.selectedProveedor = proveedor;
+          this.pedidoForm.get('idProveedor')?.setValue(proveedor.idProveedor);
+          this.lastSelectedProveedor = proveedor;
+          return;
+        }
+      });
+    }
+    (event.target as HTMLInputElement).value = '';
+  }
+
+  getFullDescriptionProveedor(proveedor: Proveedor) {
+    return `${proveedor.razonSocial}`;
+  }
+
+  filterProveedor(event: any) {
+    let query = event.query;
+    this.filteredProveedor = this.listProveedor.filter(proveedor => {
+        const fullDescriptionProveedor = `${proveedor.razonSocial}`;
+        return fullDescriptionProveedor.toLowerCase().includes(query.toLowerCase());
+    });
+  }
+  //Fin cambios para el select autocompletable de proveedor
 }

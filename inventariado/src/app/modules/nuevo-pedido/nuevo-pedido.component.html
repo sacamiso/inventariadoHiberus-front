@@ -17,12 +17,22 @@
                 <legend style="width: auto; border: none; font-size: 24px; font-weight: bold; color: #333;">
                     Proveedor <span class="text-danger">*</span></legend>
                 <div class="form-group">
-                    <select formControlName="idProveedor" id="idProveedor" class="form-control form-select">
-                        <option [value]="null" disabled>Seleccione un proveedor</option>
-                        <option *ngFor="let prov of listProveedor" [value]="prov.idProveedor">
-                            {{ prov.razonSocial }}: {{ prov.direccion }}, {{ prov.localidad }}
-                        </option>
-                    </select>
+                    <p-autoComplete styleClass="myAutoComplete w-100"
+                            (onSelect)="onSelectProveedor($event)" 
+                            (onClear)="onClearProveedor()"
+                            (onBlur)="checkIfValidInputProveedor($event)"
+                            [suggestions]="filteredProveedor" 
+                            (completeMethod)="filterProveedor($event)" 
+                            field="fullDescriptionProveedor"
+                            [dropdown]="true" 
+                            inputStyleClass="selected-office"
+                            class="selected-office"
+                            id="filtroProveedor"
+                            placeholder="{{ selectedProveedor ? getFullDescriptionProveedor(selectedProveedor): 'Seleccione un proveedor...' }}">
+                        <ng-template let-proveedor pTemplate="item">
+                            {{proveedor.razonSocial}}
+                        </ng-template>
+                    </p-autoComplete>
                 </div>
             </fieldset>
 
