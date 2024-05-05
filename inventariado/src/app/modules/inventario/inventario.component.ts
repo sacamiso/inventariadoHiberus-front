@@ -271,6 +271,6 @@ export class InventarioComponent implements OnInit {
     });
   }
 
-  //Fin cambios para el select autocompletable de filtro de artículos
+  //Fin cambios para el select autocompletable de filtro de oficinas
 
 }

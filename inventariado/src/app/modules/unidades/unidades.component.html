@@ -28,25 +28,46 @@
             <hr>
             <div class="row mb-3">
                 <div class="col-md-3">
-                    <label for="filtroEstado">Estado:</label>
-                    <select class="form-control form-select" id="filtroEstado" [(ngModel)]="filtros.codEstado">
-                        
-                        <option *ngFor="let estado of listEstados" [value]="estado.codigoEstado">{{estado.codigoEstado}}: {{estado.nombre}}</option>
-                    </select>
+                    <label for="filtroPedido">Fecha Pedido:</label>
+                    <input type="date" class="form-control" id="filtroPedido"  [(ngModel)]="filtros.fechaPedido" >
                 </div>
                 <div class="col-md-4">
                     <label for="filtroOficina">Oficina:</label>
-                    <select class="form-control form-select" id="filtroOficina" [(ngModel)]="filtros.idOficina">
-                        
-                        <option *ngFor="let oficina of listOficinas" [value]="oficina.idOficina">{{oficina.direccion}}, {{oficina.localidad}}</option>
-                    </select>
+                    <p-autoComplete styleClass="myAutoComplete w-100"
+                            (onSelect)="onSelectOficina($event)" 
+                            (onClear)="onClearOficina()"
+                            (onBlur)="checkIfValidInputOficina($event)"
+                            [suggestions]="filteredOficina" 
+                            (completeMethod)="filterOficina($event)" 
+                            field="fullDescriptionOficina"
+                            [dropdown]="true" 
+                            inputStyleClass="selected-office"
+                            class="selected-office"
+                            id="filtroOficina"
+                            placeholder="{{ selectedOficina ? getFullDescriptionOficina(selectedOficina): '' }}">
+                        <ng-template let-oficina pTemplate="item">
+                            {{oficina.direccion}}, {{oficina.localidad}}
+                        </ng-template>
+                    </p-autoComplete>
                 </div>
                 <div class="col-md-5">
                     <label for="filtroArticulo">Artículo:</label>
-                    <select class="form-control form-select" id="filtroArticulo" [(ngModel)]="filtros.codArticulo">
-                        
-                        <option *ngFor="let art of listArticulos" [value]="art.codigoArticulo">{{art.descripcion}}</option>
-                    </select>
+                    <p-autoComplete styleClass="myAutoComplete w-100"
+                            (onSelect)="onSelectArticulo($event)" 
+                            (onClear)="onClearArticulo()"
+                            (onBlur)="checkIfValidInputArticulo($event)"
+                            [suggestions]="filteredArticulo" 
+                            (completeMethod)="filterArticulo($event)" 
+                            field="fullDescriptionArticulo"
+                            [dropdown]="true" 
+                            inputStyleClass="selected-office"
+                            class="selected-office"
+                            id="filtroArticulo"
+                            placeholder="{{ selectedArticulo ? getFullDescriptionArticulo(selectedArticulo): '' }}">
+                        <ng-template let-articulo pTemplate="item">
+                            {{articulo.referencia}}: {{articulo.descripcion}}, {{articulo.precioUnitario}}€
+                        </ng-template>
+                    </p-autoComplete>
                 </div>
             </div>
             <div class="row mb-3">
@@ -55,9 +76,13 @@
                     <input type="date" class="form-control" id="filtroSalida" [(ngModel)]="filtros.fechaSalida">
                 </div>
                 <div class="col-md-3">
-                    <label for="filtroPedido">Fecha Pedido:</label>
-                    <input type="date" class="form-control" id="filtroPedido"  [(ngModel)]="filtros.fechaPedido" >
+                    <label for="filtroEstado">Estado:</label>
+                    <select class="form-control form-select" id="filtroEstado" [(ngModel)]="filtros.codEstado">
+                        
+                        <option *ngFor="let estado of listEstados" [value]="estado.codigoEstado">{{estado.codigoEstado}}: {{estado.nombre}}</option>
+                    </select>
                 </div>
+                
                 <div class="col-md-2">
                     <label>Disponible:</label>
                     <div class="row">
@@ -95,7 +120,7 @@
         </div>
 
         <div class="row mt-4">
-            <div class="col col-md-auto">
+            <div *ngIf="numeroUnidades>0" class="col col-md-auto">
                 <div class="input-group mb-4">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-default">Número elementos por página</span>
@@ -110,7 +135,7 @@
 
         <div id="liveAlert"></div>
 
-        <div class="table-responsive">
+        <div *ngIf="numeroUnidades>0" class="table-responsive">
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
@@ -198,7 +223,10 @@
                 
             </table>
         </div>
-        <div class="row">
+        <section *ngIf="numeroUnidades<=0" class="mt-2 mb-3">
+            No se ha encontrado ninguna unidad coincidente con los filtros establecidos
+        </section>
+        <div *ngIf="numeroUnidades>0" class="row">
             <div class="col text-left">
                 <p>Total de elementos: {{ numeroUnidades }}</p>
             </div>

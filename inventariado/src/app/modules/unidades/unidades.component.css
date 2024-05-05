@@ -13,3 +13,20 @@
 .underline-link:hover {
     color: #00CDE2; /* Cambia el color del texto al pasar el ratón */
 }
+
+:host ::ng-deep .myAutoComplete .selected-office{ 
+    font-weight: bold;
+  }
+  
+  :host ::ng-deep .myAutoComplete .p-autocomplete-dropdown {
+    background-color: #19255A; /* Color de fondo del botón */
+    border: 1px solid #19255A; /* Borde del botón */
+    border-radius: 4px; /* Radio de borde del botón */
+    padding: 5px; /* Relleno del botón */
+    color: #ffffff; /* Color del texto del botón */
+  }
+  
+  :host ::ng-deep .myAutoComplete .p-autocomplete-dropdown-icon {
+    font-size: 16px; /* Tamaño del ícono del botón */
+    color: #666666; /* Color del ícono del botón */
+  }
