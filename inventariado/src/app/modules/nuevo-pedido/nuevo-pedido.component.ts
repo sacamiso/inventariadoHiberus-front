@@ -260,4 +260,118 @@ export class NuevoPedidoComponent implements OnInit {
     });
   }
   //Fin cambios para el select autocompletable de proveedor
+  //cambios para el select autocompletable de filtro de empleado
+  
+  filteredEmpleado: Array<Empleado> = [];
+  selectedEmpleado: Empleado | undefined;
+  lastSelectedEmpleado: Empleado | undefined;
+
+  onSelectEmpleado(event: any) {
+    // Cuando seleccionas una oficina del dropdown, actualiza el objeto seleccionado
+    this.selectedEmpleado = event;
+    this.lastSelectedEmpleado = event;
+    this.pedidoForm.get('idEmpleado')?.setValue(event.idEmpleado);
+  }
+
+  onClearEmpleado() {
+    if (this.lastSelectedEmpleado){
+      this.selectedEmpleado = this.lastSelectedEmpleado;
+      this.pedidoForm.get('idEmpleado')?.setValue(this.lastSelectedEmpleado.idEmpleado);
+    }  else {
+      this.selectedEmpleado = undefined; 
+      this.pedidoForm.get('idEmpleado')?.setValue(null);
+    }
+  }
+
+  checkIfValidInputEmpleado(event: KeyboardEvent) {
+    const inputValue = (event.target as HTMLInputElement).value.toLowerCase();
+    const match = this.listEmpleado.some(empleado => 
+        this.getFullDescriptionEmpleado(empleado).toLowerCase()===inputValue,
+    );
+    if (!match) {
+      this.onClearEmpleado();
+    }else{
+      this.listEmpleado.forEach(empleado => {
+        if(this.getFullDescriptionEmpleado(empleado).toLowerCase()===inputValue){
+          this.selectedEmpleado = empleado;
+          this.pedidoForm.get('idEmpleado')?.setValue(empleado.idEmpleado);
+          this.lastSelectedEmpleado = empleado;
+          return;
+        }
+      });
+    }
+    (event.target as HTMLInputElement).value = '';
+  }
+
+  getFullDescriptionEmpleado(empleado: Empleado) {
+    return `${empleado.nombre} ${empleado.apellidos}, ${empleado.dni}`;
+  }
+
+  filterEmpleado(event: any) {
+    let query = event.query;
+    this.filteredEmpleado = this.listEmpleado.filter(empleado => {
+        const fullDescriptionEmpleado = `${empleado.nombre} ${empleado.apellidos}, ${empleado.dni}`;
+        return fullDescriptionEmpleado.toLowerCase().includes(query.toLowerCase());
+    });
+  }
+  //Fin cambios para el select autocompletable de filtro de empleado
+
+  //cambios para el select autocompletable de filtro de oficinas
+
+  filteredOficina: Array<Oficina> = [];
+  selectedOficina: Oficina | undefined;
+  lastSelectedOficina: Oficina | undefined;
+
+  onSelectOficina(event: any) {
+    // Cuando seleccionas una oficina del dropdown, actualiza el objeto seleccionado
+    this.selectedOficina = event;
+    this.lastSelectedOficina = event;
+    this.pedidoForm.get('idOficina')?.setValue(event.idOficina);
+  }
+
+  onClearOficina() {
+    if (this.lastSelectedOficina){
+      this.selectedOficina = this.lastSelectedOficina;
+      this.pedidoForm.get('idOficina')?.setValue(this.lastSelectedOficina.idOficina);
+    }  else {
+      this.selectedOficina = undefined; 
+      this.pedidoForm.get('idOficina')?.setValue(null);
+    }
+  }
+
+  checkIfValidInputOficina(event: KeyboardEvent) {
+    const inputValue = (event.target as HTMLInputElement).value.toLowerCase();
+    // Verificar si el texto introducido coincide con alguna de las opciones
+    const match = this.listOficina.some(oficina => 
+        this.getFullDescriptionOficina(oficina).toLowerCase()===inputValue,
+    );
+    if (!match) {
+      this.onClearOficina();
+    }else{
+      this.listOficina.forEach(oficina => {
+        if(this.getFullDescriptionOficina(oficina).toLowerCase()===inputValue){
+          this.selectedOficina = oficina;
+          this.pedidoForm.get('idOficina')?.setValue(oficina.idOficina);
+          this.lastSelectedOficina = oficina;
+          return;
+        }
+      });
+    }
+    (event.target as HTMLInputElement).value = '';
+  }
+
+  getFullDescriptionOficina(oficina: Oficina) {
+    return `${oficina.direccion}, ${oficina.localidad}`;
+  }
+
+  filterOficina(event: any) {
+    let query = event.query;
+    this.filteredOficina = this.listOficina.filter(oficina => {
+        const fullDescriptionOficina = `${oficina.direccion}, ${oficina.localidad}`;
+        return fullDescriptionOficina.toLowerCase().includes(query.toLowerCase());
+    });
+  }
+
+  //Fin cambios para el select autocompletable de filtro de oficinas
+
 }

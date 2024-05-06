@@ -12,30 +12,7 @@
         <div class="card-body">
             <p class="text-danger">* Campos obligatorios</p>
 
-            <!-- Apartado de Proveedor -->
-            <fieldset style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;" class="w-100">
-                <legend style="width: auto; border: none; font-size: 24px; font-weight: bold; color: #333;">
-                    Proveedor <span class="text-danger">*</span></legend>
-                <div class="form-group">
-                    <p-autoComplete styleClass="myAutoComplete w-100"
-                            (onSelect)="onSelectProveedor($event)" 
-                            (onClear)="onClearProveedor()"
-                            (onBlur)="checkIfValidInputProveedor($event)"
-                            [suggestions]="filteredProveedor" 
-                            (completeMethod)="filterProveedor($event)" 
-                            field="fullDescriptionProveedor"
-                            [dropdown]="true" 
-                            inputStyleClass="selected-office"
-                            class="selected-office"
-                            id="filtroProveedor"
-                            placeholder="{{ selectedProveedor ? getFullDescriptionProveedor(selectedProveedor): 'Seleccione un proveedor...' }}">
-                        <ng-template let-proveedor pTemplate="item">
-                            {{proveedor.razonSocial}}
-                        </ng-template>
-                    </p-autoComplete>
-                </div>
-            </fieldset>
-
+            
             <!-- Apartado de Líneas -->
             <fieldset style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
                 <legend style="width: auto; border: none; font-size: 24px; font-weight: bold; color: #333;"
@@ -65,7 +42,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                        <div class="col-md-2 col-lg-2 col-xl-2 ">
 
                             <div class="form-group d-flex flex-column align-items-center">
                                 <label for="numeroUnidades">Unidades <span class="text-danger">*</span>
@@ -77,7 +54,7 @@
                                     </span>
                                 </label>
                                 <input id="numeroUnidades" min="1" name="numeroUnidades" type="number"
-                                    formControlName="numeroUnidades" class="form-control form-control-sm" />
+                                    formControlName="numeroUnidades" class="form-control" />
                             </div>
 
                         </div>
@@ -102,30 +79,73 @@
             </fieldset>
 
             <div class="row mt-4">
+                
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="idEmpleado">Realizado por <span class="text-danger">*</span></label>
-                        <select class="form-control form-select" id="idEmpleado" formControlName="idEmpleado">
-                            <option [value]="null" disabled>Seleccione un empleado</option>
-                            <option *ngFor="let empl of listEmpleado" [value]="empl.idEmpleado">{{ empl.nombre
-                                }} {{ empl.apellidos }}, {{ empl.dni }}</option>
-                        </select>
+                        <p-autoComplete styleClass="myAutoComplete w-100"
+                            (onSelect)="onSelectEmpleado($event)" 
+                            (onClear)="onClearEmpleado()"
+                            (onBlur)="checkIfValidInputEmpleado($event)"
+                            [suggestions]="filteredEmpleado" 
+                            (completeMethod)="filterEmpleado($event)" 
+                            field="fullDescriptionEmpleado"
+                            [dropdown]="true" 
+                            inputStyleClass="selected-office"
+                            class="selected-office"
+                            id="idEmpleado"
+                            placeholder="{{ selectedEmpleado ? getFullDescriptionEmpleado(selectedEmpleado): 'Seleccione un empleado' }}">
+                        <ng-template let-empleado pTemplate="item">
+                            {{empleado.nombre}} {{empleado.apellidos}}, {{empleado.dni}}
+                        </ng-template>
+                    </p-autoComplete>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="idOficina">Oficina <span class="text-danger">*</span></label>
-                        <select class="form-control form-select" id="idOficina" formControlName="idOficina">
-                            <option [value]="null" disabled>Seleccione una oficina</option>
-                            <option *ngFor="let ofi of listOficina" [value]="ofi.idOficina">{{ ofi.direccion }},
-                                {{ ofi.localidad }}{{ ofi.provincia !== null ? ', '+ofi.provincia : '' }}, {{
-                                ofi.pais }}</option>
-                        </select>
+                        <p-autoComplete styleClass="myAutoComplete w-100"
+                            (onSelect)="onSelectOficina($event)" 
+                            (onClear)="onClearOficina()"
+                            (onBlur)="checkIfValidInputOficina($event)"
+                            [suggestions]="filteredOficina" 
+                            (completeMethod)="filterOficina($event)" 
+                            field="fullDescriptionOficina"
+                            [dropdown]="true" 
+                            inputStyleClass="selected-office"
+                            class="selected-office"
+                            id="idOficina"
+                            placeholder="{{ selectedOficina ? getFullDescriptionOficina(selectedOficina): 'Selecione una oficina' }}">
+                        <ng-template let-oficina pTemplate="item">
+                            {{oficina.direccion}}, {{oficina.localidad}}
+                        </ng-template>
+                    </p-autoComplete>
                     </div>
                 </div>
             </div>
             <div class="row mt-4">
-                <div class="col-md-6">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="idProveedor">Proveedor <span class="text-danger">*</span></label>
+                        <p-autoComplete styleClass="myAutoComplete w-100"
+                            (onSelect)="onSelectProveedor($event)" 
+                            (onClear)="onClearProveedor()"
+                            (onBlur)="checkIfValidInputProveedor($event)"
+                            [suggestions]="filteredProveedor" 
+                            (completeMethod)="filterProveedor($event)" 
+                            field="fullDescriptionProveedor"
+                            [dropdown]="true" 
+                            inputStyleClass="selected-office"
+                            class="selected-office"
+                            id="idProveedor"
+                            placeholder="{{ selectedProveedor ? getFullDescriptionProveedor(selectedProveedor): 'Seleccione un proveedor' }}">
+                        <ng-template let-proveedor pTemplate="item">
+                            {{proveedor.razonSocial}}
+                        </ng-template>
+                    </p-autoComplete>
+                    </div>
+                </div>
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="medioPago">Medio de pago <span class="text-danger">*</span></label>
                         <select class="form-control form-select" id="medioPago" formControlName="medioPago">
@@ -135,7 +155,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="condicionPago">Condición <span class="text-danger">*</span></label>
                         <select class="form-control form-select" id="condicionPago" formControlName="condicionPago">
