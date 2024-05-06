@@ -8,6 +8,8 @@
     background-color: #ffffff;
     color: #000000;
     border: 1px solid #ced4da;
+    user-select: none; /* Esto evitará que el texto pueda ser seleccionado */
+    cursor: pointer; 
 }
 
 .custom-pagination .page-link:hover {
@@ -25,3 +27,4 @@
 .custom-pagination .page-item:hover {
     cursor: pointer;
 }
+

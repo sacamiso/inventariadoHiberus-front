@@ -179,6 +179,12 @@ export class EntradasComponent implements OnInit {
       fechaInicioIntervalo: null,
       fechaFinIntervalo: null
     }
+    this.selectedOficina = undefined;
+    this.lastSelectedOficina = undefined;
+    this.selectedEmpleado = undefined;
+    this.lastSelectedEmpleado = undefined;
+    this.selectedProveedor = undefined;
+    this.lastSelectedProveedor = undefined;
     this.listaElementosMostrar(this.tamPag, this.pagina);
   }
 
@@ -216,4 +222,173 @@ export class EntradasComponent implements OnInit {
     this.alertPlaceholder.appendChild(wrapper);
   }
 
+  //cambios para el select autocompletable de filtro de oficinas
+  
+  filteredOficina: Array<Oficina> = [];
+  selectedOficina: Oficina | undefined;
+  lastSelectedOficina: Oficina | undefined;
+
+  onSelectOficina(event: any) {
+    // Cuando seleccionas una oficina del dropdown, actualiza el objeto seleccionado
+    this.selectedOficina = event;
+    this.lastSelectedOficina = event;
+    this.filtros.idOficina = event.idOficina;
+  }
+
+  onClearOficina() {
+    if (this.lastSelectedOficina){
+      this.selectedOficina = this.lastSelectedOficina;
+      this.filtros.idOficina = this.lastSelectedOficina.idOficina;
+    }  else {
+      this.selectedOficina = undefined; 
+      this.filtros.idOficina = 0;
+    }
+  }
+
+  checkIfValidInputOficina(event: KeyboardEvent) {
+    const inputValue = (event.target as HTMLInputElement).value.toLowerCase();
+    // Verificar si el texto introducido coincide con alguna de las opciones
+    const match = this.listOficinas.some(oficina => 
+        this.getFullDescriptionOficina(oficina).toLowerCase()===inputValue,
+    );
+    if (!match) {
+      this.onClearOficina();
+    }else{
+      this.listOficinas.forEach(oficina => {
+        if(this.getFullDescriptionOficina(oficina).toLowerCase()===inputValue){
+          this.selectedOficina = oficina;
+          this.filtros.idOficina = oficina.idOficina;
+          this.lastSelectedOficina = oficina;
+          return;
+        }
+      });
+    }
+    (event.target as HTMLInputElement).value = '';
+  }
+
+  getFullDescriptionOficina(oficina: Oficina) {
+    return `${oficina.direccion}, ${oficina.localidad}`;
+  }
+
+  filterOficina(event: any) {
+    let query = event.query;
+    this.filteredOficina = this.listOficinas.filter(oficina => {
+        const fullDescriptionOficina = `${oficina.direccion}, ${oficina.localidad}`;
+        return fullDescriptionOficina.toLowerCase().includes(query.toLowerCase());
+    });
+  }
+
+  //Fin cambios para el select autocompletable de filtro de oficinas
+
+  //cambios para el select autocompletable de filtro de empleado
+  
+  filteredEmpleado: Array<Empleado> = [];
+  selectedEmpleado: Empleado | undefined;
+  lastSelectedEmpleado: Empleado | undefined;
+
+  onSelectEmpleado(event: any) {
+    // Cuando seleccionas una oficina del dropdown, actualiza el objeto seleccionado
+    this.selectedEmpleado = event;
+    this.lastSelectedEmpleado = event;
+    this.filtros.idEmpleado = event.idEmpleado;
+  }
+
+  onClearEmpleado() {
+    if (this.lastSelectedEmpleado){
+      this.selectedEmpleado = this.lastSelectedEmpleado;
+      this.filtros.idEmpleado = this.lastSelectedEmpleado.idEmpleado;
+    }  else {
+      this.selectedEmpleado = undefined; 
+      this.filtros.idEmpleado = 0;
+    }
+  }
+
+  checkIfValidInputEmpleado(event: KeyboardEvent) {
+    const inputValue = (event.target as HTMLInputElement).value.toLowerCase();
+    // Verificar si el texto introducido coincide con alguna de las opciones
+    const match = this.listEmpleados.some(empleado => 
+        this.getFullDescriptionEmpleado(empleado).toLowerCase()===inputValue,
+    );
+    if (!match) {
+      this.onClearEmpleado();
+    }else{
+      this.listEmpleados.forEach(empleado => {
+        if(this.getFullDescriptionEmpleado(empleado).toLowerCase()===inputValue){
+          this.selectedEmpleado = empleado;
+          this.filtros.idEmpleado = empleado.idEmpleado;
+          this.lastSelectedEmpleado = empleado;
+          return;
+        }
+      });
+    }
+    (event.target as HTMLInputElement).value = '';
+  }
+
+  getFullDescriptionEmpleado(empleado: Empleado) {
+    return `${empleado.nombre} ${empleado.apellidos}, ${empleado.dni}`;
+  }
+
+  filterEmpleado(event: any) {
+    let query = event.query;
+    this.filteredEmpleado = this.listEmpleados.filter(empleado => {
+        const fullDescriptionEmpleado = `${empleado.nombre} ${empleado.apellidos}, ${empleado.dni}`;
+        return fullDescriptionEmpleado.toLowerCase().includes(query.toLowerCase());
+    });
+  }
+  //Fin cambios para el select autocompletable de filtro de empleado
+
+  //cambios para el select autocompletable de filtro de proveedor
+
+  filteredProveedor: Array<Proveedor> = [];
+  selectedProveedor: Proveedor | undefined;
+  lastSelectedProveedor: Proveedor | undefined;
+
+  onSelectProveedor(event: any) {
+    this.selectedProveedor = event;
+    this.lastSelectedProveedor = event;
+    this.filtros.idProveedor = event.idProveedor;
+  }
+
+  onClearProveedor() {
+    if (this.lastSelectedProveedor){
+      this.selectedProveedor = this.lastSelectedProveedor;
+      this.filtros.idProveedor = this.lastSelectedProveedor.idProveedor;
+    }  else {
+      this.selectedProveedor = undefined; 
+      this.filtros.idProveedor = 0;
+    }
+  }
+
+  checkIfValidInputProveedor(event: KeyboardEvent) {
+    const inputValue = (event.target as HTMLInputElement).value.toLowerCase();
+    const match = this.listProveedores.some(proveedor => 
+        this.getFullDescriptionProveedor(proveedor).toLowerCase()===inputValue,
+    );
+    if (!match) {
+      this.onClearProveedor();
+    }else{
+      this.listProveedores.forEach(proveedor => {
+        if(this.getFullDescriptionProveedor(proveedor).toLowerCase()===inputValue){
+          this.selectedProveedor = proveedor;
+          this.filtros.idProveedor = proveedor.idProveedor;
+          this.lastSelectedProveedor = proveedor;
+          return;
+        }
+      });
+    }
+    (event.target as HTMLInputElement).value = '';
+  }
+
+  getFullDescriptionProveedor(proveedor: Proveedor) {
+    return `${proveedor.razonSocial}`;
+  }
+
+  filterProveedor(event: any) {
+    let query = event.query;
+    this.filteredProveedor = this.listProveedores.filter(proveedor => {
+        const fullDescriptionProveedor = `${proveedor.razonSocial}`;
+        return fullDescriptionProveedor.toLowerCase().includes(query.toLowerCase());
+    });
+  }
+  //Fin cambios para el select autocompletable de filtro de proveedor
 }
