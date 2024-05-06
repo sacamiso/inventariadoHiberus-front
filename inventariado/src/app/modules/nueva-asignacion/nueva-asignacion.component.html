@@ -11,10 +11,21 @@
     <div class="row justify-content-center">
         <div class="col-6">
             <h2 class="text-center">Oficina</h2>
-            <select id="ofi" class="form-control form-select" [(ngModel)]="idOficinaSeleccionada" (ngModelChange)="changeOfi()" required>
-                <option [value]=0 disabled>Seleccione la oficina del empleado:</option>
-                <option *ngFor="let oficina of listOficinas" [value]="oficina.idOficina">{{oficina.direccion}}, {{oficina.localidad}}</option>
-            </select>
+            <p-autoComplete styleClass="myAutoComplete w-100"
+                            (onSelect)="onSelectOficina($event)" 
+                            (onClear)="onClear()"
+                            (onBlur)="checkIfValidInput($event)"
+                            [suggestions]="filteredOficinas" 
+                            (completeMethod)="filterOficina($event)" 
+                            field="fullDescription"
+                            [dropdown]="true" 
+                            inputStyleClass="selected-office"
+                            class="selected-office"
+                            placeholder="{{ selectedOficina ? getFullDescription(selectedOficina) : 'Seleccione la oficina...' }}">
+                <ng-template let-oficina pTemplate="item">
+                    {{oficina.direccion}}, {{oficina.localidad}}
+                </ng-template>
+            </p-autoComplete>
         </div>
     </div>
     
@@ -29,11 +40,16 @@
                         <div class="form-group">
                             <label for="idEmpleado">Seleccione el empleado <span class="text-danger">*</span></label>
                             <select class="form-control form-select" id="idEmpleado" formControlName="idEmpleado" required
-                            [ngClass]="{'is-invalid': asignacionForm.get('idEmpleado')?.invalid && formularioEnviado}">
+                            [(ngModel)]="selectedItemId" [ngClass]="{'is-invalid': asignacionForm.get('idEmpleado')?.invalid && formularioEnviado}">
+                                <option
+                                    *ngIf="listEmpleados?.message?.length !== undefined && listEmpleados?.message?.length !== 0"
+                                    [value]="null" disabled [selected]="selectedItemId===null">Seleccione el articulo
+                                </option>
                                 <option *ngFor="let listE of listEmpleados?.message" [ngValue]="listE.idEmpleado">
                                     {{ listE.dni }}: {{ listE.nombre }} {{ listE.apellidos }}
                                 </option>
-                                <option *ngIf=" listEmpleados?.message?.length === 0" [ngValue]="0" disabled>
+                                <option *ngIf=" listEmpleados?.message?.length === 0" [value]="null" disabled 
+                                [selected]="selectedItemId===null">
                                     No se encuentran empleados en esa oficina
                                 </option>
                             </select>
@@ -44,11 +60,16 @@
                         <div class="form-group">
                             <label for="codUnidad">Seleccione la unidad <span class="text-danger">*</span></label>
                             <select class="form-control form-select" id="codUnidad" formControlName="codUnidad" required
-                            [ngClass]="{'is-invalid': asignacionForm.get('codUnidad')?.invalid && formularioEnviado}">
+                            [(ngModel)]="selectedItemId2" [ngClass]="{'is-invalid': asignacionForm.get('codUnidad')?.invalid && formularioEnviado}">
+                                <option
+                                    *ngIf="listUnidades?.message?.length !== undefined && listUnidades?.message?.length !== 0"
+                                    [value]="null" disabled [selected]="selectedItemId===null">Seleccione la unidad
+                                </option>   
                                 <option *ngFor="let listU of listUnidades?.message" [ngValue]="listU.codigoInterno">
                                     {{ listU.codigoInterno }}: {{ listU.articulo.descripcion }}
                                 </option>
-                                <option *ngIf=" listUnidades?.message?.length === 0" [ngValue]="0" disabled>
+                                <option *ngIf=" listUnidades?.message?.length === 0" [ngValue]="null" disabled
+                                [selected]="selectedItemId2===null">
                                     No se encuentran unidades disponibles en esa oficina
                                 </option>
                             </select>

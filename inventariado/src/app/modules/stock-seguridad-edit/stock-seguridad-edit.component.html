@@ -12,10 +12,21 @@
             <div class="row justify-content-center">
                 <div class="col-6">
                     <h2 class="text-center">Oficina</h2>
-                    <select id="ofi" class="form-control form-select" [(ngModel)]="idOficinaSeleccionada" (ngModelChange)="changeOfi()" required>
-                        <option [value]=0 disabled>Seleccione la oficina de la que desea editar el stock de seguridad:</option>
-                        <option *ngFor="let oficina of listOficina" [value]="oficina.idOficina">{{oficina.direccion}}, {{oficina.localidad}}</option>
-                    </select>
+                    <p-autoComplete styleClass="myAutoComplete w-100"
+                            (onSelect)="onSelectOficina($event)" 
+                            (onClear)="onClear()"
+                            (onBlur)="checkIfValidInput($event)"
+                            [suggestions]="filteredOficinas" 
+                            (completeMethod)="filterOficina($event)" 
+                            field="fullDescription"
+                            [dropdown]="true" 
+                            inputStyleClass="selected-office"
+                            class="selected-office"
+                            placeholder="{{ selectedOficina ? getFullDescription(selectedOficina) : 'Seleccione la oficina...' }}">
+                        <ng-template let-oficina pTemplate="item">
+                            {{oficina.direccion}}, {{oficina.localidad}}
+                        </ng-template>
+                    </p-autoComplete>
                 </div>
             </div>
             
@@ -33,6 +44,9 @@
                 <div class="mt-2" id="liveAlert"></div>
                 <div *ngIf="repetido" class="text-danger mt-2">
                     {{ mensajeRepetido }}
+                </div>
+                <div *ngIf="stockSeguridad.length===0" class="text-danger mt-2">
+                    Actualmente no hay nigún stock de seguridad registrado para la oficina seleccionada.
                 </div>
                 <table class="table table-striped table-bordered">
                     <thead class="thead-dark">

@@ -59,11 +59,22 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="idOficina">Oficina<span class="text-danger">*</span></label>
-                            <select class="form-control form-select" id="idOficina" formControlName="idOficina"  [ngClass]="{'is-invalid': empleadoForm.get('idOficina')?.invalid && formularioEnviado}">
-                                <option [value]="" disabled>Seleccione la oficina</option>
-                                <option *ngFor="let oficina of listOficinas" [value]="oficina.idOficina">
-                                {{ oficina.direccion }}, {{ oficina.localidad }}</option>
-                            </select>
+                            <p-autoComplete styleClass="myAutoComplete w-100"
+                                (onSelect)="onSelectOficina($event)" 
+                                (onClear)="onClearOficina()"
+                                (onBlur)="checkIfValidInputOficina($event)"
+                                [suggestions]="filteredOficina" 
+                                (completeMethod)="filterOficina($event)" 
+                                field="fullDescriptionOficina"
+                                [dropdown]="true" 
+                                inputStyleClass="selected-office"
+                                class="selected-office"
+                                id="idOficina"
+                                placeholder="{{ selectedOficina ? getFullDescriptionOficina(selectedOficina): 'Selecione una oficina' }}">
+                                <ng-template let-oficina pTemplate="item">
+                                    {{oficina.direccion}}, {{oficina.localidad}}
+                                </ng-template>
+                            </p-autoComplete>
                         </div>
                     </div>
                 </div>

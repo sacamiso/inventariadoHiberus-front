@@ -198,4 +198,63 @@ export class StockSeguridadEditComponent implements OnInit {
     this.router.navigate([`gestion/stockSeguridad`]);
   }
 
+  filteredOficinas: Array<Oficina> = [];
+  selectedOficina: Oficina | undefined;
+  lastSelectedOficina: Oficina | undefined;
+
+  filterOficina(event: any) {
+    let query = event.query;
+    this.filteredOficinas = this.listOficina.filter(oficina => {
+        const fullDescription = `${oficina.direccion}, ${oficina.localidad}`;
+        return fullDescription.toLowerCase().includes(query.toLowerCase());
+    });
+  }
+
+  onSelectOficina(event: any) {
+    // Cuando seleccionas una oficina del dropdown, actualiza el objeto seleccionado
+    this.selectedOficina = event;
+    this.lastSelectedOficina = event;
+    this.idOficinaSeleccionada = event.idOficina;
+    this.changeOfi();
+  }
+
+  onClear() {
+    if (this.lastSelectedOficina){
+      this.selectedOficina = this.lastSelectedOficina;
+      this.idOficinaSeleccionada = this.lastSelectedOficina.idOficina;
+    }  else {
+      this.selectedOficina = undefined; 
+      this.idOficinaSeleccionada = 0;
+    }
+    this.changeOfi();
+  }
+
+  getFullDescription(oficina: Oficina) {
+    return `${oficina.direccion}, ${oficina.localidad}`;
+  }
+
+  checkIfValidInput(event: KeyboardEvent) {
+
+    const inputValue = (event.target as HTMLInputElement).value.toLowerCase();
+    // Verificar si el texto introducido coincide con alguna de las opciones
+    const match = this.listOficina.some(oficina => 
+        this.getFullDescription(oficina).toLowerCase()===inputValue,
+    );
+
+    if (!match) {
+      this.onClear();
+    }else{
+      this.listOficina.forEach(oficina => {
+        if(this.getFullDescription(oficina).toLowerCase()===inputValue){
+          this.selectedOficina = oficina;
+          this.idOficinaSeleccionada = oficina.idOficina;
+          this.lastSelectedOficina = oficina;
+          this.changeOfi();
+          return;
+        }
+      });
+    }
+    (event.target as HTMLInputElement).value = '';
+  }
+
 }

@@ -116,10 +116,10 @@
                             class="selected-office"
                             id="idOficina"
                             placeholder="{{ selectedOficina ? getFullDescriptionOficina(selectedOficina): 'Selecione una oficina' }}">
-                        <ng-template let-oficina pTemplate="item">
-                            {{oficina.direccion}}, {{oficina.localidad}}
-                        </ng-template>
-                    </p-autoComplete>
+                            <ng-template let-oficina pTemplate="item">
+                                {{oficina.direccion}}, {{oficina.localidad}}
+                            </ng-template>
+                        </p-autoComplete>
                     </div>
                 </div>
             </div>

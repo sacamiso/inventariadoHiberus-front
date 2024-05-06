@@ -37,6 +37,8 @@ export class NuevaAsignacionComponent implements OnInit {
   cargado1 = false;
   idOficinaSeleccionada : number = 0;
   cargado2 = false;
+  selectedItemId: any = null;
+  selectedItemId2: any = null;
 
   formularioEnviado = false;
 
@@ -57,7 +59,16 @@ export class NuevaAsignacionComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.buildForm();
     this.cargarDatos1();
+  }
+
+  buildForm(){
+    this.asignacionForm = this.formBuilder.group({
+      fechaInicio:  [null, Validators.required],
+      idEmpleado:   [null, [Validators.required, Validators.min(1)]],
+      codUnidad:    [null, [Validators.required, Validators.min(1)]]
+    });
   }
 
   async cargarDatos1() {
@@ -73,6 +84,7 @@ export class NuevaAsignacionComponent implements OnInit {
     this.asignacionForm.reset();
     if(this.idOficinaSeleccionada != 0 && this.idOficinaSeleccionada!= null && this.idOficinaSeleccionada!= undefined) {
       await this.cargarDatos2();
+      this.buildForm();
       
     }else{
       this.cargado2 = false;
@@ -138,5 +150,65 @@ export class NuevaAsignacionComponent implements OnInit {
         this.alerta(error.error.error, 'danger');
       }
     })
+  }
+
+
+  filteredOficinas: Array<Oficina> = [];
+  selectedOficina: Oficina | undefined;
+  lastSelectedOficina: Oficina | undefined;
+
+  filterOficina(event: any) {
+    let query = event.query;
+    this.filteredOficinas = this.listOficinas.filter(oficina => {
+        const fullDescription = `${oficina.direccion}, ${oficina.localidad}`;
+        return fullDescription.toLowerCase().includes(query.toLowerCase());
+    });
+  }
+
+  onSelectOficina(event: any) {
+    // Cuando seleccionas una oficina del dropdown, actualiza el objeto seleccionado
+    this.selectedOficina = event;
+    this.lastSelectedOficina = event;
+    this.idOficinaSeleccionada = event.idOficina;
+    this.changeOfi();
+  }
+
+  onClear() {
+    if (this.lastSelectedOficina){
+      this.selectedOficina = this.lastSelectedOficina;
+      this.idOficinaSeleccionada = this.lastSelectedOficina.idOficina;
+    }  else {
+      this.selectedOficina = undefined; 
+      this.idOficinaSeleccionada = 0;
+    }
+    this.changeOfi();
+  }
+
+  getFullDescription(oficina: Oficina) {
+    return `${oficina.direccion}, ${oficina.localidad}`;
+  }
+
+  checkIfValidInput(event: KeyboardEvent) {
+
+    const inputValue = (event.target as HTMLInputElement).value.toLowerCase();
+    // Verificar si el texto introducido coincide con alguna de las opciones
+    const match = this.listOficinas.some(oficina => 
+        this.getFullDescription(oficina).toLowerCase()===inputValue,
+    );
+
+    if (!match) {
+      this.onClear();
+    }else{
+      this.listOficinas.forEach(oficina => {
+        if(this.getFullDescription(oficina).toLowerCase()===inputValue){
+          this.selectedOficina = oficina;
+          this.idOficinaSeleccionada = oficina.idOficina;
+          this.lastSelectedOficina = oficina;
+          this.changeOfi();
+          return;
+        }
+      });
+    }
+    (event.target as HTMLInputElement).value = '';
   }
 }

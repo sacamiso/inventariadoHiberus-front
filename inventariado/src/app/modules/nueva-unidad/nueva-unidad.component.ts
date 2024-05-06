@@ -144,7 +144,7 @@ export class NuevaUnidadComponent implements OnInit {
   }
 
   guardarUnidad(){
-    
+    debugger
     let pasavalidacion = true;
     if(this.idOficinaSeleccionada === 0){
       this.oficinaInvalida = true;
@@ -202,4 +202,66 @@ export class NuevaUnidadComponent implements OnInit {
   goBack() {
     this.router.navigate([`gestion/unidades`]);
   }
+
+  //cambios para el select autocompletable de filtro de oficinas
+
+  filteredOficina: Array<Oficina> = [];
+  selectedOficina: Oficina | undefined;
+  lastSelectedOficina: Oficina | undefined;
+
+  onSelectOficina(event: any) {
+    // Cuando seleccionas una oficina del dropdown, actualiza el objeto seleccionado
+    this.selectedOficina = event;
+    this.lastSelectedOficina = event;
+    this.idOficinaSeleccionada = event.idOficina;
+    this.changeOfi();
+  }
+
+  onClearOficina() {
+    if (this.lastSelectedOficina){
+      this.selectedOficina = this.lastSelectedOficina;
+      this.idOficinaSeleccionada = this.lastSelectedOficina.idOficina;
+    }  else {
+      this.selectedOficina = undefined; 
+      this.idOficinaSeleccionada= 0;
+    }
+    this.changeOfi();
+  }
+
+  checkIfValidInputOficina(event: KeyboardEvent) {
+    const inputValue = (event.target as HTMLInputElement).value.toLowerCase();
+    // Verificar si el texto introducido coincide con alguna de las opciones
+    const match = this.listOficina.some(oficina => 
+        this.getFullDescriptionOficina(oficina).toLowerCase()===inputValue,
+    );
+    if (!match) {
+      this.onClearOficina();
+    }else{
+      this.listOficina.forEach(oficina => {
+        if(this.getFullDescriptionOficina(oficina).toLowerCase()===inputValue){
+          this.selectedOficina = oficina;
+          this.idOficinaSeleccionada = oficina.idOficina;
+          this.lastSelectedOficina = oficina;
+          this.changeOfi();
+          return;
+        }
+      });
+    }
+    (event.target as HTMLInputElement).value = '';
+  }
+
+  getFullDescriptionOficina(oficina: Oficina) {
+    return `${oficina.direccion}, ${oficina.localidad}`;
+  }
+
+  filterOficina(event: any) {
+    let query = event.query;
+    this.filteredOficina = this.listOficina.filter(oficina => {
+        const fullDescriptionOficina = `${oficina.direccion}, ${oficina.localidad}`;
+        return fullDescriptionOficina.toLowerCase().includes(query.toLowerCase());
+    });
+  }
+
+  //Fin cambios para el select autocompletable de filtro de oficinas
+
 }
