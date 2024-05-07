@@ -19,7 +19,7 @@
 <nav *ngIf="numeroElementos > tamPag" class="p-3">
     <ul class="pagination justify-content-center custom-pagination">
       <li *ngIf="pagActual > 0" class="page-item" [ngClass]="{'disabled': pagActual === 0}">
-        <a class="page-link" (click)="irAnterior()">&lt;</a>
+        <a class="page-link flecha" (click)="irAnterior()">&lt;</a>
       </li>
       <ng-container *ngFor="let pag of aux">
         <ng-container *ngIf="pag === -1">
@@ -34,7 +34,7 @@
         </ng-container>
       </ng-container>
       <li *ngIf="pagActual < (numPagTotales-1)" class="page-item" [ngClass]="{'disabled': pagActual === numPagTotales - 1}">
-        <a class="page-link" (click)="irSiguiente()">&gt;</a>
+        <a class="page-link flecha" (click)="irSiguiente()">&gt;</a>
       </li>
     </ul>
   </nav>

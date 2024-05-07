@@ -28,3 +28,12 @@
     cursor: pointer;
 }
 
+.custom-pagination .flecha {
+    background-color: #d6d8db; /* Fondo gris */
+}
+
+.custom-pagination .flecha:hover {
+    background-color: #e9ecef; /* Cambio al pasar el ratón */
+    color: #000000;
+}
+

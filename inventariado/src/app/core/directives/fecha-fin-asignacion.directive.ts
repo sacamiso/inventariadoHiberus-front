@@ -21,7 +21,6 @@ export class FechaFinAsignacionDirective implements Validator{
 export function fechaFinMayorQueInicioValidator(fechaInicio: string): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
     const fechaInicioControl = control.root.get(fechaInicio);
-
     if (fechaInicioControl && control.value) {
       const fechaInicioValue = new Date(fechaInicioControl.value);
       const fechaFinValue = new Date(control.value);
@@ -30,7 +29,6 @@ export function fechaFinMayorQueInicioValidator(fechaInicio: string): ValidatorF
         return { 'fechaFinAntesInicio': true };
       }
     }
-
     return null;
   };
 }
