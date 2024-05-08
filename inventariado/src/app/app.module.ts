@@ -45,6 +45,7 @@ import { AsignacionEditComponent } from './modules/asignacion-edit/asignacion-ed
 import { FechaFinAsignacionDirective } from './core/directives/fecha-fin-asignacion.directive';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AutoCompleteModule} from 'primeng/autocomplete';
+import { LoginComponent } from './modules/login/login.component';
 
 
 
@@ -87,6 +88,7 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
     NuevaAsignacionComponent,
     AsignacionEditComponent,
     FechaFinAsignacionDirective,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

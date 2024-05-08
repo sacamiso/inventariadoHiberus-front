@@ -46,6 +46,13 @@
                       </ul>
                 </li>        
             </ul>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                
+                <li [ngClass]="seleccionado == 6 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(6)">
+                    <a routerLink="/login" class="nav-link"> Iniciar sesión </a>
+                </li>
+                
+            </ul>
         </div>
     </div>    
 </nav>

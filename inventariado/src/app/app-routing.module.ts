@@ -32,6 +32,7 @@ import { AsignacionesComponent } from './modules/asignaciones/asignaciones.compo
 import { DetalleAsignacionComponent } from './modules/detalle-asignacion/detalle-asignacion.component';
 import { NuevaAsignacionComponent } from './modules/nueva-asignacion/nueva-asignacion.component';
 import { AsignacionEditComponent } from './modules/asignacion-edit/asignacion-edit.component';
+import { LoginComponent } from './modules/login/login.component';
 
 const routes: Routes = [
   {path: '', component:InicioComponent},
@@ -62,6 +63,7 @@ const routes: Routes = [
   {path: 'gestion/unidades/unidad/:id', component:DetalleUnidadComponent},
   {path: 'historial', component:HistorialInventarioComponent},
   {path: 'inventario', component:InventarioComponent},
+  {path: 'login', component:LoginComponent},
   {path: 'nuevo/pedido', component:NuevoPedidoComponent},
   {path: 'salidas', component:SalidasComponent},
   {path: 'salidas/nueva', component:NuevaSalidaComponent},

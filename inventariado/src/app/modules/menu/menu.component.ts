@@ -49,6 +49,9 @@ export class MenuComponent implements OnInit, OnDestroy  {
       case 5:
         this.seleccionado = 5;
         break;
+      case 6:
+        this.seleccionado = 6;
+        break;
       default:
         this.seleccionado = 0;
         break;
