@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { EventoAvisoService } from '../../core/services/evento-aviso.service';
+import { Empleado } from 'src/app/core/model/empleado.model';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -11,12 +13,16 @@ export class MenuComponent implements OnInit, OnDestroy  {
 
   hayAvisos = false;
 
-
+  user: Empleado | null = null;
+  isLogged: boolean = false;
+  subject = this.authService.loginSubject.subscribe((value) => {this.refreshHeader();});
+  
   private hayAvisosSubscription: Subscription = new Subscription();
 
   seleccionado: number = 0;
   constructor(
-    private eventoAvisoService: EventoAvisoService
+    private eventoAvisoService: EventoAvisoService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -24,6 +30,25 @@ export class MenuComponent implements OnInit, OnDestroy  {
       this.hayAvisos = hayAvisos;
     });
   }
+
+  async refreshHeader() {
+    
+    await this.authService.getLoggedUser()
+      .then((user) => {
+        this.user = user;
+        this.authService.usuarioActual = user;
+      })
+      .catch((error) => {this.user = null;})
+    if(this.authService.isLogged()) {
+      //this.cargarHeaderItemsLogged();
+      this.isLogged = true;
+      
+    } else {
+      //this.cargarHeaderItemsUnlogged();
+      this.isLogged = false;
+      
+    }
+  }  
 
   ngOnDestroy(): void {
     this.hayAvisosSubscription.unsubscribe();

@@ -47,3 +47,13 @@ export interface EmpleadoMsg {
     error:   string;
     message: Empleado;
 }
+
+export interface AuthRequest {
+    dni: string;
+    username: string;
+    pass: string;
+}
+
+export interface AuthResponse {
+    jwt: string;
+}

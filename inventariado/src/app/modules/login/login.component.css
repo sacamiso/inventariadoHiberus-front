@@ -1,0 +1,48 @@
+.login-card {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  
+  .login-heading {
+    font-size: 2rem; /* Hacer el título más grande */
+    letter-spacing: 1px;
+    margin-bottom: 1rem; /* Espacio reducido entre título y línea */
+    padding-bottom: 1rem; /* Ajustar padding para acercarlo a la línea */
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center; /* Alinea verticalmente los labels e inputs */
+  }
+  
+  label {
+    width: 100px; /* Establece un ancho fijo para los labels */
+    margin-right: 10px; /* Espacio entre el label y el input */
+  }
+  
+
+  .btn {
+    width: 100%; /* Hace que el botón ocupe todo el ancho del formulario */
+    padding: 10px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btn:hover {
+    background-color: #2980b9;
+  }
+
+  .custom-input {
+    width: 100%;
+  }
+

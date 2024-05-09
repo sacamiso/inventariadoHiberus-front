@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -46,6 +46,10 @@ import { FechaFinAsignacionDirective } from './core/directives/fecha-fin-asignac
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import { LoginComponent } from './modules/login/login.component';
+import { PasswordModule } from 'primeng/password';
+import { MessagesModule } from 'primeng/messages';
+import { InputTextModule } from 'primeng/inputtext';
+import { AuthInterceptorService } from './core/services/auth-interceptor.service';
 
 
 
@@ -97,9 +101,18 @@ import { LoginComponent } from './modules/login/login.component';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    PasswordModule,
+    MessagesModule,
+    InputTextModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
