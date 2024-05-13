@@ -9,14 +9,15 @@ import { AuthService } from 'src/app/core/services/auth.service';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
-export class MenuComponent implements OnInit, OnDestroy  {
+export class MenuComponent implements OnInit, OnDestroy {
 
   hayAvisos = false;
 
   user: Empleado | null = null;
   isLogged: boolean = false;
-  subject = this.authService.loginSubject.subscribe((value) => {this.refreshHeader();});
-  
+  isAdmin: boolean = false;
+  subject = this.authService.loginSubject.subscribe((value) => { this.refreshHeader(); });
+
   private hayAvisosSubscription: Subscription = new Subscription();
 
   seleccionado: number = 0;
@@ -32,23 +33,17 @@ export class MenuComponent implements OnInit, OnDestroy  {
   }
 
   async refreshHeader() {
-    
+
     await this.authService.getLoggedUser()
       .then((user) => {
         this.user = user;
         this.authService.usuarioActual = user;
       })
-      .catch((error) => {this.user = null;})
-    if(this.authService.isLogged()) {
-      //this.cargarHeaderItemsLogged();
-      this.isLogged = true;
-      
-    } else {
-      //this.cargarHeaderItemsUnlogged();
-      this.isLogged = false;
-      
-    }
-  }  
+      .catch((error) => { this.user = null; })
+    this.isLogged = this.authService.isLogged();
+    this.isAdmin = this.authService.isAdmin;
+    
+  }
 
   ngOnDestroy(): void {
     this.hayAvisosSubscription.unsubscribe();
@@ -86,7 +81,17 @@ export class MenuComponent implements OnInit, OnDestroy  {
   dropdownOpen = false;
 
   toggleDropdown(open: boolean) {
-      this.dropdownOpen = open;
+    this.dropdownOpen = open;
+  }
+
+  dropdownOpen2 = false;
+  toggleDropdown2(open: boolean) {
+    this.dropdownOpen2 = open;
+  }
+
+  cerrarSesion() {
+    this.authService.logout();
+    this.dropdownOpen2 = false;
   }
 
 }

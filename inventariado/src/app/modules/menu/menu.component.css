@@ -39,6 +39,7 @@
 .desp:hover {
     color: white;
     background-color: #19255A; /* Cambia este color al azul oscuro que desees */
+    cursor: pointer;
 }
 
 .icono-notificacion {
@@ -51,4 +52,9 @@
 .menu-imagen-hiberus {
     height: 20px; 
     width: auto; 
+}
+
+.align-right-dropdown {
+    right: 0;
+    left: auto;
 }

@@ -26,7 +26,6 @@ export class AuthInterceptorService {
       });
     }
 
-    //Ñapilla con el 403 ya que si el token ha expirado, no considera que es un error 401, así que lo manejo como 403 solo si es en auth/user para que no se mezcle con otros 403 de permisos
     return next.handle(request).pipe(
       catchError((err: HttpErrorResponse) => {
         if ((err.status === 401) || (err.status === 403 && request.url.includes('auth/user'))) {

@@ -50,6 +50,7 @@ import { PasswordModule } from 'primeng/password';
 import { MessagesModule } from 'primeng/messages';
 import { InputTextModule } from 'primeng/inputtext';
 import { AuthInterceptorService } from './core/services/auth-interceptor.service';
+import { DetalleOficinaPublicComponent } from './modules/detalle-oficina-public/detalle-oficina-public.component';
 
 
 
@@ -93,6 +94,7 @@ import { AuthInterceptorService } from './core/services/auth-interceptor.service
     AsignacionEditComponent,
     FechaFinAsignacionDirective,
     LoginComponent,
+    DetalleOficinaPublicComponent,
   ],
   imports: [
     BrowserModule,

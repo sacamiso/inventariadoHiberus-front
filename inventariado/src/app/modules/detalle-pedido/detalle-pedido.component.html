@@ -11,14 +11,14 @@
                     <p class="devuelto" *ngIf="pedido.devuelto===true">Pedido devuelto</p>
                 </div>
 
-                <div class="mt-4">
+                <div *ngIf="isAdmin" class="mt-4">
                     <button type="button" class="btn btn-primary boton-recibido" data-bs-toggle="modal"
                         [attr.data-bs-target]="'#modalRecibido' + id" [disabled]="pedido.fechaRecepcion !== null">{{
                         pedido.fechaRecepcion === null ? 'Marcar como recibido' : 'Recibido' }}</button>
 
                 </div>
 
-                <div class="modal fade" [id]="'modalRecibido' + id" tabindex="-1" aria-labelledby="modalBorrarLabel"
+                <div *ngIf="isAdmin" class="modal fade" [id]="'modalRecibido' + id" tabindex="-1" aria-labelledby="modalBorrarLabel"
                     aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -40,14 +40,14 @@
                     </div>
                 </div>
 
-                <div class="mt-4">
+                <div *ngIf="isAdmin" class="mt-4">
                     <button type="button" class="btn btn-primary boton-recibido" data-bs-toggle="modal"
                         [attr.data-bs-target]="'#modalDevolver' + id" [disabled]="pedido.fechaRecepcion === null || pedido.devuelto === true">{{
                         pedido.devuelto !== true ? 'Devolver pedido' : 'Pedido devuelto' }}</button>
 
                 </div>
 
-                <div class="modal fade" [id]="'modalDevolver' + id" tabindex="-1" aria-labelledby="modalDevolverLabel"
+                <div *ngIf="isAdmin" class="modal fade" [id]="'modalDevolver' + id" tabindex="-1" aria-labelledby="modalDevolverLabel"
                     aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -77,10 +77,10 @@
                 <div class="col col-2">
                     <button class="btn boton-recibido" (click)="volver()">Volver</button>
                 </div>
-                <div class="col col-2">
+                <div *ngIf="isAdmin" class="col col-2">
                     <button class="btn boton-descarga" (click)="descargarExcel()">Descargar en Excel</button>
                 </div>
-                <div class="col col-2">
+                <div *ngIf="isAdmin" class="col col-2">
                     <button class="btn boton-descarga" (click)="descargarPdf()">Descargar en PDF</button>
                 </div>
                 <div *ngIf="descargando" class="overlay">

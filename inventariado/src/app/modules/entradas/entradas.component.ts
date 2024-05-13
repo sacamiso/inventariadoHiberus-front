@@ -14,6 +14,7 @@ import { CondicionService } from '../../core/services/condicion.service';
 import { MedioService } from '../../core/services/medio.service';
 import { firstValueFrom } from 'rxjs';
 import { Location } from '@angular/common';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 
 @Component({
@@ -65,6 +66,10 @@ export class EntradasComponent implements OnInit {
   alertPlaceholder: HTMLElement | null;
   descargando: boolean = false;
 
+  user: Empleado | null = null;
+  isAdmin: boolean = false;
+  subject = this.authService.loginSubject.subscribe((value) => { this.refreshHeader(); });
+
   constructor(
     private location: Location,
     private readonly pedidoService: PedidoService,
@@ -73,7 +78,8 @@ export class EntradasComponent implements OnInit {
     private readonly empleadoService: EmpleadoService,
     private readonly condicionService: CondicionService,
     private readonly medioService: MedioService,
-    private readonly proveedorService: ProveedorService
+    private readonly proveedorService: ProveedorService,
+    private authService: AuthService
   ) { 
     this.alertPlaceholder = document.getElementById('liveAlert');
   }
@@ -81,6 +87,17 @@ export class EntradasComponent implements OnInit {
   ngOnInit(): void {
     this.cargarPagina(0);
     this.cargarDatos();
+    this.refreshHeader();
+  }
+
+  async refreshHeader() {
+    await this.authService.getLoggedUser()
+      .then((user) => {
+        this.user = user;
+        this.authService.usuarioActual = user;
+      })
+      .catch((error) => { this.user = null; })
+    this.isAdmin = this.authService.isAdmin;
   }
 
   async cargarDatos() {

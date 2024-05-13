@@ -8,6 +8,8 @@ import { OficinaService } from '../../core/services/oficina.service';
 import { ArticuloService } from '../../core/services/articulo.service';
 import { firstValueFrom } from 'rxjs';
 import {AutoCompleteModule} from 'primeng/autocomplete';
+import { Empleado } from 'src/app/core/model/empleado.model';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 
 @Component({
@@ -40,11 +42,17 @@ export class InventarioComponent implements OnInit {
     stockMax: null
   }
 
+  user: Empleado | null = null;
+  isAdmin: boolean = false;
+  subject = this.authService.loginSubject.subscribe((value) => { this.refreshHeader(); });
+
+
   constructor(
     private readonly inventarioService: InventarioService,
     private readonly router: Router,
     private readonly oficinaService: OficinaService,
-    private readonly articuloService: ArticuloService
+    private readonly articuloService: ArticuloService,
+    private authService: AuthService
     ) { 
       this.alertPlaceholder = document.getElementById('liveAlert');
     }
@@ -52,8 +60,19 @@ export class InventarioComponent implements OnInit {
   ngOnInit(): void {
     this.cargarPagina(0);
     this.cargarDatos();
+    this.refreshHeader();
   }
 
+  async refreshHeader() {
+    await this.authService.getLoggedUser()
+      .then((user) => {
+        this.user = user;
+        this.authService.usuarioActual = user;
+      })
+      .catch((error) => { this.user = null; })
+    this.isAdmin = this.authService.isAdmin;
+  }
+  
   async cargarDatos() {
     await this.getOficinas();
     await this.getArticulos();
@@ -119,7 +138,7 @@ export class InventarioComponent implements OnInit {
   }
 
   detalleOficina(id: number){
-    this.router.navigate([`gestion/oficinas/oficina/${id}`]);
+    this.router.navigate([`detalle/oficina/${id}`]);
   }
 
   descargarExcel() {

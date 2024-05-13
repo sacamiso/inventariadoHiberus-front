@@ -62,7 +62,7 @@
                         <div class="col-md-6 d-flex ">
                             <button class="btn btn-primary" style="background-color: #19255A; border-color: #19255A;" (click)="goBack()">Ir a Salidas</button>
                         </div>
-                        <div class="col col-6 text-end">
+                        <div *ngIf="isAdmin" class="col col-6 text-end">
                             <button class="btn boton-descarga" (click)="descargarExcel()">Descargar en Excel</button>
                         </div>
                     </div>

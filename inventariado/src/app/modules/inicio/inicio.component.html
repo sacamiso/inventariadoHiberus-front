@@ -7,42 +7,39 @@
         </div>
     </div>
     <div class="container">
-        <section class="mt-5">
+        <section *ngIf="isAdmin" class="mt-5">
             <div class="row">
-                <div class="col-md-4 text-center mb-4">
+                <div class="col-lg-4 col-md-4 col-sm-6 text-center mb-4">
                   <a routerLink="/inventario" class="text-decoration-none color">
                     <i class="fas fa-archive fa-3x"></i>
                     <p class="fs-5">Inventario</p>
                   </a>
                 </div>
-                <div class="col-md-4 text-center mb-4">
+                <div class="col-lg-4 col-md-4 col-sm-6 text-center mb-4">
                   <a routerLink="/entradas" class="text-decoration-none color">
                     <i class="fas fa-truck fa-3x"></i>
                     <p class="fs-5">Entradas</p>
                   </a>
                 </div>
-                <div class="col-md-4 text-center mb-4">
-                  <a routerLink="/avisos" class="text-decoration-none color">
-                    <i class="fas fa-exclamation-triangle fa-3x"></i>
-                    <p class="fs-5">Avisos</p>
-                  </a>
-                </div>
-                
-            </div>
-            <div class="row">
-                <div class="col-md-4 text-center mb-4">
-                  <a routerLink="/historial" class="text-decoration-none color">
-                    <i class="fas fa-history fa-3x"></i>
-                    <p class="fs-5">Historial</p>
-                  </a>
-                </div>
-                <div class="col-md-4 text-center mb-4">
+                <div class="col-lg-4 col-md-4 col-sm-6 text-center mb-4">
                   <a routerLink="/salidas" class="text-decoration-none color">
                     <i class="fas fa-sign-out-alt fa-3x"></i>
                     <p class="fs-5">Salidas</p>
                   </a>
                 </div>
-                <div class="col-md-4 text-center mb-4">
+                <div class="col-lg-4 col-md-4 col-sm-6 text-center mb-4">
+                  <a routerLink="/historial" class="text-decoration-none color">
+                    <i class="fas fa-history fa-3x"></i>
+                    <p class="fs-5">Historial</p>
+                  </a>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 text-center mb-4">
+                  <a routerLink="/avisos" class="text-decoration-none color">
+                    <i class="fas fa-exclamation-triangle fa-3x"></i>
+                    <p class="fs-5">Avisos</p>
+                  </a>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 text-center mb-4">
                   <a routerLink="/gestion" class="text-decoration-none color">
                     <i class="fas fa-tasks fa-3x"></i>
                     <p class="fs-5">Gestión</p>
@@ -50,6 +47,34 @@
                 </div>
             </div>
         </section>
+        <section *ngIf="!isAdmin" class="mt-5">
+          <div class="row">
+              <div class="col-lg-3 col-md-4 col-sm-6 text-center mb-4">
+                <a routerLink="/inventario" class="text-decoration-none color">
+                  <i class="fas fa-archive fa-3x"></i>
+                  <p class="fs-5">Inventario</p>
+                </a>
+              </div>
+              <div class="col-lg-3 col-md-4 col-sm-6 text-center mb-4">
+                <a routerLink="/entradas" class="text-decoration-none color">
+                  <i class="fas fa-truck fa-3x"></i>
+                  <p class="fs-5">Entradas</p>
+                </a>
+              </div>
+              <div class="col-lg-3 col-md-4 col-sm-6 text-center mb-4">
+                <a routerLink="/salidas" class="text-decoration-none color">
+                  <i class="fas fa-sign-out-alt fa-3x"></i>
+                  <p class="fs-5">Salidas</p>
+                </a>
+              </div>
+              <div class="col-lg-3 col-md-4 col-sm-6 text-center mb-4">
+                <a routerLink="/historial" class="text-decoration-none color">
+                  <i class="fas fa-history fa-3x"></i>
+                  <p class="fs-5">Historial</p>
+                </a>
+              </div>
+          </div>
+      </section>
     </div>
     
   </div>

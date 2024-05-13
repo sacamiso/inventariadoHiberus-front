@@ -8,6 +8,8 @@ import { Articulo } from 'src/app/core/model/articulo.model';
 import { OficinaService } from '../../core/services/oficina.service';
 import { ArticuloService } from '../../core/services/articulo.service';
 import { firstValueFrom } from 'rxjs';
+import { Empleado } from 'src/app/core/model/empleado.model';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-historial-inventario',
@@ -41,12 +43,18 @@ export class HistorialInventarioComponent implements OnInit {
     fechaFinIntervalo: null
   }
 
+  user: Empleado | null = null;
+  isAdmin: boolean = false;
+  subject = this.authService.loginSubject.subscribe((value) => { this.refreshHeader(); });
+
+
   constructor(
     private readonly historialService: HistorialService,
     private readonly router: Router,
     private location: Location,
     private readonly oficinaService: OficinaService,
-    private readonly articuloService: ArticuloService
+    private readonly articuloService: ArticuloService,
+    private authService: AuthService
     ) { 
       this.alertPlaceholder = document.getElementById('liveAlert');
     }
@@ -54,8 +62,18 @@ export class HistorialInventarioComponent implements OnInit {
   ngOnInit(): void {
     this.cargarPagina(0);
     this.cargarDatos();
+    this.refreshHeader();
   }
 
+  async refreshHeader() {
+    await this.authService.getLoggedUser()
+      .then((user) => {
+        this.user = user;
+        this.authService.usuarioActual = user;
+      })
+      .catch((error) => { this.user = null; })
+    this.isAdmin = this.authService.isAdmin;
+  }
   async cargarDatos() {
     await this.getOficinas();
     await this.getArticulos();

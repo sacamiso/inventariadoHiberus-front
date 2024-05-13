@@ -27,9 +27,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.hayAvisos();
-    // interval(this.intervalo).subscribe(() => {
-    //   this.hayAvisosCron();
-    // });
+    interval(this.intervalo).subscribe(() => {
+      this.hayAvisosCron();
+    });
   }
 
   hayAvisos() {

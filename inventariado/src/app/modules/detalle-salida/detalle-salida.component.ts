@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { SalidaService } from '../../core/services/salida.service';
 import { Location } from '@angular/common';
 import { MesaggeResponse } from 'src/app/core/model/mesagge-response.model';
+import { Empleado } from 'src/app/core/model/empleado.model';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-detalle-salida',
@@ -22,11 +24,16 @@ export class DetalleSalidaComponent implements OnInit {
 
   descargando: boolean = false;
 
+  user: Empleado | null = null;
+  isAdmin: boolean = false;
+  subject = this.authService.loginSubject.subscribe((value) => { this.refreshHeader(); });
+
   constructor(
     private route: ActivatedRoute,
     private readonly salidaService: SalidaService,
     private readonly router: Router,
-    private location: Location
+    private location: Location,
+    private authService: AuthService
   ) {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.alertPlaceholder = document.getElementById('liveAlert');
@@ -34,8 +41,18 @@ export class DetalleSalidaComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargaDatos();
+    this.refreshHeader();
   }
 
+  async refreshHeader() {
+    await this.authService.getLoggedUser()
+      .then((user) => {
+        this.user = user;
+        this.authService.usuarioActual = user;
+      })
+      .catch((error) => { this.user = null; })
+    this.isAdmin = this.authService.isAdmin;
+  }
   cargaDatos() {
     this.getSalida();
   }

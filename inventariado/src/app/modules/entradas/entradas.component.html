@@ -14,7 +14,7 @@
                     {{ mostrarFiltros ? 'Ocultar Filtros' : 'Mostrar Filtros' }}
                 </button>
             </div>
-            <div class="col-md-6 text-end">
+            <div *ngIf="isAdmin" class="col-md-6 text-end">
                 <button class="btn btn-success" (click)="crearNuevoPedido()">Nuevo Pedido</button>
             </div>
         </div>
@@ -240,7 +240,7 @@
                 <div class="col col-5">
                     <h2>Información de Pedidos</h2>
                 </div>
-                <div *ngIf="numeroPedidos>0" class="col col-2">
+                <div *ngIf="numeroPedidos>0 && isAdmin" class="col col-2">
                     <button class="btn boton-descarga" (click)="descargarExcel()">Descargar en Excel</button>
                 </div>
                 <div class="col col-5">

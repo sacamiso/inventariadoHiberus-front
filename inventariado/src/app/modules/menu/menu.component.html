@@ -12,16 +12,16 @@
                         <img src="assets/images/Hiberus_Blanco.png" alt="Inicio" class="menu-imagen-hiberus"/>    
                     </a>
                 </li>
-                <li [ngClass]="seleccionado == 1 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(1)">
+                <li *ngIf="isLogged" [ngClass]="seleccionado == 1 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(1)">
                     <a routerLink="/inventario" class="nav-link"> Inventario </a>
                 </li>
-                <li [ngClass]="seleccionado == 2 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(2)">
+                <li *ngIf="isLogged" [ngClass]="seleccionado == 2 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(2)">
                     <a routerLink="/entradas" class="nav-link"> Entradas </a>
                 </li>
-                <li [ngClass]="seleccionado == 3 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(3)" >
+                <li *ngIf="isLogged" [ngClass]="seleccionado == 3 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(3)" >
                     <a routerLink="/salidas" class="nav-link"> Salidas </a>
                 </li>    
-                <li [ngClass]="seleccionado == 4 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(4)" >
+                <li *ngIf="isAdmin" [ngClass]="seleccionado == 4 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(4)" >
                     <a routerLink="/avisos" class="nav-link"> 
                         <span>Avisos</span>
                         <span *ngIf="hayAvisos" class="badge">
@@ -29,7 +29,7 @@
                         </span>    
                     </a>
                 </li>
-                <li [ngClass]="seleccionado == 5 ? 'nav-item dropdown active' : 'nav-item dropdown'" 
+                <li *ngIf="isAdmin" [ngClass]="seleccionado == 5 ? 'nav-item dropdown active' : 'nav-item dropdown'" 
                 (mouseenter)="toggleDropdown(true)" (mouseleave)="toggleDropdown(false)" (click)="cambiaSeleccionado(5)">
                     <a class="nav-link dropdown-toggle" routerLink="/gestion" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Gestión
@@ -51,10 +51,15 @@
                 <li *ngIf="!isLogged" [ngClass]="seleccionado == 6 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(6)">
                     <a routerLink="/login" class="nav-link"> Iniciar sesión </a>
                 </li>
-                <li *ngIf="isLogged" [ngClass]="seleccionado == 6 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(6)">
-                    <a routerLink="/login" class="nav-link"> {{user?.nombre}} {{user?.apellidos}} </a>
+                <li *ngIf="isLogged" [ngClass]="seleccionado == 6 ? 'nav-item dropdown active' : 'nav-item dropdown'" 
+                (mouseenter)="toggleDropdown2(true)" (mouseleave)="toggleDropdown2(false)" (click)="cambiaSeleccionado(6)">
+                    <a class="nav-link dropdown-toggle" routerLink="/login" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{user?.nombre}} {{user?.apellidos}}
+                    </a>
+                    <ul class="dropdown-menu align-right-dropdown" aria-labelledby="navbarDropdown2" [ngClass]="dropdownOpen2 ? 'show' : ''">
+                        <li><a class="dropdown-item desp" (click)="cerrarSesion()">Cerrar sesión</a></li>
+                    </ul>
                 </li>
-                
             </ul>
         </div>
     </div>    
