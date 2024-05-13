@@ -36,10 +36,12 @@ import { LoginComponent } from './modules/login/login.component';
 import { UsuarioLoggedGuard } from './core/guards/usuario-logged.guard';
 import { UsuarioAdminGuard } from './core/guards/usuario-admin.guard';
 import { DetalleOficinaPublicComponent } from './modules/detalle-oficina-public/detalle-oficina-public.component';
+import { CambiarContrasenaComponent } from './modules/cambiar-contrasena/cambiar-contrasena.component';
 
 const routes: Routes = [
   {path: '', component:InicioComponent},
   {path: 'avisos', component:AvisosComponent, canActivate: [UsuarioAdminGuard]},
+  {path: 'cambiarContrasena', component:CambiarContrasenaComponent, canActivate: [UsuarioLoggedGuard]},
   {path: 'detalle/oficina/:id', component:DetalleOficinaPublicComponent, canActivate: [UsuarioLoggedGuard]},
   {path: 'entradas', component:EntradasComponent, canActivate: [UsuarioLoggedGuard]},
   {path: 'entradas/pedido/:id', component:DetallePedidoComponent , canActivate: [UsuarioLoggedGuard]},

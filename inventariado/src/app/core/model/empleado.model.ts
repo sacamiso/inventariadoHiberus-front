@@ -14,6 +14,12 @@ export interface Empleado {
     oficina:    Oficina;
 }
 
+export interface EmpleadoCambioContrasena {
+    empleado: Empleado;
+    contraAct: string;
+    contraNueva: string;
+}
+
 export interface EmpleadoFiltros {
     dni:        string | null;
     nombre:     string | null;

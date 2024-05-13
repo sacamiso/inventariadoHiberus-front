@@ -1,0 +1,26 @@
+<section class="login-section">
+    <div class="container py-5 ">
+      <div class="row d-flex justify-content-center align-items-center ">
+        <p-messages class="mb-14" [(value)]="messages" [enableService]="false" [closable]="true"></p-messages>
+        <div class="col-12 ">
+          <div class="login-card">
+            <h2 class="login-heading">Cambiar contraseña</h2>
+            <div class="form-grid">
+                <label for="contraAct">Contraseña actual:</label>
+                <p-password [(ngModel)]="contraAct" [toggleMask]="true" [feedback]="false"
+                  styleClass="w-full custom-input"></p-password>
+              
+                <label for="contraNueva">Nueva contraseña:</label>
+                <p-password [(ngModel)]="contraNueva" [toggleMask]="true" [feedback]="false"
+                  styleClass="w-full custom-input"></p-password>
+  
+                <label for="contraNueva">Repita nueva contraseña:</label>
+                <p-password [(ngModel)]="contraNuevaRepit" [toggleMask]="true" [feedback]="false"
+                  styleClass="w-full custom-input"></p-password>
+            </div>
+            <button type="submit" class="btn btn-lg mt-3" (click)="cambiarContrasena()">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

@@ -51,6 +51,7 @@ import { MessagesModule } from 'primeng/messages';
 import { InputTextModule } from 'primeng/inputtext';
 import { AuthInterceptorService } from './core/services/auth-interceptor.service';
 import { DetalleOficinaPublicComponent } from './modules/detalle-oficina-public/detalle-oficina-public.component';
+import { CambiarContrasenaComponent } from './modules/cambiar-contrasena/cambiar-contrasena.component';
 
 
 
@@ -95,6 +96,7 @@ import { DetalleOficinaPublicComponent } from './modules/detalle-oficina-public/
     FechaFinAsignacionDirective,
     LoginComponent,
     DetalleOficinaPublicComponent,
+    CambiarContrasenaComponent,
   ],
   imports: [
     BrowserModule,

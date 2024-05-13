@@ -1,5 +1,5 @@
 .login-card {
-    max-width: 400px;
+    max-width: 480px;
     margin: auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -23,7 +23,7 @@
   }
   
   label {
-    width: 100px; /* Establece un ancho fijo para los labels */
+    width: 180px; /* Establece un ancho fijo para los labels */
     margin-right: 10px; /* Espacio entre el label y el input */
   }
   
