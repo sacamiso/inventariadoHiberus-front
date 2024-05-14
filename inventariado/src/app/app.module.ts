@@ -52,6 +52,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { AuthInterceptorService } from './core/services/auth-interceptor.service';
 import { DetalleOficinaPublicComponent } from './modules/detalle-oficina-public/detalle-oficina-public.component';
 import { CambiarContrasenaComponent } from './modules/cambiar-contrasena/cambiar-contrasena.component';
+import { FooterComponent } from './modules/footer/footer.component';
 
 
 
@@ -97,6 +98,7 @@ import { CambiarContrasenaComponent } from './modules/cambiar-contrasena/cambiar
     LoginComponent,
     DetalleOficinaPublicComponent,
     CambiarContrasenaComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
