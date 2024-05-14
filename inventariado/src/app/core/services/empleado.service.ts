@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Empleado, EmpleadoFiltros, EmpleadoForm, EmpleadoList, EmpleadoMsg } from '../model/empleado.model';
+import { Empleado, EmpleadoCambioContrasena, EmpleadoFiltros, EmpleadoForm, EmpleadoList, EmpleadoMsg } from '../model/empleado.model';
 import { MesaggeResponse, MesaggeResponseNumber } from '../model/mesagge-response.model';
 
 @Injectable({
@@ -34,4 +34,9 @@ export class EmpleadoService {
   getEmpleadosByOficina(id: number): Observable<EmpleadoList> {
     return this.http.get<EmpleadoList>(`${this.apiUrl}/empleado/listAll/oficina/${id}`);
   }
+
+  cambiarContrasena(empleado: EmpleadoCambioContrasena): Observable<MesaggeResponse> {
+    return this.http.post<MesaggeResponse>(`${this.apiUrl}/empleado/cambiarContra`, empleado);
+  }
+  
 }
