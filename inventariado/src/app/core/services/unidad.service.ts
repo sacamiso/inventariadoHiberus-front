@@ -53,4 +53,7 @@ export class UnidadService {
     return this.http.get<UnidadList>(`${this.apiUrl}/unidad/listDisponiblesSinAsignar/${id}`);
   }
   
+  descargarExcelByUnidad(id: number): Observable<ArrayBuffer> {
+    return this.http.post(`${this.apiUrl}/unidad/descargarExcelById?id=${id}`, null, { responseType: 'arraybuffer' });
+  }
 }

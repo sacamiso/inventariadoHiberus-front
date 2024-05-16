@@ -81,9 +81,19 @@
                         No está registrada en ninguna salida
                     </div>
 
-                    <div class="col-md-6 d-flex mt-4">
-                        <button class="btn boton" (click)="goBack()">Ir a Unidades</button>
+                    
+                    <div class="row mt-4 mb-3">
+                        <div class="col-md-6 d-flex">
+                            <button class="btn boton" (click)="goBack()">Ir a Unidades</button>
+                        </div>
+                        <div *ngIf="isAdmin" class="col col-6 text-end">
+                            <button class="btn boton-descarga" (click)="descargarExcel()">Descargar detalles</button>
+                        </div>
                     </div>
+                    <div *ngIf="descargando" class="overlay">
+                        <div class="spinner"></div>
+                    </div>
+                    <div id="liveAlert"></div>
                 </div>
                 
             </div>
