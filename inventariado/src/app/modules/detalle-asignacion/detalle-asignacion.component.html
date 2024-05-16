@@ -7,7 +7,7 @@
                     
                 </div>
                 <div class="mt-4">
-                    <button class="btn boton text-end" (click)="volver()">Volver</button>
+                    <button class="btn boton btn-primary text-end" (click)="volver()">Volver</button>
                 </div>
             </div>
         </header>
@@ -24,10 +24,10 @@
                         asignacion.fechaFin === null ? 'Finalizar asignación' : 'Asignación finalizada' }}</button>
                 </div>
                 <div class="col-2 centrar">
-                    <button class="btn boton-editar" (click)="editarAsig()" >Editar asignación</button>
+                    <button class="btn btn-success boton-editar" (click)="editarAsig()" >Editar asignación</button>
                 </div>
                 <div class="col-2 izquierda">
-                    <button class="btn boton" (click)="irAsignaciones()" >Asignaciones</button>
+                    <button class="btn btn-primary boton" (click)="irAsignaciones()" >Asignaciones</button>
                 </div>
             </div>
             <div class="row mb-4">

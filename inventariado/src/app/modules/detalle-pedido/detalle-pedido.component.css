@@ -4,6 +4,11 @@
     color: white;
 }
 
+.boton-recibido:hover {
+  background-color: #253b9b;
+  color: white;
+}
+
 .devuelto {
     color: red; 
     font-weight: bold; 

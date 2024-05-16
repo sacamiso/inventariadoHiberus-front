@@ -36,7 +36,7 @@
                 <h2 class="mb-3">Información del Stock de Seguridad</h2>
             </div>
             <div class="col-md-6 text-end">
-                <button class="btn boton" (click)="goBack()">Volver Stock</button>
+                <button class="btn boton btn-primary" (click)="goBack()">Volver Stock</button>
             </div>
             
             
@@ -95,8 +95,8 @@
                     </tbody>
                 </table>
                 <div class="card-footer mt-4 mb-5">
-                    <button class="btn boton" (click)="agregarFila()">Agregar fila</button>
-                    <button class="btn btn-success float-end" (click)="guardar()" [disabled]="!validaCampos()">Guardar</button>
+                    <button class="btn boton btn-primary" (click)="agregarFila()">Agregar fila</button>
+                    <button class="btn btn-success float-end boton-editar " (click)="guardar()" [disabled]="!validaCampos()">Guardar</button>
                 </div>
             </div>
         </div>

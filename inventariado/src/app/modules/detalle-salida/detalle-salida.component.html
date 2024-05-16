@@ -8,7 +8,7 @@
                     <p><strong>Fecha de salida: </strong> {{salida.fechaSalida | date: 'dd/MM/yyyy'  }}</p>
                 </div>
                 <div class="mt-4">
-                    <button class="btn boton text-end" (click)="volver()">Volver</button>
+                    <button class="btn boton btn-primary text-end" (click)="volver()">Volver</button>
                 </div>
             </div>
         </header>
@@ -60,7 +60,7 @@
                     </table>
                     <div class="row mt-4 ">
                         <div class="col-md-6 d-flex ">
-                            <button class="btn btn-primary" style="background-color: #19255A; border-color: #19255A;" (click)="goBack()">Ir a Salidas</button>
+                            <button class="btn btn-primary boton" (click)="goBack()">Ir a Salidas</button>
                         </div>
                         <div *ngIf="isAdmin" class="col col-6 text-end">
                             <button class="btn boton-descarga" (click)="descargarExcel()">Descargar en Excel</button>

@@ -39,7 +39,8 @@
   }
   
   .btn:hover {
-    background-color: #1d2d74;
+    background-color: #253b9b;
+    color: white;
   }
 
   .custom-input {

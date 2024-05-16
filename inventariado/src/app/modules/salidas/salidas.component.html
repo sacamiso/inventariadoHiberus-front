@@ -10,12 +10,12 @@
         <!-- Botón para mostrar/ocultar filtros -->
         <div class="row mb-3">
             <div class="col-md-6 text-start">
-                <button class="btn boton" (click)="toggleFiltros()">
+                <button class="btn boton btn-primary" (click)="toggleFiltros()">
                     {{ mostrarFiltros ? 'Ocultar Filtros' : 'Mostrar Filtros' }}
                 </button>
             </div>
             <div *ngIf="isAdmin" class="col-md-6 text-end">
-                <button class="btn btn-success" (click)="crearNuevaSalida()">Nueva Salida</button>
+                <button class="btn btn-success boton-editar " (click)="crearNuevaSalida()">Nueva Salida</button>
             </div>
         </div>
 

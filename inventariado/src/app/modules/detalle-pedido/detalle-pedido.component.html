@@ -62,7 +62,7 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary"
                                     data-bs-dismiss="modal">Cancelar</button>
-                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                <button type="button" class="btn btn-primary boton-recibido" data-bs-dismiss="modal"
                                     (click)="devolverPedido()">Si</button>
                             </div>
                         </div>
@@ -75,7 +75,7 @@
         <section class="mb-5">
             <div class="row mb-3">
                 <div class="col col-2">
-                    <button class="btn boton-recibido" (click)="volver()">Volver</button>
+                    <button class="btn btn-primary boton-recibido" (click)="volver()">Volver</button>
                 </div>
                 <div *ngIf="isAdmin" class="col col-2">
                     <button class="btn boton-descarga" (click)="descargarExcel()">Descargar en Excel</button>
@@ -178,7 +178,7 @@
                     </table>
                     <div class="row mt-4">
                         <div class="col-6">
-                            <button class="btn boton-recibido text-start" (click)="goBack()">Ir a Entradas</button>
+                            <button class="btn boton-recibido btn-primary text-start" (click)="goBack()">Ir a Entradas</button>
                         </div>
 
                     </div>

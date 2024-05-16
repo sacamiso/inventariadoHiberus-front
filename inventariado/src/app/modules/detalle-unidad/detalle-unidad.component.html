@@ -6,7 +6,7 @@
                     <h1 class="mb-4 mt-4">Información de la unidad {{unidad.codigoInterno}}</h1>
                 </div>
                 <div class="mt-4">
-                    <button class="btn boton text-end" (click)="volver()">Volver</button>
+                    <button class="btn boton btn-primary text-end" (click)="volver()">Volver</button>
                 </div>
             </div>
         </header>
@@ -84,7 +84,7 @@
                     
                     <div class="row mt-4 mb-3">
                         <div class="col-md-6 d-flex">
-                            <button class="btn boton" (click)="goBack()">Ir a Unidades</button>
+                            <button class="btn boton btn-primary" (click)="goBack()">Ir a Unidades</button>
                         </div>
                         <div *ngIf="isAdmin" class="col col-6 text-end">
                             <button class="btn boton-descarga" (click)="descargarExcel()">Descargar detalles</button>

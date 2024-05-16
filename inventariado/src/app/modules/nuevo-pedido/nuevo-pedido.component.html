@@ -209,7 +209,7 @@
             <button type="button" (click)="volver()" class="btn btn-danger">Cancelar</button>
             <!-- Botón de guardar: esta con el evento click porque no quiero que se envíe cuando haga enter -->
             <!-- Sino con el submit en la etiqueta del form vale -->
-            <button class="btn btn-success float-end" (click)="guardar()" [disabled]="!verificarValidezLineas() || !pedidoForm.valid || lineas.length < 1">Guardar</button>
+            <button class="btn btn-success float-end boton-editar " (click)="guardar()" [disabled]="!verificarValidezLineas() || !pedidoForm.valid || lineas.length < 1">Guardar</button>
         </div>
     </form>
 

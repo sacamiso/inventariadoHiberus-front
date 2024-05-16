@@ -1,3 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
 @import "primeng/resources/themes/bootstrap4-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
+
+.boton {
+    background-color: #19255A;
+    border-color: #19255A;
+    color: white;
+}
+
+.boton:hover {
+    background-color: #253b9b;
+    color: white;
+}
+
+.boton-editar {
+    background-color: #76aa3b;
+    border-color: #76aa3b;
+    color: white;
+}
+
+.boton-editar:hover {
+    background-color: #537e22;
+    border-color: #537e22;
+    color: white;
+}
+
+.underline-link {
+    text-decoration: underline;
+    cursor: pointer; /* Cambia el cursor al pasar el ratón */
+  }
+  
+  /* Estilos para cambiar el color al pasar el ratón */
+  .underline-link:hover {
+    color: #00CDE2; /* Cambia el color del texto al pasar el ratón */
+  }
+
+  
