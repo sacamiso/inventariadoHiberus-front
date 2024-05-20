@@ -34,6 +34,7 @@ export class NuevoEmpleadoComponent implements OnInit {
     nombre:     '',
     apellidos:  '',
     usuario:    '',
+    correo:     '',
     contraseña: '',
     codRol:     '',
     idOficina:  0
@@ -50,6 +51,7 @@ export class NuevoEmpleadoComponent implements OnInit {
       dni: ['', [Validators.required, this.validarDNI, this.noSoloEspacios]],
       nombre: ['', [Validators.required, this.noSoloEspacios]],
       apellidos: ['', [Validators.required, this.noSoloEspacios]],
+      correo: ['', [Validators.required, this.noSoloEspacios, Validators.email]],
       usuario: ['', [Validators.required, this.noSoloEspacios]],
       contraseña: ['', [Validators.required, this.noSoloEspacios]],
       codRol: ['', [Validators.required, this.noSoloEspacios]],

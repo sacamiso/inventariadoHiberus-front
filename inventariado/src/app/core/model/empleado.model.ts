@@ -7,6 +7,7 @@ export interface Empleado {
     nombre:     string;
     apellidos:  string;
     usuario:    string;
+    correo:     string;
     contraseña: string;
     codRol:     string;
     idOficina:  number;
@@ -42,6 +43,7 @@ export interface EmpleadoForm {
     dni:        string;
     nombre:     string;
     apellidos:  string;
+    correo:     string;
     usuario:    string;
     contraseña: string;
     codRol:     string;

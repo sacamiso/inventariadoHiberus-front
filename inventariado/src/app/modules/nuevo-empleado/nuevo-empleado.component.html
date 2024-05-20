@@ -14,7 +14,7 @@
             <div class="form-group m-2">
                 <br>
                 <div class="row mb-4">
-                    <div class="form-item col-md-2">
+                    <div class="form-item col-md-3">
                         <label for="dni">DNI<span class="text-danger">*</span></label>
                         <input required id="dni" class="form-control" type="text" formControlName="dni"
                             placeholder="DNI" [ngClass]="{'is-invalid': empleadoForm.get('dni')?.invalid && formularioEnviado}"/>
@@ -24,29 +24,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-item col-md-3">
+                    <div class="form-item col-md-4">
                         <label for="nombre">Nombre<span class="text-danger">*</span></label>
                         <input required id="nombre" class="form-control" type="text" formControlName="nombre"
                             placeholder="Nombre" [ngClass]="{'is-invalid': empleadoForm.get('nombre')?.invalid && formularioEnviado}"/>
                     </div>
-                    <div class="form-item col-md-4">
+                    <div class="form-item col-md-5">
                         <label for="apellidos">Apellidos<span class="text-danger">*</span></label>
                         <input required id="apellidos" class="form-control" type="text" formControlName="apellidos"
                             placeholder="Apellidos" [ngClass]="{'is-invalid': empleadoForm.get('apellidos')?.invalid && formularioEnviado}"/>
                     </div>
-                    <div class="form-item col-md-3">
-                        <label for="usuario">Usuario<span class="text-danger">*</span></label>
-                        <input required id="usuario" class="form-control" type="text" formControlName="usuario"
-                            placeholder="Usuario" [ngClass]="{'is-invalid': empleadoForm.get('usuario')?.invalid && formularioEnviado}"/>
-                    </div>
+                    
                 </div>
                 <div class="row mb-4">
-                    <div class="form-item col-md-4">
-                        <label for="contraseña">Contraseña provisional<span class="text-danger">*</span></label>
-                        <input required id="contraseña" class="form-control" type="text" formControlName="contraseña"
-                            placeholder="Contraseña" [ngClass]="{'is-invalid': empleadoForm.get('contraseña')?.invalid && formularioEnviado}"/>
-                    </div>
-                    <div class="col-md-4">
+                    
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="codRol">Rol<span class="text-danger">*</span></label>
                             <select class="form-control form-select" id="codRol" formControlName="codRol"  [ngClass]="{'is-invalid': empleadoForm.get('codRol')?.invalid && formularioEnviado}">
@@ -56,7 +48,12 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="form-item col-md-4">
+                        <label for="correo">Correo electrónico<span class="text-danger">*</span></label>
+                        <input required id="correo" class="form-control" type="email" formControlName="correo"
+                            placeholder="Correo" [ngClass]="{'is-invalid': empleadoForm.get('correo')?.invalid && formularioEnviado}"/>
+                    </div>
+                    <div class="col-md-5">
                         <div class="form-group">
                             <label for="idOficina">Oficina<span class="text-danger">*</span></label>
                             <p-autoComplete styleClass="myAutoComplete w-100"
@@ -77,6 +74,21 @@
                             </p-autoComplete>
                         </div>
                     </div>
+                    
+                </div>
+                <div class="row mb-4">
+                    <div class="form-item col-md-3">
+                        <label for="usuario">Usuario<span class="text-danger">*</span></label>
+                        <input required id="usuario" class="form-control" type="text" formControlName="usuario"
+                            placeholder="Usuario" [ngClass]="{'is-invalid': empleadoForm.get('usuario')?.invalid && formularioEnviado}"/>
+                    </div>
+                    <div class="form-item col-md-4">
+                        <label for="contraseña">Contraseña provisional<span class="text-danger">*</span></label>
+                        <input required id="contraseña" class="form-control" type="text" formControlName="contraseña"
+                            placeholder="Contraseña" [ngClass]="{'is-invalid': empleadoForm.get('contraseña')?.invalid && formularioEnviado}"/>
+                    </div>
+                    
+                    
                 </div>
             </div>
         </section>

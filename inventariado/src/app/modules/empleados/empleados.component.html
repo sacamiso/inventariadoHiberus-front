@@ -102,6 +102,7 @@
                                 <th class="text-center" scope="col">DNI</th>
                                 <th class="text-center" scope="col">Nombre</th>
                                 <th class="text-center" scope="col">Apellidos</th>
+                                <th class="text-center" scope="col">Correo</th>
                                 <th class="text-center" scope="col">Usuario</th>
                                 <th class="text-center" scope="col">Rol</th>
                                 <th class="text-center" scope="col">Oficina</th>
@@ -112,8 +113,9 @@
                                 <td class="underline-link" (click)="detalleEmpleado(empl.idEmpleado)">{{empl.dni}}</td>
                                 <td>{{empl.nombre}}</td>
                                 <td>{{empl.apellidos}}</td>
+                                <td>{{empl.correo}}</td>
                                 <td>{{empl.usuario}}</td>
-                                <td>{{empl.codRol}}: {{empl.rol.nombre}}</td>
+                                <td>{{empl.codRol}}</td>
                                 <td>{{empl.oficina.localidad}}</td>
                             </tr>
                         </tbody>
