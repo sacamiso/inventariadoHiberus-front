@@ -7,55 +7,85 @@
         </div>
     </div>
 
-    
+
 
     <div class="mt-4" id="liveAlert"></div>
-    
+
     <section>
         <div class="row mb-4">
             <div class="col-3">
                 <button class="btn boton btn-primary text-end" (click)="volver()">Volver</button>
             </div>
-            <form [formGroup]="editAsignacionForm" (ngSubmit)="guardar()">
-                    <div class="row mt-4">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="fechaInicio">Fecha de inicio</label>
-                                <input type="date" class="form-control" id="fechaInicio" formControlName="fechaInicio" 
-                                [ngClass]="{'is-invalid': editAsignacionForm.get('fechaInicio')?.invalid && formularioEnviado}" appFechaValida required>
-                                <br>
-                                <span class="text-danger" *ngIf="editAsignacionForm.get('fechaInicio')?.errors?.['fechaInvalida']">
-                                    (No puede ser posterior a la actual)
-                                </span>
-                                <span class="text-danger" *ngIf="editAsignacionForm.get('fechaInicio')?.errors?.['required']">
-                                    (Este campo es obligatorio)
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="fechaFin">Fecha de fin</label>
-                                <input type="date" class="form-control" id="fechaFin" formControlName="fechaFin" 
-                                [ngClass]="{'is-invalid': editAsignacionForm.get('fechaFin')?.invalid && formularioEnviado}" appFechaFinAsignacion >
-                                <br>
-                                <span class="text-danger" *ngIf="editAsignacionForm.get('fechaFin')?.errors?.['fechaFinInvalida']">
-                                    (No puede ser posterior a la actual)
-                                </span>
-                                <span class="text-danger" *ngIf="editAsignacionForm.get('fechaFin')?.errors?.['fechaFinAntesInicio']">
-                                    (No puede ser anterior a la fecha de inicio)
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mt-4">
-                            <button type="submit" class="btn btn-success boton-editar float-end">Guardar</button>
+            <form [formGroup]="editAsignacionForm">
+                <div class="row mt-4">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="fechaInicio">Fecha de inicio</label>
+                            <input type="date" class="form-control" id="fechaInicio" formControlName="fechaInicio"
+                                [ngClass]="{'is-invalid': editAsignacionForm.get('fechaInicio')?.invalid && formularioEnviado}"
+                                appFechaValida required>
+                            <br>
+                            <span class="text-danger"
+                                *ngIf="editAsignacionForm.get('fechaInicio')?.errors?.['fechaInvalida']">
+                                (No puede ser posterior a la actual)
+                            </span>
+                            <span class="text-danger"
+                                *ngIf="editAsignacionForm.get('fechaInicio')?.errors?.['required']">
+                                (Este campo es obligatorio)
+                            </span>
                         </div>
                     </div>
-    
-                    
-                    
-                
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="fechaFin">Fecha de fin</label>
+                            <input type="date" class="form-control" id="fechaFin" formControlName="fechaFin"
+                                [ngClass]="{'is-invalid': editAsignacionForm.get('fechaFin')?.invalid && formularioEnviado}"
+                                appFechaFinAsignacion>
+                            <br>
+                            <span class="text-danger"
+                                *ngIf="editAsignacionForm.get('fechaFin')?.errors?.['fechaFinInvalida']">
+                                (No puede ser posterior a la actual)
+                            </span>
+                            <span class="text-danger"
+                                *ngIf="editAsignacionForm.get('fechaFin')?.errors?.['fechaFinAntesInicio']">
+                                (No puede ser anterior a la fecha de inicio)
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-4">
+
+                        <button type="button" class="btn btn-success boton-editar float-end" data-bs-toggle="modal"
+                            [attr.data-bs-target]="'#modalRecibido'">Guardar</button>
+
+                        <div class="modal fade" [id]="'modalRecibido'" tabindex="-1" aria-labelledby="modalBorrarLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalBorrarLabel">GUARDAR</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ¿Está seguro que desea guardar los cambios en la asignación?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                            (click)="guardar()">Si</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
             </form>
-            
+
         </div>
         <div class="row mb-4">
             <div class="col-sm-6">
@@ -67,11 +97,14 @@
                 <h2 class="mt-4">Detalles</h2>
                 <div>
                     <strong>Oficina:</strong>
-                    <br>{{asignacion.empleado.oficina.direccion}}, {{asignacion.empleado.oficina.codigoPostal}}, {{asignacion.empleado.oficina.localidad}} {{ asignacion.empleado.oficina.provincia !== null ? ', ' + asignacion.empleado.oficina.provincia : '' }}, {{asignacion.empleado.oficina.pais}}
+                    <br>{{asignacion.empleado.oficina.direccion}}, {{asignacion.empleado.oficina.codigoPostal}},
+                    {{asignacion.empleado.oficina.localidad}} {{ asignacion.empleado.oficina.provincia !== null ? ', ' +
+                    asignacion.empleado.oficina.provincia : '' }}, {{asignacion.empleado.oficina.pais}}
                 </div>
             </div>
             <div class="col-sm-6">
-                <h2 class="underline-link" (click)="detalleEmpleado(asignacion.empleado.idEmpleado)">Información del empleado</h2>
+                <h2 class="underline-link" (click)="detalleEmpleado(asignacion.empleado.idEmpleado)">Información del
+                    empleado</h2>
                 <div>
                     <p><strong>DNI: </strong>{{asignacion.empleado.dni}}</p>
                     <p><strong>Nombre: </strong>{{asignacion.empleado.nombre}}</p>
@@ -79,10 +112,9 @@
                     <p><strong>Usuario: </strong>{{asignacion.empleado.usuario}}</p>
                 </div>
             </div>
-            
-        </div>
-    </section>  
-    
-    
-</div>
 
+        </div>
+    </section>
+
+
+</div>

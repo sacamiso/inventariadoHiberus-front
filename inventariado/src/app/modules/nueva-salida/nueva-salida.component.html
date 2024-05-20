@@ -122,8 +122,30 @@
 
                 <!-- Botón de guardar: esta con el evento click porque no quiero que se envíe cuando haga enter -->
                 <!-- Sino con el submit en la etiqueta del form vale -->
-                <button class="btn btn-success float-end boton-editar " (click)="guardar()"
-                    [disabled]="!salidaForm.valid">Guardar</button>
+
+                <button type="button" class="btn btn-success float-end boton-editar" data-bs-toggle="modal"
+                [attr.data-bs-target]="'#modalRecibido'"
+                [disabled]="!salidaForm.valid">Guardar</button>
+    
+                <div class="modal fade" [id]="'modalRecibido'" tabindex="-1"
+                    aria-labelledby="modalBorrarLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalBorrarLabel">GUARDAR</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                ¿Está seguro que desea guardar la salida?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                    (click)="guardar()">Si</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
     </div>

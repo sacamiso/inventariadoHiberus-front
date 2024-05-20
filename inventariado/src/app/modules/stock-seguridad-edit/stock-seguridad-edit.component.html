@@ -12,24 +12,18 @@
             <div class="row justify-content-center">
                 <div class="col-6">
                     <h2 class="text-center">Oficina</h2>
-                    <p-autoComplete styleClass="myAutoComplete w-100"
-                            (onSelect)="onSelectOficina($event)" 
-                            (onClear)="onClear()"
-                            (onBlur)="checkIfValidInput($event)"
-                            [suggestions]="filteredOficinas" 
-                            (completeMethod)="filterOficina($event)" 
-                            field="fullDescription"
-                            [dropdown]="true" 
-                            inputStyleClass="selected-office"
-                            class="selected-office"
-                            placeholder="{{ selectedOficina ? getFullDescription(selectedOficina) : 'Seleccione la oficina...' }}">
+                    <p-autoComplete styleClass="myAutoComplete w-100" (onSelect)="onSelectOficina($event)"
+                        (onClear)="onClear()" (onBlur)="checkIfValidInput($event)" [suggestions]="filteredOficinas"
+                        (completeMethod)="filterOficina($event)" field="fullDescription" [dropdown]="true"
+                        inputStyleClass="selected-office" class="selected-office"
+                        placeholder="{{ selectedOficina ? getFullDescription(selectedOficina) : 'Seleccione la oficina...' }}">
                         <ng-template let-oficina pTemplate="item">
                             {{oficina.direccion}}, {{oficina.localidad}}
                         </ng-template>
                     </p-autoComplete>
                 </div>
             </div>
-            
+
         </div>
         <div class="row">
             <div class="col-md-6 text-start">
@@ -38,8 +32,8 @@
             <div class="col-md-6 text-end">
                 <button class="btn boton btn-primary" (click)="goBack()">Volver Stock</button>
             </div>
-            
-            
+
+
             <div *ngIf="cargado2" class="table-responsive">
                 <div class="mt-2" id="liveAlert"></div>
                 <div *ngIf="repetido" class="text-danger mt-2">
@@ -48,7 +42,7 @@
                 <div *ngIf="stockSeguridad.length===0" class="text-danger mt-2">
                     Actualmente no hay nigún stock de seguridad registrado para la oficina seleccionada.
                 </div>
-                <table class="table table-striped table-bordered">
+                <table *ngIf="stockSeguridad.length!==0" class="table table-striped table-bordered">
                     <thead class="thead-dark">
                         <tr>
                             <th class="text-center" scope="col" class="col-2">Categoría</th>
@@ -61,17 +55,22 @@
                     <tbody>
                         <tr *ngFor="let ss of stockSeguridad">
                             <td class="col-2">
-                                <select class="form-control form-select" [(ngModel)]="ss.codCategoria" (change)="limpiarSeleccionSubcategoria(ss)" [ngClass]="{'is-invalid': !ss.codCategoria}">
-                                    <option *ngFor="let categoria of listCategorias" [value]="categoria.codigoCategoria">{{categoria.codigoCategoria}}</option>
+                                <select class="form-control form-select" [(ngModel)]="ss.codCategoria"
+                                    (change)="limpiarSeleccionSubcategoria(ss)"
+                                    [ngClass]="{'is-invalid': !ss.codCategoria}">
+                                    <option *ngFor="let categoria of listCategorias"
+                                        [value]="categoria.codigoCategoria">{{categoria.codigoCategoria}}</option>
                                 </select>
                                 <div *ngIf="!ss.codCategoria" class="invalid-feedback">Campo obligatorio</div>
                             </td>
-                            
+
                             <td class="col-2" contentEditable="true">
-                                <select class="form-control form-select" [(ngModel)]="ss.codSubcategoria" [disabled]="!ss.codCategoria" [ngClass]="{'is-invalid': !ss.codSubcategoria}">
+                                <select class="form-control form-select" [(ngModel)]="ss.codSubcategoria"
+                                    [disabled]="!ss.codCategoria" [ngClass]="{'is-invalid': !ss.codSubcategoria}">
                                     <ng-container *ngFor="let subcategoria of listSubcategorias">
                                         <ng-container *ngIf="subcategoria.codigoCategoria === ss.codCategoria">
-                                            <option [ngValue]="subcategoria.codigoSubcategoria">{{ subcategoria.codigoSubcategoria }}</option>
+                                            <option [ngValue]="subcategoria.codigoSubcategoria">{{
+                                                subcategoria.codigoSubcategoria }}</option>
                                         </ng-container>
                                     </ng-container>
                                 </select>
@@ -79,24 +78,55 @@
                             </td>
 
                             <td class="col-2" contentEditable="true">
-                                <input type="number" min="1" class="form-control" [(ngModel)]="ss.cantidad" [ngClass]="{'text-danger is-invalid': !isNumeroEnteroValido(ss.cantidad) || ss.cantidad<1}">
-                                <div *ngIf="!isNumeroEnteroValido(ss.cantidad) || ss.cantidad < 1" class="invalid-feedback">Debe ser entero mayor o igual que 1</div>
+                                <input type="number" min="1" class="form-control" [(ngModel)]="ss.cantidad"
+                                    [ngClass]="{'text-danger is-invalid': !isNumeroEnteroValido(ss.cantidad) || ss.cantidad<1}">
+                                <div *ngIf="!isNumeroEnteroValido(ss.cantidad) || ss.cantidad < 1"
+                                    class="invalid-feedback">Debe ser entero mayor o igual que 1</div>
                             </td>
 
                             <td class="col-3" contentEditable="true">
-                                <input type="number" min="1" class="form-control" [(ngModel)]="ss.plazoEntregaMedio" [ngClass]="{'text-danger is-invalid': !isNumeroEnteroValido(ss.plazoEntregaMedio) || ss.plazoEntregaMedio<1}">
-                                <div *ngIf="!isNumeroEnteroValido(ss.plazoEntregaMedio) || ss.plazoEntregaMedio < 1" class="invalid-feedback">Debe ser entero mayor o igual que 1</div>
+                                <input type="number" min="1" class="form-control" [(ngModel)]="ss.plazoEntregaMedio"
+                                    [ngClass]="{'text-danger is-invalid': !isNumeroEnteroValido(ss.plazoEntregaMedio) || ss.plazoEntregaMedio<1}">
+                                <div *ngIf="!isNumeroEnteroValido(ss.plazoEntregaMedio) || ss.plazoEntregaMedio < 1"
+                                    class="invalid-feedback">Debe ser entero mayor o igual que 1</div>
                             </td>
 
                             <td class="col-1 text-center">
-                                <i class="fas fa-trash-alt text-danger" (click)="eliminarLineaSS(ss)" style="cursor: pointer;"></i>
+                                <i class="fas fa-trash-alt text-danger" (click)="eliminarLineaSS(ss)"
+                                    style="cursor: pointer;"></i>
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="card-footer mt-4 mb-5">
                     <button class="btn boton btn-primary" (click)="agregarFila()">Agregar fila</button>
-                    <button class="btn btn-success float-end boton-editar " (click)="guardar()" [disabled]="!validaCampos()">Guardar</button>
+                    
+
+                    <button type="button" class="btn btn-success float-end boton-editar" data-bs-toggle="modal"
+                    [disabled]="!validaCampos()" [attr.data-bs-target]="'#modalRecibido'">Guardar</button>
+
+                    <div class="modal fade" [id]="'modalRecibido'" tabindex="-1" aria-labelledby="modalBorrarLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalBorrarLabel">GUARDAR</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    ¿Está seguro que desea guardar el stock de seguridad?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                        (click)="guardar()">Si</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

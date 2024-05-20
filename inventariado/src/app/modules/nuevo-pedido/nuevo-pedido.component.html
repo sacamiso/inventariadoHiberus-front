@@ -12,7 +12,7 @@
         <div class="card-body">
             <p class="text-danger">* Campos obligatorios</p>
 
-            
+
             <!-- Apartado de Líneas -->
             <fieldset style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
                 <legend style="width: auto; border: none; font-size: 24px; font-weight: bold; color: #333;"
@@ -33,7 +33,8 @@
                         <div class="col-md-4 col-lg-2 col-xl-5">
                             <div class="form-group d-flex flex-column align-items-center">
                                 <label for="codigoArticulo">Artículo <span class="text-danger">*</span></label>
-                                <select formControlName="codigoArticulo" id="codigoArticulo" class="form-control form-select">
+                                <select formControlName="codigoArticulo" id="codigoArticulo"
+                                    class="form-control form-select">
                                     <option [value]="null" disabled>Seleccione el articulo</option>
                                     <option *ngFor="let art of listArticulos" [value]="art.codigoArticulo">{{
                                         art.referencia }}:{{art.descripcion }}, {{ art.modelo }}, {{ art.fabricante }},
@@ -49,7 +50,8 @@
                                     <span class="text-danger" *ngIf="this.linea.get('numeroUnidades')?.errors?.['min']">
                                         (Como mínimo debe ser 1)
                                     </span>
-                                    <span class="text-danger" *ngIf="this.linea.get('numeroUnidades')?.errors?.['pattern']">
+                                    <span class="text-danger"
+                                        *ngIf="this.linea.get('numeroUnidades')?.errors?.['pattern']">
                                         (Debe ser entero)
                                     </span>
                                 </label>
@@ -72,49 +74,38 @@
                         </div>
 
                         <div class="col-md-1 col-lg-1 col-xl-1 align-items-center d-flex">
-                            <a (click)="eliminarLineaForm(i)" class="text-muted interactive-link"><i class="fas fa-trash-alt"></i></a>
+                            <a (click)="eliminarLineaForm(i)" class="text-muted interactive-link"><i
+                                    class="fas fa-trash-alt"></i></a>
                         </div>
                     </div>
                 </div>
             </fieldset>
 
             <div class="row mt-4">
-                
+
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="idEmpleado">Realizado por <span class="text-danger">*</span></label>
-                        <p-autoComplete styleClass="myAutoComplete w-100"
-                            (onSelect)="onSelectEmpleado($event)" 
-                            (onClear)="onClearEmpleado()"
-                            (onBlur)="checkIfValidInputEmpleado($event)"
-                            [suggestions]="filteredEmpleado" 
-                            (completeMethod)="filterEmpleado($event)" 
-                            field="fullDescriptionEmpleado"
-                            [dropdown]="true" 
-                            inputStyleClass="selected-office"
-                            class="selected-office"
-                            id="idEmpleado"
+                        <p-autoComplete styleClass="myAutoComplete w-100" (onSelect)="onSelectEmpleado($event)"
+                            (onClear)="onClearEmpleado()" (onBlur)="checkIfValidInputEmpleado($event)"
+                            [suggestions]="filteredEmpleado" (completeMethod)="filterEmpleado($event)"
+                            field="fullDescriptionEmpleado" [dropdown]="true" inputStyleClass="selected-office"
+                            class="selected-office" id="idEmpleado"
                             placeholder="{{ selectedEmpleado ? getFullDescriptionEmpleado(selectedEmpleado): 'Seleccione un empleado' }}">
-                        <ng-template let-empleado pTemplate="item">
-                            {{empleado.nombre}} {{empleado.apellidos}}, {{empleado.dni}}
-                        </ng-template>
-                    </p-autoComplete>
+                            <ng-template let-empleado pTemplate="item">
+                                {{empleado.nombre}} {{empleado.apellidos}}, {{empleado.dni}}
+                            </ng-template>
+                        </p-autoComplete>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="idOficina">Oficina <span class="text-danger">*</span></label>
-                        <p-autoComplete styleClass="myAutoComplete w-100"
-                            (onSelect)="onSelectOficina($event)" 
-                            (onClear)="onClearOficina()"
-                            (onBlur)="checkIfValidInputOficina($event)"
-                            [suggestions]="filteredOficina" 
-                            (completeMethod)="filterOficina($event)" 
-                            field="fullDescriptionOficina"
-                            [dropdown]="true" 
-                            inputStyleClass="selected-office"
-                            class="selected-office"
-                            id="idOficina"
+                        <p-autoComplete styleClass="myAutoComplete w-100" (onSelect)="onSelectOficina($event)"
+                            (onClear)="onClearOficina()" (onBlur)="checkIfValidInputOficina($event)"
+                            [suggestions]="filteredOficina" (completeMethod)="filterOficina($event)"
+                            field="fullDescriptionOficina" [dropdown]="true" inputStyleClass="selected-office"
+                            class="selected-office" id="idOficina"
                             placeholder="{{ selectedOficina ? getFullDescriptionOficina(selectedOficina): 'Selecione una oficina' }}">
                             <ng-template let-oficina pTemplate="item">
                                 {{oficina.direccion}}, {{oficina.localidad}}
@@ -127,22 +118,16 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="idProveedor">Proveedor <span class="text-danger">*</span></label>
-                        <p-autoComplete styleClass="myAutoComplete w-100"
-                            (onSelect)="onSelectProveedor($event)" 
-                            (onClear)="onClearProveedor()"
-                            (onBlur)="checkIfValidInputProveedor($event)"
-                            [suggestions]="filteredProveedor" 
-                            (completeMethod)="filterProveedor($event)" 
-                            field="fullDescriptionProveedor"
-                            [dropdown]="true" 
-                            inputStyleClass="selected-office"
-                            class="selected-office"
-                            id="idProveedor"
+                        <p-autoComplete styleClass="myAutoComplete w-100" (onSelect)="onSelectProveedor($event)"
+                            (onClear)="onClearProveedor()" (onBlur)="checkIfValidInputProveedor($event)"
+                            [suggestions]="filteredProveedor" (completeMethod)="filterProveedor($event)"
+                            field="fullDescriptionProveedor" [dropdown]="true" inputStyleClass="selected-office"
+                            class="selected-office" id="idProveedor"
                             placeholder="{{ selectedProveedor ? getFullDescriptionProveedor(selectedProveedor): 'Seleccione un proveedor' }}">
-                        <ng-template let-proveedor pTemplate="item">
-                            {{proveedor.razonSocial}}
-                        </ng-template>
-                    </p-autoComplete>
+                            <ng-template let-proveedor pTemplate="item">
+                                {{proveedor.razonSocial}}
+                            </ng-template>
+                        </p-autoComplete>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -174,7 +159,8 @@
                                 (No puede ser negativo)
                             </span>
                         </label>
-                        <input type="number" class="form-control" id="ivaPedido" formControlName="ivaPedido" step="0.01" min="0"/>
+                        <input type="number" class="form-control" id="ivaPedido" formControlName="ivaPedido" step="0.01"
+                            min="0" />
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -187,7 +173,8 @@
                                 (Debe ser entero)
                             </span>
                         </label>
-                        <input type="number" class="form-control" id="plazoEntrega" formControlName="plazoEntrega" min="1">
+                        <input type="number" class="form-control" id="plazoEntrega" formControlName="plazoEntrega"
+                            min="1">
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -197,19 +184,43 @@
                                 (No puede ser negativo)
                             </span>
                         </label>
-                        <input type="number" class="form-control" id="costesEnvio" formControlName="costesEnvio" step="0.01" min="0" />
+                        <input type="number" class="form-control" id="costesEnvio" formControlName="costesEnvio"
+                            step="0.01" min="0" />
                     </div>
                 </div>
             </div>
 
         </div>
 
-        
+
         <div class="card-footer mt-4 mb-5">
             <button type="button" (click)="volver()" class="btn btn-danger">Cancelar</button>
             <!-- Botón de guardar: esta con el evento click porque no quiero que se envíe cuando haga enter -->
             <!-- Sino con el submit en la etiqueta del form vale -->
-            <button class="btn btn-success float-end boton-editar " (click)="guardar()" [disabled]="!verificarValidezLineas() || !pedidoForm.valid || lineas.length < 1">Guardar</button>
+            
+            <button type="button" class="btn btn-success float-end boton-editar" data-bs-toggle="modal"
+                [attr.data-bs-target]="'#modalRecibido'"
+                [disabled]="!verificarValidezLineas() || !pedidoForm.valid || lineas.length < 1">Guardar</button>
+
+            <div class="modal fade" [id]="'modalRecibido'" tabindex="-1"
+                aria-labelledby="modalBorrarLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalBorrarLabel">GUARDAR</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            ¿Está seguro que desea guardar el pedido?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                (click)="guardar()">Si</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </form>
 

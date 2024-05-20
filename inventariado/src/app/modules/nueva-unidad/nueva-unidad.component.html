@@ -10,27 +10,24 @@
     <p class="text-danger mt-4">* Campos obligatorios</p>
     <div class="row mt-4">
         <div class="col-md-5">
-            <label for="ofi"  class="mb-3">Seleccione la oficina <span class="text-danger">*</span></label>
-            <p-autoComplete styleClass="myAutoComplete w-100"
-                    (onSelect)="onSelectOficina($event)" 
-                    (onClear)="onClearOficina()"
-                    (onBlur)="checkIfValidInputOficina($event)"
-                    [suggestions]="filteredOficina" 
-                    (completeMethod)="filterOficina($event)" 
-                    field="fullDescriptionOficina"
-                    [dropdown]="true" 
-                    inputStyleClass="selected-office"
-                    class="selected-office"
-                    id="filtroOficina"
-                    placeholder="{{ selectedOficina ? getFullDescriptionOficina(selectedOficina): 'Seleccione una oficina' }}">
+            <label for="ofi" class="mb-3">Seleccione la oficina <span class="text-danger">*</span></label>
+            <p-autoComplete styleClass="myAutoComplete w-100" (onSelect)="onSelectOficina($event)"
+                (onClear)="onClearOficina()" (onBlur)="checkIfValidInputOficina($event)" [suggestions]="filteredOficina"
+                (completeMethod)="filterOficina($event)" field="fullDescriptionOficina" [dropdown]="true"
+                inputStyleClass="selected-office" class="selected-office" id="filtroOficina"
+                placeholder="{{ selectedOficina ? getFullDescriptionOficina(selectedOficina): 'Seleccione una oficina' }}">
                 <ng-template let-oficina pTemplate="item">
                     {{oficina.direccion}}, {{oficina.localidad}}
                 </ng-template>
             </p-autoComplete>
+            <div *ngIf="oficinaInvalida" class="text-danger">
+                La oficina es obligatoria
+            </div>
         </div>
         <div class="col-md-5">
-            <label for="estado"  class="mb-3">Seleccione el estado <span class="text-danger">*</span></label>
-            <select id="estado" class="form-control form-select" [(ngModel)]="estadoSeleccionado" required [ngClass]="{'is-invalid': estadoInvalido}" (ngModelChange)="changeEstado()">
+            <label for="estado" class="mb-3">Seleccione el estado <span class="text-danger">*</span></label>
+            <select id="estado" class="form-control form-select" [(ngModel)]="estadoSeleccionado" required
+                [ngClass]="{'is-invalid': estadoInvalido}" (ngModelChange)="changeEstado()">
                 <ng-container *ngFor="let estado of listEstados">
                     <ng-container *ngIf="estado.codigoEstado !== 'S'">
                         <option [ngValue]="estado.codigoEstado">{{ estado.codigoEstado }}: {{ estado.nombre }}</option>
@@ -41,38 +38,44 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label for="codInterno" class="mb-3">Código interno <span class="text-danger">*</span></label>
-                <input type="number" class="form-control" id="codInterno" min="0" (change)="changeCodigo()" required [(ngModel)]="unidad.codigoInterno" [ngClass]="{'is-invalid': codigoInvalido}"/>
+                <input type="number" class="form-control" id="codInterno" min="0" (change)="changeCodigo()" required
+                    [(ngModel)]="unidad.codigoInterno" [ngClass]="{'is-invalid': codigoInvalido}" />
                 <div *ngIf="codigoInvalido" class="invalid-feedback">Debe ser mayor que 1</div>
             </div>
         </div>
     </div>
     <div class="row mt-4">
         <div class="col-md-6">
-            <label for="art"  class="mb-3">Seleccione el artículo <span class="text-danger">*</span></label>
-            <select id="art" class="form-control form-select" [(ngModel)]="codArticuloSeleccionado" (ngModelChange)="changeArticulo()" required [disabled]="!cargado2" [ngClass]="{'is-invalid': articuloInvalido}">
+            <label for="art" class="mb-3">Seleccione el artículo <span class="text-danger">*</span></label>
+            <select id="art" class="form-control form-select" [(ngModel)]="codArticuloSeleccionado"
+                (ngModelChange)="changeArticulo()" required [disabled]="!cargado2"
+                [ngClass]="{'is-invalid': articuloInvalido}">
                 <option disabled value="0">Seleccione un artículo</option>
                 <ng-container *ngIf="listArticulo && listArticulo.length > 0; else noArticulos">
-                    <option *ngFor="let articulo of listArticulo" [value]="articulo.codigoArticulo">{{articulo.referencia}}: {{articulo.descripcion}}, {{articulo.precioUnitario}} €</option>
+                    <option *ngFor="let articulo of listArticulo" [value]="articulo.codigoArticulo">
+                        {{articulo.referencia}}: {{articulo.descripcion}}, {{articulo.precioUnitario}} €</option>
                 </ng-container>
                 <ng-template #noArticulos>
                     <option disabled>No se ha encontrado ningún artículo disponible en el inventario sin unidad</option>
                 </ng-template>
-            
+
             </select>
         </div>
-        
+
         <div class="col-md-6">
-            <label for="pedido"  class="mb-3">Seleccione el pedido</label>
-            <select id="pedido" class="form-control form-select" [(ngModel)]="unidad.numeroPedido" required [disabled]="!cargado3">
+            <label for="pedido" class="mb-3">Seleccione el pedido</label>
+            <select id="pedido" class="form-control form-select" [(ngModel)]="unidad.numeroPedido" required
+                [disabled]="!cargado3">
                 <option *ngIf="unidad.numeroPedido===0" disabled value="0">Seleccione un pedido</option>
                 <option *ngIf="unidad.numeroPedido===null" disabled value=null>Seleccione un pedido</option>
                 <ng-container *ngIf="listPedido && listPedido.length > 0; else noPedidos">
-                    <option *ngFor="let pedido of listPedido" [value]="pedido.numeroPedido">Pedido {{pedido.numeroPedido}}: {{pedido.fechaPedido}}, recibido el {{pedido.fechaRecepcion}}</option>
+                    <option *ngFor="let pedido of listPedido" [value]="pedido.numeroPedido">Pedido
+                        {{pedido.numeroPedido}}: {{pedido.fechaPedido}}, recibido el {{pedido.fechaRecepcion}}</option>
                 </ng-container>
                 <ng-template #noPedidos>
                     <option disabled>No se ha encontrado ningún pedido compatible</option>
                 </ng-template>
-            
+
             </select>
         </div>
     </div>
@@ -81,9 +84,28 @@
             <button class="btn boton btn-primary" (click)="goBack()">Volver a Unidades</button>
         </div>
         <div class="col-md-6 text-end">
-            <button class="btn btn-success boton-editar " (click)="guardarUnidad()">
-                Guardar
-            </button>
+            <button type="button" class="btn btn-success boton-editar " data-bs-toggle="modal"
+                [attr.data-bs-target]="'#modalRecibido'">Guardar</button>
+
+            <div class="modal fade" [id]="'modalRecibido'" tabindex="-1" aria-labelledby="modalBorrarLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalBorrarLabel">GUARDAR</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            ¿Está seguro que desea registrar la unidad?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                (click)="guardarUnidad()">Si</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

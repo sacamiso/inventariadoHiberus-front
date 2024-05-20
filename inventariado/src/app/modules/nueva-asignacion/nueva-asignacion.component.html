@@ -7,31 +7,25 @@
         </div>
     </div>
     <div class="mt-4" id="liveAlert"></div>
-    
+
     <div class="row justify-content-center">
         <div class="col-6">
             <h2 class="text-center">Oficina</h2>
-            <p-autoComplete styleClass="myAutoComplete w-100"
-                            (onSelect)="onSelectOficina($event)" 
-                            (onClear)="onClear()"
-                            (onBlur)="checkIfValidInput($event)"
-                            [suggestions]="filteredOficinas" 
-                            (completeMethod)="filterOficina($event)" 
-                            field="fullDescription"
-                            [dropdown]="true" 
-                            inputStyleClass="selected-office"
-                            class="selected-office"
-                            placeholder="{{ selectedOficina ? getFullDescription(selectedOficina) : 'Seleccione la oficina...' }}">
+            <p-autoComplete styleClass="myAutoComplete w-100" (onSelect)="onSelectOficina($event)" (onClear)="onClear()"
+                (onBlur)="checkIfValidInput($event)" [suggestions]="filteredOficinas"
+                (completeMethod)="filterOficina($event)" field="fullDescription" [dropdown]="true"
+                inputStyleClass="selected-office" class="selected-office"
+                placeholder="{{ selectedOficina ? getFullDescription(selectedOficina) : 'Seleccione la oficina...' }}">
                 <ng-template let-oficina pTemplate="item">
                     {{oficina.direccion}}, {{oficina.localidad}}
                 </ng-template>
             </p-autoComplete>
         </div>
     </div>
-    
+
 
     <div *ngIf="cargado2 && idOficinaSeleccionada!==0" class="mt-4">
-        <form [formGroup]="asignacionForm" (ngSubmit)="guardar()">
+        <form [formGroup]="asignacionForm">
             <div class="card-body">
                 <p class="text-danger">* Campos obligatorios</p>
 
@@ -39,8 +33,9 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="idEmpleado">Seleccione el empleado <span class="text-danger">*</span></label>
-                            <select class="form-control form-select" id="idEmpleado" formControlName="idEmpleado" required
-                            [(ngModel)]="selectedItemId" [ngClass]="{'is-invalid': asignacionForm.get('idEmpleado')?.invalid && formularioEnviado}">
+                            <select class="form-control form-select" id="idEmpleado" formControlName="idEmpleado"
+                                required [(ngModel)]="selectedItemId"
+                                [ngClass]="{'is-invalid': asignacionForm.get('idEmpleado')?.invalid && formularioEnviado}">
                                 <option
                                     *ngIf="listEmpleados?.message?.length !== undefined && listEmpleados?.message?.length !== 0"
                                     [value]="null" disabled [selected]="selectedItemId===null">Seleccione el empleado
@@ -48,8 +43,8 @@
                                 <option *ngFor="let listE of listEmpleados?.message" [ngValue]="listE.idEmpleado">
                                     {{ listE.dni }}: {{ listE.nombre }} {{ listE.apellidos }}
                                 </option>
-                                <option *ngIf=" listEmpleados?.message?.length === 0" [value]="null" disabled 
-                                [selected]="selectedItemId===null">
+                                <option *ngIf=" listEmpleados?.message?.length === 0" [value]="null" disabled
+                                    [selected]="selectedItemId===null">
                                     No se encuentran empleados en esa oficina
                                 </option>
                             </select>
@@ -60,16 +55,17 @@
                         <div class="form-group">
                             <label for="codUnidad">Seleccione la unidad <span class="text-danger">*</span></label>
                             <select class="form-control form-select" id="codUnidad" formControlName="codUnidad" required
-                            [(ngModel)]="selectedItemId2" [ngClass]="{'is-invalid': asignacionForm.get('codUnidad')?.invalid && formularioEnviado}">
+                                [(ngModel)]="selectedItemId2"
+                                [ngClass]="{'is-invalid': asignacionForm.get('codUnidad')?.invalid && formularioEnviado}">
                                 <option
                                     *ngIf="listUnidades?.message?.length !== undefined && listUnidades?.message?.length !== 0"
                                     [value]="null" disabled [selected]="selectedItemId===null">Seleccione la unidad
-                                </option>   
+                                </option>
                                 <option *ngFor="let listU of listUnidades?.message" [ngValue]="listU.codigoInterno">
                                     {{ listU.codigoInterno }}: {{ listU.articulo.descripcion }}
                                 </option>
                                 <option *ngIf=" listUnidades?.message?.length === 0" [ngValue]="null" disabled
-                                [selected]="selectedItemId2===null">
+                                    [selected]="selectedItemId2===null">
                                     No se encuentran unidades disponibles en esa oficina
                                 </option>
                             </select>
@@ -79,27 +75,52 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="fechaInicio">Fecha de inicio <span class="text-danger">*</span></label>
-                            <input type="date" class="form-control" id="fechaInicio" formControlName="fechaInicio" 
-                            [ngClass]="{'is-invalid': asignacionForm.get('fechaInicio')?.invalid && formularioEnviado}" appFechaValida required>
+                            <input type="date" class="form-control" id="fechaInicio" formControlName="fechaInicio"
+                                [ngClass]="{'is-invalid': asignacionForm.get('fechaInicio')?.invalid && formularioEnviado}"
+                                appFechaValida required>
                             <br>
-                            <span class="text-danger" *ngIf="asignacionForm.get('fechaInicio')?.errors?.['fechaInvalida']">
+                            <span class="text-danger"
+                                *ngIf="asignacionForm.get('fechaInicio')?.errors?.['fechaInvalida']">
                                 (La fecha no puede ser posterior a la actual)
                             </span>
                         </div>
                     </div>
                 </div>
-                
-                
+
+
             </div>
 
             <div class="card-footer mt-4">
-                
-                <button type="submit" class="btn btn-success float-end boton-editar ">Guardar</button>
+
+                <button type="button" class="btn btn-success float-end boton-editar" data-bs-toggle="modal"
+                    [attr.data-bs-target]="'#modalRecibido'">Guardar</button>
+
+                <div class="modal fade" [id]="'modalRecibido'" tabindex="-1" aria-labelledby="modalBorrarLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalBorrarLabel">GUARDAR</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                ¿Está seguro que desea guardar la asignación?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                    (click)="guardar()">Si</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
     <div class="card-footer mt-4">
         <button type="button" (click)="volver()" class="btn btn-danger">Cancelar</button>
     </div>
-    
+
 </div>
