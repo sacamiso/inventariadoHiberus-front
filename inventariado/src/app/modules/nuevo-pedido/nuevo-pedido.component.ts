@@ -176,6 +176,11 @@ export class NuevoPedidoComponent implements OnInit {
     wrapper.innerHTML = `<div class="alert alert-${type} alert-dismissible" role="alert"> ${message} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
 
     this.alertPlaceholder.appendChild(wrapper);
+
+    // Establecer un temporizador para eliminar la alerta después de 20 segundos
+    setTimeout(() => {
+      wrapper.remove(); // Eliminar la alerta del DOM
+    }, 20000); // 20000 milisegundos = 20 segundos
   }
 
   volver(){
