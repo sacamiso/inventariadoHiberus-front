@@ -23,7 +23,7 @@
         <div *ngIf="mostrarFiltros " class="container mb-3">
             <hr>
             <div class="row mb-3">
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <label for="filtroOficina">Oficina:</label>
                     <p-autoComplete styleClass="myAutoComplete w-100"
                             (onSelect)="onSelectOficina($event)" 
@@ -61,7 +61,7 @@
                         </ng-template>
                     </p-autoComplete>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <label for="filtroFecha">Fecha:</label>
                     <input type="date" class="form-control" id="filtroFecha"  [(ngModel)]="filtros.fechaSalida" >
                 </div>

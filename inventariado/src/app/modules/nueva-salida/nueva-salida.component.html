@@ -56,7 +56,7 @@
                                     [value]="null" disabled [selected]="selectedItemId===null">No se dispone de
                                     artículos</option>
                                 <option *ngFor="let listI of listInventario?.message" [ngValue]="listI.codArticulo">
-                                    {{ listI.articulo.descripcion }}, {{ listI.articulo.modelo }}
+                                    {{ listI.articulo.referencia }}: {{ listI.articulo.descripcion }}, {{ listI.articulo.modelo }}
                                 </option>
                             </select>
                             <div *ngIf="selectedItemId !== null" class="mt-2">Stock actual: {{ getSelectedStock() }}

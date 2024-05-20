@@ -36,7 +36,7 @@
                                 <select formControlName="codigoArticulo" id="codigoArticulo" class="form-control form-select">
                                     <option [value]="null" disabled>Seleccione el articulo</option>
                                     <option *ngFor="let art of listArticulos" [value]="art.codigoArticulo">{{
-                                        art.descripcion }}: {{ art.modelo }}, {{ art.fabricante }},
+                                        art.referencia }}:{{art.descripcion }}, {{ art.modelo }}, {{ art.fabricante }},
                                         {{art.precioUnitario}} €/ud</option>
                                 </select>
                             </div>

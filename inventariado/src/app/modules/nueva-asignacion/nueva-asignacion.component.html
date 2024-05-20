@@ -43,7 +43,7 @@
                             [(ngModel)]="selectedItemId" [ngClass]="{'is-invalid': asignacionForm.get('idEmpleado')?.invalid && formularioEnviado}">
                                 <option
                                     *ngIf="listEmpleados?.message?.length !== undefined && listEmpleados?.message?.length !== 0"
-                                    [value]="null" disabled [selected]="selectedItemId===null">Seleccione el articulo
+                                    [value]="null" disabled [selected]="selectedItemId===null">Seleccione el empleado
                                 </option>
                                 <option *ngFor="let listE of listEmpleados?.message" [ngValue]="listE.idEmpleado">
                                     {{ listE.dni }}: {{ listE.nombre }} {{ listE.apellidos }}
