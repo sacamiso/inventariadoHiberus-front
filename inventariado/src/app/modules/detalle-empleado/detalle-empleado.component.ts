@@ -53,4 +53,8 @@ export class DetalleEmpleadoComponent implements OnInit {
   irEmpleados(){
     this.router.navigate([`gestion/empleados`]);
   }
+
+  editarEmp(){
+    this.router.navigate([`gestion/edit/empleado/${this.id}`]);
+  }
 }

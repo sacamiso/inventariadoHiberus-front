@@ -50,6 +50,7 @@ export interface EmpleadoForm {
     idOficina:  number;
 }
 
+
 export interface EmpleadoMsg {
     success: boolean;
     error:   string;

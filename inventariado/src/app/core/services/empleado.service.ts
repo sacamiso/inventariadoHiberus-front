@@ -39,4 +39,7 @@ export class EmpleadoService {
     return this.http.post<MesaggeResponse>(`${this.apiUrl}/empleado/cambiarContra`, empleado);
   }
   
+  editarEmpleado(empleado: Empleado, id:number){
+    return this.http.put<MesaggeResponse>(`${this.apiUrl}/empleado/editar/${id}`, empleado);
+  }
 }

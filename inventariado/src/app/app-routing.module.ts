@@ -37,6 +37,7 @@ import { UsuarioLoggedGuard } from './core/guards/usuario-logged.guard';
 import { UsuarioAdminGuard } from './core/guards/usuario-admin.guard';
 import { DetalleOficinaPublicComponent } from './modules/detalle-oficina-public/detalle-oficina-public.component';
 import { CambiarContrasenaComponent } from './modules/cambiar-contrasena/cambiar-contrasena.component';
+import { EmpleadoEditComponent } from './modules/empleado-edit/empleado-edit.component';
 
 const routes: Routes = [
   {path: '', component:InicioComponent},
@@ -55,6 +56,7 @@ const routes: Routes = [
   {path: 'gestion/asignaciones/nueva', component:NuevaAsignacionComponent, canActivate: [UsuarioAdminGuard]},
   {path: 'gestion/empleados', component:EmpleadosComponent, canActivate: [UsuarioAdminGuard]},
   {path: 'gestion/empleados/empleado/:id', component:DetalleEmpleadoComponent, canActivate: [UsuarioAdminGuard]},
+  {path: 'gestion/edit/empleado/:id', component:EmpleadoEditComponent, canActivate: [UsuarioAdminGuard]},
   {path: 'gestion/empleados/nuevo', component:NuevoEmpleadoComponent, canActivate: [UsuarioAdminGuard]},
   {path: 'gestion/oficinas', component:OficinasComponent, canActivate: [UsuarioAdminGuard]},
   {path: 'gestion/oficinas/oficina/:id', component:DetalleOficinaComponent, canActivate: [UsuarioAdminGuard]},

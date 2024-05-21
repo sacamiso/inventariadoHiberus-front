@@ -1,0 +1,128 @@
+<div *ngIf="cargado" class="container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center mt-5">
+                <h1 class="display-4">EDITAR EMPLEADO {{id}}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="mt-4" id="liveAlert"></div>
+       
+    <form [formGroup]="empleadoForm">
+        <p class="text-danger">* Campos obligatorios</p>
+        <section class="rounded" style="border: 1px solid #aaaaaa;">
+            <div class="form-group m-2">
+                <br>
+                <div class="row mb-4">
+                    <div class="form-item col-md-2">
+                        <label for="dni">DNI<span class="text-danger">*</span></label>
+                        <input required id="dni" class="form-control" type="text" formControlName="dni"
+                            placeholder="DNI" [ngClass]="{'is-invalid': empleadoForm.get('dni')?.invalid && formularioEnviado}"/>
+                        <div *ngIf="formularioEnviado && empleadoForm.get('dni')?.invalid" class="text-danger">
+                            <div *ngIf="empleadoForm.get('dni')?.errors?.['dniInvalido']">
+                                El DNI no es válido.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-item col-md-3">
+                        <label for="nombre">Nombre<span class="text-danger">*</span></label>
+                        <input required id="nombre" class="form-control" type="text" formControlName="nombre"
+                            placeholder="Nombre" [ngClass]="{'is-invalid': empleadoForm.get('nombre')?.invalid && formularioEnviado}"/>
+                    </div>
+                    <div class="form-item col-md-4">
+                        <label for="apellidos">Apellidos<span class="text-danger">*</span></label>
+                        <input required id="apellidos" class="form-control" type="text" formControlName="apellidos"
+                            placeholder="Apellidos" [ngClass]="{'is-invalid': empleadoForm.get('apellidos')?.invalid && formularioEnviado}"/>
+                    </div>
+                    <div class="form-item col-md-3">
+                        <label for="usuario">Usuario<span class="text-danger">*</span></label>
+                        <input required id="usuario" class="form-control" type="text" formControlName="usuario"
+                            placeholder="Usuario" [ngClass]="{'is-invalid': empleadoForm.get('usuario')?.invalid && formularioEnviado}"/>
+                    </div>  
+                </div>
+                <div class="row mb-4">
+                    
+                    <div *ngIf="!esElUsuarioLog" class="col-md-3">
+                        <div class="form-group">
+                            <label for="codRol">Rol<span class="text-danger">*</span></label>
+                            <select class="form-control form-select" id="codRol" formControlName="codRol"  [ngClass]="{'is-invalid': empleadoForm.get('codRol')?.invalid && formularioEnviado}">
+                                <option [value]="0" disabled>Seleccione el rol</option>
+                                <option *ngFor="let rol of listRoles" [value]="rol.codigoRol">{{
+                                    rol.codigoRol }}: {{ rol.nombre }}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div *ngIf="esElUsuarioLog" class="col-md-3">
+                        <div class="form-group">
+                            <label for="codRol">Rol<span class="text-danger">*</span></label>
+                            <select class="form-control form-select" id="codRol" >
+                                <option [value]="'ADM'" >ADM: administrador</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-item col-md-4">
+                        <label for="correo">Correo electrónico<span class="text-danger">*</span></label>
+                        <input required id="correo" class="form-control" type="email" formControlName="correo"
+                            placeholder="Correo" [ngClass]="{'is-invalid': empleadoForm.get('correo')?.invalid && formularioEnviado}"/>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="idOficina">Oficina<span class="text-danger">*</span></label>
+                            <p-autoComplete styleClass="myAutoComplete w-100"
+                                (onSelect)="onSelectOficina($event)" 
+                                (onClear)="onClearOficina()"
+                                (onBlur)="checkIfValidInputOficina($event)"
+                                [suggestions]="filteredOficina" 
+                                (completeMethod)="filterOficina($event)" 
+                                field="fullDescriptionOficina"
+                                [dropdown]="true" 
+                                inputStyleClass="selected-office"
+                                class="selected-office"
+                                id="idOficina"
+                                placeholder="{{ selectedOficina ? getFullDescriptionOficina(selectedOficina): 'Selecione una oficina' }}">
+                                <ng-template let-oficina pTemplate="item">
+                                    {{oficina.direccion}}, {{oficina.localidad}}
+                                </ng-template>
+                            </p-autoComplete>
+                        </div>
+                        <div *ngIf="formularioEnviado && empleadoForm.get('idOficina')?.invalid" class="text-danger">
+                            La oficina es obligatoria
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+        <div class="mt-4 mb-5">
+            <button type="button" (click)="volver()" class="btn btn-primary boton">Volver</button>
+
+            <button type="button" class="btn btn-success float-end boton-editar " data-bs-toggle="modal"
+                [attr.data-bs-target]="'#modalRecibido'">Guardar</button>
+
+            <div class="modal fade" [id]="'modalRecibido'" tabindex="-1" aria-labelledby="modalBorrarLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalBorrarLabel">GUARDAR</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            ¿Está seguro que desea guardar el empleado editado?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                (click)="guardar()">Si</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </form>
+
+</div>

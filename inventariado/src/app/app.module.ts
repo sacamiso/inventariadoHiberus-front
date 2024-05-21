@@ -53,6 +53,7 @@ import { AuthInterceptorService } from './core/services/auth-interceptor.service
 import { DetalleOficinaPublicComponent } from './modules/detalle-oficina-public/detalle-oficina-public.component';
 import { CambiarContrasenaComponent } from './modules/cambiar-contrasena/cambiar-contrasena.component';
 import { FooterComponent } from './modules/footer/footer.component';
+import { EmpleadoEditComponent } from './modules/empleado-edit/empleado-edit.component';
 
 
 
@@ -99,6 +100,7 @@ import { FooterComponent } from './modules/footer/footer.component';
     DetalleOficinaPublicComponent,
     CambiarContrasenaComponent,
     FooterComponent,
+    EmpleadoEditComponent,
   ],
   imports: [
     BrowserModule,
