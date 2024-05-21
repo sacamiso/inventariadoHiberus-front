@@ -1,0 +1,107 @@
+<div *ngIf="cargado" class="container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center mt-5">
+                <h1 class="display-4">EDITAR PROVEEDOR {{id}}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="mt-4" id="liveAlert"></div>
+       
+    <form [formGroup]="proveedorForm">
+        <p class="text-danger">* Campos obligatorios</p>
+        <section class="rounded" style="border: 1px solid #aaaaaa;">
+            <div class="form-group m-2">
+                <br>
+                <div class="row mb-4">
+                    <div class="form-item col-md-4 ">
+                        <label for="cif">CIF<span class="text-danger">*</span></label>
+                        <input required id="cif" class="form-control" type="text" formControlName="cif"
+                            placeholder="CIF" [ngClass]="{'is-invalid': proveedorForm.get('cif')?.invalid && formularioEnviado}"/>
+                        <div *ngIf="formularioEnviado && proveedorForm.get('cif')?.invalid" class="text-danger">
+                            <div *ngIf="proveedorForm.get('cif')?.errors?.['cifInvalido']">
+                                El CIF no es válido.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-item col-md-8">
+                        <label for="razonSocial">Razón social<span class="text-danger">*</span></label>
+                        <input required id="razonSocial" class="form-control" type="text" formControlName="razonSocial"
+                            placeholder="Razón Social" [ngClass]="{'is-invalid': proveedorForm.get('razonSocial')?.invalid && formularioEnviado}"/>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="form-item col-md-7">
+                        <label for="direccion">Dirección<span class="text-danger">*</span></label>
+                        <input required id="direccion" class="form-control" type="text" formControlName="direccion"
+                            placeholder="Dirección" [ngClass]="{'is-invalid': proveedorForm.get('direccion')?.invalid && formularioEnviado}"/>
+                    </div>
+                    <div class="form-item col-md-3">
+                        <label for="localidad">Localidad<span class="text-danger">*</span></label>
+                        <input required id="localidad" class="form-control" type="text" formControlName="localidad"
+                            placeholder="Localidad" [ngClass]="{'is-invalid': proveedorForm.get('localidad')?.invalid && formularioEnviado}"/>
+                    </div>
+                    <div class="form-item col-md-2">
+                        <label for="codigoPostal">Código postal</label>
+                        <input id="codigoPostal" class="form-control" type="number" min="0" formControlName="codigoPostal"
+                            placeholder="Código Postal" [ngClass]="{'is-invalid': proveedorForm.get('codigoPostal')?.invalid && formularioEnviado}"/>
+                        <div *ngIf="formularioEnviado && proveedorForm.get('codigoPostal')?.invalid" class="text-danger">
+                            <div *ngIf="proveedorForm.get('codigoPostal')?.errors?.['min'] || proveedorForm.get('codigoPostal')?.errors?.['pattern']">
+                                Codigo postal inválido.
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+                <div class="row mb-4">
+                    <div class="form-item col-md-7">
+                        <label for="email">Correo electrónico<span class="text-danger">*</span></label>
+                        <input required id="email" class="form-control" type="email" formControlName="email"
+                            placeholder="Email" [ngClass]="{'is-invalid': proveedorForm.get('email')?.invalid && formularioEnviado}"/>
+                        <div *ngIf="formularioEnviado && proveedorForm.get('email')?.invalid" class="text-danger">
+                            <div *ngIf="proveedorForm.get('email')?.errors?.['email'] || proveedorForm.get('email')?.errors?.['required']">
+                                No es un correo electrónico válido.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-item col-md-5">
+                        <label for="telefono">Teléfono<span class="text-danger">*</span></label>
+                        <input required id="telefono" class="form-control" type="text" formControlName="telefono"
+                            placeholder="Teléfono" [ngClass]="{'is-invalid': proveedorForm.get('telefono')?.invalid && formularioEnviado}"/>
+                        <div *ngIf="formularioEnviado && proveedorForm.get('telefono')?.invalid" class="text-danger">
+                            <div *ngIf="proveedorForm.get('telefono')?.errors?.['telefonoInvalido']">
+                                No es un número de teléfono válido.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="mt-4 mb-5">
+            <button type="button" (click)="volver()" class="btn btn-primary boton">volver</button>
+            <button type="button" class="btn btn-success float-end boton-editar " data-bs-toggle="modal"
+                [attr.data-bs-target]="'#modalRecibido'">Guardar</button>
+
+            <div class="modal fade" [id]="'modalRecibido'" tabindex="-1" aria-labelledby="modalBorrarLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalBorrarLabel">GUARDAR</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            ¿Está seguro que desea guardar el proveedor editado?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                (click)="guardar()">Si</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </form>
+
+</div>

@@ -56,6 +56,7 @@ import { FooterComponent } from './modules/footer/footer.component';
 import { EmpleadoEditComponent } from './modules/empleado-edit/empleado-edit.component';
 import { OficinaEditComponent } from './modules/oficina-edit/oficina-edit.component';
 import { ArticuloEditComponent } from './modules/articulo-edit/articulo-edit.component';
+import { ProveedorEditComponent } from './modules/proveedor-edit/proveedor-edit.component';
 
 
 
@@ -105,6 +106,7 @@ import { ArticuloEditComponent } from './modules/articulo-edit/articulo-edit.com
     EmpleadoEditComponent,
     OficinaEditComponent,
     ArticuloEditComponent,
+    ProveedorEditComponent,
   ],
   imports: [
     BrowserModule,

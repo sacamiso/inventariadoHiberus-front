@@ -40,6 +40,7 @@ import { CambiarContrasenaComponent } from './modules/cambiar-contrasena/cambiar
 import { EmpleadoEditComponent } from './modules/empleado-edit/empleado-edit.component';
 import { OficinaEditComponent } from './modules/oficina-edit/oficina-edit.component';
 import { ArticuloEditComponent } from './modules/articulo-edit/articulo-edit.component';
+import { ProveedorEditComponent } from './modules/proveedor-edit/proveedor-edit.component';
 
 const routes: Routes = [
   {path: '', component:InicioComponent},
@@ -67,6 +68,7 @@ const routes: Routes = [
   {path: 'gestion/oficinas/nueva', component:NuevaOficinaComponent, canActivate: [UsuarioAdminGuard]},
   {path: 'gestion/proveedores', component:ProveedoresComponent, canActivate: [UsuarioAdminGuard]},
   {path: 'gestion/proveedores/proveedor/:id', component:DetalleProveedorComponent, canActivate: [UsuarioAdminGuard]},
+  {path: 'gestion/edit/proveedor/:id', component:ProveedorEditComponent, canActivate: [UsuarioAdminGuard]},
   {path: 'gestion/proveedores/nuevo', component:NuevoProveedorComponent, canActivate: [UsuarioAdminGuard]},
   {path: 'gestion/stockSeguridad', component:StockSeguridadComponent, canActivate: [UsuarioAdminGuard]},
   {path: 'gestion/stockSeguridad/edit', component:StockSeguridadEditComponent, canActivate: [UsuarioAdminGuard]},

@@ -53,4 +53,8 @@ export class DetalleProveedorComponent implements OnInit {
   irProveedores(){
     this.router.navigate([`gestion/proveedores`]);
   }
+
+  editar(){
+    this.router.navigate([`gestion/edit/proveedor/${this.id}`]);
+  }
 }

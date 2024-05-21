@@ -31,4 +31,8 @@ export class ProveedorService {
   guardarProveedor(proveedor: ProveedorForm){
     return this.http.post<MesaggeResponseNumber>(`${this.apiUrl}/proveedor/add`, proveedor);
   }
+
+  editarProveedor(proveedor: Proveedor, id: number){
+    return this.http.put<MesaggeResponse>(`${this.apiUrl}/proveedor/editar/${id}`, proveedor);
+  }
 }
