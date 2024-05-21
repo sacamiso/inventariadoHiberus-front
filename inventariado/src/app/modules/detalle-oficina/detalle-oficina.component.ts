@@ -53,4 +53,8 @@ export class DetalleOficinaComponent implements OnInit {
   irOficinas(){
     this.router.navigate([`gestion/oficinas`]);
   }
+
+  editar(){
+    this.router.navigate([`gestion/edit/oficina/${this.id}`]);
+  }
 }

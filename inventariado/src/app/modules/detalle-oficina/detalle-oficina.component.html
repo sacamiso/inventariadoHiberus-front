@@ -11,7 +11,7 @@
         <section class="mb-5">
             <div class="row">
                 <div class="col-11">
-                    <h5><strong>Dirección</strong>{{oficina.direccion}}</h5>
+                    <h5><strong>Dirección: </strong>{{oficina.direccion}}</h5>
                     <h5 *ngIf="oficina.codigoPostal !== null"><strong>Código postal: </strong>{{oficina.codigoPostal}}</h5>
                     <h5><strong>Localidad: </strong> {{oficina.localidad}}</h5>
                     <h5 *ngIf="oficina.provincia !== null"><strong>Provincia: </strong>{{oficina.provincia}}</h5>
@@ -22,7 +22,10 @@
                         <button class="btn btn-primary boton mb-3" (click)="volver()">Volver</button>
                     </div>
                     <div class="row">
-                        <button class="btn btn-primary boton" (click)="irOficinas()">Oficinas</button>
+                        <button class="btn btn-primary boton mb-3" (click)="irOficinas()">Oficinas</button>
+                    </div>
+                    <div class="row">
+                        <button class="btn btn-secondary boton-editar " (click)="editar()">Editar</button>
                     </div>
                 </div>   
             </div>

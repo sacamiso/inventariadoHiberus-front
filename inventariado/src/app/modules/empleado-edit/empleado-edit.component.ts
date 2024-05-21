@@ -77,13 +77,9 @@ export class EmpleadoEditComponent implements OnInit {
         this.authService.usuarioActual = user;
       })
       .catch((error) => { this.user = null; })
-      console.log("console.log(this.authService.userId);"+this.authService.userId);
-      console.log("console.log(this.id.toString());"+this.id.toString());
     if(Number(this.authService.userId) == this.id){
-      debugger
       this.esElUsuarioLog = true;
     }else{
-      debugger
       this.esElUsuarioLog = false;
     }
   }
@@ -105,7 +101,6 @@ export class EmpleadoEditComponent implements OnInit {
       codRol: this.empleado?.codRol,
       idOficina: this.empleado?.idOficina
     })
-    debugger
     this.cargado = true;
   }
 
@@ -193,7 +188,7 @@ export class EmpleadoEditComponent implements OnInit {
     // Establecer un temporizador para eliminar la alerta después de 20 segundos
     setTimeout(() => {
       wrapper.remove(); // Eliminar la alerta del DOM
-    }, 20000); // 20000 milisegundos = 20 segundos
+    }, 5000);
   }
 
   trimStringProperties(obj: any) {
@@ -209,7 +204,7 @@ export class EmpleadoEditComponent implements OnInit {
   }
 
   volver(){
-    this.router.navigate([`gestion/empleados/empleado/${this.id}`]);
+    this.location.back();
   }
 
   //cambios para el select autocompletable de filtro de oficinas

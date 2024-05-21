@@ -31,4 +31,8 @@ export class OficinaService {
   guardarOficina(oficina: OficinaForm){
     return this.http.post<MesaggeResponseNumber>(`${this.apiUrl}/oficina/add`, oficina);
   }
+
+  editarOficina(oficina: Oficina, id:number){
+    return this.http.put<MesaggeResponseNumber>(`${this.apiUrl}/oficina/editar/${id}`, oficina);
+  }
 }

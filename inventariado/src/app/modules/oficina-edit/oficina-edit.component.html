@@ -1,0 +1,80 @@
+<div *ngIf="cargado" class="container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center mt-5">
+                <h1 class="display-4">EDITAR OFICINA {{id}}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="mt-4" id="liveAlert"></div>
+       
+    <form [formGroup]="oficinaForm">
+        <p class="text-danger">* Campos obligatorios</p>
+        <section class="rounded" style="border: 1px solid #aaaaaa;">
+            <div class="form-group m-2">
+                <br>
+                <div class="row mb-4">
+                    <div class="form-item col-md-7">
+                        <label for="direccion">Dirección<span class="text-danger">*</span></label>
+                        <input required id="direccion" class="form-control" type="text" formControlName="direccion"
+                            placeholder="Dirección" [ngClass]="{'is-invalid': oficinaForm.get('direccion')?.invalid && formularioEnviado}"/>
+                    </div>
+                    <div class="form-item col-md-5">
+                        <label for="localidad">Localidad<span class="text-danger">*</span></label>
+                        <input required id="localidad" class="form-control" type="text" formControlName="localidad"
+                            placeholder="Localidad" [ngClass]="{'is-invalid': oficinaForm.get('localidad')?.invalid && formularioEnviado}"/>
+                    </div>                     
+                </div>
+                <div class="row mb-4">
+                    <div class="form-item col-md-4">
+                        <label for="codigoPostal">Código postal</label>
+                        <input id="codigoPostal" class="form-control" type="number" min="0" formControlName="codigoPostal"
+                            placeholder="Código Postal" [ngClass]="{'is-invalid': oficinaForm.get('codigoPostal')?.invalid && formularioEnviado}"/>
+                        <div *ngIf="formularioEnviado && oficinaForm.get('codigoPostal')?.invalid" class="text-danger">
+                            <div *ngIf="oficinaForm.get('codigoPostal')?.errors?.['min'] || oficinaForm.get('codigoPostal')?.errors?.['pattern']">
+                                Codigo postal inválido.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-item col-md-4">
+                        <label for="provincia">Provincia</label>
+                        <input id="provincia" class="form-control" type="text" formControlName="provincia"
+                            placeholder="Provincia" />
+                    </div>
+                    <div class="form-item col-md-4">
+                        <label for="pais">País<span class="text-danger">*</span></label>
+                        <input required id="pais" class="form-control" type="text" formControlName="pais"
+                            placeholder="País" [ngClass]="{'is-invalid': oficinaForm.get('pais')?.invalid && formularioEnviado}"/>
+                    </div>                       
+                </div>
+            </div>
+        </section>
+        <div class="mt-4 mb-5">
+            <button type="button" (click)="volver()" class="btn btn-primary boton">Volver</button>
+            <button type="button" class="btn btn-success float-end boton-editar " data-bs-toggle="modal"
+                [attr.data-bs-target]="'#modalRecibido'">Guardar</button>
+
+            <div class="modal fade" [id]="'modalRecibido'" tabindex="-1" aria-labelledby="modalBorrarLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalBorrarLabel">GUARDAR</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            ¿Está seguro que desea guardar la oficina editada?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                (click)="guardar()">Si</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </form>
+
+</div>
