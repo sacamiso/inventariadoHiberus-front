@@ -31,4 +31,8 @@ export class ArticuloService {
   getArticuloById(id: number): Observable<ArticuloMsg> {
     return this.http.get<ArticuloMsg>(`${this.apiUrl}/articulo/${id}`);
   }
+
+  editarArticulo(articulo: Articulo, id:number){
+    return this.http.put<MesaggeResponse>(`${this.apiUrl}/articulo/editar/${id}`, articulo);
+  }
 }

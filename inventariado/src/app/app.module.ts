@@ -55,6 +55,7 @@ import { CambiarContrasenaComponent } from './modules/cambiar-contrasena/cambiar
 import { FooterComponent } from './modules/footer/footer.component';
 import { EmpleadoEditComponent } from './modules/empleado-edit/empleado-edit.component';
 import { OficinaEditComponent } from './modules/oficina-edit/oficina-edit.component';
+import { ArticuloEditComponent } from './modules/articulo-edit/articulo-edit.component';
 
 
 
@@ -103,6 +104,7 @@ import { OficinaEditComponent } from './modules/oficina-edit/oficina-edit.compon
     FooterComponent,
     EmpleadoEditComponent,
     OficinaEditComponent,
+    ArticuloEditComponent,
   ],
   imports: [
     BrowserModule,

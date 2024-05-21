@@ -10,6 +10,16 @@ export interface Articulo {
     modelo: string;
 }
 
+export interface ArticuloForm {
+    descripcion: string;
+    precioUnitario: number | null;
+    referencia: string;
+    codCategoria: string;
+    codSubcategoria: string;
+    iva: number | null;
+    fabricante: string;
+    modelo: string;
+}
 export interface ArticuloFiltros {
     descripcion: string | null;
     precioUnitarioMin: number | null;
@@ -38,13 +48,3 @@ export interface ArticuloMsg {
     message: Articulo;
 }
 
-export interface ArticuloForm {
-    descripcion: string;
-    precioUnitario: number | null;
-    referencia: string;
-    codCategoria: string;
-    codSubcategoria: string;
-    iva: number | null;
-    fabricante: string;
-    modelo: string;
-}

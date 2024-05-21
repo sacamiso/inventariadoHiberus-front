@@ -185,7 +185,6 @@ export class EmpleadoEditComponent implements OnInit {
 
     this.alertPlaceholder.appendChild(wrapper);
 
-    // Establecer un temporizador para eliminar la alerta después de 20 segundos
     setTimeout(() => {
       wrapper.remove(); // Eliminar la alerta del DOM
     }, 5000);

@@ -33,6 +33,6 @@ export class OficinaService {
   }
 
   editarOficina(oficina: Oficina, id:number){
-    return this.http.put<MesaggeResponseNumber>(`${this.apiUrl}/oficina/editar/${id}`, oficina);
+    return this.http.put<MesaggeResponse>(`${this.apiUrl}/oficina/editar/${id}`, oficina);
   }
 }

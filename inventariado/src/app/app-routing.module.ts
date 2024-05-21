@@ -39,6 +39,7 @@ import { DetalleOficinaPublicComponent } from './modules/detalle-oficina-public/
 import { CambiarContrasenaComponent } from './modules/cambiar-contrasena/cambiar-contrasena.component';
 import { EmpleadoEditComponent } from './modules/empleado-edit/empleado-edit.component';
 import { OficinaEditComponent } from './modules/oficina-edit/oficina-edit.component';
+import { ArticuloEditComponent } from './modules/articulo-edit/articulo-edit.component';
 
 const routes: Routes = [
   {path: '', component:InicioComponent},
@@ -50,6 +51,7 @@ const routes: Routes = [
   {path: 'gestion', component:GestionComponent, canActivate: [UsuarioAdminGuard]},
   {path: 'gestion/articulos', component:ArticulosComponent, canActivate: [UsuarioAdminGuard]},
   {path: 'gestion/articulos/articulo/:id', component:DetalleArticuloComponent, canActivate: [UsuarioAdminGuard]},
+  {path: 'gestion/edit/articulo/:id', component:ArticuloEditComponent, canActivate: [UsuarioAdminGuard]},
   {path: 'gestion/articulos/nuevo', component:NuevoArticuloComponent, canActivate: [UsuarioAdminGuard]},
   {path: 'gestion/asignaciones', component:AsignacionesComponent, canActivate: [UsuarioAdminGuard]},
   {path: 'gestion/asignaciones/asignacion/:id', component:DetalleAsignacionComponent, canActivate: [UsuarioAdminGuard]},

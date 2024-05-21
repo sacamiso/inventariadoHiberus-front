@@ -1,0 +1,119 @@
+<div *ngIf="cargado && articulo" class="container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center mt-5">
+                <h1 class="display-4">EDITAR ARTÍCULO {{id}}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="mt-4" id="liveAlert"></div>
+    <p class="text-danger mt-4">* Campos obligatorios</p>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <label for="cat" class="mb-3">Seleccione la categoría <span class="text-danger">*</span></label>
+            <select id="cat" class="form-control form-select" [(ngModel)]="articulo.codCategoria"
+                (ngModelChange)="changeCategoria()" required [ngClass]="{'is-invalid': categoriaInvalida}">
+                <option *ngFor="let categoria of listCategorias" [value]="categoria.codigoCategoria">
+                    {{categoria.codigoCategoria}}: {{categoria.nombre}}</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="subCat" class="mb-3">Seleccione la subcategoría <span class="text-danger">*</span></label>
+            <select id="subCat" class="form-control form-select" [(ngModel)]="articulo.codSubcategoria"
+                (ngModelChange)="changeSubcategoria()" required [disabled]="!cargadoCategoria"
+                [ngClass]="{'is-invalid': subcategoriaInvalida}">
+                <ng-container *ngIf="listSubcategorias && listSubcategorias.length > 0">
+                    <option [value]=""></option>
+                </ng-container>
+                <ng-container *ngIf="listSubcategorias && listSubcategorias.length > 0; else noSubcategoria">
+                    <option *ngFor="let sub of listSubcategorias" [value]="sub.codigoSubcategoria">
+                        {{sub.codigoSubcategoria}}: {{sub.nombre}}</option>
+                </ng-container>
+                <ng-template #noSubcategoria>
+                    <option disabled>No se han encontrado subcategorías de la categoria seleccionada</option>
+                </ng-template>
+
+            </select>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="referencia" class="mb-3">Referencia <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="referencia" (change)="changeReferencia()" required
+                    [(ngModel)]="articulo.referencia" [ngClass]="{'is-invalid': referenciaInvalida}" />
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="precio" class="mb-3">Precio unitario (€)<span class="text-danger">*</span></label>
+                <input type="number" class="form-control" id="precio" min="0" (change)="changePrecio()" required
+                    [(ngModel)]="articulo.precioUnitario" [ngClass]="{'is-invalid': precioInvalido}" />
+                <div *ngIf="precioInvalido" class="invalid-feedback">No puede ser negativo</div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="iva" class="mb-3">IVA (%)<span class="text-danger">*</span></label>
+                <input type="number" class="form-control" id="iva" min="0" (change)="changeIva()" required
+                    [(ngModel)]="articulo.iva" [ngClass]="{'is-invalid': ivaInvalido}" />
+                <div *ngIf="precioInvalido" class="invalid-feedback">No puede ser negativo</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="fab" class="mb-3">Fabricante <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="fab" (change)="changeFabricante()" required
+                    [(ngModel)]="articulo.fabricante" [ngClass]="{'is-invalid': fabricanteInvalido}" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="modelo" class="mb-3">Modelo <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="modleo" (change)="changeModelo()" required
+                    [(ngModel)]="articulo.modelo" [ngClass]="{'is-invalid': modeloInvalido}" />
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4 align-items-end">
+        <div class="col-md-6 mb-3">
+            <div class="form-group">
+                <label for="descripcion" class="mb-3">Descripción <span class="text-danger">*</span></label>
+                <textarea type="text" class="form-control" id="descripcion" rows="4" (change)="changeDescripcion()"
+                    required [(ngModel)]="articulo.descripcion"
+                    [ngClass]="{'is-invalid': descripcionInvalida}"></textarea>
+            </div>
+        </div>
+        <div class="col-md-3 text-end mb-3">
+            <button type="button" class="btn btn-success boton-editar" data-bs-toggle="modal"
+                [attr.data-bs-target]="'#modalRecibido'">Guardar</button>
+
+            <div class="modal fade" [id]="'modalRecibido'" tabindex="-1" aria-labelledby="modalBorrarLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalBorrarLabel">GUARDAR</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            ¿Está seguro que desea guardar el artículo editado?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                (click)="guardarArticulo()">Si</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3  text-end mb-3">
+            <button class="btn btn-primary boton" (click)="volver()">
+                Volver
+            </button>
+        </div>
+
+    </div>
+</div>

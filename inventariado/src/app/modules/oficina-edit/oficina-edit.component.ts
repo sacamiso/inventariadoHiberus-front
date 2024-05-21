@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { OficinaService } from 'src/app/core/services/oficina.service';
 import { firstValueFrom } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MesaggeResponseNumber } from 'src/app/core/model/mesagge-response.model';
+import { MesaggeResponse, MesaggeResponseNumber } from 'src/app/core/model/mesagge-response.model';
 
 @Component({
   selector: 'app-oficina-edit',
@@ -20,7 +20,7 @@ export class OficinaEditComponent implements OnInit {
 
   oficinaForm: FormGroup;
 
-  msg: MesaggeResponseNumber | undefined;
+  msg: MesaggeResponse | undefined;
   alertPlaceholder: HTMLElement | null;
 
   formularioEnviado = false;
@@ -92,7 +92,6 @@ export class OficinaEditComponent implements OnInit {
 
     this.alertPlaceholder.appendChild(wrapper);
 
-    // Establecer un temporizador para eliminar la alerta después de 20 segundos
     setTimeout(() => {
       wrapper.remove(); // Eliminar la alerta del DOM
     }, 5000); 

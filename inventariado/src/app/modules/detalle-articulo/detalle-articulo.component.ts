@@ -53,4 +53,8 @@ export class DetalleArticuloComponent implements OnInit {
   irArticulos(){
     this.router.navigate([`gestion/articulos`]);
   }
+
+  editar(){
+    this.router.navigate([`gestion/edit/articulo/${this.id}`]);
+  }
 }
