@@ -20,7 +20,7 @@ export class AuthService {
 
   constructor(
     private readonly http: HttpClient,
-    readonly router: Router
+    private readonly router: Router
   ) { }
 
   decodificarToken(): any {
@@ -97,7 +97,7 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem(LOCAL_STORAGE.USUARIO_TOKEN);
     this.usuarioActual = null;
-    this.router.navigate(['']);
+    this.router.navigate(['/login']);
     this.loginSubject.next(false);
   }
 

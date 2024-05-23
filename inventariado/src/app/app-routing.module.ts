@@ -43,7 +43,7 @@ import { ArticuloEditComponent } from './modules/articulo-edit/articulo-edit.com
 import { ProveedorEditComponent } from './modules/proveedor-edit/proveedor-edit.component';
 
 const routes: Routes = [
-  {path: '', component:InicioComponent},
+  {path: '', component:InicioComponent, canActivate: [UsuarioLoggedGuard]},
   {path: 'avisos', component:AvisosComponent, canActivate: [UsuarioAdminGuard]},
   {path: 'cambiarContrasena', component:CambiarContrasenaComponent, canActivate: [UsuarioLoggedGuard]},
   {path: 'detalle/oficina/:id', component:DetalleOficinaPublicComponent, canActivate: [UsuarioLoggedGuard]},
