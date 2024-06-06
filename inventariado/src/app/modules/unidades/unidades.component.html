@@ -196,6 +196,7 @@
                                             <div *ngIf="selectedEstado==='S'" class="col-md-6">
                                                 <label for="salida">Nueva salida:</label>
                                                 <select id="salida" class="form-select" [(ngModel)]="selectedSalida">
+                                                    <option [ngValue]="null" disabled>Sin salida</option>
                                                     <ng-container *ngFor="let salida of listSalidas">
                                                         <ng-container *ngIf="salida.idOficina === unidad.idOficina && salida.codArticulo === unidad.codArticulo">
                                                             <option [ngValue]="salida.idSalida">{{ salida.idSalida }}: {{ salida.fechaSalida | date: 'dd/MM/yyyy' }}</option>

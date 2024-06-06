@@ -64,7 +64,7 @@
                         <strong>Número de pedido:</strong> {{unidad.pedido.numeroPedido}}
                         <br><strong>Fecha de pedido:</strong> {{unidad.pedido.fechaPedido}}
                         <br><strong>Plazo de entrega:</strong> {{unidad.pedido.plazoEntrega}} días
-                        <br><strong>Coste total:</strong> {{unidad.pedido.costeTotal}} €
+                        <br><strong>Coste total:</strong> {{unidad.pedido.costeTotal.toFixed(2)}} €
                         <div><strong>Fecha recepción: </strong> {{ unidad.pedido.fechaRecepcion !== null ? unidad.pedido.fechaRecepcion : '-' }}</div>
                     </div>
                     <div *ngIf="unidad.pedido===null">

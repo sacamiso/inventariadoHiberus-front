@@ -102,10 +102,10 @@
                             <tr>
                                 <th class="text-center" scope="col">Referencia</th>
                                 <th class="text-center" scope="col">Descripción</th>
-                                <th class="text-center" scope="col">Precio</th>
+                                <th class="text-center" scope="col">Precio(€)</th>
                                 <th class="text-center" scope="col">Categoría</th>
                                 <th class="text-center" scope="col">Subcategoría</th>
-                                <th class="text-center" scope="col">IVA</th>
+                                <th class="text-center" scope="col">IVA(%)</th>
                                 <th class="text-center" scope="col">Fabricante</th>
                                 <th class="text-center" scope="col">Modelo</th>
                             </tr>
@@ -114,10 +114,10 @@
                             <tr *ngFor="let articulo of articulos">
                                 <td class="text-center underline-link" (click)="detalleArticulo(articulo.codigoArticulo)">{{articulo.referencia}}</td>
                                 <td>{{articulo.descripcion}}</td>
-                                <td class="text-center">{{articulo.precioUnitario.toFixed(2)}} €</td>
+                                <td class="text-center">{{articulo.precioUnitario.toFixed(2)}}</td>
                                 <td class="text-center">{{articulo.codCategoria}}</td>
                                 <td class="text-center">{{articulo.codSubcategoria}}</td>
-                                <td class="text-center">{{articulo.iva.toFixed(2)}} %</td>
+                                <td class="text-center">{{articulo.iva.toFixed(2)}}</td>
                                 <td class="text-center">{{articulo.fabricante}}</td>
                                 <td class="text-center">{{articulo.modelo}}</td>
                             </tr>

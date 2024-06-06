@@ -59,7 +59,7 @@
                                 [ngClass]="{'is-invalid': asignacionForm.get('codUnidad')?.invalid && formularioEnviado}">
                                 <option
                                     *ngIf="listUnidades?.message?.length !== undefined && listUnidades?.message?.length !== 0"
-                                    [value]="null" disabled [selected]="selectedItemId===null">Seleccione la unidad
+                                    [value]="null" disabled [selected]="selectedItemId2===null">Seleccione la unidad
                                 </option>
                                 <option *ngFor="let listU of listUnidades?.message" [ngValue]="listU.codigoInterno">
                                     {{ listU.codigoInterno }}: {{ listU.articulo.descripcion }}

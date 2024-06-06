@@ -47,8 +47,8 @@
                         <tr>
                             <th class="text-center" scope="col" class="col-2">Categoría</th>
                             <th class="text-center" scope="col" class="col-2">Subcategoría</th>
-                            <th class="text-center" scope="col" class="col-2">Cantidad</th>
-                            <th class="text-center" scope="col" class="col-3">Plazo de entrega medio</th>
+                            <th class="text-center" scope="col" class="col-2">Cantidad (Nº de unidades)</th>
+                            <th class="text-center" scope="col" class="col-3">Plazo de entrega medio (días)</th>
                             <th class="text-center" scope="col" class="col-1"></th>
                         </tr>
                     </thead>
@@ -58,8 +58,9 @@
                                 <select class="form-control form-select" [(ngModel)]="ss.codCategoria"
                                     (change)="limpiarSeleccionSubcategoria(ss)"
                                     [ngClass]="{'is-invalid': !ss.codCategoria}">
-                                    <option *ngFor="let categoria of listCategorias"
-                                        [value]="categoria.codigoCategoria">{{categoria.codigoCategoria}}</option>
+                                    <ng-container *ngFor="let categoria of listCategorias">
+                                            <option [ngValue]="categoria.codigoCategoria">{{categoria.codigoCategoria}}</option>
+                                    </ng-container>
                                 </select>
                                 <div *ngIf="!ss.codCategoria" class="invalid-feedback">Campo obligatorio</div>
                             </td>
